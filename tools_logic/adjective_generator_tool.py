@@ -1,20 +1,27 @@
 import logging
 import re
-import os
-import nltk # NLTK data setup ke liye
-import json # JSON parsing ke liye
+import os # Added for environment variable access
+import nltk # For NLTK data setup
+import json # For JSON parsing
 
 # --- Gemini API Configuration ---
-# IMPORTANT: google-generativeai library install karna zaroori hai.
+# IMPORTANT: It is necessary to install the google-generativeai library.
 # 'pip install google-generativeai' run karein.
 try:
     import google.generativeai as genai
-    # Aapki Gemini API key yahan configure ki gai hai.
-    # Yeh key Gemini model ko istemal karne ke liye zaroori hai.
-    # User ne di hui API key: AIzaSyBnLc4iJy4KFR5iA1Cwy6c207wAyMfwHn0
-    genai.configure(api_key="AIzaSyBnLc4iJy4KFR5iA1Cwy6c207wAyMfwHn0")
-    logging.info("Google Generative AI library loaded and configured for adjective_generator_tool.")
-    GEMINI_API_AVAILABLE = True
+    # Configure your Gemini API key from environment variables for production.
+    # On Railway, set a variable named GOOGLE_API_KEY with your actual API key.
+    gemini_api_key = os.environ.get("GOOGLE_API_KEY")
+    if gemini_api_key:
+        genai.configure(api_key=gemini_api_key)
+        logging.info("Google Generative AI library loaded and configured for adjective_generator_tool.")
+        GEMINI_API_AVAILABLE = True
+    else:
+        logging.warning("GOOGLE_API_KEY environment variable not set. Gemini functions will not work in adjective_generator_tool.")
+        GEMINI_API_AVAILABLE = False
+        # Define a helper message for missing API key if it's not set
+        def missing_api_key_error_msg(tool_name):
+            return f"Error: Gemini API not configured for {tool_name}. Please ensure GOOGLE_API_KEY environment variable is set."
 except ImportError:
     logging.warning("Google Generative AI library not found. Gemini functions will not work in adjective_generator_tool.")
     GEMINI_API_AVAILABLE = False
@@ -26,6 +33,7 @@ except Exception as e:
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 # --- NLTK Data Path Setup ---
+# Create directory for NLTK data if it doesn't exist
 nltk_data_dir = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'nltk_data')
 if not os.path.exists(nltk_data_dir):
     os.makedirs(nltk_data_dir)
@@ -35,6 +43,7 @@ logging.info(f"NLTK data path added: {nltk_data_dir}")
 
 # --- NLTK Data Download Check ---
 def ensure_nltk_data():
+    """Ensures necessary NLTK data is downloaded."""
     try:
         nltk.data.find('tokenizers/punkt')
         logging.info("NLTK 'punkt' tokenizer already exists.")
@@ -58,19 +67,20 @@ ensure_nltk_data()
 def get_gemini_model():
     """Helper function to get a Gemini model that supports generateContent."""
     if not GEMINI_API_AVAILABLE:
-        raise Exception("Gemini API is not available.")
+        # Provide specific error message if API is not available due to missing key
+        raise Exception("Gemini API is not available. Ensure GOOGLE_API_KEY is set.")
     
     available_models = [m for m in genai.list_models() if 'generateContent' in m.supported_generation_methods]
     selected_model_name = None
     for model_info in available_models:
-        # gemini-2.0-flash ko prefer karein kyunki yeh efficient hai
+        # Prefer gemini-2.0-flash because it is efficient
         if 'gemini-2.0-flash' in model_info.name:
             selected_model_name = model_info.name
             break
     
     if not selected_model_name:
         if available_models:
-            # Agar flash model na mile to koi bhi available model use karein
+            # If flash model is not found, use any available model
             selected_model_name = available_models[0].name
             logging.warning(f"gemini-2.0-flash not found. Using available model: {selected_model_name}")
         else:
@@ -80,10 +90,10 @@ def get_gemini_model():
 
 # --- Adjective Generator Tool Logic ---
 def generate_adjectives(text):
-    """Diye gaye noun ya sentence ke liye Gemini model ka istemal karte hue adjectives generate karta hai."""
+    """Generates adjectives for a given noun or sentence using the Gemini model."""
     if not GEMINI_API_AVAILABLE:
-        logging.error("Gemini API adjective generation ke liye available nahi. 'google-generativeai' install karein aur API key configure karein.")
-        return ["Error: Gemini API adjective generation ke liye configure nahi."]
+        logging.error(missing_api_key_error_msg("adjective_generator_tool"))
+        return [missing_api_key_error_msg("adjective_generator_tool")]
     try:
         model = get_gemini_model()
         response_schema = {
@@ -96,8 +106,8 @@ def generate_adjectives(text):
             }
         }
         prompt = (
-            f"Darj zail text mein concept ya noun ke liye 5-7 mutaliqa aur descriptive adjectives generate karein. "
-            f"Unhein single words ki list ki shakal mein provide karein.\n\n"
+            f"Generate 5-7 relevant and descriptive adjectives in English for the concept or noun in the following text. " # Explicitly request English
+            f"Provide them as a list of single words. Do not use any markdown formatting like **bold**, *italic*, or ##headings.\n\n" # Add formatting instruction
             f"Text: {text}\n\nAdjectives:"
         )
         response = model.generate_content(
@@ -115,9 +125,9 @@ def generate_adjectives(text):
             json_string = response.candidates[0].content.parts[0].text
             adjectives_data = json.loads(json_string)
             adjectives_list = [item["adjective"].strip() for item in adjectives_data if "adjective" in item]
-            return adjectives_list if adjectives_list else ["Koi adjectives nahi milay."]
+            return adjectives_list if adjectives_list else ["No adjectives found."]
         else:
-            return ["Koi adjectives generate nahi ho sakay."]
+            return ["No adjectives could be generated."]
     except Exception as e:
-        logging.error(f"Gemini se adjectives generate karne mein error: {e}", exc_info=True)
-        return [f"Error: Adjective generation fail ho gai. Tafseelat: {str(e)}"]
+        logging.error(f"Error generating adjectives with Gemini: {e}", exc_info=True)
+        return [f"Error: Adjective generation failed. Details: {str(e)}"]

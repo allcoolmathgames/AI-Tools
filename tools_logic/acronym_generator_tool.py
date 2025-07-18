@@ -1,20 +1,27 @@
 import logging
 import re
-import os
-import nltk # NLTK data setup ke liye
-import json # JSON parsing ke liye
+import os # Added for environment variable access
+import nltk # For NLTK data setup
+import json # For JSON parsing
 
 # --- Gemini API Configuration ---
-# IMPORTANT: google-generativeai library install karna zaroori hai.
+# IMPORTANT: It is necessary to install the google-generativeai library.
 # 'pip install google-generativeai' run karein.
 try:
     import google.generativeai as genai
-    # Aapki Gemini API key yahan configure ki gai hai.
-    # Yeh key Gemini model ko istemal karne ke liye zaroori hai.
-    # User ne di hui API key: AIzaSyBnLc4iJy4KFR5iA1Cwy6c207wAyMfwHn0
-    genai.configure(api_key="AIzaSyBnLc4iJy4KFR5iA1Cwy6c207wAyMfwHn0")
-    logging.info("Google Generative AI library loaded and configured for acronym_generator_tool.")
-    GEMINI_API_AVAILABLE = True
+    # Configure your Gemini API key from environment variables for production.
+    # On Railway, set a variable named GOOGLE_API_KEY with your actual API key.
+    gemini_api_key = os.environ.get("GOOGLE_API_KEY")
+    if gemini_api_key:
+        genai.configure(api_key=gemini_api_key)
+        logging.info("Google Generative AI library loaded and configured for acronym_generator_tool.")
+        GEMINI_API_AVAILABLE = True
+    else:
+        logging.warning("GOOGLE_API_KEY environment variable not set. Gemini functions will not work in acronym_generator_tool.")
+        GEMINI_API_AVAILABLE = False
+        # Define a helper message for missing API key if it's not set
+        def missing_api_key_error_msg(tool_name):
+            return f"Error: Gemini API not configured for {tool_name}. Please ensure GOOGLE_API_KEY environment variable is set."
 except ImportError:
     logging.warning("Google Generative AI library not found. Gemini functions will not work in acronym_generator_tool.")
     GEMINI_API_AVAILABLE = False
@@ -26,6 +33,7 @@ except Exception as e:
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 # --- NLTK Data Path Setup ---
+# Create directory for NLTK data if it doesn't exist
 nltk_data_dir = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'nltk_data')
 if not os.path.exists(nltk_data_dir):
     os.makedirs(nltk_data_dir)
@@ -35,6 +43,7 @@ logging.info(f"NLTK data path added: {nltk_data_dir}")
 
 # --- NLTK Data Download Check ---
 def ensure_nltk_data():
+    """Ensures necessary NLTK data is downloaded."""
     try:
         nltk.data.find('tokenizers/punkt')
         logging.info("NLTK 'punkt' tokenizer already exists.")
@@ -58,19 +67,19 @@ ensure_nltk_data()
 def get_gemini_model():
     """Helper function to get a Gemini model that supports generateContent."""
     if not GEMINI_API_AVAILABLE:
-        raise Exception("Gemini API is not available.")
+        raise Exception("Gemini API is not available. Ensure GOOGLE_API_KEY is set.")
     
     available_models = [m for m in genai.list_models() if 'generateContent' in m.supported_generation_methods]
     selected_model_name = None
     for model_info in available_models:
-        # gemini-2.0-flash ko prefer karein kyunki yeh efficient hai
+        # Prefer gemini-2.0-flash because it is efficient
         if 'gemini-2.0-flash' in model_info.name:
             selected_model_name = model_info.name
             break
     
     if not selected_model_name:
         if available_models:
-            # Agar flash model na mile to koi bhi available model use karein
+            # If flash model is not found, use any available model
             selected_model_name = available_models[0].name
             logging.warning(f"gemini-2.0-flash not found. Using available model: {selected_model_name}")
         else:
@@ -80,15 +89,16 @@ def get_gemini_model():
 
 # --- Acronym Generator Tool Logic ---
 def generate_acronym(text):
-    """Gemini model ka istemal karte hue acronym generate karta hai."""
+    """Generates an acronym using the Gemini model."""
     if not GEMINI_API_AVAILABLE:
-        logging.error("Gemini API acronym generation ke liye available nahi. 'google-generativeai' install karein aur API key configure karein.")
-        return "Error: Gemini API acronym generation ke liye configure nahi."
+        logging.error(missing_api_key_error_msg("acronym_generator_tool"))
+        return missing_api_key_error_msg("acronym_generator_tool")
     try:
         model = get_gemini_model()
         prompt = (
-            f"Darj zail phrase ya text se mukhtasar acronym generate karein. "
-            f"Sirf har ahem word ka pehla harf istemal karein. Common words jaise 'a', 'an', 'the', 'of', 'for' ko hata dein.\n\n"
+            f"Generate a concise acronym in English from the following phrase or text. " # Explicitly request English
+            f"Only use the first letter of each significant word. Exclude common words like 'a', 'an', 'the', 'of', 'for'. "
+            f"Provide only the acronym itself, without any additional text or explanations. Do not use any markdown formatting like **bold**, *italic*, or ##headings.\n\n" # Add formatting instruction
             f"Text: {text}\n\nAcronym:"
         )
         response = model.generate_content(
@@ -102,11 +112,11 @@ def generate_acronym(text):
         )
         if response.candidates and response.candidates[0].content and response.candidates[0].content.parts:
             acronym_text = response.candidates[0].content.parts[0].text.strip()
-            # "Acronym:" jaisi shuruati lines ko hata dein
+            # Remove leading "Acronym:" if present
             acronym_text = re.sub(r'^(Acronym:)?\s*', '', acronym_text, flags=re.IGNORECASE).strip()
             return acronym_text if acronym_text else "N/A"
         else:
-            return "N/A" # Agar Gemini generate na kare to default
+            return "N/A" # Default if Gemini does not generate
     except Exception as e:
-        logging.error(f"Gemini se acronym generate karne mein error: {e}", exc_info=True)
-        return f"Error: Acronym generation fail ho gai. Tafseelat: {str(e)}"
+        logging.error(f"Error generating acronym with Gemini: {e}", exc_info=True)
+        return f"Error: Acronym generation failed. Details: {str(e)}"

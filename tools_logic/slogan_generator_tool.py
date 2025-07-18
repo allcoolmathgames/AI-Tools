@@ -1,20 +1,27 @@
 import logging
 import re
-import os
+import os # Added for environment variable access
 import nltk # For NLTK data setup
 import json # For JSON parsing
 
 # --- Gemini API Configuration ---
 # IMPORTANT: It is necessary to install the google-generativeai library.
-# Run 'pip install google-generativeai' in your virtual environment.
+# 'pip install google-generativeai' run karein.
 try:
     import google.generativeai as genai
-    # Your Gemini API key is configured here.
-    # This key is crucial for using the Gemini model.
-    # User-provided API key: AIzaSyBnLc4iJy4KFR5iA1Cwy6c207wAyMfwHn0
-    genai.configure(api_key="AIzaSyBnLc4iJy4KFR5iA1Cwy6c207wAyMfwHn0")
-    logging.info("Google Generative AI library loaded and configured for slogan_generator_tool.")
-    GEMINI_API_AVAILABLE = True
+    # Configure your Gemini API key from environment variables for production.
+    # On Railway, set a variable named GOOGLE_API_KEY with your actual API key.
+    gemini_api_key = os.environ.get("GOOGLE_API_KEY")
+    if gemini_api_key:
+        genai.configure(api_key=gemini_api_key)
+        logging.info("Google Generative AI library loaded and configured for slogan_generator_tool.")
+        GEMINI_API_AVAILABLE = True
+    else:
+        logging.warning("GOOGLE_API_KEY environment variable not set. Gemini functions will not work in slogan_generator_tool.")
+        GEMINI_API_AVAILABLE = False
+        # Define a helper message for missing API key if it's not set
+        def missing_api_key_error_msg(tool_name):
+            return f"Error: Gemini API not configured for {tool_name}. Please ensure GOOGLE_API_KEY environment variable is set."
 except ImportError:
     logging.warning("Google Generative AI library not found. Gemini functions will not work in slogan_generator_tool.")
     GEMINI_API_AVAILABLE = False
@@ -60,7 +67,8 @@ ensure_nltk_data()
 def get_gemini_model():
     """Helper function to get a Gemini model that supports generateContent."""
     if not GEMINI_API_AVAILABLE:
-        raise Exception("Gemini API is not available.")
+        # Provide specific error message if API is not available due to missing key
+        raise Exception("Gemini API is not available. Ensure GOOGLE_API_KEY is set.")
     
     available_models = [m for m in genai.list_models() if 'generateContent' in m.supported_generation_methods]
     selected_model_name = None
@@ -84,8 +92,8 @@ def get_gemini_model():
 def generate_slogans(keywords, num_slogans=5):
     """Generates slogans using the Gemini model."""
     if not GEMINI_API_AVAILABLE:
-        logging.error("Gemini API is not available for slogan generation. Please install 'google-generativeai' and configure API key.")
-        return [f"Error: Gemini API not configured for slogan generation. Please install 'google-generativeai' and set your API key."]
+        logging.error(missing_api_key_error_msg("slogan_generator_tool"))
+        return [missing_api_key_error_msg("slogan_generator_tool")]
     try:
         model = get_gemini_model()
         response_schema = {
@@ -98,9 +106,9 @@ def generate_slogans(keywords, num_slogans=5):
             }
         }
         prompt = (
-            f"Generate {num_slogans} unique, catchy, and memorable advertising slogans "
+            f"Generate {num_slogans} unique, catchy, and memorable advertising slogans in English " # Explicitly request English
             f"for a brand or campaign related to '{keywords}'. "
-            "Each slogan should be concise and highly impactful. Ensure all slogans are in English." # Added specific English instruction
+            "Each slogan should be concise and highly impactful. Do not use any markdown formatting like **bold**, *italic*, or ##headings. Provide plain text." # Add formatting instruction
         )
         response = model.generate_content(
             prompt,
