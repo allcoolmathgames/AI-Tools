@@ -12,4 +12,8 @@ psutil==7.0.0
 requests==2.32.4
 toml==0.10.2
 tqdm==4.67.1
+<<<<<<< HEAD
 urllib3==2.5.0
+=======
+urllib3==2.5.0
+>>>>>>> e18499ad1913fdf3c820ff35a1031c6b9124426a
