@@ -1,0 +1,26 @@
+# Virtual environment
+venv/
+.env
+
+# Python cache
+__pycache__/
+*.pyc
+
+# NLTK data (agar runtime par download hoti hai)
+nltk_data/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+
+# Log files
+*.log
+
+# API keys and sensitive information
+# Warning: Aapne API keys ko Python files ke andar hardcode kiya hua hai.
+# Production mein API keys ko environment variables mein rakhna zyada secure hota hai.
+# Abhi ke liye, ye keys GitHub par public ho jayengi agar code push kiya jaye.
