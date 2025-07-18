@@ -4,6 +4,7 @@ from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
 
 # Import specific functions from the new modular tool files
+# Ensure these files exist in your 'tools_logic' folder.
 from tools_logic.summarizer_tool import summarize_text
 from tools_logic.rewriter_tool import rewrite_article, paraphrase_text
 from tools_logic.plagiarism_ai_checker_tool import check_plagiarism_and_ai # Ensure this file exists if not removed
@@ -55,6 +56,7 @@ def article_rewriter_page():
 @app.route('/plagiarism-checker')
 def plagiarism_checker_page():
     """Renders the Plagiarism Checker tool page."""
+    # Fix for 'index_page' BuildError if present in templates
     return render_template('plagiarism_checker.html')
 
 @app.route('/paraphrasing-tool')
@@ -279,398 +281,396 @@ def generate_content_ideas_api():
 
 @app.route('/api/paraphrase', methods=['POST'])
 def paraphrase_api():
-    """API endpoint for paraphrasing text."""
-    logging.info("Received /api/paraphrase POST request.")
-    data = request.get_json()
-    text = data.get('text', '')
+    """API endpoint for paraphrasing text."""
+    logging.info("Received /api/paraphrase POST request.")
+    data = request.get_json()
+    text = data.get('text', '')
 
-    if not text:
-        return jsonify({"paraphrased_text": "", "error": "Please provide text to paraphrase."}), 400
-    
-    try:
-        paraphrased_text = paraphrase_text(text)
-        if str(paraphrased_text).startswith("Error:"):
-            logging.error(f"Paraphrasing API call failed: {paraphrased_text}")
-            return jsonify({"paraphrased_text": "", "error": paraphrased_text}), 500
-        
-        logging.info("Paraphrasing successful.")
-        return jsonify({"paraphrased_text": str(paraphrased_text).strip()})
-    except Exception as e:
-        error_message = f"An unexpected error occurred during paraphrasing: {str(e)}"
-        logging.error(error_message, exc_info=True)
-        return jsonify({"paraphrased_text": "", "error": error_message}), 500
+    if not text:
+        return jsonify({"paraphrased_text": "", "error": "Please provide text to paraphrase."}), 400
+    
+    try:
+        paraphrased_text = paraphrase_text(text)
+        if str(paraphrased_text).startswith("Error:"):
+            logging.error(f"Paraphrasing API call failed: {paraphrased_text}")
+            return jsonify({"paraphrased_text": "", "error": paraphrased_text}), 500
+        
+        logging.info("Paraphrasing successful.")
+        return jsonify({"paraphrased_text": str(paraphrased_text).strip()})
+    except Exception as e:
+        error_message = f"An unexpected error occurred during paraphrasing: {str(e)}"
+        logging.error(error_message, exc_info=True)
+        return jsonify({"paraphrased_text": "", "error": error_message}), 500
 
 @app.route('/api/check_grammar', methods=['POST'])
 def check_grammar_api():
-    """API endpoint for checking grammar."""
-    logging.info("Received /api/check_grammar POST request.")
-    data = request.get_json()
-    text = data.get('text', '')
+    """API endpoint for checking grammar."""
+    logging.info("Received /api/check_grammar POST request.")
+    data = request.get_json()
+    text = data.get('text', '')
 
-    if not text:
-        return jsonify({"corrected_text": "", "error": "Please provide text to check grammar."}), 400
-    
-    try:
-        corrected_text = check_grammar(text) # Changed to corrected_text to match frontend
-        if str(corrected_text).startswith("Error:"):
-            logging.error(f"Grammar check API call failed: {corrected_text}")
-            return jsonify({"corrected_text": "", "error": corrected_text}), 500
-        
-        logging.info("Grammar check successful.")
-        return jsonify({"corrected_text": str(corrected_text).strip()})
-    except Exception as e:
-        error_message = f"An unexpected error occurred during grammar check: {str(e)}"
-        logging.error(error_message, exc_info=True)
-        return jsonify({"corrected_text": "", "error": error_message}), 500
+    if not text:
+        return jsonify({"corrected_text": "", "error": "Please provide text to check grammar."}), 400
+    
+    try:
+        corrected_text = check_grammar(text) # Changed to corrected_text to match frontend
+        if str(corrected_text).startswith("Error:"):
+            logging.error(f"Grammar check API call failed: {corrected_text}")
+            return jsonify({"corrected_text": "", "error": corrected_text}), 500
+        
+        logging.info("Grammar check successful.")
+        return jsonify({"corrected_text": str(corrected_text).strip()})
+    except Exception as e:
+        error_message = f"An unexpected error occurred during grammar check: {str(e)}"
+        logging.error(error_message, exc_info=True)
+        return jsonify({"corrected_text": "", "error": error_message}), 500
 
 @app.route('/api/generate_slogan', methods=['POST'])
 def generate_slogan_api():
-    """API endpoint for generating slogans."""
-    logging.info("Received /api/generate_slogan POST request.")
-    data = request.get_json()
-    keywords = data.get('keywords', '')
-    num_slogans = data.get('num_slogans', 5)
+    """API endpoint for generating slogans."""
+    logging.info("Received /api/generate_slogan POST request.")
+    data = request.get_json()
+    keywords = data.get('keywords', '')
+    num_slogans = data.get('num_slogans', 5)
 
-    if not keywords:
-        return jsonify({"slogans": [], "error": "Please provide keywords for slogan generation."}), 400
-    
-    try:
-        num_slogans = int(num_slogans)
-        num_slogans = max(1, min(num_slogans, 10))
-    except (ValueError, TypeError):
-        logging.warning(f"Invalid num_slogans received: {num_slogans}. Defaulting to 5.")
-        num_slogans = 5
+    if not keywords:
+        return jsonify({"slogans": [], "error": "Please provide keywords for slogan generation."}), 400
+    
+    try:
+        num_slogans = int(num_slogans)
+        num_slogans = max(1, min(num_slogans, 10))
+    except (ValueError, TypeError):
+        logging.warning(f"Invalid num_slogans received: {num_slogans}. Defaulting to 5.")
+        num_slogans = 5
 
-    try:
-        slogans = generate_slogans(keywords, num_slogans)
-        if isinstance(slogans, list) and slogans and str(slogans[0]).startswith("Error: Gemini API"):
-             logging.error(f"Gemini slogan generation failed: {slogans[0]}")
-             return jsonify({"slogans": [], "error": slogans[0]}), 500
-        
-        logging.info("Slogan generation successful.")
-        return jsonify({"slogans": slogans})
-    except Exception as e:
-        error_message = f"An unexpected error occurred during slogan generation: {str(e)}"
-        logging.error(error_message, exc_info=True)
-        return jsonify({"slogans": [], "error": error_message}), 500
+    try:
+        slogans = generate_slogans(keywords, num_slogans)
+        if isinstance(slogans, list) and slogans and str(slogans[0]).startswith("Error: Gemini API"):
+             logging.error(f"Gemini slogan generation failed: {slogans[0]}")
+             return jsonify({"slogans": [], "error": slogans[0]}), 500
+        
+        logging.info("Slogan generation successful.")
+        return jsonify({"slogans": slogans})
+    except Exception as e:
+        error_message = f"An unexpected error occurred during slogan generation: {str(e)}"
+        logging.error(error_message, exc_info=True)
+        return jsonify({"slogans": [], "error": error_message}), 500
 
 
 @app.route('/api/check_plagiarism_ai', methods=['POST'])
 def check_plagiarism_ai_api():
-    """API endpoint for checking plagiarism and AI content."""
-    logging.info("Received /api/check_plagiarism_ai POST request.")
-    data = request.get_json()
-    text = data.get('text', '')
+    """API endpoint for checking plagiarism and AI content."""
+    logging.info("Received /api/check_plagiarism_ai POST request.")
+    data = request.get_json()
+    text = data.get('text', '')
 
-    if not text:
-        return jsonify({"error": "Please provide text to check."}), 400
+    if not text:
+        return jsonify({"error": "Please provide text to check."}), 400
 
-    try:
-        results = check_plagiarism_and_ai(text)
-        logging.info("Plagiarism and AI check processed.")
-        return jsonify(results)
-    except Exception as e:
-        error_message = f"An unexpected error occurred during plagiarism/AI check: {str(e)}"
-        logging.error(error_message, exc_info=True)
-        return jsonify({"error": error_message}), 500
+    try:
+        results = check_plagiarism_and_ai(text)
+        logging.info("Plagiarism and AI check processed.")
+        return jsonify(results)
+    except Exception as e:
+        error_message = f"An unexpected error occurred during plagiarism/AI check: {str(e)}"
+        logging.error(error_message, exc_info=True)
+        return jsonify({"error": error_message}), 500
 
 
 @app.route('/api/generate_story', methods=['POST'])
 def generate_story_api():
-    """API endpoint for generating stories."""
-    logging.info("Received /api/generate_story POST request.")
-    data = request.get_json()
-    topic = data.get('topic', '') # Changed from genre, characters, plot_keywords as per script.js
-    genre = data.get('genre', '')
-    characters = data.get('characters', '')
-    # length = data.get('length', 'medium') # Not directly used in frontend script payload
+    """API endpoint for generating stories."""
+    logging.info("Received /api/generate_story POST request.")
+    data = request.get_json()
+    topic = data.get('topic', '') # Changed from genre, characters, plot_keywords as per script.js
+    genre = data.get('genre', '')
+    characters = data.get('characters', '')
+    # length = data.get('length', 'medium') # Not directly used in frontend script payload
 
-    if not topic: # Only topic is mandatory as per frontend validation
-        return jsonify({"story": "", "error": "Please provide a story topic or keywords."}), 400
-    
-    try:
-        # Pass topic as plot_keywords since front-end script is sending it this way for story generation
-        story = generate_story(topic, genre, characters) 
-        if str(story).startswith("Error:"):
-            logging.error(f"Story generation API call failed: {story}")
-            return jsonify({"story": "", "error": story}), 500
-        
-        logging.info("Story generation successful.")
-        return jsonify({"story": str(story).strip()})
-    except Exception as e:
-        error_message = f"An unexpected error occurred during story generation: {str(e)}"
-        logging.error(error_message, exc_info=True)
-        return jsonify({"story": "", "error": error_message}), 500
+    if not topic: # Only topic is mandatory as per frontend validation
+        return jsonify({"story": "", "error": "Please provide a story topic or keywords."}), 400
+    
+    try:
+        # Pass topic as plot_keywords since front-end script is sending it this way for story generation
+        story = generate_story(topic, genre, characters) 
+        if str(story).startswith("Error:"):
+            logging.error(f"Story generation API call failed: {story}")
+            return jsonify({"story": "", "error": story}), 500
+        
+        logging.info("Story generation successful.")
+        return jsonify({"story": str(story).strip()})
+    except Exception as e:
+        error_message = f"An unexpected error occurred during story generation: {str(e)}"
+        logging.error(error_message, exc_info=True)
+        return jsonify({"story": "", "error": error_message}), 500
 
 
 @app.route('/api/generate_product_description', methods=['POST'])
 def generate_product_description_api():
-    """API endpoint for generating product descriptions."""
-    logging.info("Received /api/generate_product_description POST request.")
-    data = request.get_json()
-    product_name = data.get('productName', '')
-    product_keywords = data.get('keywords', '') # Changed from features to product_keywords to match front-end
-    target_audience = data.get('targetAudience', '') # Changed from audience to target_audience
-    tone = data.get('tone', 'informative')
+    """API endpoint for generating product descriptions."""
+    logging.info("Received /api/generate_product_description POST request.")
+    data = request.get_json()
+    product_name = data.get('productName', '')
+    product_keywords = data.get('keywords', '') # Changed from features to product_keywords to match front-end
+    target_audience = data.get('targetAudience', '') # Changed from audience to target_audience
+    tone = data.get('tone', 'informative')
 
-    if not product_name and not product_keywords: # Validate as per front-end script
-        return jsonify({"description": "", "error": "Please enter a product name or keywords to generate a description."}), 400
-    
-    try:
-        description = generate_product_description(product_name, product_keywords, target_audience, tone)
-        if str(description).startswith("Error:"):
-            logging.error(f"Product description generation API call failed: {description}")
-            return jsonify({"description": "", "error": description}), 500
-        
-        logging.info("Product description generation successful.")
-        return jsonify({"description": str(description).strip()})
-    except Exception as e:
-        error_message = f"An unexpected error occurred during product description generation: {str(e)}"
-        logging.error(error_message, exc_info=True)
-        return jsonify({"description": "", "error": error_message}), 500
+    if not product_name and not product_keywords: # Validate as per front-end script
+        return jsonify({"description": "", "error": "Please enter a product name or keywords to generate a description."}), 400
+    
+    try:
+        description = generate_product_description(product_name, product_keywords, target_audience, tone)
+        if str(description).startswith("Error:"):
+            logging.error(f"Product description generation API call failed: {description}")
+            return jsonify({"description": "", "error": description}), 500
+        
+        logging.info("Product description generation successful.")
+        return jsonify({"description": str(description).strip()})
+    except Exception as e:
+        error_message = f"An unexpected error occurred during product description generation: {str(e)}"
+        logging.error(error_message, exc_info=True)
+        return jsonify({"description": "", "error": error_message}), 500
 
 @app.route('/api/generate_essay', methods=['POST'])
 def generate_essay_api():
-    """API endpoint for generating essays."""
-    logging.info("Received /api/generate_essay POST request.")
-    data = request.get_json()
-    topic = data.get('topic', '')
-    length = data.get('length', 'medium')
-    style = data.get('style', 'formal')
-    keywords = data.get('keywords', '') # Added as per original logic.py, though script doesn't send it
+    """API endpoint for generating essays."""
+    logging.info("Received /api/generate_essay POST request.")
+    data = request.get_json()
+    topic = data.get('topic', '')
+    length = data.get('length', 'medium')
+    style = data.get('style', 'formal')
+    keywords = data.get('keywords', '') # Added as per original logic.py, though script doesn't send it
 
-    if not topic:
-        return jsonify({"essay": "", "error": "Please provide a topic for the essay."}), 400
-    
-    try:
-        essay = generate_essay(topic, length, style, keywords)
-        if str(essay).startswith("Error:"):
-            logging.error(f"Essay generation API call failed: {essay}")
-            return jsonify({"essay": "", "error": essay}), 500
-        
-        logging.info("Essay generation successful.")
-        return jsonify({"essay": str(essay).strip()})
-    except Exception as e:
-        error_message = f"An unexpected error occurred during essay generation: {str(e)}"
-        logging.error(error_message, exc_info=True)
-        return jsonify({"essay": "", "error": error_message}), 500
+    if not topic:
+        return jsonify({"essay": "", "error": "Please provide a topic for the essay."}), 400
+    
+    try:
+        essay = generate_essay(topic, length, style, keywords)
+        if str(essay).startswith("Error:"):
+            logging.error(f"Essay generation API call failed: {essay}")
+            return jsonify({"essay": "", "error": essay}), 500
+        
+        logging.info("Essay generation successful.")
+        return jsonify({"essay": str(essay).strip()})
+    except Exception as e:
+        error_message = f"An unexpected error occurred during essay generation: {str(e)}"
+        logging.error(error_message, exc_info=True)
+        return jsonify({"essay": "", "error": error_message}), 500
 
 @app.route('/api/generate_trending_news', methods=['POST'])
 def generate_trending_news_api():
-    logging.info("Received /api/generate_trending_news POST request.")
-    data = request.get_json()
-    # Corrected: Use 'keywords' and 'category' as keys, matching frontend payload
-    keywords = data.get('keywords', '') 
-    category = data.get('category', '') 
-    num_articles = data.get('num_articles', 1) # This key was already correct
+    logging.info("Received /api/generate_trending_news POST request.")
+    data = request.get_json()
+    # Corrected: Use 'keywords' and 'category' as keys, matching frontend payload
+    keywords = data.get('keywords', '') 
+    category = data.get('category', '') 
+    num_articles = data.get('num_articles', 1) # This key was already correct
 
-    if not keywords and not category:
-        return jsonify({"news_summary": "", "error": "Please enter a news topic/keywords or select a category."}), 400
-    
-    try:
-        # num_articles ko int mein convert karein, agar woh string ho
-        num_articles = int(num_articles) if isinstance(num_articles, str) and num_articles.isdigit() else 1
+    if not keywords and not category:
+        return jsonify({"news_summary": "", "error": "Please enter a news topic/keywords or select a category."}), 400
+    
+    try:
+        # num_articles ko int mein convert karein, agar woh string ho
+        num_articles = int(num_articles) if isinstance(num_articles, str) and num_articles.isdigit() else 1
 
-        news_summary = generate_trending_news(keywords, category, num_articles)
-        if isinstance(news_summary, str) and str(news_summary).startswith("Error:"):
-            logging.error(f"Trending news generation API call failed: {news_summary}")
-            return jsonify({"news_summary": "", "error": news_summary}), 500
-        
-        logging.info("Trending news generation successful.")
-        return jsonify({"news_summary": str(news_summary).strip()})
-    except Exception as e:
-        error_message = f"An unexpected error occurred during trending news generation: {str(e)}"
-        logging.error(error_message, exc_info=True)
-        return jsonify({"news_summary": "", "error": error_message}), 500
+        news_summary = generate_trending_news(keywords, category, num_articles)
+        if isinstance(news_summary, str) and str(news_summary).startswith("Error:"):
+            logging.error(f"Trending news generation API call failed: {news_summary}")
+            return jsonify({"news_summary": "", "error": news_summary}), 500
+        
+        logging.info("Trending news generation successful.")
+        return jsonify({"news_summary": str(news_summary).strip()})
+    except Exception as e:
+        error_message = f"An unexpected error occurred during trending news generation: {str(e)}"
+        logging.error(error_message, exc_info=True)
+        return jsonify({"news_summary": "", "error": error_message}), 500
 
 @app.route('/api/generate_acronym', methods=['POST'])
 def generate_acronym_api():
-    """API endpoint for generating acronyms."""
-    logging.info("Received /api/generate_acronym POST request.")
-    data = request.get_json()
-    text = data.get('text', '')
+    """API endpoint for generating acronyms."""
+    logging.info("Received /api/generate_acronym POST request.")
+    data = request.get_json()
+    text = data.get('text', '')
 
-    if not text:
-        return jsonify({"acronym": "", "error": "Please enter a phrase or text to generate an acronym."}), 400
+    if not text:
+        return jsonify({"acronym": "", "error": "Please enter a phrase or text to generate an acronym."}), 400
 
-    try:
-        acronym = generate_acronym(text)
-        if str(acronym).startswith("Error:"):
-            logging.error(f"Acronym generation API call failed: {acronym}")
-            return jsonify({"acronym": "", "error": acronym}), 500
-        
-        logging.info("Acronym generation successful.")
-        return jsonify({"acronym": str(acronym).strip()})
-    except Exception as e:
-        error_message = f"An unexpected error occurred during acronym generation: {str(e)}"
-        logging.error(error_message, exc_info=True)
-        return jsonify({"acronym": "", "error": error_message}), 500
+    try:
+        acronym = generate_acronym(text)
+        if str(acronym).startswith("Error:"):
+            logging.error(f"Acronym generation API call failed: {acronym}")
+            return jsonify({"acronym": "", "error": acronym}), 500
+        
+        logging.info("Acronym generation successful.")
+        return jsonify({"acronym": str(acronym).strip()})
+    except Exception as e:
+        error_message = f"An unexpected error occurred during acronym generation: {str(e)}"
+        logging.error(error_message, exc_info=True)
+        return jsonify({"acronym": "", "error": error_message}), 500
 
 @app.route('/api/generate_abstract', methods=['POST'])
 def generate_abstract_api():
-    """API endpoint for generating abstracts."""
-    logging.info("Received /api/generate_abstract POST request.")
-    data = request.get_json()
-    text = data.get('text', '')
+    """API endpoint for generating abstracts."""
+    logging.info("Received /api/generate_abstract POST request.")
+    data = request.get_json()
+    text = data.get('text', '')
 
-    if not text:
-        return jsonify({"abstract": "", "error": "Please paste your text or paper to generate an abstract."}), 400
+    if not text:
+        return jsonify({"abstract": "", "error": "Please paste your text or paper to generate an abstract."}), 400
 
-    try:
-        abstract = generate_abstract(text)
-        if str(abstract).startswith("Error:"):
-            logging.error(f"Abstract generation API call failed: {abstract}")
-            return jsonify({"abstract": "", "error": abstract}), 500
-        
-        logging.info("Abstract generation successful.")
-        return jsonify({"abstract": str(abstract).strip()})
-    except Exception as e:
-        error_message = f"An unexpected error occurred during abstract generation: {str(e)}"
-        logging.error(error_message, exc_info=True)
-        return jsonify({"abstract": "", "error": error_message}), 500
+    try:
+        abstract = generate_abstract(text)
+        if str(abstract).startswith("Error:"):
+            logging.error(f"Abstract generation API call failed: {abstract}")
+            return jsonify({"abstract": "", "error": abstract}), 500
+        
+        logging.info("Abstract generation successful.")
+        return jsonify({"abstract": str(abstract).strip()})
+    except Exception as e:
+        error_message = f"An unexpected error occurred during abstract generation: {str(e)}"
+        logging.error(error_message, exc_info=True)
+        return jsonify({"abstract": "", "error": error_message}), 500
 
 @app.route('/api/generate_adjectives', methods=['POST'])
 def generate_adjectives_api():
-    """API endpoint for generating adjectives."""
-    logging.info("Received /api/generate_adjectives POST request.")
-    data = request.get_json()
-    text = data.get('text', '')
+    logging.info("Received /api/generate_adjectives POST request.")
+    data = request.get_json()
+    text = data.get('text', '')
 
-    if not text:
-        return jsonify({"adjectives": [], "error": "Please enter a noun or sentence to get adjectives."}), 400
+    if not text:
+        return jsonify({"adjectives": [], "error": "Please enter a noun or sentence to get adjectives."}), 400
 
-    try:
-        adjectives = generate_adjectives(text)
-        if isinstance(adjectives, list) and adjectives and str(adjectives[0]).startswith("Error:"):
-            logging.error(f"Adjective generation API call failed: {adjectives[0]}")
-            return jsonify({"adjectives": [], "error": adjectives[0]}), 500
-        
-        logging.info("Adjective generation successful.")
-        return jsonify({"adjectives": adjectives})
-    except Exception as e:
-        error_message = f"An unexpected error occurred during adjective generation: {str(e)}"
-        logging.error(error_message, exc_info=True)
-        return jsonify({"adjectives": [], "error": error_message}), 500
+    try:
+        adjectives = generate_adjectives(text)
+        if isinstance(adjectives, list) and adjectives and str(adjectives[0]).startswith("Error:"):
+            logging.error(f"Adjective generation API call failed: {adjectives[0]}")
+            return jsonify({"adjectives": [], "error": adjectives[0]}), 500
+
+        logging.info("Adjective generation successful.")
+        return jsonify({"adjectives": adjectives})
+    except Exception as e:
+        error_message = f"An unexpected error occurred during adjective generation: {str(e)}"
+        logging.error(error_message, exc_info=True)
+        return jsonify({"adjectives": [], "error": error_message}), 500
+
 
 @app.route('/api/generate_hooks', methods=['POST'])
 def generate_hooks_api():
-    """API endpoint for generating hooks."""
-    logging.info("Received /api/generate_hooks POST request.")
-    data = request.get_json()
-    topic = data.get('topic', '')
-    tone = data.get('tone', 'Intriguing')
+    logging.info("Received /api/generate_hooks POST request.")
+    data = request.get_json()
+    topic = data.get('topic', '')
+    tone = data.get('tone', 'Intriguing')
 
-    if not topic:
-        return jsonify({"hooks": [], "error": "Please describe your content topic to generate hooks."}), 400
+    if not topic:
+        return jsonify({"hooks": [], "error": "Please describe your content topic to generate hooks."}), 400
 
-    try:
-        hooks = generate_hooks(topic, tone)
-        if isinstance(hooks, list) and hooks and str(hooks[0]).startswith("Error:"):
-            logging.error(f"Hook generation API call failed: {hooks[0]}")
-            return jsonify({"hooks": [], "error": hooks[0]}), 500
-        
-        logging.info("Hook generation successful.")
-        return jsonify({"hooks": hooks})
-    except Exception as e:
-        error_message = f"An unexpected error occurred during hook generation: {str(e)}"
-        logging.error(error_message, exc_info=True)
-        return jsonify({"hooks": [], "error": error_message}), 500
+    try:
+        hooks = generate_hooks(topic, tone)
+        if isinstance(hooks, list) and hooks and str(hooks[0]).startswith("Error:"):
+            logging.error(f"Hook generation API call failed: {hooks[0]}")
+            return jsonify({"hooks": [], "error": hooks[0]}), 500
+
+        logging.info("Hook generation successful.")
+        return jsonify({"hooks": hooks})
+    except Exception as e:
+        error_message = f"An unexpected error occurred during hook generation: {str(e)}"
+        logging.error(error_message, exc_info=True)
+        return jsonify({"hooks": [], "error": error_message}), 500
+
 
 @app.route('/api/generate_titles', methods=['POST'])
 def generate_titles_api():
-    """API endpoint for generating titles."""
-    logging.info("Received /api/generate_titles POST request.")
-    data = request.get_json()
-    topic = data.get('topic', '')
+    logging.info("Received /api/generate_titles POST request.")
+    data = request.get_json()
+    topic = data.get('topic', '')
 
-    if not topic:
-        return jsonify({"titles": [], "error": "Please describe your content to generate titles."}), 400
+    if not topic:
+        return jsonify({"titles": [], "error": "Please describe your content to generate titles."}), 400
 
-    try:
-        titles = generate_titles(topic)
-        if isinstance(titles, list) and titles and str(titles[0]).startswith("Error:"):
-            logging.error(f"Title generation API call failed: {titles[0]}")
-            return jsonify({"titles": [], "error": titles[0]}), 500
-        
-        logging.info("Title generation successful.")
-        return jsonify({"titles": titles})
-    except Exception as e:
-        error_message = f"An unexpected error occurred during title generation: {str(e)}"
-        logging.error(error_message, exc_info=True)
-        return jsonify({"titles": [], "error": error_message}), 500
+    try:
+        titles = generate_titles(topic)
+        if isinstance(titles, list) and titles and str(titles[0]).startswith("Error:"):
+            logging.error(f"Title generation API call failed: {titles[0]}")
+            return jsonify({"titles": [], "error": titles[0]}), 500
+
+        logging.info("Title generation successful.")
+        return jsonify({"titles": titles})
+    except Exception as e:
+        error_message = f"An unexpected error occurred during title generation: {str(e)}"
+        logging.error(error_message, exc_info=True)
+        return jsonify({"titles": [], "error": error_message}), 500
+
 
 @app.route('/api/generate_conclusion', methods=['POST'])
 def generate_conclusion_api():
-    """API endpoint for generating conclusions."""
-    logging.info("Received /api/generate_conclusion POST request.")
-    data = request.get_json()
-    text = data.get('text', '')
+    logging.info("Received /api/generate_conclusion POST request.")
+    data = request.get_json()
+    text = data.get('text', '')
 
-    if not text:
-        return jsonify({"conclusion": "", "error": "Please paste your main text to generate a conclusion."}), 400
+    if not text:
+        return jsonify({"conclusion": "", "error": "Please paste your main text to generate a conclusion."}), 400
 
-    try:
-        conclusion = generate_conclusion(text)
-        if str(conclusion).startswith("Error:"):
-            logging.error(f"Conclusion generation API call failed: {conclusion}")
-            return jsonify({"conclusion": "", "error": conclusion}), 500
-        
-        logging.info("Conclusion generation successful.")
-        return jsonify({"conclusion": str(conclusion).strip()})
-    except Exception as e:
-        error_message = f"An unexpected error occurred during conclusion generation: {str(e)}"
-        logging.error(error_message, exc_info=True)
-        return jsonify({"conclusion": "", "error": error_message}), 500
+    try:
+        conclusion = generate_conclusion(text)
+        if str(conclusion).startswith("Error:"):
+            logging.error(f"Conclusion generation API call failed: {conclusion}")
+            return jsonify({"conclusion": "", "error": conclusion}), 500
+
+        logging.info("Conclusion generation successful.")
+        return jsonify({"conclusion": str(conclusion).strip()})
+    except Exception as e:
+        error_message = f"An unexpected error occurred during conclusion generation: {str(e)}"
+        logging.error(error_message, exc_info=True)
+        return jsonify({"conclusion": "", "error": error_message}), 500
+
 
 @app.route('/api/generate_business_names', methods=['POST'])
 def generate_business_names_api():
-    """API endpoint for generating business names."""
-    logging.info("Received /api/generate_business_names POST request.")
-    data = request.get_json()
-    keywords = data.get('keywords', '')
-    style = data.get('style', 'Creative')
+    logging.info("Received /api/generate_business_names POST request.")
+    data = request.get_json()
+    keywords = data.get('keywords', '')
+    style = data.get('style', 'Creative')
 
-    if not keywords:
-        return jsonify({"names": [], "error": "Please enter keywords about your business to generate names."}), 400
+    if not keywords:
+        return jsonify({"names": [], "error": "Please enter keywords about your business to generate names."}), 400
 
-    try:
-        names = generate_business_names(keywords, style)
-        if isinstance(names, list) and names and str(names[0]).startswith("Error:"):
-            logging.error(f"Business name generation API call failed: {names[0]}")
-            return jsonify({"names": [], "error": names[0]}), 500
-        
-        logging.info("Business name generation successful.")
-        return jsonify({"names": names})
-    except Exception as e:
-        error_message = f"An unexpected error occurred during business name generation: {str(e)}"
-        logging.error(error_message, exc_info=True)
-        return jsonify({"names": [], "error": error_message}), 500
+    try:
+        names = generate_business_names(keywords, style)
+        if isinstance(names, list) and names and str(names[0]).startswith("Error:"):
+            logging.error(f"Business name generation API call failed: {names[0]}")
+            return jsonify({"names": [], "error": names[0]}), 500
+
+        logging.info("Business name generation successful.")
+        return jsonify({"names": names})
+    except Exception as e:
+        error_message = f"An unexpected error occurred during business name generation: {str(e)}"
+        logging.error(error_message, exc_info=True)
+        return jsonify({"names": [], "error": error_message}), 500
+
 
 @app.route('/api/generate_email_subjects', methods=['POST'])
 def generate_email_subjects_api():
-    """API endpoint for generating email subject lines."""
-    logging.info("Received /api/generate_email_subjects POST request.")
-    data = request.get_json()
-    content = data.get('content', '')
-    tone = data.get('tone', 'Professional')
+    logging.info("Received /api/generate_email_subjects POST request.")
+    data = request.get_json()
+    content = data.get('content', '')
+    tone = data.get('tone', 'Professional')
 
-    if not content:
-        return jsonify({"subjects": [], "error": "Please describe what your email is about."}), 400
+    if not content:
+        return jsonify({"subjects": [], "error": "Please describe what your email is about."}), 400
 
-    try:
-        subjects = generate_email_subjects(content, tone)
-        if isinstance(subjects, list) and subjects and str(subjects[0]).startswith("Error:"):
-            logging.error(f"Email subject generation API call failed: {subjects[0]}")
-            return jsonify({"subjects": [], "error": subjects[0]}), 500
-        
-        logging.info("Email subject generation successful.")
-        return jsonify({"subjects": subjects})
-    except Exception as e:
-        error_message = f"An unexpected error occurred during email subject generation: {str(e)}"
-        logging.error(error_message, exc_info=True)
-        return jsonify({"subjects": [], "error": error_message}), 500
+    try:
+        subjects = generate_email_subjects(content, tone)
+        if isinstance(subjects, list) and subjects and str(subjects[0]).startswith("Error:"):
+            logging.error(f"Email subject generation API call failed: {subjects[0]}")
+            return jsonify({"subjects": [], "error": subjects[0]}), 500
+
+        logging.info("Email subject generation successful.")
+        return jsonify({"subjects": subjects})
+    except Exception as e:
+        error_message = f"An unexpected error occurred during email subject generation: {str(e)}"
+        logging.error(error_message, exc_info=True)
+        return jsonify({"subjects": [], "error": error_message}), 500
+
 
 if __name__ == '__main__':
-    # Starting the Flask development server.
-    # In production, use a production WSGI server (e.g., Gunicorn, uWSGI).
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    app.run(debug=True, host='0.0.0.0', port=5000)
