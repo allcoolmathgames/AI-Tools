@@ -44,10 +44,11 @@ logging.info(f"NLTK data path added: {nltk_data_dir}")
 # --- NLTK Data Download Check ---
 def ensure_nltk_data():
     """Ensures necessary NLTK data is downloaded."""
+    # ... (inside ensure_nltk_data function)
     try:
         nltk.data.find('tokenizers/punkt')
         logging.info("NLTK 'punkt' tokenizer already exists.")
-    except nltk.downloader.DownloadError:
+    except LookupError: # <--- Exception type ko 'LookupError' mein badla gaya hai
         logging.info("Downloading NLTK 'punkt' tokenizer...")
         nltk.download('punkt', download_dir=nltk_data_dir)
         logging.info("NLTK 'punkt' tokenizer downloaded.")
@@ -55,7 +56,7 @@ def ensure_nltk_data():
     try:
         nltk.data.find('corpora/stopwords')
         logging.info("NLTK 'stopwords' corpus already exists.")
-    except nltk.downloader.DownloadError:
+    except LookupError: # <--- Exception type ko 'LookupError' mein badla gaya hai
         logging.info("Downloading NLTK 'stopwords' corpus...")
         nltk.download('stopwords', download_dir=nltk_data_dir)
         logging.info("NLTK 'stopwords' corpus downloaded.")

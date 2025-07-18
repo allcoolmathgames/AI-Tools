@@ -1,3 +1,8 @@
+Flask
+Flask-Cors
+gunicorn
+google-generativeai
+nltk # Yeh line add karein
 certifi==2025.6.15
 charset-normalizer==3.4.2
 colorama==0.4.6
@@ -8,4 +13,3 @@ requests==2.32.4
 toml==0.10.2
 tqdm==4.67.1
 urllib3==2.5.0
-gunicorn
