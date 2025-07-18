@@ -20,6 +20,16 @@ Thumbs.db
 # Log files
 *.log
 
+# Python packaging
+*.egg-info/
+dist/
+build/
+
+# Model and large binary files
+*.pth
+*.bin
+*.pt
+
 # API keys and sensitive information
 # Warning: Aapne API keys ko Python files ke andar hardcode kiya hua hai.
 # Production mein API keys ko environment variables mein rakhna zyada secure hota hai.
