@@ -1,5 +1,6 @@
 flask
 gunicorn
+flask-cors
 language_tool_python
 requests
 certifi
@@ -10,4 +11,6 @@ tqdm
 colorama
 psutil
 toml
-flask-cors
+transformers
+torch
+nltk
