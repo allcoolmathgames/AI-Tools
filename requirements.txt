@@ -10,3 +10,4 @@ tqdm
 colorama
 psutil
 toml
+flask-cors
