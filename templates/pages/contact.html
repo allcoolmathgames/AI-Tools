@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Summarizer.ai</title>
+    <meta name="description" content="Get in touch with Summarizer.ai support. Contact us for any queries, feedback, or assistance.">
+    <meta name="keywords" content="Contact Summarizer.ai, Summarizer.ai support, get in touch, customer service, support email">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2QWDFWwBCxN5V6qG/t3bLtmG6NvwK20R8T3M2t/FfD3M5C5S5P5M5P5M5A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="alternate" hreflang="x-default" href=""/>
+    <link rel="alternate" hreflang="cs" href=""/>
+    <link rel="alternate" hreflang="ar" href=""/>
+    <link rel="alternate" hreflang="de" href=""/>
+    <link rel="alternate" hreflang="es" href=""/>
+    <link rel="alternate" hreflang="fi" href=""/>
+    <link rel="alternate" hreflang="fr" href=""/>
+    <link rel="alternate" hreflang="id" href=""/>
+    <link rel="alternate" hreflang="it" href=""/>
+    <link rel="alternate" hreflang="ja" href=""/>
+    <link rel="alternate" hreflang="ko" href=""/>
+    <link rel="alternate" hreflang="pl" href=""/>
+    <link rel="alternate" hreflang="pt" href=""/>
+    <link rel="alternate" hreflang="ru" href=""/>
+    <link rel="alternate" hreflang="da" href=""/>
+    <link rel="alternate" hreflang="no" href=""/>
+    <link rel="alternate" hreflang="tr" href=""/>
+    <style>
+        /* Specific styles for Contact Us page */
+        .contact-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+            text-align: center;
+        }
+        .contact-card {
+            background-color: var(--background-card);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+        }
+        .contact-card .icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        .contact-card h3 {
+            font-size: 1.3rem;
+            color: var(--accent-heading);
+            margin-bottom: 10px;
+        }
+        .contact-card p, .contact-card a {
+            font-size: 1rem;
+            color: var(--text-medium);
+            text-decoration: none;
+            line-height: 1.6;
+        }
+        .contact-card a {
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+        .contact-form-container {
+            background-color: var(--background-card);
+            padding: 50px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            max-width: 800px;
+            margin: 60px auto 0 auto;
+        }
+        .contact-form-container .input-group {
+            margin-bottom: 20px;
+        }
+        .contact-form-container label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+        .contact-form-container input[type="text"],
+        .contact-form-container input[type="email"],
+        .contact-form-container textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color-medium);
+            border-radius: 8px;
+            font-size: 1rem;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+            transition: border-color 0.3s ease;
+        }
+        .contact-form-container input[type="text"]:focus,
+        .contact-form-container input[type="email"]:focus,
+        .contact-form-container textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(106, 27, 154, 0.2);
+        }
+        .contact-form-container textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        .contact-form-container button {
+            width: auto;
+            margin-top: 10px;
+            display: block; /* To apply margin auto horizontally if needed */
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .contact-form-container {
+                padding: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    {% include 'header.html' %}
+
+    <div class="main-content-wrapper">
+        <section class="section-container" id="contact-us-section">
+            <h1 class="section-heading">Contact Us</h1>
+            <p style="text-align: center; color: var(--text-medium); margin-bottom: 40px; font-size: 1.05rem;">
+                Hamein aapki rai aur sawalaat ka intezar hai. Neeche diye gaye tareeqon se humse rabta karein.
+            </p>
+
+            <div class="contact-info-grid">
+                <div class="contact-card">
+                    <div class="icon"><i class="fas fa-envelope"></i></div>
+                    <h3>Email Support</h3>
+                    <p>Hamari support team ko email bhej kar madad hasil karein.</p>
+                    <p><a href="mailto:support@summarizer.org">support@summarizer.org</a></p>
+                </div>
+                <div class="contact-card">
+                    <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <h3>Our Address</h3>
+                    <p>Aap humse yahaan mil sakte hain:</p>
+                    <p>HR Tower, College Rd, Faisalabad, Pakistan</p>
+                </div>
+                <div class="contact-card">
+                    <div class="icon"><i class="fas fa-phone"></i></div>
+                    <h3>Call Us</h3>
+                    <p>Phone par humse rabta karein:</p>
+                    <p><a href="tel:+923001234567">+92 300 1234567</a></p>
+                </div>
+            </div>
+
+            <div class="contact-form-container">
+                <h2 class="section-heading" style="margin-top: 0; margin-bottom: 30px; font-size: 1.8rem;">Send Us a Message</h2>
+                <form action="#" method="POST">
+                    <div class="input-group">
+                        <label for="name">Your Name:</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="email">Your Email:</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="subject">Subject:</label>
+                        <input type="text" id="subject" name="subject" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="message">Your Message:</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <button type="submit" class="primary-button">Send Message</button>
+                </form>
+            </div>
+
+        </section>
+    </div>
+
+    {% include 'footer.html' %}
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script>
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+        // Agar aap har page par specific currentYear ID istemal kar rahe hain to:
+        // document.getElementById('currentYearContactUs').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

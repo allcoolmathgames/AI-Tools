@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Text Summarizer - Summarizer.ai</title>
+    <meta name="description" content="Summarize long text and articles into concise, easy-to-read summaries with our advanced AI-powered tool.">
+    <meta name="keywords" content="AI summarizer, text summarizer, online summary tool, article summarizer, summarize text, AI tool">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2QWDFWwBCxN5V6qG/t3bLtmG6NvwK20R8T3M2t/FfD3M5C5S5P5M5P5M5A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="alternate" hreflang="x-default" href=""/>
+    <link rel="alternate" hreflang="cs" href=""/>
+    <link rel="alternate" hreflang="ar" href=""/>
+    <link rel="alternate" hreflang="de" href=""/>
+    <link rel="alternate" hreflang="es" href=""/>
+    <link rel="alternate" hreflang="fi" href=""/>
+    <link rel="alternate" hreflang="fr" href=""/>
+    <link rel="alternate" hreflang="id" href=""/>
+    <link rel="alternate" hreflang="it" href=""/>
+    <link rel="alternate" hreflang="ja" href=""/>
+    <link rel="alternate" hreflang="ko" href=""/>
+    <link rel="alternate" hreflang="pl" href=""/>
+    <link rel="alternate" hreflang="pt" href=""/>
+    <link rel="alternate" hreflang="ru" href=""/>
+    <link rel="alternate" hreflang="da" href=""/>
+    <link rel="alternate" hreflang="no" href=""/>
+    <link rel="alternate" hreflang="tr" href=""/>
+</head>
+
+<body>
+
+    {% include 'header.html' %}
+
+    <section id="summarizer-tool" class="section-container">
+        <h1 class="section-heading" style="font-size: 2.5rem;">AI Text Summarizer</h1>
+        <div class="tool-container">
+            <main>
+                <div class="summarizer-grid">
+                    <div class="text-area-container" style="width: 450px;">
+                        <textarea id="inputText" placeholder="Type or paste your text here..."></textarea>
+                        <div class="counter" id="inputCounter">0 words</div>
+                    </div>
+                    <div class="text-area-container" style="width: 450px;">
+                        <textarea id="outputText" placeholder="Your summary will appear here..." readonly></textarea>
+                        <div class="counter" id="outputCounter">0 words</div>
+                    </div>
+                </div>
+                <div class="controls">
+                    <button id="summarizeBtn" class="primary-button">Summarize</button>
+                    <div class="slider-container">
+                        <label for="lengthSlider">Length:</label>
+                        <input type="range" id="lengthSlider" min="20" max="80" value="50">
+                        <span id="sliderValue">50%</span>
+                    </div>
+                </div>
+            </main>
+            <div id="loader" class="loader"></div>
+            <div id="errorMessage" class="error-message"></div>
+        </div>
+    </section>
+
+    <section id="features" class="section-container">
+        <h2 class="section-heading">Why Choose Our Summarizer?</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>Fast & Efficient</h3>
+                <p>Get your text summarized in seconds, not minutes. Save time and read more efficiently.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <h3>AI-Powered Accuracy</h3>
+                <p>Our advanced AI understands context to provide the most relevant and accurate summaries.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔧</div>
+                <h3>Adjustable Length</h3>
+                <p>You are in control. Use the slider to choose the perfect length for your summary.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="more-tools" class="section-container">
+        <h2 class="section-heading">Explore Our Other AI Tools</h2>
+        <div class="tools-grid">
+            <a href="{{ url_for('abstract_generator_page') }}" class="tool-card">
+                <div class="tool-icon">📑</div>
+                <h3>Abstract Generator</h3>
+                <p>Generate concise abstracts for your research papers.</p>
+            </a>
+            <a href="{{ url_for('acronym_generator_page') }}" class="tool-card">
+                <div class="tool-icon">🔠</div>
+                <h3>Acronym Generator</h3>
+                <p>Create acronyms from long phrases instantly.</p>
+            </a>
+            <a href="{{ url_for('adjective_generator_page') }}" class="tool-card">
+                <div class="tool-icon">🎨</div>
+                <h3>Adjective Generator</h3>
+                <p>Find the perfect adjectives to enhance your writing.</p>
+            </a>
+            <a href="{{ url_for('ai_email_generator_page') }}" class="tool-card">
+                <div class="tool-icon">📧</div>
+                <h3>AI Email Generator</h3>
+                <p>Generate professional and engaging emails quickly with AI.</p>
+            </a>
+            <a href="{{ url_for('ai_product_description_generator_page') }}" class="tool-card">
+                <div class="tool-icon">🛍️</div>
+                <h3>Product Description Generator</h3>
+                <p>Create compelling product descriptions using AI.</p>
+            </a>
+            <a href="{{ url_for('slogan_generator_page') }}" class="tool-card">
+                <div class="tool-icon">🏷️</div>
+                <h3>AI Slogan Generator</h3>
+                <p>Create catchy and memorable slogans for your brand or campaign.</p>
+            </a>
+            <a href="{{ url_for('ai_story_generator_page') }}" class="tool-card">
+                <div class="tool-icon">📖</div>
+                <h3>AI Story Generator</h3>
+                <p>Generate creative and engaging stories with AI.</p>
+            </a>
+            <a href="{{ url_for('index') }}" class="tool-card">
+                <div class="tool-icon">✍️</div>
+                <h3>AI Summarizer</h3>
+                <p>Transform long texts into concise summaries instantly.</p>
+            </a>
+            <a href="{{ url_for('ai_humanizer_page') }}" class="tool-card">
+                <div class="tool-icon">🧑‍💻</div>
+                <h3>AI Text Humanizer</h3>
+                <p>Transform AI-generated text into natural, human-like content.</p>
+            </a>
+            <a href="{{ url_for('article_rewriter_page') }}" class="tool-card">
+                <div class="tool-icon">🔄</div>
+                <h3>Article Rewriter</h3>
+                <p>Rewrite articles to generate fresh, unique content.</p>
+            </a>
+            <a href="{{ url_for('business_name_generator_page') }}" class="tool-card">
+                <div class="tool-icon">🏢</div>
+                <h3>Business Name Generator</h3>
+                <p>Find unique and creative names for your business.</p>
+            </a>
+            <a href="{{ url_for('conclusion_generator_page') }}" class="tool-card">
+                <div class="tool-icon">🏁</div>
+                <h3>Conclusion Generator</h3>
+                <p>Write powerful conclusions for your essays and reports.</p>
+            </a>
+            <a href="{{ url_for('content_idea_generator_page') }}" class="tool-card">
+                <div class="tool-icon">💡</div>
+                <h3>Content Idea Generator</h3>
+                <p>Generate creative and engaging ideas for your next content piece.</p>
+            </a>
+            <a href="{{ url_for('email_subject_line_generator_page') }}" class="tool-card">
+                <div class="tool-icon">📬</div>
+                <h3>Email Subject Line Generator</h3>
+                <p>Create effective subject lines to boost open rates.</p>
+            </a>
+            <a href="{{ url_for('essay_generator_page') }}" class="tool-card">
+                <div class="tool-icon">📄</div>
+                <h3>Essay Generator</h3>
+                <p>Generate well-structured essays on any topic with AI.</p>
+            </a>
+            <a href="{{ url_for('grammar_checker_page') }}" class="tool-card">
+                <div class="tool-icon">✅</div>
+                <h3>Grammar Checker</h3>
+                <p>Correct grammar, spelling, and punctuation errors instantly.</p>
+            </a>
+            <a href="{{ url_for('hook_generator_page') }}" class="tool-card">
+                <div class="tool-icon">🎣</div>
+                <h3>Hook Generator</h3>
+                <p>Create catchy hooks to grab your readers' attention.</p>
+            </a>
+            <a href="{{ url_for('paraphrasing_tool_page') }}" class="tool-card">
+                <div class="tool-icon">📝</div>
+                <h3>Paraphrasing Tool</h3>
+                <p>Rephrase sentences and paragraphs without changing their meaning.</p>
+            </a>
+            <a href="{{ url_for('plagiarism_checker_page') }}" class="tool-card">
+                <div class="tool-icon">📚</div>
+                <h3>Plagiarism Checker</h3>
+                <p>Ensure your content is original and free from plagiarism.</p>
+            </a>
+            <a href="{{ url_for('title_generator_page') }}" class="tool-card">
+                <div class="tool-icon">✒️</div>
+                <h3>Title Generator</h3>
+                <p>Generate compelling titles for your articles and blogs.</p>
+            </a>
+            <a href="{{ url_for('trending_news_generator_page') }}" class="tool-card">
+                <div class="tool-icon">📰</div>
+                <h3>Trending News Generator</h3>
+                <p>Stay updated with trending news generated by AI.</p>
+            </a>
+        </div>
+    </section>
+
+    <section id="latest-blogs" class="section-container">
+        <h2 class="section-heading">Latest Blogs</h2>
+        <div class="blog-cards-grid">
+            <a href="{{ url_for('blog_post', slug='how_to_write_better_summaries_with_ai') }}" class="blog-card">
+                <img src="https://via.placeholder.com/300x200?text=Blog+Image+3" alt="Blog Post Image" class="blog-card-image">
+                <div class="blog-card-content">
+                    <h3>How to Write Better Summaries with AI</h3>
+                    <p>Unlock the secrets to generating concise and effective summaries using advanced AI techniques.</p>
+                    <span class="read-more">Read More ›</span>
+                </div>
+            </a>
+            {# Placeholder Blog Card 2 #}
+            <a href="{{ url_for('blog_post', slug='the_future_of_ai_writing_tools') }}" class="blog-card">
+                <img src="https://via.placeholder.com/300x200?text=Blog+Image+3" alt="Blog Post Image" class="blog-card-image">
+                <div class="blog-card-content">
+                    <h3>The Future of AI Writing Tools</h3>
+                    <p>Explore the exciting advancements and potential impacts of artificial intelligence on content creation.</p>
+                    <span class="read-more">Read More ›</span>
+                </div>
+            </a>
+            {# Placeholder Blog Card 3 #}
+            <a href="{{ url_for('blog_post', slug='tips_for_effective_paraphrasing_with_ai') }}" class="blog-card">
+                <img src="https://via.placeholder.com/300x200?text=Blog+Image+3" alt="Blog Post Image" class="blog-card-image">
+                <div class="blog-card-content">
+                    <h3>Tips for Effective Paraphrasing with AI</h3>
+                    <p>Learn how to rephrase text naturally and avoid plagiarism using AI-powered paraphrasing tools.</p>
+                    <span class="read-more">Read More ›</span>
+                </div>
+            </a>
+        </div>
+        <div style="text-align: center; margin-top: 40px;">
+            <a href="{{ url_for('blogs_index') }}" class="primary-button" style="padding: 15px 30px; font-size: 1.2rem; background-color: var(--primary-button); color: var(--card-section-background); border: 1px solid var(--primary-button); border-radius: 8px;">View All Blogs</a>
+        </div>
+    </section>
+
+    <section id="faq" class="section-container">
+        <h2 class="section-heading">Frequently Asked Questions</h2>
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-question"><h3>Is this text summarizer free to use?</h3><i class="fas fa-plus"></i></div>
+                <div class="faq-answer">
+                    <p>Yes, our tool is completely free for everyone. There are no hidden charges or subscription fees. You can summarize as many articles as you want.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question"><h3>How accurate is the AI summary?</h3><i class="fas fa-plus"></i></div>
+                <div class="faq-answer">
+                    <p>Our summarizer uses a state-of-the-art AI model that is designed to understand the core ideas of the text. While it is highly accurate, we always recommend proofreading the summary for critical applications.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question"><h3>What is the maximum length of text I can summarize?</h3><i class="fas fa-plus"></i></div>
+                <div class="faq-answer">
+                    <p>Currently, our tool is optimized for texts up to 5,000 words. For longer texts, we recommend breaking them into smaller parts for the best results.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% include 'footer.html' %}
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script>
+        document.getElementById('currentYearSummarizer').textContent = new Date().getFullYear();
+    </script>
+</body>
+
+</html>

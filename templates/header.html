@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {# Ye title aur description har page ke liye alag honge, isliye ye individual HTML file mein rahenge #}
+    {# <title>AI Text Summarizer - Summarizer.ai</title> #}
+    {# <meta name="description" content="Summarize long text and articles into concise, easy-to-read summaries with our advanced AI-powered tool."> #}
+    <meta name="robots" content="noindex, nofollow"> {# Aapki request ke mutabiq, ye section hamesha same rahega #}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2QWDFWwBCxN5V6qG/t3bLtmG6NvwK20R8T3M2t/FfD3M5C5S5P5M5P5M5A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <nav>
+        <a href="{{ url_for('index') }}" class="nav-logo">Summarizer.ai</a>
+        <div class="nav-links">
+            <a href="{{ url_for('index') }}">Home</a>
+            <a href="{{ url_for('blogs_index') }}">Blogs</a>
+            <a href="{{ url_for('index') }}#more-tools">More Tools</a>
+            <a href="{{ url_for('index') }}#faq">FAQ</a>
+        </div>
+        <div class="nav-toggle" id="navToggle">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>

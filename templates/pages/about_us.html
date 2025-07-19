@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Summarizer.ai</title>
+    <meta name="description" content="Learn more about Summarizer.ai, our mission to provide advanced AI-powered tools for content summarization and generation.">
+    <meta name="keywords" content="About Summarizer.ai, Summarizer.ai mission, AI text summarizer company, our story, what we do">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2QWDFWwBCxN5V6qG/t3bLtmG6NvwK20R8T3M2t/FfD3M5C5S5P5M5P5M5A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="alternate" hreflang="x-default" href=""/>
+    <link rel="alternate" hreflang="cs" href=""/>
+    <link rel="alternate" hreflang="ar" href=""/>
+    <link rel="alternate" hreflang="de" href=""/>
+    <link rel="alternate" hreflang="es" href=""/>
+    <link rel="alternate" hreflang="fi" href=""/>
+    <link rel="alternate" hreflang="fr" href=""/>
+    <link rel="alternate" hreflang="id" href=""/>
+    <link rel="alternate" hreflang="it" href=""/>
+    <link rel="alternate" hreflang="ja" href=""/>
+    <link rel="alternate" hreflang="ko" href=""/>
+    <link rel="alternate" hreflang="pl" href=""/>
+    <link rel="alternate" hreflang="pt" href=""/>
+    <link rel="alternate" hreflang="ru" href=""/>
+    <link rel="alternate" hreflang="da" href=""/>
+    <link rel="alternate" hreflang="no" href=""/>
+    <link rel="alternate" hreflang="tr" href=""/>
+</head>
+<body>
+
+    {% include 'header.html' %}
+
+    <div class="main-content-wrapper">
+        <section class="section-container" id="about-us-section">
+            <h1 class="section-heading">About Summarizer.AI</h1>
+            <div class="about-content">
+                <p>
+                    Summarizer.AI ek leading platform hai jo advanced Artificial Intelligence ka istemal karta hai taake aapko text summarization aur content generation tools provide kar sake. Hamara mission hai ke hum writing process ko har kisi ke liye asaan, tez, aur efficient banayen.
+                </p>
+                <p>
+                    Hum jante hain ke aaj ke digital दौर mein time kitna qeemti hai. Is liye, hamare tools aapko lambe articles, reports, aur documents ko concise, easy-to-read summaries mein convert karne mein madad karte hain, jisse aap zaroori information ko jald samajh sakte hain. Hamari AI sirf text ko condense nahi karti balke context aur key points ko bhi samajhti hai taake aapko sab se relevant aur accurate results mil saken.
+                </p>
+                <p>
+                    Hum sirf summarization tak mehdood nahi. Summarizer.AI content rewriting, plagiarism checking, grammar correction, aur creative content ideas generate karne ke liye bhi mukammal tools provide karta hai. Hamari team lagatar naye features aur tools par kaam kar rahi hai taake aapki writing needs ko behtar tareeqe se pura kiya ja sake.
+                </p>
+                <p>
+                    Hum quality, privacy, aur user satisfaction ko apni top priority dete hain. Aapka data hamesha secure rehta hai aur humara platform use karne mein bilkul free hai. Summarizer.AI par yaqeen rakhen jab bhi aapko smart, tez, aur effective content solutions chahiye hon.
+                </p>
+            </div>
+        </section>
+    </div>
+
+    {% include 'footer.html' %}
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script>
+        // Assuming this is a general script for current year and potentially other global functionalities
+        document.getElementById('currentYear').textContent = new Date().getFullYear(); 
+        // Note: Agar aap har page par specific currentYear ID istemal kar rahe hain, to yahaan ID change kar dein.
+        // Maslan: document.getElementById('currentYearAboutUs').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
