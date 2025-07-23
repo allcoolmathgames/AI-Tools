@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Footer</title>
+</head>
+<body>
+    <footer class="main-footer">
+        <div class="section-container footer-container">
+            <div class="footer-column brand-info">
+                <a href="{{ url_for('index') }}" class="footer-logo">
+                    <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Summarizer.AI Logo" class="logo-icon">
+                    Summarizer.AI
+                </a>
+                <p>
+                    Apni content creation ko behtar banao. Humare AI tools ke saath, likhna asaan, tez, aur behtar hota hai.
+                </p>
+                <div class="social-icons">
+                    <a href="https://facebook.com" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://twitter.com" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://instagram.com" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-column">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="{{ url_for('index') }}">Home</a></li>
+                    <li><a href="{{ url_for('blogs_index') }}">Blog</a></li>
+                    <li><a href="{{ url_for('about_us_page') }}">About Us</a></li>
+                    <li><a href="{{ url_for('contact_page') }}">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="{{ url_for('privacy_policy_page') }}">Privacy Policy</a></li>
+                    <li><a href="{{ url_for('terms_conditions_page') }}">Terms & Conditions</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h4>Contact Info</h4>
+                <div class="contact-info">
+                    <a href="mailto:support@summarizer.org"><i class="fas fa-envelope"></i> support@summarizer.org</a>
+                    <a href="tel:+923001234567"><i class="fas fa-phone"></i> +92 300 1234567</a>
+                    <p><i class="fas fa-map-marker-alt"></i> HR Tower, College Rd, Faisalabad, Pakistan</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom section-container">
+            <div class="footer-bottom-content">
+                <p>&copy; <span id="currentYear"></span> Summarizer.AI. All rights reserved.</p>
+                <div class="language-selector">
+                    </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Default script for current year if individual page script is not loaded
+        if (!document.getElementById('currentYearAbstract') && !document.getElementById('currentYearAcronym') &&
+            !document.getElementById('currentYearAdjective') && !document.getElementById('currentYearEmail') &&
+            !document.getElementById('currentYearProductDescription') && !document.getElementById('currentYearSlogan') &&
+            !document.getElementById('currentYearStory') && !document.getElementById('currentYearHumanizer') &&
+            !document.getElementById('currentYearRewriter') && !document.getElementById('currentYearBusinessName') &&
+            !document.getElementById('currentYearConclusion') && !document.getElementById('currentYearContentIdea') &&
+            !document.getElementById('currentYearEmailSubject') && !document.getElementById('currentYearEssay') &&
+            !document.getElementById('currentYearGrammar') && !document.getElementById('currentYearHook') &&
+            !document.getElementById('currentYearParaphrasing') && !document.getElementById('currentYearPlagiarism') &&
+            !document.getElementById('currentYearTitle') && !document.getElementById('currentYearTrendingNews') &&
+            !document.getElementById('currentYearAboutUs') && !document.getElementById('currentYearContact') &&
+            !document.getElementById('currentYearPrivacyPolicy') && !document.getElementById('currentYearTermsConditions')) {
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+        }
+    </script>
+</body>
+</html>

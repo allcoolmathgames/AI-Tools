@@ -4,6 +4,7 @@ from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
 
 # Import specific functions from the new modular tool files
+# Ensure these files exist in your 'tools_logic' folder.
 from tools_logic.summarizer_tool import summarize_text
 from tools_logic.rewriter_tool import rewrite_article, paraphrase_text
 from tools_logic.plagiarism_ai_checker_tool import check_plagiarism_and_ai
@@ -40,112 +41,150 @@ CORS(app)
 @app.route('/')
 def index():
     """Renders the main index page (AI Summarizer tool)."""
-    return render_template('index.html')
+    return render_template('summarizer/index.html')
 
 @app.route('/summarizer')
 def summarizer_page():
     """Renders the AI Summarizer tool page."""
-    return render_template('summarizer.html') 
+    return render_template('summarizer/index.html')
 
 @app.route('/article-rewriter')
 def article_rewriter_page():
     """Renders the Article Rewriter tool page."""
-    return render_template('article_rewriter.html')
+    return render_template('article_rewriter/index.html')
 
 @app.route('/plagiarism-checker')
 def plagiarism_checker_page():
     """Renders the Plagiarism Checker tool page."""
-    return render_template('plagiarism_checker.html')
+    return render_template('plagiarism_checker/index.html')
 
 @app.route('/paraphrasing-tool')
 def paraphrasing_tool_page():
     """Renders the Paraphrasing Tool page."""
-    return render_template('paraphrasing_tool.html')
+    return render_template('paraphrasing_tool/index.html')
 
 @app.route('/content-idea-generator')
 def content_idea_generator_page():
     """Renders the Content Idea Generator tool page."""
-    return render_template('content_idea_generator.html')
+    return render_template('content_idea_generator/index.html')
 
 @app.route('/slogan-generator')
 def slogan_generator_page():
     """Renders the Slogan Generator tool page."""
-    return render_template('slogan_generator.html')
+    return render_template('slogan_generator/index.html')
 
 @app.route('/ai-text-to-humanize')
 def ai_humanizer_page():
     """Renders the AI Text Humanizer tool page."""
-    return render_template('ai_text_to_humanize.html')
+    return render_template('ai_text_to_humanize/index.html')
 
 @app.route('/ai-email-generator')
 def ai_email_generator_page():
     """Renders the AI Email Generator tool page."""
-    return render_template('ai_email_generator.html')
+    return render_template('ai_email_generator/index.html')
 
 @app.route('/grammar-checker')
 def grammar_checker_page():
     """Renders the Grammar Checker tool page."""
-    return render_template('grammar_checker.html')
+    return render_template('grammar_checker/index.html')
 
 @app.route('/ai-story-generator')
 def ai_story_generator_page():
     """Renders the AI Story Generator tool page."""
-    return render_template('ai_story_generator.html')
+    return render_template('ai_story_generator/index.html')
 
 @app.route('/ai-product-description-generator')
 def ai_product_description_generator_page():
     """Renders the AI Product Description Generator tool page."""
-    return render_template('ai_product_description_generator.html')
+    return render_template('ai_product_description_generator/index.html')
 
 @app.route('/essay-generator')
 def essay_generator_page():
     """Renders the Essay Generator tool page."""
-    return render_template('essay_generator.html')
+    return render_template('essay_generator/index.html')
 
 @app.route('/trending-news-generator')
 def trending_news_generator_page():
     """Renders the Trending News Generator tool page."""
-    return render_template('trending_news_generator.html')
+    return render_template('trending_news_generator/index.html')
 
 @app.route('/acronym-generator')
 def acronym_generator_page():
     """Renders the Acronym Generator tool page."""
-    return render_template('acronym_generator.html')
+    return render_template('acronym_generator/index.html')
 
 @app.route('/abstract-generator')
 def abstract_generator_page():
     """Renders the Abstract Generator tool page."""
-    return render_template('abstract_generator.html')
+    return render_template('abstract_generator/index.html')
 
 @app.route('/adjective-generator')
 def adjective_generator_page():
     """Renders the Adjective Generator tool page."""
-    return render_template('adjective_generator.html')
+    return render_template('adjective_generator/index.html')
 
 @app.route('/hook-generator')
 def hook_generator_page():
     """Renders the Hook Generator tool page."""
-    return render_template('hook_generator.html')
+    return render_template('hook_generator/index.html')
 
 @app.route('/title-generator')
 def title_generator_page():
     """Renders the Title Generator tool page."""
-    return render_template('title_generator.html')
+    return render_template('title_generator/index.html')
 
 @app.route('/conclusion-generator')
 def conclusion_generator_page():
     """Renders the Conclusion Generator tool page."""
-    return render_template('conclusion_generator.html')
+    return render_template('conclusion_generator/index.html')
 
 @app.route('/business-name-generator')
 def business_name_generator_page():
     """Renders the Business Name Generator tool page."""
-    return render_template('business_name_generator.html')
+    return render_template('business_name_generator/index.html')
 
 @app.route('/email-subject-line-generator')
 def email_subject_line_generator_page():
     """Renders the Email Subject Line Generator tool page."""
-    return render_template('email_subject_line_generator.html')
+    return render_template('email_subject_line_generator/index.html')
+
+# --- New Static Pages Routes ---
+@app.route('/about-us')
+def about_us_page():
+    """Renders the About Us page."""
+    return render_template('pages/about_us.html')
+
+@app.route('/contact')
+def contact_page():
+    """Renders the Contact Us page."""
+    return render_template('pages/contact.html')
+
+@app.route('/privacy-policy')
+def privacy_policy_page():
+    """Renders the Privacy Policy page."""
+    return render_template('pages/privacy_policy.html')
+
+@app.route('/terms-conditions')
+def terms_conditions_page():
+    """Renders the Terms & Conditions page."""
+    return render_template('pages/terms_conditions.html')
+# --- New Static Pages Routes End ---
+
+# --- Blog Routes (Yeh routes aapki app.py mein pehle se maujood hain aur sahi hain) ---
+@app.route('/blogs/')
+def blogs_index():
+    """Renders the main blog listing page."""
+    return render_template('blogs/index.html')
+
+@app.route('/blogs/<string:slug>.html')
+def blog_post(slug):
+    """Renders individual blog post based on slug."""
+    try:
+        return render_template(f'blogs/{slug}.html')
+    except Exception as e:
+        # Agar blog post file na mile, to 404 error page dikha sakte hain
+        return render_template('404.html'), 404 # Assuming you have a 404.html template
+# --- Blog Routes End ---
 
 # ==============================================================================
 # API Endpoints: Define routes for handling API requests from the frontend
@@ -156,19 +195,19 @@ def summarize_api():
     """API endpoint for text summarization."""
     data = request.get_json()
     text = data.get('text', '')
-    length_ratio = data.get('length', 0.5) # Renamed 'maxLengthRatio' to 'length' for consistency with front-end script
+    length_ratio = data.get('length', 0.5) 
 
     if not text:
         return jsonify({"summary": "", "error": "Please provide text to summarize."}), 400
     
     try:
         summary = summarize_text(text, length_ratio)
-        if str(summary).startswith("Error:"): # Ensure summary is converted to string for error check
+        if str(summary).startswith("Error:"): 
             logging.error(f"Summarization API call failed: {summary}")
             return jsonify({"summary": "", "error": summary}), 500
         
         logging.info("Summarization successful.")
-        return jsonify({"summary": str(summary).strip()}) # Ensure output is string
+        return jsonify({"summary": str(summary).strip()}) 
     except Exception as e:
         error_message = f"An unexpected error occurred during summarization: {str(e)}"
         logging.error(error_message, exc_info=True)
@@ -206,7 +245,7 @@ def humanize_api():
     logging.info("Received /api/humanize POST request.")
     data = request.get_json()
     text = data.get('text', '')
-    creativity = data.get('creativity', 0.7) # Renamed creativity_level to creativity for front-end consistency
+    creativity = data.get('creativity', 0.7) 
 
     if not text:
         return jsonify({"humanized_text": "", "error": "Please provide text to humanize."}), 400
@@ -234,7 +273,7 @@ def generate_email_api():
     purpose = data.get('purpose', '')
     recipient = data.get('recipient', '')
 
-    if not subject and not purpose: # Corrected validation logic
+    if not subject and not purpose: 
         return jsonify({"generated_email": "", "error": "Please provide either a subject or purpose for the email."}), 400
     
     try:
@@ -268,7 +307,7 @@ def generate_content_ideas_api():
             return jsonify({"content_ideas": [], "error": content_ideas}), 500
         
         logging.info("Content idea generation successful.")
-        if isinstance(content_ideas, str): # Ensure consistent list output for front-end
+        if isinstance(content_ideas, str): 
             return jsonify({"content_ideas": content_ideas.strip().split('\n')})
         return jsonify({"content_ideas": content_ideas})
     except Exception as e:
@@ -311,7 +350,7 @@ def check_grammar_api():
         return jsonify({"corrected_text": "", "error": "Please provide text to check grammar."}), 400
     
     try:
-        corrected_text = check_grammar(text) # Changed to corrected_text to match frontend
+        corrected_text = check_grammar(text)
         if str(corrected_text).startswith("Error:"):
             logging.error(f"Grammar check API call failed: {corrected_text}")
             return jsonify({"corrected_text": "", "error": corrected_text}), 500
@@ -343,9 +382,9 @@ def generate_slogan_api():
 
     try:
         slogans = generate_slogans(keywords, num_slogans)
-        if isinstance(slogans, list) and slogans and str(slogans[0]).startswith("Error:"):
-             logging.error(f"Gemini slogan generation failed: {slogans[0]}")
-             return jsonify({"slogans": [], "error": slogans[0]}), 500
+        if isinstance(slogans, list) and slogans and str(slogans[0]).startswith("Error: Gemini API"):
+            logging.error(f"Gemini slogan generation failed: {slogans[0]}")
+            return jsonify({"slogans": [], "error": slogans[0]}), 500
         
         logging.info("Slogan generation successful.")
         return jsonify({"slogans": slogans})
@@ -380,16 +419,14 @@ def generate_story_api():
     """API endpoint for generating stories."""
     logging.info("Received /api/generate_story POST request.")
     data = request.get_json()
-    topic = data.get('topic', '') # Changed from genre, characters, plot_keywords as per script.js
+    topic = data.get('topic', '')
     genre = data.get('genre', '')
     characters = data.get('characters', '')
-    # length = data.get('length', 'medium') # Not directly used in frontend script payload
 
-    if not topic: # Only topic is mandatory as per frontend validation
+    if not topic:
         return jsonify({"story": "", "error": "Please provide a story topic or keywords."}), 400
     
     try:
-        # Pass topic as plot_keywords since front-end script is sending it this way for story generation
         story = generate_story(topic, genre, characters) 
         if str(story).startswith("Error:"):
             logging.error(f"Story generation API call failed: {story}")
@@ -409,11 +446,11 @@ def generate_product_description_api():
     logging.info("Received /api/generate_product_description POST request.")
     data = request.get_json()
     product_name = data.get('productName', '')
-    product_keywords = data.get('keywords', '') # Changed from features to product_keywords to match front-end
-    target_audience = data.get('targetAudience', '') # Changed from audience to target_audience
+    product_keywords = data.get('keywords', '')
+    target_audience = data.get('targetAudience', '')
     tone = data.get('tone', 'informative')
 
-    if not product_name and not product_keywords: # Validate as per front-end script
+    if not product_name and not product_keywords: 
         return jsonify({"description": "", "error": "Please enter a product name or keywords to generate a description."}), 400
     
     try:
@@ -437,7 +474,7 @@ def generate_essay_api():
     topic = data.get('topic', '')
     length = data.get('length', 'medium')
     style = data.get('style', 'formal')
-    keywords = data.get('keywords', '') # Added as per original logic.py, though script doesn't send it
+    keywords = data.get('keywords', '')
 
     if not topic:
         return jsonify({"essay": "", "error": "Please provide a topic for the essay."}), 400
@@ -459,16 +496,14 @@ def generate_essay_api():
 def generate_trending_news_api():
     logging.info("Received /api/generate_trending_news POST request.")
     data = request.get_json()
-    # Corrected: Use 'keywords' and 'category' as keys, matching frontend payload
     keywords = data.get('keywords', '') 
     category = data.get('category', '') 
-    num_articles = data.get('num_articles', 1) # This key was already correct
+    num_articles = data.get('num_articles', 1)
 
     if not keywords and not category:
         return jsonify({"news_summary": "", "error": "Please enter a news topic/keywords or select a category."}), 400
     
     try:
-        # num_articles ko int mein convert karein, agar woh string ho
         num_articles = int(num_articles) if isinstance(num_articles, str) and num_articles.isdigit() else 1
 
         news_summary = generate_trending_news(keywords, category, num_articles)
@@ -514,7 +549,7 @@ def generate_abstract_api():
     text = data.get('text', '')
 
     if not text:
-        return jsonify({"abstract": "", "error": "Please paste your text or paper to generate an abstract."}), 400
+        return jsonify({"abstract": "", "error": "Please paste your main text to generate an abstract."}), 400
 
     try:
         abstract = generate_abstract(text)
@@ -531,7 +566,6 @@ def generate_abstract_api():
 
 @app.route('/api/generate_adjectives', methods=['POST'])
 def generate_adjectives_api():
-    """API endpoint for generating adjectives."""
     logging.info("Received /api/generate_adjectives POST request.")
     data = request.get_json()
     text = data.get('text', '')
@@ -544,7 +578,7 @@ def generate_adjectives_api():
         if isinstance(adjectives, list) and adjectives and str(adjectives[0]).startswith("Error:"):
             logging.error(f"Adjective generation API call failed: {adjectives[0]}")
             return jsonify({"adjectives": [], "error": adjectives[0]}), 500
-        
+
         logging.info("Adjective generation successful.")
         return jsonify({"adjectives": adjectives})
     except Exception as e:
@@ -552,9 +586,9 @@ def generate_adjectives_api():
         logging.error(error_message, exc_info=True)
         return jsonify({"adjectives": [], "error": error_message}), 500
 
+
 @app.route('/api/generate_hooks', methods=['POST'])
 def generate_hooks_api():
-    """API endpoint for generating hooks."""
     logging.info("Received /api/generate_hooks POST request.")
     data = request.get_json()
     topic = data.get('topic', '')
@@ -568,7 +602,7 @@ def generate_hooks_api():
         if isinstance(hooks, list) and hooks and str(hooks[0]).startswith("Error:"):
             logging.error(f"Hook generation API call failed: {hooks[0]}")
             return jsonify({"hooks": [], "error": hooks[0]}), 500
-        
+
         logging.info("Hook generation successful.")
         return jsonify({"hooks": hooks})
     except Exception as e:
@@ -576,9 +610,9 @@ def generate_hooks_api():
         logging.error(error_message, exc_info=True)
         return jsonify({"hooks": [], "error": error_message}), 500
 
+
 @app.route('/api/generate_titles', methods=['POST'])
 def generate_titles_api():
-    """API endpoint for generating titles."""
     logging.info("Received /api/generate_titles POST request.")
     data = request.get_json()
     topic = data.get('topic', '')
@@ -591,7 +625,7 @@ def generate_titles_api():
         if isinstance(titles, list) and titles and str(titles[0]).startswith("Error:"):
             logging.error(f"Title generation API call failed: {titles[0]}")
             return jsonify({"titles": [], "error": titles[0]}), 500
-        
+
         logging.info("Title generation successful.")
         return jsonify({"titles": titles})
     except Exception as e:
@@ -599,9 +633,9 @@ def generate_titles_api():
         logging.error(error_message, exc_info=True)
         return jsonify({"titles": [], "error": error_message}), 500
 
+
 @app.route('/api/generate_conclusion', methods=['POST'])
 def generate_conclusion_api():
-    """API endpoint for generating conclusions."""
     logging.info("Received /api/generate_conclusion POST request.")
     data = request.get_json()
     text = data.get('text', '')
@@ -614,7 +648,7 @@ def generate_conclusion_api():
         if str(conclusion).startswith("Error:"):
             logging.error(f"Conclusion generation API call failed: {conclusion}")
             return jsonify({"conclusion": "", "error": conclusion}), 500
-        
+
         logging.info("Conclusion generation successful.")
         return jsonify({"conclusion": str(conclusion).strip()})
     except Exception as e:
@@ -622,9 +656,9 @@ def generate_conclusion_api():
         logging.error(error_message, exc_info=True)
         return jsonify({"conclusion": "", "error": error_message}), 500
 
+
 @app.route('/api/generate_business_names', methods=['POST'])
 def generate_business_names_api():
-    """API endpoint for generating business names."""
     logging.info("Received /api/generate_business_names POST request.")
     data = request.get_json()
     keywords = data.get('keywords', '')
@@ -638,7 +672,7 @@ def generate_business_names_api():
         if isinstance(names, list) and names and str(names[0]).startswith("Error:"):
             logging.error(f"Business name generation API call failed: {names[0]}")
             return jsonify({"names": [], "error": names[0]}), 500
-        
+
         logging.info("Business name generation successful.")
         return jsonify({"names": names})
     except Exception as e:
@@ -646,9 +680,9 @@ def generate_business_names_api():
         logging.error(error_message, exc_info=True)
         return jsonify({"names": [], "error": error_message}), 500
 
+
 @app.route('/api/generate_email_subjects', methods=['POST'])
 def generate_email_subjects_api():
-    """API endpoint for generating email subject lines."""
     logging.info("Received /api/generate_email_subjects POST request.")
     data = request.get_json()
     content = data.get('content', '')
@@ -662,7 +696,7 @@ def generate_email_subjects_api():
         if isinstance(subjects, list) and subjects and str(subjects[0]).startswith("Error:"):
             logging.error(f"Email subject generation API call failed: {subjects[0]}")
             return jsonify({"subjects": [], "error": subjects[0]}), 500
-        
+
         logging.info("Email subject generation successful.")
         return jsonify({"subjects": subjects})
     except Exception as e:
@@ -670,7 +704,6 @@ def generate_email_subjects_api():
         logging.error(error_message, exc_info=True)
         return jsonify({"subjects": [], "error": error_message}), 500
 
+
 if __name__ == '__main__':
-    # Starting the Flask development server.
-    # In production, use a production WSGI server (e.g., Gunicorn, uWSGI).
     app.run(debug=True, host='0.0.0.0', port=5000)

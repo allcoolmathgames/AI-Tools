@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Story Generator - Summarizer.ai</title>
+    <meta name="description" content="Generate creative and engaging stories from scratch with our AI Story Generator. Perfect for writers, students, and content creators.">
+    <meta name="keywords" content="AI story generator, creative writing AI, story ideas, plot generator, character generator, story writer">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2QWDFWwBCxN5V6qG/t3bLtmG6NvwK20R8T3M2t/FfD3M5C5S5P5M5P5M5A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="alternate" hreflang="x-default" href=""/>
+    <link rel="alternate" hreflang="cs" href=""/>
+    <link rel="alternate" hreflang="ar" href=""/>
+    <link rel="alternate" hreflang="de" href=""/>
+    <link rel="alternate" hreflang="es" href=""/>
+    <link rel="alternate" hreflang="fi" href=""/>
+    <link rel="alternate" hreflang="fr" href=""/>
+    <link rel="alternate" hreflang="id" href=""/>
+    <link rel="alternate" hreflang="it" href=""/>
+    <link rel="alternate" hreflang="ja" href=""/>
+    <link rel="alternate" hreflang="ko" href=""/>
+    <link rel="alternate" hreflang="pl" href=""/>
+    <link rel="alternate" hreflang="pt" href=""/>
+    <link rel="alternate" hreflang="ru" href=""/>
+    <link rel="alternate" hreflang="da" href=""/>
+    <link rel="alternate" hreflang="no" href=""/>
+    <link rel="alternate" hreflang="tr" href=""/>
+</head>
+<body>
+
+    {% include 'header.html' %}
+
+    <section id="ai-story-generator-tool" class="section-container">
+        <h1 class="section-heading">AI Story Generator</h1>
+        <div class="tool-container">
+            <div class="text-area-group">
+                <label for="topicInput">Story Topic/Keywords:</label>
+                <textarea id="topicInput" placeholder="e.g., 'A detective solving a mystery in a futuristic city', 'Two friends on a magical adventure'"></textarea>
+            </div>
+            <div class="input-group">
+                <label for="genreSelect">Genre (Optional):</label>
+                <select id="genreSelect">
+                    <option value="">Any</option>
+                    <option value="Fantasy">Fantasy</option>
+                    <option value="Science Fiction">Science Fiction</option>
+                    <option value="Mystery">Mystery</option>
+                    <option value="Horror">Horror</option>
+                    <option value="Romance">Romance</option>
+                    <option value="Thriller">Thriller</option>
+                    <option value="Comedy">Comedy</option>
+                    <option value="Drama">Drama</option>
+                </select>
+            </div>
+            <div class="text-area-group">
+                <label for="charactersInput">Characters (Optional):</label>
+                <input type="text" id="charactersInput" placeholder="e.g., 'A brave knight, a mischievous wizard', 'A shy student, a talking cat'">
+            </div>
+            <div class="action-buttons">
+                <button id="generateBtn" class="primary-button">Generate Story</button>
+            </div>
+            
+            <div class="loader" id="loader"></div>
+            <div class="error-message" id="errorMessage"></div>
+
+            <div class="output-group">
+                <label for="storyOutput">Generated Story:</label>
+                <textarea id="storyOutput" readonly placeholder="Your AI-generated story will appear here..."></textarea>
+            </div>
+        </div>
+    </section>
+
+    <section id="story-features" class="section-container">
+        <h2 class="section-heading">Why Use Our AI Story Generator?</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">💡</div>
+                <h3>Spark Creativity</h3>
+                <p>Overcome writer's block and get unique story ideas instantly.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">✍️</div>
+                <h3>Develop Plots</h3>
+                <p>Generate compelling plot lines and narrative arcs for your stories.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⏱️</div>
+                <h3>Save Time</h3>
+                <p>Rapidly create story drafts, allowing you to focus on refining your masterpiece.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="how-it-works" class="section-container" style="background-color: var(--background-card);">
+        <h2 class="section-heading">How To Use the AI Story Generator</h2>
+        <div class="steps-container">
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-text">
+                    <h4>Provide Story Elements</h4>
+                    <p>Enter a topic, keywords, desired genre, and optional characters for your story.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-text">
+                    <h4>Generate</h4>
+                    <p>Click 'Generate Story'. Our AI will craft a unique narrative based on your input.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-text">
+                    <h4>Edit & Refine</h4>
+                    <p>Review the generated story. Feel free to edit, expand, and personalize it further.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="more-tools" class="section-container">
+        <h2 class="section-heading">Explore Our Other AI Tools</h2>
+        <div class="tools-grid">
+            <a href="{{ url_for('abstract_generator_page') }}" class="tool-card">
+                <div class="tool-icon">📑</div>
+                <h3>Abstract Generator</h3>
+                <p>Generate concise abstracts for your research papers.</p>
+            </a>
+            <a href="{{ url_for('acronym_generator_page') }}" class="tool-card">
+                <div class="tool-icon">🔠</div>
+                <h3>Acronym Generator</h3>
+                <p>Create acronyms from long phrases instantly.</p>
+            </a>
+            <a href="{{ url_for('adjective_generator_page') }}" class="tool-card">
+                <div class="tool-icon">🎨</div>
+                <h3>Adjective Generator</h3>
+                <p>Find the perfect adjectives to enhance your writing.</p>
+            </a>
+            <a href="{{ url_for('ai_email_generator_page') }}" class="tool-card">
+                <div class="tool-icon">📧</div>
+                <h3>AI Email Generator</h3>
+                <p>Generate professional and engaging emails quickly with AI.</p>
+            </a>
+            <a href="{{ url_for('ai_product_description_generator_page') }}" class="tool-card">
+                <div class="tool-icon">🛍️</div>
+                <h3>Product Description Generator</h3>
+                <p>Create compelling product descriptions using AI.</p>
+            </a>
+            <a href="{{ url_for('slogan_generator_page') }}" class="tool-card">
+                <div class="tool-icon">🏷️</div>
+                <h3>AI Slogan Generator</h3>
+                <p>Create catchy and memorable slogans for your brand or campaign.</p>
+            </a>
+            <a href="{{ url_for('ai_story_generator_page') }}" class="tool-card">
+                <div class="tool-icon">📖</div>
+                <h3>AI Story Generator</h3>
+                <p>Generate creative and engaging stories with AI.</p>
+            </a>
+            <a href="{{ url_for('index') }}" class="tool-card">
+                <div class="tool-icon">✍️</div>
+                <h3>AI Summarizer</h3>
+                <p>Transform long texts into concise summaries instantly.</p>
+            </a>
+            <a href="{{ url_for('ai_humanizer_page') }}" class="tool-card">
+                <div class="tool-icon">🧑‍💻</div>
+                <h3>AI Text Humanizer</h3>
+                <p>Transform AI-generated text into natural, human-like content.</p>
+            </a>
+            <a href="{{ url_for('article_rewriter_page') }}" class="tool-card">
+                <div class="tool-icon">🔄</div>
+                <h3>Article Rewriter</h3>
+                <p>Rewrite articles to generate fresh, unique content.</p>
+            </a>
+            <a href="{{ url_for('business_name_generator_page') }}" class="tool-card">
+                <div class="tool-icon">🏢</div>
+                <h3>Business Name Generator</h3>
+                <p>Find unique and creative names for your business.</p>
+            </a>
+            <a href="{{ url_for('conclusion_generator_page') }}" class="tool-card">
+                <div class="tool-icon">🏁</div>
+                <h3>Conclusion Generator</h3>
+                <p>Write powerful conclusions for your essays and reports.</p>
+            </a>
+            <a href="{{ url_for('content_idea_generator_page') }}" class="tool-card">
+                <div class="tool-icon">💡</div>
+                <h3>Content Idea Generator</h3>
+                <p>Generate creative and engaging ideas for your next content piece.</p>
+            </a>
+            <a href="{{ url_for('email_subject_line_generator_page') }}" class="tool-card">
+                <div class="tool-icon">📬</div>
+                <h3>Email Subject Line Generator</h3>
+                <p>Create effective subject lines to boost open rates.</p>
+            </a>
+            <a href="{{ url_for('essay_generator_page') }}" class="tool-card">
+                <div class="tool-icon">📄</div>
+                <h3>Essay Generator</h3>
+                <p>Generate well-structured essays on any topic with AI.</p>
+            </a>
+            <a href="{{ url_for('grammar_checker_page') }}" class="tool-card">
+                <div class="tool-icon">✅</div>
+                <h3>Grammar Checker</h3>
+                <p>Correct grammar, spelling, and punctuation errors instantly.</p>
+            </a>
+            <a href="{{ url_for('hook_generator_page') }}" class="tool-card">
+                <div class="tool-icon">🎣</div>
+                <h3>Hook Generator</h3>
+                <p>Create catchy hooks to grab your readers' attention.</p>
+            </a>
+            <a href="{{ url_for('paraphrasing_tool_page') }}" class="tool-card">
+                <div class="tool-icon">📝</div>
+                <h3>Paraphrasing Tool</h3>
+                <p>Rephrase sentences and paragraphs without changing their meaning.</p>
+            </a>
+            <a href="{{ url_for('plagiarism_checker_page') }}" class="tool-card">
+                <div class="tool-icon">📚</div>
+                <h3>Plagiarism Checker</h3>
+                <p>Ensure your content is original and free from plagiarism.</p>
+            </a>
+            <a href="{{ url_for('title_generator_page') }}" class="tool-card">
+                <div class="tool-icon">✒️</div>
+                <h3>Title Generator</h3>
+                <p>Generate compelling titles for your articles and blogs.</p>
+            </a>
+            <a href="{{ url_for('trending_news_generator_page') }}" class="tool-card">
+                <div class="tool-icon">📰</div>
+                <h3>Trending News Generator</h3>
+                <p>Stay updated with trending news generated by AI.</p>
+            </a>
+        </div>
+    </section>
+
+    <section id="faq" class="section-container">
+        <h2 class="section-heading">Frequently Asked Questions</h2>
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>What kind of stories can I generate?</h3>
+                    <i class="fas fa-plus"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Our AI Story Generator can help you create stories across various genres, including fantasy, science fiction, mystery, horror, romance, and more. You can provide keywords, characters, and a basic plot to guide the AI.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Is the generated content unique?</h3>
+                    <i class="fas fa-plus"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>The AI generates original story content based on its vast training data and your specific prompts. While it uses learned patterns, the output is unique and tailored to your input, helping you spark new narratives.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Can I use this tool for professional writing?</h3>
+                    <i class="fas fa-plus"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes, many writers use AI story generators to overcome writer's block, brainstorm plot ideas, or create initial drafts. It's a powerful assistant for both amateur and professional writers to enhance their creative process.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% include 'footer.html' %}
+
+    <script src="{{ url_for('static', filename='js/ai_story_generator_script.js') }}"></script>
+    <script>
+        document.getElementById('currentYearStory').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
