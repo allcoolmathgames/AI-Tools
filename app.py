@@ -38,6 +38,21 @@ CORS(app)
 # HTML Page Routes: Define routes for serving HTML templates to the user
 # ==============================================================================
 
+# ==============================================================================
+# Language-based Routes
+# ==============================================================================
+from flask import redirect
+
+SUPPORTED_LANGUAGES = ["en", "es", "id", "br", "fr", "nl", "it", "de", "ru", "ar", "vi"]
+
+@app.route('/<lang>/')
+def localized_index(lang):
+    """Redirects to localized index if language is supported."""
+    if lang in SUPPORTED_LANGUAGES:
+        return render_template('summarizer/index.html', lang=lang)
+    return redirect('/')
+
+
 @app.route('/')
 def index():
     """Renders the main index page (AI Summarizer tool)."""
@@ -168,6 +183,11 @@ def privacy_policy_page():
 def terms_conditions_page():
     """Renders the Terms & Conditions page."""
     return render_template('pages/terms_conditions.html')
+
+@app.route('/tools/')
+def tools_index():
+    """Renders the main tools listing page."""
+    return render_template('tools/index.html')
 # --- New Static Pages Routes End ---
 
 # --- Blog Routes (Yeh routes aapki app.py mein pehle se maujood hain aur sahi hain) ---

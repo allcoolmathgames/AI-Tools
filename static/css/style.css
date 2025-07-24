@@ -484,16 +484,32 @@ input[type="range"] {
     width: 100%;
     padding: 10px 15px;
     border-radius: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.2); /* Specific rgba for border, can be variable if needed */
-    background-color: var(--footer-bg-dark); /* Changed to use variable */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background-color: var(--footer-bg-dark); /* Dark blue background for the select box itself */
     color: var(--background-card); /* White text for select */
     font-size: 1rem;
+    -webkit-appearance: none; /* Remove default arrow */
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%20viewBox%3D%220%200%20292.4%20292.4%22%3E%3Cpath%20fill%3D%22%23cccccc%22%20d%3D%22M287%2C197.6%20L158.4%2C69%20c-3.6-3.6-8.5-5.4-13.4-5.4s-9.8%2C1.8-13.4%2C5.4L5.4%2C197.6c-7.2%2C7.2-7.2%2C18.8%2C0%2C26c7.2%2C7.2%2C18.8%2C7.2%2C26%2C0l110-110l110%2C110c7.2%2C7.2%2C18.8%2C7.2%2C26%2C0C294.2%2C216.4%2C294.2%2C204.8%2C287%2C197.6z%22%2F%3E%3C%2Fsvg%3E');
+    background-repeat: no-repeat;
+    background-position: right 10px top 50%;
+    background-size: 12px auto;
+}
+.language-selector select option { /* Styles options for browsers that support it */
+    background-color: var(--footer-bg-dark);
+    color: var(--footer-text-light);
 }
 
+
+/* Modified footer-bottom styling */
 .footer-bottom {
     background-color: var(--footer-bg-darker);
-    padding: 0;
-    height: 135px;
+    height: 75px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%; /* Ensure full width */
 }
 
 .footer-bottom-content {
@@ -504,6 +520,9 @@ input[type="range"] {
     gap: 15px;
     font-size: 0.85rem;
     color: var(--footer-text-lighter);
+    width: 100%; /* Ensure content takes full width */
+    max-width: 1200px; /* Match section-container max-width */
+    margin: 0 auto; /* Center the content */
 }
 
 .social-icons {
@@ -516,7 +535,7 @@ input[type="range"] {
     width: 35px;
     height: 35px;
     border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.1); /* Specific rgba for background, can be variable if needed */
+    background-color: rgba(255, 255, 255, 0.1);
     display: inline-flex;
     justify-content: center;
     align-items: center;
@@ -664,7 +683,7 @@ input[type="range"] {
 /* --- Styles for Summarizer Tool (Moved from its HTML and enhanced specificity) --- */
 #summarizer-tool .tool-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: 25px;
     margin-top: 40px;
     padding: 40px;
@@ -680,8 +699,7 @@ input[type="range"] {
 
 /* Specific grid layout for summarizer */
 #summarizer-tool .summarizer-grid {
-    display: flex;
-    flex-direction: column;
+    display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 25px;
     width: 100%;
@@ -1748,7 +1766,7 @@ input[type="range"] {
     box-shadow: 0 0 0 3px rgba(106, 27, 154, 0.2);
 }
 #humanizer-tool .output-group textarea {
-    background-color: var(--background-light-gray); /* Slightly off-white for output */
+    background-color: var(--background-light-gray);
     cursor: default;
 }
 #humanizer-tool .slider-group { /* Specific styles for slider group */
@@ -1823,9 +1841,6 @@ input[type="range"] {
 .contact-card a {
     color: var(--primary-color);
     font-weight: 500;
-}
-.contact-card a:hover {
-    color: var(--secondary-color);
 }
 .contact-form-container {
     background-color: var(--background-card);
@@ -2001,4 +2016,93 @@ input[type="range"] {
     .blog-content h3 {
         font-size: 1.2rem;
     }
+}
+
+#how-it-works { /* This applies to all sections with how-it-works ID */
+    background-color: var(--background-card); /* Is section ko white background deta hai */
+    margin-top: 60px; /* Is section ke oopar space deta hai */
+}
+
+.steps-container {
+    display: flex;
+    justify-content: space-around;
+    gap: 30px;
+    flex-wrap: wrap;
+    text-align: center;
+}
+
+.step {
+    flex-basis: 250px;
+}
+
+.step .step-number {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    color: var(--background-card); /* White text on step number */
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.step h4 {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+}
+
+#digital-storage-converter-info {
+    background-color: var(--background-body); /* Is section container ko body ka background color deta hai */
+    margin-top: 60px; /* Is section ke oopar space deta hai */
+}
+
+.digital-storage-info-card {
+    background-color: #f9f9f9; /* Card ko halka grey background deta hai */
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.digital-storage-info-card p {
+    color: var(--text-medium);
+    line-height: 1.6;
+}
+
+/* Specific button style for "View All Tools" */
+.view-all-tools-button {
+    padding: 15px 30px !important; /* Overrides default primary-button padding */
+    font-size: 1.2rem !important; /* Overrides default primary-button font size */
+    /* Other styles are inherited from .primary-button (e.g., background, color, border) */
+}
+
+/* Utility class for centering text */
+.text-center {
+    text-align: center;
+}
+
+/* --- Styles for Additional Info Section --- */
+#additional-info-section {
+    background-color: var(--background-body); /* Is section container ko body ka background color deta hai */
+    margin-top: 60px; /* Is section ke oopar space deta hai */
+}
+
+.info-text-box {
+    background-color: var(--background-card); /* Card ko white background deta hai */
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.info-text-box p {
+    color: var(--text-medium);
+    line-height: 1.6;
 }

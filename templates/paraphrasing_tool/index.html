@@ -77,7 +77,7 @@
         </div>
     </section>
 
-    <section id="how-it-works" class="section-container" style="background-color: var(--background-card);">
+    <section id="how-it-works" class="section-container">
         <h2 class="section-heading">How To Use the Paraphrasing Tool</h2>
         <div class="steps-container">
             <div class="step">
@@ -107,111 +107,49 @@
     <section id="more-tools" class="section-container">
         <h2 class="section-heading">Explore Our Other AI Tools</h2>
         <div class="tools-grid">
-            <a href="{{ url_for('abstract_generator_page') }}" class="tool-card">
-                <div class="tool-icon">📑</div>
-                <h3>Abstract Generator</h3>
-                <p>Generate concise abstracts for your research papers.</p>
-            </a>
-            <a href="{{ url_for('acronym_generator_page') }}" class="tool-card">
-                <div class="tool-icon">🔠</div>
-                <h3>Acronym Generator</h3>
-                <p>Create acronyms from long phrases instantly.</p>
-            </a>
-            <a href="{{ url_for('adjective_generator_page') }}" class="tool-card">
-                <div class="tool-icon">🎨</div>
-                <h3>Adjective Generator</h3>
-                <p>Find the perfect adjectives to enhance your writing.</p>
-            </a>
-            <a href="{{ url_for('ai_email_generator_page') }}" class="tool-card">
-                <div class="tool-icon">📧</div>
-                <h3>AI Email Generator</h3>
-                <p>Generate professional and engaging emails quickly with AI.</p>
-            </a>
-            <a href="{{ url_for('ai_product_description_generator_page') }}" class="tool-card">
-                <div class="tool-icon">🛍️</div>
-                <h3>Product Description Generator</h3>
-                <p>Create compelling product descriptions using AI.</p>
+            <a href="{{ url_for('content_idea_generator_page') }}" class="tool-card">
+                <div class="tool-icon">💡</div>
+                <h3>Content Idea Generator</h3>
+                <p>Generate creative and engaging ideas for your next content piece.</p>
             </a>
             <a href="{{ url_for('slogan_generator_page') }}" class="tool-card">
                 <div class="tool-icon">🏷️</div>
                 <h3>AI Slogan Generator</h3>
                 <p>Create catchy and memorable slogans for your brand or campaign.</p>
             </a>
-            <a href="{{ url_for('ai_story_generator_page') }}" class="tool-card">
-                <div class="tool-icon">📖</div>
-                <h3>AI Story Generator</h3>
-                <p>Generate creative and engaging stories with AI.</p>
-            </a>
-            <a href="{{ url_for('index') }}" class="tool-card">
-                <div class="tool-icon">✍️</div>
-                <h3>AI Summarizer</h3>
-                <p>Transform long texts into concise summaries instantly.</p>
-            </a>
             <a href="{{ url_for('ai_humanizer_page') }}" class="tool-card">
                 <div class="tool-icon">🧑‍💻</div>
                 <h3>AI Text Humanizer</h3>
                 <p>Transform AI-generated text into natural, human-like content.</p>
             </a>
-            <a href="{{ url_for('article_rewriter_page') }}" class="tool-card">
-                <div class="tool-icon">🔄</div>
-                <h3>Article Rewriter</h3>
-                <p>Rewrite articles to generate fresh, unique content.</p>
-            </a>
-            <a href="{{ url_for('business_name_generator_page') }}" class="tool-card">
-                <div class="tool-icon">🏢</div>
-                <h3>Business Name Generator</h3>
-                <p>Find unique and creative names for your business.</p>
-            </a>
-            <a href="{{ url_for('conclusion_generator_page') }}" class="tool-card">
-                <div class="tool-icon">🏁</div>
-                <h3>Conclusion Generator</h3>
-                <p>Write powerful conclusions for your essays and reports.</p>
-            </a>
-            <a href="{{ url_for('content_idea_generator_page') }}" class="tool-card">
-                <div class="tool-icon">💡</div>
-                <h3>Content Idea Generator</h3>
-                <p>Generate creative and engaging ideas for your next content piece.</p>
-            </a>
-            <a href="{{ url_for('email_subject_line_generator_page') }}" class="tool-card">
-                <div class="tool-icon">📬</div>
-                <h3>Email Subject Line Generator</h3>
-                <p>Create effective subject lines to boost open rates.</p>
-            </a>
-            <a href="{{ url_for('essay_generator_page') }}" class="tool-card">
-                <div class="tool-icon">📄</div>
-                <h3>Essay Generator</h3>
-                <p>Generate well-structured essays on any topic with AI.</p>
+            <a href="{{ url_for('ai_email_generator_page') }}" class="tool-card">
+                <div class="tool-icon">📧</div>
+                <h3>AI Email Generator</h3>
+                <p>Generate professional and engaging emails quickly with AI.</p>
             </a>
             <a href="{{ url_for('grammar_checker_page') }}" class="tool-card">
                 <div class="tool-icon">✅</div>
                 <h3>Grammar Checker</h3>
                 <p>Correct grammar, spelling, and punctuation errors instantly.</p>
             </a>
-            <a href="{{ url_for('hook_generator_page') }}" class="tool-card">
-                <div class="tool-icon">🎣</div>
-                <h3>Hook Generator</h3>
-                <p>Create catchy hooks to grab your readers' attention.</p>
+            <a href="{{ url_for('ai_story_generator_page') }}" class="tool-card">
+                <div class="tool-icon">📖</div>
+                <h3>AI Story Generator</h3>
+                <p>Generate creative and engaging stories with AI.</p>
             </a>
-            <a href="{{ url_for('paraphrasing_tool_page') }}" class="tool-card">
-                <div class="tool-icon">📝</div>
-                <h3>Paraphrasing Tool</h3>
-                <p>Rephrase sentences and paragraphs without changing their meaning.</p>
-            </a>
-            <a href="{{ url_for('plagiarism_checker_page') }}" class="tool-card">
-                <div class="tool-icon">📚</div>
-                <h3>Plagiarism Checker</h3>
-                <p>Ensure your content is original and free from plagiarism.</p>
-            </a>
-            <a href="{{ url_for('title_generator_page') }}" class="tool-card">
-                <div class="tool-icon">✒️</div>
-                <h3>Title Generator</h3>
-                <p>Generate compelling titles for your articles and blogs.</p>
-            </a>
-            <a href="{{ url_for('trending_news_generator_page') }}" class="tool-card">
-                <div class="tool-icon">📰</div>
-                <h3>Trending News Generator</h3>
-                <p>Stay updated with trending news generated by AI.</p>
-            </a>
+        </div>
+        <br>
+        <div class="text-center">
+            <a href="{{ url_for('tools_index') }}" class="primary-button view-all-tools-button">View All Tools</a>
+        </div>
+    </section>
+
+    <section id="additional-info-section" class="section-container">
+        <h2 class="section-heading">Additional Information</h2>
+        <div class="info-text-box">
+            <p>
+                Here you can add any additional text or information related to this page or tool. For example, the benefits of this tool, or tips for using it.
+            </p>
         </div>
     </section>
 

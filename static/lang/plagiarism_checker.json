@@ -1,0 +1,57 @@
+{
+  "en": {
+    "title": "AI Plagiarism Checker",
+    "subtitle": "Ensure your content is 100% original",
+    "description": "Detect and remove plagiarism from your text with our advanced AI-powered plagiarism checker."
+  },
+  "es": {
+    "title": "Comprobador de Plagio con IA",
+    "subtitle": "Asegura que tu contenido sea 100% original",
+    "description": "Detecta y elimina el plagio de tu texto con nuestro avanzado comprobador de plagio con IA."
+  },
+  "id": {
+    "title": "Pemeriksa Plagiarisme AI",
+    "subtitle": "Pastikan konten Anda 100% asli",
+    "description": "Deteksi dan hapus plagiarisme dari teks Anda dengan pemeriksa plagiarisme berbasis AI kami."
+  },
+  "br": {
+    "title": "Verificador de Plágio com IA",
+    "subtitle": "Garanta que seu conteúdo seja 100% original",
+    "description": "Detecte e remova plágio de seu texto com nosso avançado verificador de plágio com IA."
+  },
+  "fr": {
+    "title": "Vérificateur de Plagiat IA",
+    "subtitle": "Assurez-vous que votre contenu est 100% original",
+    "description": "Détectez et supprimez le plagiat de votre texte avec notre vérificateur de plagiat IA avancé."
+  },
+  "nl": {
+    "title": "AI Plagiaat Checker",
+    "subtitle": "Zorg dat je inhoud 100% origineel is",
+    "description": "Detecteer en verwijder plagiaat uit je tekst met onze geavanceerde AI-plagiaatchecker."
+  },
+  "it": {
+    "title": "Controllo Plagio con AI",
+    "subtitle": "Assicura che i tuoi contenuti siano 100% originali",
+    "description": "Rileva e rimuovi il plagio dai tuoi testi con il nostro avanzato controllo plagio AI."
+  },
+  "de": {
+    "title": "KI-Plagiatsprüfung",
+    "subtitle": "Stellen Sie sicher, dass Ihr Inhalt 100% original ist",
+    "description": "Erkennen und entfernen Sie Plagiate in Ihren Texten mit unserem fortschrittlichen KI-Plagiatsprüfer."
+  },
+  "ru": {
+    "title": "Проверка на Плагиат с ИИ",
+    "subtitle": "Убедитесь, что ваш контент на 100% оригинален",
+    "description": "Выявляйте и удаляйте плагиат из текста с помощью нашего продвинутого инструмента на ИИ."
+  },
+  "ar": {
+    "title": "مدقق الانتحال بالذكاء الاصطناعي",
+    "subtitle": "تأكد من أن المحتوى الخاص بك أصلي 100%",
+    "description": "اكتشف وأزل الانتحال من نصوصك باستخدام مدقق الانتحال المتقدم بالذكاء الاصطناعي."
+  },
+  "vi": {
+    "title": "Trình kiểm tra Đạo văn AI",
+    "subtitle": "Đảm bảo nội dung của bạn 100% nguyên bản",
+    "description": "Phát hiện và xóa đạo văn khỏi văn bản của bạn bằng trình kiểm tra đạo văn AI tiên tiến của chúng tôi."
+  }
+}

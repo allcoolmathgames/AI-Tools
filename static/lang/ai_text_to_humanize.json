@@ -1,0 +1,57 @@
+{
+  "en": {
+    "title": "AI Text to Humanizer",
+    "subtitle": "Convert AI-generated text into natural human-like content",
+    "description": "Make AI-generated content more natural and human-like with our AI text humanizer tool."
+  },
+  "es": {
+    "title": "Humanizador de Texto IA",
+    "subtitle": "Convierte texto generado por IA en contenido natural",
+    "description": "Haz que el contenido generado por IA sea más natural y humano con nuestra herramienta humanizadora."
+  },
+  "id": {
+    "title": "Pengubah Teks AI ke Natural",
+    "subtitle": "Ubah teks buatan AI menjadi konten seperti manusia",
+    "description": "Buat konten buatan AI terasa lebih alami dengan alat humanizer AI kami."
+  },
+  "br": {
+    "title": "Humanizador de Texto IA",
+    "subtitle": "Transforme textos gerados por IA em conteúdo natural",
+    "description": "Deixe os conteúdos de IA mais naturais e humanos com nossa ferramenta humanizadora."
+  },
+  "fr": {
+    "title": "Humaniseur de Texte IA",
+    "subtitle": "Transformez un texte IA en contenu naturel",
+    "description": "Rendez les contenus générés par IA plus naturels et humains grâce à notre outil."
+  },
+  "nl": {
+    "title": "AI Tekst naar Menselijk",
+    "subtitle": "Maak AI-tekst natuurlijk en menselijk",
+    "description": "Maak AI-gegenereerde content natuurlijker met onze AI humanizer-tool."
+  },
+  "it": {
+    "title": "Umanizzatore di Testi AI",
+    "subtitle": "Rendi i testi generati da AI più naturali",
+    "description": "Rendi i contenuti AI più naturali e umani con il nostro tool humanizer."
+  },
+  "de": {
+    "title": "KI-Text-Humanizer",
+    "subtitle": "Machen Sie KI-generierte Texte natürlicher",
+    "description": "Gestalten Sie KI-Texte natürlicher und menschenähnlicher mit unserem Humanizer-Tool."
+  },
+  "ru": {
+    "title": "Гуманизатор текста с ИИ",
+    "subtitle": "Сделайте текст ИИ более естественным",
+    "description": "Сделайте текст ИИ более естественным и похожим на человеческий с помощью нашего инструмента."
+  },
+  "ar": {
+    "title": "أداة تحويل النصوص بالذكاء الاصطناعي إلى أسلوب بشري",
+    "subtitle": "حوّل النصوص إلى محتوى طبيعي",
+    "description": "اجعل النصوص المولدة بالذكاء الاصطناعي تبدو أكثر طبيعية وبشرية باستخدام أداتنا."
+  },
+  "vi": {
+    "title": "Trình làm Tự nhiên Văn bản AI",
+    "subtitle": "Chuyển đổi văn bản AI thành nội dung tự nhiên",
+    "description": "Làm cho nội dung AI trở nên tự nhiên và giống con người hơn với công cụ của chúng tôi."
+  }
+}

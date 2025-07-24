@@ -1,0 +1,57 @@
+{
+  "en": {
+    "title": "AI Email Generator",
+    "subtitle": "Create professional emails in seconds",
+    "description": "Generate polished and personalized email content effortlessly with our AI-powered email generator."
+  },
+  "es": {
+    "title": "Generador de Correos con IA",
+    "subtitle": "Crea correos profesionales en segundos",
+    "description": "Genera correos electrónicos personalizados y bien redactados fácilmente con nuestra herramienta IA."
+  },
+  "id": {
+    "title": "Pembuat Email AI",
+    "subtitle": "Buat email profesional dalam hitungan detik",
+    "description": "Hasilkan konten email yang rapi dan personal dengan mudah menggunakan alat AI kami."
+  },
+  "br": {
+    "title": "Gerador de E-mails com IA",
+    "subtitle": "Crie e-mails profissionais em segundos",
+    "description": "Gere conteúdos de e-mails personalizados e bem elaborados com nossa ferramenta de IA."
+  },
+  "fr": {
+    "title": "Générateur d'E-mails IA",
+    "subtitle": "Créez des e-mails professionnels en quelques secondes",
+    "description": "Générez des e-mails personnalisés et soignés grâce à notre générateur IA."
+  },
+  "nl": {
+    "title": "AI E-mail Generator",
+    "subtitle": "Maak professionele e-mails in seconden",
+    "description": "Genereer moeiteloos gepersonaliseerde en nette e-mails met onze AI-tool."
+  },
+  "it": {
+    "title": "Generatore di E-mail AI",
+    "subtitle": "Crea e-mail professionali in pochi secondi",
+    "description": "Genera e-mail personalizzate e ben curate con il nostro strumento AI."
+  },
+  "de": {
+    "title": "KI-E-Mail-Generator",
+    "subtitle": "Erstellen Sie professionelle E-Mails in Sekunden",
+    "description": "Erstellen Sie mühelos personalisierte und gut formulierte E-Mails mit unserem KI-Tool."
+  },
+  "ru": {
+    "title": "Генератор Писем с ИИ",
+    "subtitle": "Создавайте профессиональные письма за секунды",
+    "description": "Создавайте персонализированные и аккуратные письма с помощью нашего ИИ-инструмента."
+  },
+  "ar": {
+    "title": "مولد البريد الإلكتروني بالذكاء الاصطناعي",
+    "subtitle": "أنشئ رسائل بريد احترافية في ثوانٍ",
+    "description": "قم بإنشاء رسائل بريد إلكتروني مصممة بعناية وبشكل احترافي بسهولة باستخدام أداتنا."
+  },
+  "vi": {
+    "title": "Trình tạo Email AI",
+    "subtitle": "Tạo email chuyên nghiệp trong vài giây",
+    "description": "Tạo nội dung email được cá nhân hóa và chuyên nghiệp với công cụ AI của chúng tôi."
+  }
+}

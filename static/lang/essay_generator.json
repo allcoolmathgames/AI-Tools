@@ -1,0 +1,57 @@
+{
+  "en": {
+    "title": "AI Essay Generator",
+    "subtitle": "Write essays in minutes",
+    "description": "Generate high-quality, structured essays on any topic using our AI-powered essay writing tool."
+  },
+  "es": {
+    "title": "Generador de Ensayos con IA",
+    "subtitle": "Escribe ensayos en minutos",
+    "description": "Genera ensayos estructurados y de alta calidad sobre cualquier tema con nuestra herramienta de IA."
+  },
+  "id": {
+    "title": "Pembuat Esai AI",
+    "subtitle": "Tulis esai dalam hitungan menit",
+    "description": "Hasilkan esai berkualitas tinggi dan terstruktur tentang topik apa pun menggunakan alat AI kami."
+  },
+  "br": {
+    "title": "Gerador de Ensaios com IA",
+    "subtitle": "Escreva ensaios em minutos",
+    "description": "Gere ensaios bem estruturados e de alta qualidade sobre qualquer assunto com nossa ferramenta de IA."
+  },
+  "fr": {
+    "title": "Générateur d'Essais IA",
+    "subtitle": "Rédigez des essais en quelques minutes",
+    "description": "Générez des essais de haute qualité et structurés sur n'importe quel sujet avec notre outil IA."
+  },
+  "nl": {
+    "title": "AI Essay Generator",
+    "subtitle": "Schrijf essays in enkele minuten",
+    "description": "Genereer gestructureerde essays van hoge kwaliteit over elk onderwerp met onze AI-tool."
+  },
+  "it": {
+    "title": "Generatore di Saggi AI",
+    "subtitle": "Scrivi saggi in pochi minuti",
+    "description": "Genera saggi ben strutturati e di alta qualità su qualsiasi argomento con il nostro strumento AI."
+  },
+  "de": {
+    "title": "KI-Aufsatzgenerator",
+    "subtitle": "Schreiben Sie Aufsätze in wenigen Minuten",
+    "description": "Erstellen Sie hochwertige, strukturierte Aufsätze zu jedem Thema mit unserem KI-Tool."
+  },
+  "ru": {
+    "title": "Генератор Эссе с ИИ",
+    "subtitle": "Пишите эссе за считанные минуты",
+    "description": "Создавайте качественные, структурированные эссе на любую тему с помощью нашего ИИ-инструмента."
+  },
+  "ar": {
+    "title": "مولد المقالات بالذكاء الاصطناعي",
+    "subtitle": "اكتب مقالات خلال دقائق",
+    "description": "قم بإنشاء مقالات عالية الجودة ومنظمة حول أي موضوع باستخدام أداة كتابة المقالات بالذكاء الاصطناعي."
+  },
+  "vi": {
+    "title": "Trình tạo Bài luận AI",
+    "subtitle": "Viết bài luận trong vài phút",
+    "description": "Tạo bài luận chất lượng cao và có cấu trúc về bất kỳ chủ đề nào bằng công cụ AI của chúng tôi."
+  }
+}
