@@ -215,19 +215,26 @@ def summarize_api():
     """API endpoint for text summarization."""
     data = request.get_json()
     text = data.get('text', '')
-    length_ratio = data.get('length', 0.5) 
+    length_ratio_str = data.get('length', '0.5') # Renamed to avoid confusion before conversion
+
+    # Ensure length_ratio is a float
+    try:
+        length_ratio = float(length_ratio_str)
+    except (ValueError, TypeError):
+        logging.warning(f"Invalid length_ratio received: {length_ratio_str}. Defaulting to 0.5.")
+        length_ratio = 0.5 # Default value if conversion fails
 
     if not text:
         return jsonify({"summary": "", "error": "Please provide text to summarize."}), 400
-    
+
     try:
         summary = summarize_text(text, length_ratio)
-        if str(summary).startswith("Error:"): 
+        if str(summary).startswith("Error:"):
             logging.error(f"Summarization API call failed: {summary}")
             return jsonify({"summary": "", "error": summary}), 500
-        
+
         logging.info("Summarization successful.")
-        return jsonify({"summary": str(summary).strip()}) 
+        return jsonify({"summary": str(summary).strip()})
     except Exception as e:
         error_message = f"An unexpected error occurred during summarization: {str(e)}"
         logging.error(error_message, exc_info=True)
@@ -244,13 +251,13 @@ def rewrite_api():
 
     if not text:
         return jsonify({"rewritten_text": "", "error": "Please provide text to rewrite."}), 400
-    
+
     try:
         rewritten_text = rewrite_article(text, creativity)
         if str(rewritten_text).startswith("Error:"):
             logging.error(f"Rewriting API call failed: {rewritten_text}")
             return jsonify({"rewritten_text": "", "error": rewritten_text}), 500
-        
+
         logging.info("Rewriting successful.")
         return jsonify({"rewritten_text": str(rewritten_text).strip()})
     except Exception as e:
@@ -265,17 +272,17 @@ def humanize_api():
     logging.info("Received /api/humanize POST request.")
     data = request.get_json()
     text = data.get('text', '')
-    creativity = data.get('creativity', 0.7) 
+    creativity = data.get('creativity', 0.7)
 
     if not text:
         return jsonify({"humanized_text": "", "error": "Please provide text to humanize."}), 400
-    
+
     try:
         humanized_text = humanize_text(text, creativity)
         if str(humanized_text).startswith("Error:"):
             logging.error(f"Humanization API call failed: {humanized_text}")
             return jsonify({"humanized_text": "", "error": humanized_text}), 500
-        
+
         logging.info("Humanization successful.")
         return jsonify({"humanized_text": str(humanized_text).strip()})
     except Exception as e:
@@ -293,15 +300,15 @@ def generate_email_api():
     purpose = data.get('purpose', '')
     recipient = data.get('recipient', '')
 
-    if not subject and not purpose: 
+    if not subject and not purpose:
         return jsonify({"generated_email": "", "error": "Please provide either a subject or purpose for the email."}), 400
-    
+
     try:
         email_content = generate_email(subject, purpose, recipient)
         if str(email_content).startswith("Error:"):
             logging.error(f"Email generation API call failed: {email_content}")
             return jsonify({"generated_email": "", "error": email_content}), 500
-        
+
         logging.info("Email generation successful.")
         return jsonify({"generated_email": str(email_content).strip()})
     except Exception as e:
@@ -319,15 +326,15 @@ def generate_content_ideas_api():
 
     if not keywords:
         return jsonify({"content_ideas": [], "error": "Please provide keywords for content ideas."}), 400
-    
+
     try:
         content_ideas = generate_content_ideas(keywords)
         if isinstance(content_ideas, str) and content_ideas.startswith("Error:"):
             logging.error(f"Content idea generation API call failed: {content_ideas}")
             return jsonify({"content_ideas": [], "error": content_ideas}), 500
-        
+
         logging.info("Content idea generation successful.")
-        if isinstance(content_ideas, str): 
+        if isinstance(content_ideas, str):
             return jsonify({"content_ideas": content_ideas.strip().split('\n')})
         return jsonify({"content_ideas": content_ideas})
     except Exception as e:
@@ -345,13 +352,13 @@ def paraphrase_api():
 
     if not text:
         return jsonify({"paraphrased_text": "", "error": "Please provide text to paraphrase."}), 400
-    
+
     try:
         paraphrased_text = paraphrase_text(text)
         if str(paraphrased_text).startswith("Error:"):
             logging.error(f"Paraphrasing API call failed: {paraphrased_text}")
             return jsonify({"paraphrased_text": "", "error": paraphrased_text}), 500
-        
+
         logging.info("Paraphrasing successful.")
         return jsonify({"paraphrased_text": str(paraphrased_text).strip()})
     except Exception as e:
@@ -368,13 +375,13 @@ def check_grammar_api():
 
     if not text:
         return jsonify({"corrected_text": "", "error": "Please provide text to check grammar."}), 400
-    
+
     try:
         corrected_text = check_grammar(text)
         if str(corrected_text).startswith("Error:"):
             logging.error(f"Grammar check API call failed: {corrected_text}")
             return jsonify({"corrected_text": "", "error": corrected_text}), 500
-        
+
         logging.info("Grammar check successful.")
         return jsonify({"corrected_text": str(corrected_text).strip()})
     except Exception as e:
@@ -392,7 +399,7 @@ def generate_slogan_api():
 
     if not keywords:
         return jsonify({"slogans": [], "error": "Please provide keywords for slogan generation."}), 400
-    
+
     try:
         num_slogans = int(num_slogans)
         num_slogans = max(1, min(num_slogans, 10))
@@ -405,7 +412,7 @@ def generate_slogan_api():
         if isinstance(slogans, list) and slogans and str(slogans[0]).startswith("Error: Gemini API"):
             logging.error(f"Gemini slogan generation failed: {slogans[0]}")
             return jsonify({"slogans": [], "error": slogans[0]}), 500
-        
+
         logging.info("Slogan generation successful.")
         return jsonify({"slogans": slogans})
     except Exception as e:
@@ -445,13 +452,13 @@ def generate_story_api():
 
     if not topic:
         return jsonify({"story": "", "error": "Please provide a story topic or keywords."}), 400
-    
+
     try:
-        story = generate_story(topic, genre, characters) 
+        story = generate_story(topic, genre, characters)
         if str(story).startswith("Error:"):
             logging.error(f"Story generation API call failed: {story}")
             return jsonify({"story": "", "error": story}), 500
-        
+
         logging.info("Story generation successful.")
         return jsonify({"story": str(story).strip()})
     except Exception as e:
@@ -470,15 +477,15 @@ def generate_product_description_api():
     target_audience = data.get('targetAudience', '')
     tone = data.get('tone', 'informative')
 
-    if not product_name and not product_keywords: 
+    if not product_name and not product_keywords:
         return jsonify({"description": "", "error": "Please enter a product name or keywords to generate a description."}), 400
-    
+
     try:
         description = generate_product_description(product_name, product_keywords, target_audience, tone)
         if str(description).startswith("Error:"):
             logging.error(f"Product description generation API call failed: {description}")
             return jsonify({"description": "", "error": description}), 500
-        
+
         logging.info("Product description generation successful.")
         return jsonify({"description": str(description).strip()})
     except Exception as e:
@@ -498,13 +505,13 @@ def generate_essay_api():
 
     if not topic:
         return jsonify({"essay": "", "error": "Please provide a topic for the essay."}), 400
-    
+
     try:
         essay = generate_essay(topic, length, style, keywords)
         if str(essay).startswith("Error:"):
             logging.error(f"Essay generation API call failed: {essay}")
             return jsonify({"essay": "", "error": essay}), 500
-        
+
         logging.info("Essay generation successful.")
         return jsonify({"essay": str(essay).strip()})
     except Exception as e:
@@ -516,13 +523,13 @@ def generate_essay_api():
 def generate_trending_news_api():
     logging.info("Received /api/generate_trending_news POST request.")
     data = request.get_json()
-    keywords = data.get('keywords', '') 
-    category = data.get('category', '') 
+    keywords = data.get('keywords', '')
+    category = data.get('category', '')
     num_articles = data.get('num_articles', 1)
 
     if not keywords and not category:
         return jsonify({"news_summary": "", "error": "Please enter a news topic/keywords or select a category."}), 400
-    
+
     try:
         num_articles = int(num_articles) if isinstance(num_articles, str) and num_articles.isdigit() else 1
 
@@ -530,7 +537,7 @@ def generate_trending_news_api():
         if isinstance(news_summary, str) and str(news_summary).startswith("Error:"):
             logging.error(f"Trending news generation API call failed: {news_summary}")
             return jsonify({"news_summary": "", "error": news_summary}), 500
-        
+
         logging.info("Trending news generation successful.")
         return jsonify({"news_summary": str(news_summary).strip()})
     except Exception as e:
@@ -553,7 +560,7 @@ def generate_acronym_api():
         if str(acronym).startswith("Error:"):
             logging.error(f"Acronym generation API call failed: {acronym}")
             return jsonify({"acronym": "", "error": acronym}), 500
-        
+
         logging.info("Acronym generation successful.")
         return jsonify({"acronym": str(acronym).strip()})
     except Exception as e:
@@ -576,7 +583,7 @@ def generate_abstract_api():
         if str(abstract).startswith("Error:"):
             logging.error(f"Abstract generation API call failed: {abstract}")
             return jsonify({"abstract": "", "error": abstract}), 500
-        
+
         logging.info("Abstract generation successful.")
         return jsonify({"abstract": str(abstract).strip()})
     except Exception as e:
