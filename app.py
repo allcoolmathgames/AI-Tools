@@ -2,7 +2,7 @@ import os
 import logging
 from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
-from langdetect import detect, LangDetectException # Nayi import line
+from langdetect import detect, LangDetectException
 
 # Import specific functions from the new modular tool files
 # Ensure these files exist in your 'tools_logic' folder.
@@ -159,7 +159,7 @@ def business_name_generator_page():
     """Renders the Business Name Generator tool page."""
     return render_template('business_name_generator/index.html')
 
-@app.route('/email-subject_line_generator')
+@app.route('/email_subject_line_generator')
 def email_subject_line_generator_page():
     """Renders the Email Subject Line Generator tool page."""
     return render_template('email_subject_line_generator/index.html')
@@ -208,21 +208,38 @@ def blog_post(slug):
 # --- Blog Routes End ---
 
 # ==============================================================================
-# Helper for Language Detection
+# Helper for Language Detection (Updated to return full language names)
 # ==============================================================================
+LANGUAGE_CODE_TO_NAME = {
+    "en": "English",
+    "es": "Spanish",
+    "id": "Indonesian",
+    "pt": "Portuguese", # 'br' is typically for Portuguese (Brazil), 'pt' for general Portuguese
+    "fr": "French",
+    "nl": "Dutch",
+    "it": "Italian",
+    "de": "German",
+    "ru": "Russian",
+    "ar": "Arabic",
+    "vi": "Vietnamese",
+    "ur": "Urdu", # Added Urdu
+    "zh-cn": "Chinese (Simplified)", # Example for Chinese
+    "ja": "Japanese",
+    "ko": "Korean",
+    # Add more mappings as needed
+}
+
 def get_request_language(text_to_detect):
-    """Detects the language of the given text, defaults to English if detection fails."""
-    if not text_to_detect or len(text_to_detect) < 20: # Langdetect needs enough text
+    """Detects the language of the given text, returns full language name, defaults to English if detection fails."""
+    if not text_to_detect or len(text_to_detect.strip()) < 20: # Ensure stripping whitespace
         logging.info("Text too short or empty for reliable language detection, defaulting to English.")
         return "English"
     try:
         detected_code = detect(text_to_detect)
-        # Langdetect returns ISO 639-1 codes (e.g., 'en', 'ur', 'es').
-        # Gemini usually understands these or common names. If specific names are needed,
-        # a mapping from code to full name can be added here.
-        # For now, we pass the code directly.
-        logging.info(f"Detected language code: {detected_code}")
-        return detected_code # Return the detected language code
+        # Return full language name if mapped, otherwise return the code or default to English
+        full_language_name = LANGUAGE_CODE_TO_NAME.get(detected_code, detected_code)
+        logging.info(f"Detected language code: {detected_code}, Full language name: {full_language_name}")
+        return full_language_name
     except LangDetectException as e:
         logging.warning(f"Could not detect language for text: {e}. Defaulting to English.")
         return "English"
