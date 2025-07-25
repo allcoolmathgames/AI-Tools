@@ -2,10 +2,10 @@ import logging
 import re
 import os
 import nltk
-from nltk.tokenize import sent_tokenize # Assuming this is used elsewhere if NLTK is truly needed
-from nltk.corpus import stopwords # Assuming this is used elsewhere if NLTK is truly needed
-from nltk.stem import PorterStemmer # Assuming this is used elsewhere if NLTK is truly needed
-import json # For JSON parsing
+from nltk.tokenize import sent_tokenize
+from nltk.corpus import stopwords
+from nltk.stem import PorterStemmer
+import json
 
 # Configure logging for this module
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -53,11 +53,11 @@ def ensure_nltk_data():
         # Check if 'punkt' tokenizer is available
         nltk.data.find('tokenizers/punkt')
         logging.info("NLTK 'punkt' tokenizer is available.")
-        
+
         # Check if 'stopwords' corpus is available
         nltk.data.find('corpora/stopwords')
         logging.info("NLTK 'stopwords' corpus is available.")
-        
+
         return True # Indicate success
     except LookupError as e:
         # If data is not found, log an error indicating it needs pre-downloading
@@ -80,7 +80,7 @@ def get_gemini_model():
     """Helper function to get a Gemini model that supports generateContent."""
     if not GEMINI_API_AVAILABLE:
         raise Exception("Gemini API is not available. Ensure GOOGLE_API_KEY is set.")
-    
+
     available_models = [m for m in genai.list_models() if 'generateContent' in m.supported_generation_methods]
     selected_model_name = None
     for model_info in available_models:
@@ -88,7 +88,7 @@ def get_gemini_model():
         if 'gemini-2.0-flash' in model_info.name:
             selected_model_name = model_info.name
             break
-    
+
     if not selected_model_name:
         if available_models:
             # If flash model is not found, use any available model
@@ -96,21 +96,21 @@ def get_gemini_model():
             logging.warning(f"gemini-2.0-flash not found. Using available model: {selected_model_name}")
         else:
             raise Exception("No Gemini model found that supports content generation.")
-    
+
     return genai.GenerativeModel(selected_model_name)
 
 # Global model variable
 _summarizer_model = None
 
 # Summarization Function
-def summarize_text(text, length_ratio=0.5):
-    """Summarizes text using the Gemini model, with an option for length ratio."""
+def summarize_text(text, length_ratio=0.5, target_language="English"): # 'target_language' parameter add kiya
+    """Summarizes text using the Gemini model, with an option for length ratio and target language."""
     global _summarizer_model # Use the global model instance
 
     if not GEMINI_API_AVAILABLE:
         logging.error(missing_api_key_error_msg("summarizer_tool"))
         return missing_api_key_error_msg("summarizer_tool")
-    
+
     # Check NLTK data status, though for AI summarization, NLTK isn't strictly necessary for the AI part.
     if not _nltk_data_available: # Use the global status flag
         logging.warning("NLTK data setup issue detected, but summarization might still proceed.")
@@ -118,7 +118,7 @@ def summarize_text(text, length_ratio=0.5):
     try:
         if not _summarizer_model:
             _summarizer_model = get_gemini_model()
-        
+
         if not _summarizer_model:
             return "Error: Gemini model could not be loaded for summarization."
 
@@ -129,15 +129,15 @@ def summarize_text(text, length_ratio=0.5):
             length_desc = "comprehensively"
         elif length_ratio > 0.3:
             length_desc = "moderately"
-        
+
         prompt = (
-            f"Summarize the following text in English {length_desc}. "
+            f"Summarize the following text in {target_language} {length_desc}. " # 'target_language' use kiya
             f"Focus on key points and main ideas. "
             f"Do not use any markdown formatting, such as **bold**, *italic*, or ##headings. Provide plain text.\n\n"
             f"Text:\n---\n{text}\n---\n\nSummary:"
         )
 
-        logging.info(f"Sending prompt for summarization (length_ratio: {length_ratio}).")
+        logging.info(f"Sending prompt for summarization (length_ratio: {length_ratio}, target_language: {target_language}).") # Logging update
         response = _summarizer_model.generate_content(
             prompt,
             generation_config=genai.types.GenerationConfig(
@@ -147,7 +147,7 @@ def summarize_text(text, length_ratio=0.5):
                 candidate_count=1,
             )
         )
-        
+
         if response.candidates and response.candidates[0].content and response.candidates[0].content.parts:
             summary = response.candidates[0].content.parts[0].text.strip()
             # Remove leading "Summary:" if present
@@ -158,6 +158,6 @@ def summarize_text(text, length_ratio=0.5):
             return "Error: AI could not generate a summary. Please try again or provide more text."
 
     except Exception as e:
-        error_message = f"An error occurred during summarization: {e}"
+        error_message = f"An error occurred during summarization: {type(e).__name__}: {e}" # Enhanced error logging
         logging.error(error_message, exc_info=True)
         return f"Error: {error_message}"
