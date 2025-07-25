@@ -2,6 +2,7 @@ import os
 import logging
 from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
+from langdetect import detect, LangDetectException # Nayi import line
 
 # Import specific functions from the new modular tool files
 # Ensure these files exist in your 'tools_logic' folder.
@@ -158,7 +159,7 @@ def business_name_generator_page():
     """Renders the Business Name Generator tool page."""
     return render_template('business_name_generator/index.html')
 
-@app.route('/email-subject-line-generator')
+@app.route('/email-subject_line_generator')
 def email_subject_line_generator_page():
     """Renders the Email Subject Line Generator tool page."""
     return render_template('email_subject_line_generator/index.html')
@@ -207,6 +208,29 @@ def blog_post(slug):
 # --- Blog Routes End ---
 
 # ==============================================================================
+# Helper for Language Detection
+# ==============================================================================
+def get_request_language(text_to_detect):
+    """Detects the language of the given text, defaults to English if detection fails."""
+    if not text_to_detect or len(text_to_detect) < 20: # Langdetect needs enough text
+        logging.info("Text too short or empty for reliable language detection, defaulting to English.")
+        return "English"
+    try:
+        detected_code = detect(text_to_detect)
+        # Langdetect returns ISO 639-1 codes (e.g., 'en', 'ur', 'es').
+        # Gemini usually understands these or common names. If specific names are needed,
+        # a mapping from code to full name can be added here.
+        # For now, we pass the code directly.
+        logging.info(f"Detected language code: {detected_code}")
+        return detected_code # Return the detected language code
+    except LangDetectException as e:
+        logging.warning(f"Could not detect language for text: {e}. Defaulting to English.")
+        return "English"
+    except Exception as e:
+        logging.error(f"An unexpected error occurred during language detection: {e}. Defaulting to English.")
+        return "English"
+
+# ==============================================================================
 # API Endpoints: Define routes for handling API requests from the frontend
 # ==============================================================================
 
@@ -215,20 +239,21 @@ def summarize_api():
     """API endpoint for text summarization."""
     data = request.get_json()
     text = data.get('text', '')
-    length_ratio_str = data.get('length', '0.5') # Renamed to avoid confusion before conversion
+    length_ratio_str = data.get('length', '0.5')
 
-    # Ensure length_ratio is a float
     try:
         length_ratio = float(length_ratio_str)
     except (ValueError, TypeError):
         logging.warning(f"Invalid length_ratio received: {length_ratio_str}. Defaulting to 0.5.")
-        length_ratio = 0.5 # Default value if conversion fails
+        length_ratio = 0.5
 
     if not text:
         return jsonify({"summary": "", "error": "Please provide text to summarize."}), 400
 
+    detected_language = get_request_language(text) # Language Detection
+
     try:
-        summary = summarize_text(text, length_ratio)
+        summary = summarize_text(text, length_ratio, detected_language)
         if str(summary).startswith("Error:"):
             logging.error(f"Summarization API call failed: {summary}")
             return jsonify({"summary": "", "error": summary}), 500
@@ -249,11 +274,13 @@ def rewrite_api():
     text = data.get('text', '')
     creativity = data.get('creativity', 0.5)
 
+    detected_language = get_request_language(text) # Language Detection
+
     if not text:
         return jsonify({"rewritten_text": "", "error": "Please provide text to rewrite."}), 400
 
     try:
-        rewritten_text = rewrite_article(text, creativity)
+        rewritten_text = rewrite_article(text, creativity, detected_language) # Pass language
         if str(rewritten_text).startswith("Error:"):
             logging.error(f"Rewriting API call failed: {rewritten_text}")
             return jsonify({"rewritten_text": "", "error": rewritten_text}), 500
@@ -274,11 +301,13 @@ def humanize_api():
     text = data.get('text', '')
     creativity = data.get('creativity', 0.7)
 
+    detected_language = get_request_language(text) # Language Detection
+
     if not text:
         return jsonify({"humanized_text": "", "error": "Please provide text to humanize."}), 400
 
     try:
-        humanized_text = humanize_text(text, creativity)
+        humanized_text = humanize_text(text, creativity, detected_language) # Pass language
         if str(humanized_text).startswith("Error:"):
             logging.error(f"Humanization API call failed: {humanized_text}")
             return jsonify({"humanized_text": "", "error": humanized_text}), 500
@@ -299,12 +328,16 @@ def generate_email_api():
     subject = data.get('subject', '')
     purpose = data.get('purpose', '')
     recipient = data.get('recipient', '')
+    
+    # Using 'subject' and 'purpose' for language detection
+    text_for_detection = f"{subject} {purpose}".strip()
+    detected_language = get_request_language(text_for_detection) # Language Detection
 
     if not subject and not purpose:
         return jsonify({"generated_email": "", "error": "Please provide either a subject or purpose for the email."}), 400
 
     try:
-        email_content = generate_email(subject, purpose, recipient)
+        email_content = generate_email(subject, purpose, recipient, detected_language) # Pass language
         if str(email_content).startswith("Error:"):
             logging.error(f"Email generation API call failed: {email_content}")
             return jsonify({"generated_email": "", "error": email_content}), 500
@@ -324,11 +357,13 @@ def generate_content_ideas_api():
     data = request.get_json()
     keywords = data.get('keywords', '')
 
+    detected_language = get_request_language(keywords) # Language Detection (using keywords)
+
     if not keywords:
         return jsonify({"content_ideas": [], "error": "Please provide keywords for content ideas."}), 400
 
     try:
-        content_ideas = generate_content_ideas(keywords)
+        content_ideas = generate_content_ideas(keywords, detected_language) # Pass language
         if isinstance(content_ideas, str) and content_ideas.startswith("Error:"):
             logging.error(f"Content idea generation API call failed: {content_ideas}")
             return jsonify({"content_ideas": [], "error": content_ideas}), 500
@@ -350,11 +385,13 @@ def paraphrase_api():
     data = request.get_json()
     text = data.get('text', '')
 
+    detected_language = get_request_language(text) # Language Detection
+
     if not text:
         return jsonify({"paraphrased_text": "", "error": "Please provide text to paraphrase."}), 400
 
     try:
-        paraphrased_text = paraphrase_text(text)
+        paraphrased_text = paraphrase_text(text, detected_language) # Pass language
         if str(paraphrased_text).startswith("Error:"):
             logging.error(f"Paraphrasing API call failed: {paraphrased_text}")
             return jsonify({"paraphrased_text": "", "error": paraphrased_text}), 500
@@ -373,11 +410,13 @@ def check_grammar_api():
     data = request.get_json()
     text = data.get('text', '')
 
+    detected_language = get_request_language(text) # Language Detection
+
     if not text:
         return jsonify({"corrected_text": "", "error": "Please provide text to check grammar."}), 400
 
     try:
-        corrected_text = check_grammar(text)
+        corrected_text = check_grammar(text, detected_language) # Pass language
         if str(corrected_text).startswith("Error:"):
             logging.error(f"Grammar check API call failed: {corrected_text}")
             return jsonify({"corrected_text": "", "error": corrected_text}), 500
@@ -397,6 +436,8 @@ def generate_slogan_api():
     keywords = data.get('keywords', '')
     num_slogans = data.get('num_slogans', 5)
 
+    detected_language = get_request_language(keywords) # Language Detection (using keywords)
+
     if not keywords:
         return jsonify({"slogans": [], "error": "Please provide keywords for slogan generation."}), 400
 
@@ -408,7 +449,7 @@ def generate_slogan_api():
         num_slogans = 5
 
     try:
-        slogans = generate_slogans(keywords, num_slogans)
+        slogans = generate_slogans(keywords, num_slogans, detected_language) # Pass language
         if isinstance(slogans, list) and slogans and str(slogans[0]).startswith("Error: Gemini API"):
             logging.error(f"Gemini slogan generation failed: {slogans[0]}")
             return jsonify({"slogans": [], "error": slogans[0]}), 500
@@ -428,11 +469,13 @@ def check_plagiarism_ai_api():
     data = request.get_json()
     text = data.get('text', '')
 
+    detected_language = get_request_language(text) # Language Detection
+
     if not text:
         return jsonify({"error": "Please provide text to check."}), 400
 
     try:
-        results = check_plagiarism_and_ai(text)
+        results = check_plagiarism_and_ai(text, detected_language) # Pass language
         logging.info("Plagiarism and AI check processed.")
         return jsonify(results)
     except Exception as e:
@@ -450,11 +493,15 @@ def generate_story_api():
     genre = data.get('genre', '')
     characters = data.get('characters', '')
 
+    # Use topic for language detection
+    text_for_detection = topic
+    detected_language = get_request_language(text_for_detection) # Language Detection
+
     if not topic:
         return jsonify({"story": "", "error": "Please provide a story topic or keywords."}), 400
 
     try:
-        story = generate_story(topic, genre, characters)
+        story = generate_story(topic, genre, characters, detected_language) # Pass language
         if str(story).startswith("Error:"):
             logging.error(f"Story generation API call failed: {story}")
             return jsonify({"story": "", "error": story}), 500
@@ -477,11 +524,15 @@ def generate_product_description_api():
     target_audience = data.get('targetAudience', '')
     tone = data.get('tone', 'informative')
 
+    # Use product_name or product_keywords for language detection
+    text_for_detection = f"{product_name} {product_keywords}".strip()
+    detected_language = get_request_language(text_for_detection) # Language Detection
+
     if not product_name and not product_keywords:
         return jsonify({"description": "", "error": "Please enter a product name or keywords to generate a description."}), 400
 
     try:
-        description = generate_product_description(product_name, product_keywords, target_audience, tone)
+        description = generate_product_description(product_name, product_keywords, target_audience, tone, detected_language) # Pass language
         if str(description).startswith("Error:"):
             logging.error(f"Product description generation API call failed: {description}")
             return jsonify({"description": "", "error": description}), 500
@@ -503,11 +554,15 @@ def generate_essay_api():
     style = data.get('style', 'formal')
     keywords = data.get('keywords', '')
 
+    # Use topic or keywords for language detection
+    text_for_detection = f"{topic} {keywords}".strip()
+    detected_language = get_request_language(text_for_detection) # Language Detection
+
     if not topic:
         return jsonify({"essay": "", "error": "Please provide a topic for the essay."}), 400
 
     try:
-        essay = generate_essay(topic, length, style, keywords)
+        essay = generate_essay(topic, length, style, keywords, detected_language) # Pass language
         if str(essay).startswith("Error:"):
             logging.error(f"Essay generation API call failed: {essay}")
             return jsonify({"essay": "", "error": essay}), 500
@@ -527,13 +582,17 @@ def generate_trending_news_api():
     category = data.get('category', '')
     num_articles = data.get('num_articles', 1)
 
+    # Use keywords or category for language detection
+    text_for_detection = f"{keywords} {category}".strip()
+    detected_language = get_request_language(text_for_detection) # Language Detection
+
     if not keywords and not category:
         return jsonify({"news_summary": "", "error": "Please enter a news topic/keywords or select a category."}), 400
 
     try:
         num_articles = int(num_articles) if isinstance(num_articles, str) and num_articles.isdigit() else 1
 
-        news_summary = generate_trending_news(keywords, category, num_articles)
+        news_summary = generate_trending_news(keywords, category, num_articles, detected_language) # Pass language
         if isinstance(news_summary, str) and str(news_summary).startswith("Error:"):
             logging.error(f"Trending news generation API call failed: {news_summary}")
             return jsonify({"news_summary": "", "error": news_summary}), 500
@@ -552,11 +611,13 @@ def generate_acronym_api():
     data = request.get_json()
     text = data.get('text', '')
 
+    detected_language = get_request_language(text) # Language Detection
+
     if not text:
         return jsonify({"acronym": "", "error": "Please enter a phrase or text to generate an acronym."}), 400
 
     try:
-        acronym = generate_acronym(text)
+        acronym = generate_acronym(text, detected_language) # Pass language
         if str(acronym).startswith("Error:"):
             logging.error(f"Acronym generation API call failed: {acronym}")
             return jsonify({"acronym": "", "error": acronym}), 500
@@ -575,11 +636,13 @@ def generate_abstract_api():
     data = request.get_json()
     text = data.get('text', '')
 
+    detected_language = get_request_language(text) # Language Detection
+
     if not text:
         return jsonify({"abstract": "", "error": "Please paste your main text to generate an abstract."}), 400
 
     try:
-        abstract = generate_abstract(text)
+        abstract = generate_abstract(text, detected_language) # Pass language
         if str(abstract).startswith("Error:"):
             logging.error(f"Abstract generation API call failed: {abstract}")
             return jsonify({"abstract": "", "error": abstract}), 500
@@ -597,11 +660,13 @@ def generate_adjectives_api():
     data = request.get_json()
     text = data.get('text', '')
 
+    detected_language = get_request_language(text) # Language Detection
+
     if not text:
         return jsonify({"adjectives": [], "error": "Please enter a noun or sentence to get adjectives."}), 400
 
     try:
-        adjectives = generate_adjectives(text)
+        adjectives = generate_adjectives(text, detected_language) # Pass language
         if isinstance(adjectives, list) and adjectives and str(adjectives[0]).startswith("Error:"):
             logging.error(f"Adjective generation API call failed: {adjectives[0]}")
             return jsonify({"adjectives": [], "error": adjectives[0]}), 500
@@ -621,11 +686,13 @@ def generate_hooks_api():
     topic = data.get('topic', '')
     tone = data.get('tone', 'Intriguing')
 
+    detected_language = get_request_language(topic) # Language Detection (using topic)
+
     if not topic:
         return jsonify({"hooks": [], "error": "Please describe your content topic to generate hooks."}), 400
 
     try:
-        hooks = generate_hooks(topic, tone)
+        hooks = generate_hooks(topic, tone, detected_language) # Pass language
         if isinstance(hooks, list) and hooks and str(hooks[0]).startswith("Error:"):
             logging.error(f"Hook generation API call failed: {hooks[0]}")
             return jsonify({"hooks": [], "error": hooks[0]}), 500
@@ -644,11 +711,13 @@ def generate_titles_api():
     data = request.get_json()
     topic = data.get('topic', '')
 
+    detected_language = get_request_language(topic) # Language Detection (using topic)
+
     if not topic:
         return jsonify({"titles": [], "error": "Please describe your content to generate titles."}), 400
 
     try:
-        titles = generate_titles(topic)
+        titles = generate_titles(topic, detected_language) # Pass language
         if isinstance(titles, list) and titles and str(titles[0]).startswith("Error:"):
             logging.error(f"Title generation API call failed: {titles[0]}")
             return jsonify({"titles": [], "error": titles[0]}), 500
@@ -667,11 +736,13 @@ def generate_conclusion_api():
     data = request.get_json()
     text = data.get('text', '')
 
+    detected_language = get_request_language(text) # Language Detection
+
     if not text:
         return jsonify({"conclusion": "", "error": "Please paste your main text to generate a conclusion."}), 400
 
     try:
-        conclusion = generate_conclusion(text)
+        conclusion = generate_conclusion(text, detected_language) # Pass language
         if str(conclusion).startswith("Error:"):
             logging.error(f"Conclusion generation API call failed: {conclusion}")
             return jsonify({"conclusion": "", "error": conclusion}), 500
@@ -691,11 +762,13 @@ def generate_business_names_api():
     keywords = data.get('keywords', '')
     style = data.get('style', 'Creative')
 
+    detected_language = get_request_language(keywords) # Language Detection (using keywords)
+
     if not keywords:
         return jsonify({"names": [], "error": "Please enter keywords about your business to generate names."}), 400
 
     try:
-        names = generate_business_names(keywords, style)
+        names = generate_business_names(keywords, style, detected_language) # Pass language
         if isinstance(names, list) and names and str(names[0]).startswith("Error:"):
             logging.error(f"Business name generation API call failed: {names[0]}")
             return jsonify({"names": [], "error": names[0]}), 500
@@ -715,11 +788,13 @@ def generate_email_subjects_api():
     content = data.get('content', '')
     tone = data.get('tone', 'Professional')
 
+    detected_language = get_request_language(content) # Language Detection (using content)
+
     if not content:
         return jsonify({"subjects": [], "error": "Please describe what your email is about."}), 400
 
     try:
-        subjects = generate_email_subjects(content, tone)
+        subjects = generate_email_subjects(content, tone, detected_language) # Pass language
         if isinstance(subjects, list) and subjects and str(subjects[0]).startswith("Error:"):
             logging.error(f"Email subject generation API call failed: {subjects[0]}")
             return jsonify({"subjects": [], "error": subjects[0]}), 500
