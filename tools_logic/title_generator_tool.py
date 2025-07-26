@@ -100,7 +100,7 @@ def get_gemini_model():
 # Global model instance to avoid re-initializing on every call
 _title_generator_model = None
 
-def generate_titles(topic):
+def generate_titles(topic, target_language="English"): # target_language parameter add kiya
     """Generates compelling titles using the Gemini model."""
     global _title_generator_model # Use the global model instance
 
@@ -129,7 +129,7 @@ def generate_titles(topic):
             }
         }
         prompt = (
-            f"Generate 5-7 catchy, SEO-friendly, and compelling titles in English for content about '{topic}'. "
+            f"Generate 5-7 catchy, SEO-friendly, and compelling titles in {target_language} for content about '{topic}'. " # prompt mein target_language use kiya
             f"Focus on titles that will attract clicks and engage the audience. "
             f"Do not use any markdown formatting like **bold**, *italic*, or ##headings. "
             f"Provide the output as a JSON array of objects, where each object has a key 'title' and its value is the title. Example: [{{'title': 'Top 10 Tips'}}, {{'title': 'How to Master X'}}].\n\n"
@@ -153,5 +153,5 @@ def generate_titles(topic):
         else:
             return ["No titles could be generated."]
     except Exception as e:
-        logging.error(f"Error generating titles with Gemini: {e}", exc_info=True)
+        logging.error(f"Error generating titles with Gemini: {type(e).__name__}: {e}", exc_info=True) # Enhanced error logging
         return [f"Error: Title generation failed. Details: {str(e)}"]

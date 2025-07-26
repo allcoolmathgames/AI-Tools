@@ -1,0 +1,90 @@
+{
+  "en": {
+    "nav_logo": "Summarizer.AI",
+    "home": "Home",
+    "tools": "Tools",
+    "blog": "Blog",
+    "about_us": "About Us",
+    "contact": "Contact"
+  },
+  "es": {
+    "nav_logo": "Summarizer.AI",
+    "home": "Inicio",
+    "tools": "Herramientas",
+    "blog": "Blog",
+    "about_us": "Acerca de nosotros",
+    "contact": "Contacto"
+  },
+  "id": {
+    "nav_logo": "Summarizer.AI",
+    "home": "Beranda",
+    "tools": "Alat",
+    "blog": "Blog",
+    "about_us": "Tentang Kami",
+    "contact": "Kontak"
+  },
+  "br": {
+    "nav_logo": "Summarizer.AI",
+    "home": "Início",
+    "tools": "Ferramentas",
+    "blog": "Blog",
+    "about_us": "Sobre Nós",
+    "contact": "Contato"
+  },
+  "fr": {
+    "nav_logo": "Summarizer.AI",
+    "home": "Accueil",
+    "tools": "Outils",
+    "blog": "Blog",
+    "about_us": "À Propos",
+    "contact": "Contact"
+  },
+  "nl": {
+    "nav_logo": "Summarizer.AI",
+    "home": "Startpagina",
+    "tools": "Tools",
+    "blog": "Blog",
+    "about_us": "Over Ons",
+    "contact": "Contact"
+  },
+  "it": {
+    "nav_logo": "Summarizer.AI",
+    "home": "Home",
+    "tools": "Strumenti",
+    "blog": "Blog",
+    "about_us": "Chi Siamo",
+    "contact": "Contatti"
+  },
+  "de": {
+    "nav_logo": "Summarizer.AI",
+    "home": "Startseite",
+    "tools": "Tools",
+    "blog": "Blog",
+    "about_us": "Über Uns",
+    "contact": "Kontakt"
+  },
+  "ru": {
+    "nav_logo": "Summarizer.AI",
+    "home": "Главная",
+    "tools": "Инструменты",
+    "blog": "Блог",
+    "about_us": "О нас",
+    "contact": "Контакты"
+  },
+  "ar": {
+    "nav_logo": "Summarizer.AI",
+    "home": "الرئيسية",
+    "tools": "الأدوات",
+    "blog": "المدونة",
+    "about_us": "من نحن",
+    "contact": "اتصل بنا"
+  },
+  "vi": {
+    "nav_logo": "Summarizer.AI",
+    "home": "Trang chủ",
+    "tools": "Công cụ",
+    "blog": "Blog",
+    "about_us": "Về chúng tôi",
+    "contact": "Liên hệ"
+  }
+}

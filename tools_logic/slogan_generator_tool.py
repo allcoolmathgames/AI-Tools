@@ -100,7 +100,7 @@ def get_gemini_model():
 # Global model instance to avoid re-initializing on every call
 _slogan_generator_model = None
 
-def generate_slogans(keywords, num_slogans=5):
+def generate_slogans(keywords, num_slogans=5, target_language="English"): # target_language parameter add kiya
     """Generates slogans using the Gemini model."""
     global _slogan_generator_model # Use the global model instance
 
@@ -129,7 +129,7 @@ def generate_slogans(keywords, num_slogans=5):
             }
         }
         prompt = (
-            f"Generate {num_slogans} unique, catchy, and memorable advertising slogans in English "
+            f"Generate {num_slogans} unique, catchy, and memorable advertising slogans in {target_language} " # prompt mein target_language use kiya
             f"for a brand or campaign related to '{keywords}'. "
             f"Each slogan should be concise and highly impactful. Do not use any markdown formatting like **bold**, *italic*, or ##headings. "
             f"Provide the output as a JSON array of objects, where each object has a key 'slogan' and its value is the slogan. Example: [{{'slogan': 'Think Different'}}, {{'slogan': 'Just Do It'}}].\n\n"
@@ -161,12 +161,12 @@ def generate_slogans(keywords, num_slogans=5):
                     break
             
             if not unique_slogans:
-                return ["Gemini could not generate any slogans. Please try different keywords."]
+                return [f"Gemini could not generate any slogans in {target_language}. Please try different keywords."] # localized message
             
             return unique_slogans[:num_slogans]
         else:
-            return ["Gemini could not generate any slogans. Please try different keywords."]
+            return [f"Gemini could not generate any slogans in {target_language}. Please try different keywords."] # localized message
 
     except Exception as e:
-        logging.error(f"Error generating slogans with Gemini: {e}", exc_info=True)
+        logging.error(f"Error generating slogans with Gemini: {type(e).__name__}: {e}", exc_info=True) # Enhanced error logging
         return [f"Error: Slogan generation failed with Gemini. Details: {str(e)}"]

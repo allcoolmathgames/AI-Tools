@@ -1,55 +1,59 @@
 /* -------------------------------------------------------
- * language.js
+ * language.js (Final Version for ALL Pages & Tools)
  * - Detects current language from URL
- * - Loads the right /static/lang/<page>.json
- * - Replaces texts marked with data-i18n / data-i18n-placeholder
+ * - Loads /static/lang/<tool>.json dynamically
+ * - Supports kebab-case tool names (abstract-generator, ai-email-generator, etc.)
+ * - Handles header & footer translations
  * - Keeps English URLs clean (no /en), other langs as /<lang>/...
  * ----------------------------------------------------- */
 
 (function () {
   const DEFAULT_LANG = 'en';
 
-  // The languages you support
-  const SUPPORTED_LANGS = ['en', 'es', 'id', 'br', 'fr', 'nl', 'it', 'de', 'ru', 'ar', 'vi'];
+  // Supported languages
+  const SUPPORTED_LANGS = ['en', 'es', 'id', 'pt', 'fr', 'nl', 'it', 'de', 'ru', 'ar', 'vi'];
 
-  // Homepage == summarizer
+  // Homepage key
   const DEFAULT_PAGE_KEY = 'summarizer';
 
-  // Tool pages (folder names) you localized -> <name>.json
+  // All tool pages (kebab-case names)
   const TOOL_PAGES = new Set([
-    'trending_news_generator',
-    'title_generator',
+    'abstract-generator',
+    'acronym-generator',
+    'adjective-generator',
+    'ai-email-generator',
+    'ai-product-description-generator',
+    'ai-story-generator',
+    'ai-text-to-humanize',
+    'article-rewriter',
+    'business-name-generator',
+    'conclusion-generator',
+    'content-idea-generator',
+    'email-subject-line-generator',
+    'essay-generator',
+    'grammar-checker',
+    'hook-generator',
+    'paraphrasing-tool',
+    'plagiarism-checker',
+    'slogan-generator',
     'summarizer',
-    'slogan_generator',
-    'plagiarism_checker',
-    'paraphrasing_tool',
-    'hook_generator',
-    'grammar_checker',
-    'essay_generator',
-    'email_subject_line_generator',
-    'content_idea_generator',
-    'conclusion_generator',
-    'business_name_generator',
-    'article_rewriter',
-    'ai_text_to_humanize',
-    'ai_story_generator',
-    'ai_product_description_generator',
-    'ai_email_generator',
-    'adjective_generator',
-    'acronym_generator',
-    'abstract_generator',
-    'index' // only if you ever really use index.json
+    'title-generator',
+    'trending-news-generator',
+    'tools'
   ]);
 
-  // Standalone pages (templates/pages/...)
+  // Standalone pages (about, contact, etc.)
   const STANDALONE_PAGES = new Set([
-    'about_us',
+    'about-us',
     'contact',
-    'privacy_policy',
-    'terms_conditions'
+    'privacy-policy',
+    'terms-conditions'
   ]);
 
-  // ---------- URL helpers ----------
+  // Special pages (header & footer)
+  const EXTRA_PAGES = ['header', 'footer'];
+
+  // ---------- URL Helpers ----------
 
   function detectLangFromPath() {
     const parts = window.location.pathname.split('/');
@@ -57,7 +61,7 @@
   }
 
   function stripLangPrefix(pathname) {
-    return pathname.replace(/^\/(en|es|id|br|fr|nl|it|de|ru|ar|vi)(\/|$)/, '/');
+    return pathname.replace(/^\/(en|es|id|pt|fr|nl|it|de|ru|ar|vi)(\/|$)/, '/');
   }
 
   function isBlog() {
@@ -65,100 +69,89 @@
     return clean.startsWith('/blogs/');
   }
 
-  /**
-   * Decide which json to load for this route
-   * Rules:
-   *   - "/" -> DEFAULT_PAGE_KEY (summarizer)
-   *   - "/<tool>[/index.html]" -> <tool>
-   *   - "/pages/<page>.html" -> <page> (if in STANDALONE_PAGES)
-   *   - otherwise null
-   */
+  // Determine page key
   function getPageKey() {
     const clean = stripLangPrefix(window.location.pathname).toLowerCase();
-    const parts = clean.split('/').filter(Boolean); // remove empty
+    const parts = clean.split('/').filter(Boolean);
 
-    // Root "/" => your homepage (summarizer)
-    if (parts.length === 0) return DEFAULT_PAGE_KEY;
+    if (parts.length === 0) return DEFAULT_PAGE_KEY; // homepage
+    if (parts[0] === 'blogs') return null;           // blogs have no translation
 
-    // Blogs are not localized
-    if (parts[0] === 'blogs') return null;
-
-    // /pages/about_us.html
     if (parts[0] === 'pages') {
       const file = (parts[1] || '').replace('.html', '');
       return STANDALONE_PAGES.has(file) ? file : null;
     }
 
-    // /summarizer/, /summarizer/index.html, etc.
     const first = parts[0];
     if (TOOL_PAGES.has(first)) return first;
 
-    // /about_us.html directly
     const maybeFile = first.replace('.html', '');
     if (STANDALONE_PAGES.has(maybeFile)) return maybeFile;
 
-    // Fallback to homepage key
     return DEFAULT_PAGE_KEY;
   }
 
-  // ---------- Apply translations ----------
+  // ---------- Apply Translations ----------
 
   function setText(el, val) {
-    // If you ever store HTML in your JSON, switch to innerHTML
     el.textContent = val;
   }
 
   function applyTranslations(dict, currentLang) {
     const langBlock = dict[currentLang] || dict[DEFAULT_LANG] || {};
 
-    // Update document language attribute
     document.documentElement.setAttribute('lang', currentLang);
-
-    // document.title
     if (langBlock.page_title) document.title = langBlock.page_title;
 
-    // Regular text nodes
     document.querySelectorAll('[data-i18n]').forEach(el => {
       const key = el.getAttribute('data-i18n');
       if (langBlock[key] !== undefined) setText(el, langBlock[key]);
     });
 
-    // placeholders
     document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
       const key = el.getAttribute('data-i18n-placeholder');
       if (langBlock[key] !== undefined) el.setAttribute('placeholder', langBlock[key]);
     });
+
+    document.querySelectorAll('[data-i18n-content]').forEach(el => {
+      const key = el.getAttribute('data-i18n-content');
+      if (langBlock[key] !== undefined) el.setAttribute('content', langBlock[key]);
+    });
   }
 
-  // ---------- Fetch + init ----------
+  // ---------- Fetch + Init ----------
 
   async function loadTranslations(currentLang) {
     const pageKey = getPageKey();
-    if (!pageKey) return; // nothing to translate (blogs or explicitly skipped)
+    if (!pageKey) return;
 
-    const cacheBuster = Date.now(); // avoid dev cache issues
-    const url = `/static/lang/${pageKey}.json?v=${cacheBuster}`;
+    const cacheBuster = Date.now();
+    const urls = [`/static/lang/${pageKey}.json?v=${cacheBuster}`];
 
-    try {
-      const res = await fetch(url);
-      if (!res.ok) {
-        console.error(`[i18n] Failed to fetch ${url} (status ${res.status})`);
-        return;
+    // Always load header & footer translations too
+    EXTRA_PAGES.forEach(extra => urls.push(`/static/lang/${extra}.json?v=${cacheBuster}`));
+
+    for (const url of urls) {
+      try {
+        const res = await fetch(url);
+        if (!res.ok) {
+          console.warn(`[i18n] Failed to fetch ${url} (status ${res.status})`);
+          continue;
+        }
+        const data = await res.json();
+        applyTranslations(data, currentLang);
+      } catch (e) {
+        console.error('[i18n] Translation load error:', e);
       }
-      const data = await res.json();
-      applyTranslations(data, currentLang);
-    } catch (e) {
-      console.error('[i18n] Translation load error:', e);
     }
   }
 
-  // ---------- Switcher ----------
+  // ---------- Language Switcher ----------
 
   function initLangSwitcher(currentLang) {
     const switcher = document.getElementById('langSwitcher');
     if (!switcher) return;
 
-    // Set current value
     switcher.value = SUPPORTED_LANGS.includes(currentLang) ? currentLang : DEFAULT_LANG;
 
     switcher.addEventListener('change', e => {
@@ -168,10 +161,8 @@
       const hash = window.location.hash || '';
 
       if (lang === DEFAULT_LANG) {
-        // English => no prefix
         window.location.href = `${clean}${search}${hash}`;
       } else {
-        // other => /<lang>/...
         const path = clean.startsWith('/') ? clean : `/${clean}`;
         window.location.href = `/${lang}${path}${search}${hash}`;
       }
@@ -188,4 +179,8 @@
       loadTranslations(currentLang);
     }
   });
+
+  // Make functions accessible for debugging
+  window.__i18n = { getPageKey, detectLangFromPath };
+
 })();

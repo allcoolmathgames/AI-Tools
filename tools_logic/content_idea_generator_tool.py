@@ -100,7 +100,7 @@ def get_gemini_model():
 # Global model instance to avoid re-initializing on every call
 _content_idea_generator_model = None
 
-def generate_content_ideas(keywords):
+def generate_content_ideas(keywords, target_language="English"): # target_language parameter add kiya
     """Generates content ideas based on keywords using the Gemini model."""
     global _content_idea_generator_model # Use the global model instance
 
@@ -131,7 +131,7 @@ def generate_content_ideas(keywords):
         }
 
         prompt = (
-            f"Generate 7 creative, unique, and engaging content ideas in English related to '{keywords}'. "
+            f"Generate 7 creative, unique, and engaging content ideas in {target_language} related to '{keywords}'. " # prompt mein target_language use kiya
             f"Focus on diverse angles, trending topics, and actionable ideas. "
             f"Each idea should be concise, compelling, and presented as a plain string without any numbering or special characters like hyphens or asterisks. "
             f"For example: 'Idea Title: Brief description.' Do not use any markdown formatting like **bold** or ##headings. "
@@ -166,5 +166,5 @@ def generate_content_ideas(keywords):
             return "Gemini could not generate any content ideas. Please try different keywords."
 
     except Exception as e:
-        logging.error(f"Error generating content ideas with Gemini: {e}", exc_info=True)
+        logging.error(f"Error generating content ideas with Gemini: {type(e).__name__}: {e}", exc_info=True) # Enhanced error logging
         return f"Error: Content idea generation failed with Gemini. Details: {str(e)}"

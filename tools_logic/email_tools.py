@@ -103,7 +103,7 @@ def get_gemini_model():
 # Global model instance for generate_email to avoid re-initializing on every call
 _email_generator_model = None
 
-def generate_email(subject, purpose, recipient=''):
+def generate_email(subject, purpose, recipient='', target_language="English"): # target_language parameter add kiya
     """Generates email content using the Gemini model."""
     global _email_generator_model # Use the global model instance
 
@@ -123,7 +123,7 @@ def generate_email(subject, purpose, recipient=''):
             return "Error: Gemini model could not be loaded for email generation."
         
         email_prompt = (
-            f"Generate a professional email in English.\n"
+            f"Generate a professional email in {target_language}.\n" # prompt mein target_language use kiya
             f"Subject: {subject}\n"
             f"Purpose: {purpose}\n"
         )
@@ -149,13 +149,13 @@ def generate_email(subject, purpose, recipient=''):
             return "Gemini could not generate email content. Please try different details."
 
     except Exception as e:
-        logging.error(f"Error generating email with Gemini: {e}", exc_info=True)
+        logging.error(f"Error generating email with Gemini: {type(e).__name__}: {e}", exc_info=True) # Enhanced error logging
         return f"Error: Email generation failed with Gemini. Details: {str(e)}"
 
 # Global model instance for generate_email_subjects to avoid re-initializing on every call
 _email_subject_generator_model = None
 
-def generate_email_subjects(content, tone):
+def generate_email_subjects(content, tone, target_language="English"): # target_language parameter add kiya
     """Generates email subjects using the Gemini model."""
     global _email_subject_generator_model # Use the global model instance
 
@@ -184,7 +184,7 @@ def generate_email_subjects(content, tone):
             }
         }
         prompt = (
-            f"Generate 3-5 catchy and effective email subject lines in English for an email about '{content}'. "
+            f"Generate 3-5 catchy and effective email subject lines in {target_language} for an email about '{content}'. " # prompt mein target_language use kiya
             f"The tone should be '{tone}'. Focus on boosting open rates. "
             f"Do not use any markdown formatting like **bold**, *italic*, or ##headings. "
             f"Provide the output as a JSON array of objects, where each object has a key 'subject' and its value is the subject line. Example: [{{'subject': 'Exciting News!'}}, {{'subject': 'Your Update'}}].\n\n"
@@ -208,5 +208,5 @@ def generate_email_subjects(content, tone):
         else:
             return ["No email subjects could be generated."]
     except Exception as e:
-        logging.error(f"Error generating email subjects with Gemini: {e}", exc_info=True)
+        logging.error(f"Error generating email subjects with Gemini: {type(e).__name__}: {e}", exc_info=True)
         return [f"Error: Email subject generation failed with Gemini. Details: {str(e)}"]

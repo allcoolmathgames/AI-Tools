@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Article Rewriter - Summarizer.ai</title>
-    <meta name="description" content="Rewrite articles and text to generate fresh, unique content effortlessly with our AI Article Rewriter.">
-    <meta name="keywords" content="AI article rewriter, rewrite text, content spinner, plagiarism remover, content rephraser, unique content generator">
+    <title data-i18n="page_title">AI Article Rewriter - Summarizer.ai</title>
+    <meta data-i18n-content="meta_description" name="description" content="Rewrite articles and text to generate fresh, unique content effortlessly with our AI Article Rewriter.">
+    <meta data-i18n-content="meta_keywords" name="keywords" content="AI article rewriter, rewrite text, content spinner, plagiarism remover, content rephraser, unique content generator">
     <meta name="robots" content="noindex, nofollow">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -35,27 +35,27 @@
     {% include 'header.html' %}
 
     <section id="article-rewriter-tool" class="section-container">
-        <h1 class="section-heading">AI Article Rewriter</h1>
+        <h1 class="section-heading" data-i18n="section_heading_tool">AI Article Rewriter</h1>
         <div class="tool-container">
             <div class="summarizer-grid">
                 <div class="text-area-container">
-                    <label for="inputText">Original Text:</label>
-                    <textarea id="inputText" placeholder="Paste the text you want to rewrite here..."></textarea>
-                    <div class="counter"><span id="inputWordCount">0</span> words</div>
+                    <label for="inputText" data-i18n="label_original_text">Original Text:</label>
+                    <textarea id="inputText" data-i18n-placeholder="placeholder_original_text" placeholder="Paste the text you want to rewrite here..."></textarea>
+                    <div class="counter"><span id="inputWordCount">0</span> <span data-i18n="words_label">words</span></div>
                 </div>
                 <div class="text-area-container">
-                    <label for="rewrittenText">Rewritten Text:</label>
-                    <textarea id="rewrittenText" readonly placeholder="Your rewritten content will appear here..."></textarea>
-                    <div class="counter"><span id="outputWordCount">0</span> words</div>
+                    <label for="rewrittenText" data-i18n="label_rewritten_text">Rewritten Text:</label>
+                    <textarea id="rewrittenText" readonly data-i18n-placeholder="placeholder_rewritten_text" placeholder="Your rewritten content will appear here..."></textarea>
+                    <div class="counter"><span id="outputWordCount">0</span> <span data-i18n="words_label">words</span></div>
                 </div>
             </div>
             <div class="controls">
                 <div class="slider-container">
-                    <label for="creativitySlider">Creativity Level:</label>
+                    <label for="creativitySlider" data-i18n="label_creativity_level">Creativity Level:</label>
                     <input type="range" id="creativitySlider" min="0" max="100" value="50">
-                    <span id="creativityValue">50%</span>
+                    <span id="creativityValue">50<span data-i18n="percent_suffix">%</span></span>
                 </div>
-                <button id="rewriteBtn" class="primary-button">Rewrite Article</button>
+                <button id="rewriteBtn" class="primary-button" data-i18n="button_rewrite_article">Rewrite Article</button>
             </div>
             
             <div class="loader" id="loader"></div>
@@ -64,130 +64,130 @@
     </section>
 
     <section id="rewriter-features" class="section-container">
-        <h2 class="section-heading">Why Use Our Article Rewriter?</h2>
+        <h2 class="section-heading" data-i18n="section_heading_why_use_tool">Why Use Our Article Rewriter?</h2>
         <div class="features-grid">
             <div class="feature-card">
                 <div class="feature-icon">✨</div>
-                <h3>Unique Content</h3>
-                <p>Generate fresh, original versions of your articles to avoid plagiarism and duplicate content issues.</p>
+                <h3 data-i18n="feature_title_unique_content">Unique Content</h3>
+                <p data-i18n="feature_description_unique_content">Generate fresh, original versions of your articles to avoid plagiarism and duplicate content issues.</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">🚀</div>
-                <h3>Improve Readability</h3>
-                <p>Enhance the clarity and flow of your text, making it more engaging and easier to read for your audience.</p>
+                <h3 data-i18n="feature_title_improve_readability">Improve Readability</h3>
+                <p data-i18n="feature_description_improve_readability">Enhance the clarity and flow of your text, making it more engaging and easier to read for your audience.</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">⏱️</div>
-                <h3>Save Time</h3>
-                <p>Rewrite lengthy articles in seconds, significantly reducing the time and effort compared to manual rewriting.</p>
+                <h3 data-i18n="feature_title_save_time">Save Time</h3>
+                <p data-i18n="feature_description_save_time">Rewrite lengthy articles in seconds, significantly reducing the time and effort compared to manual rewriting.</p>
             </div>
         </div>
     </section>
 
     <section id="how-it-works" class="section-container">
-        <h2 class="section-heading">How To Use the Article Rewriter</h2>
+        <h2 class="section-heading" data-i18n="section_heading_how_to_use">How To Use the Article Rewriter</h2>
         <div class="steps-container">
             <div class="step">
-                <div class="step-number">1</div>
+                <div class="step-number" data-i18n="step_number_1">1</div>
                 <div class="step-text">
-                    <h4>Paste Your Text</h4>
-                    <p>Copy the article or text you wish to rewrite and paste it into the input box.</p>
+                    <h4 data-i18n="step_title_1">Paste Your Text</h4>
+                    <p data-i18n="step_description_1">Copy the article or text you wish to rewrite and paste it into the input box.</p>
                 </div>
             </div>
             <div class="step">
-                <div class="step-number">2</div>
+                <div class="step-number" data-i18n="step_number_2">2</div>
                 <div class="step-text">
-                    <h4>Adjust Creativity</h4>
-                    <p>Use the slider to control how creative or similar the rewritten output should be.</p>
+                    <h4 data-i18n="step_title_2">Adjust Creativity</h4>
+                    <p data-i18n="step_description_2">Use the slider to control how creative or similar the rewritten output should be.</p>
                 </div>
             </div>
             <div class="step">
-                <div class="step-number">3</div>
+                <div class="step-number" data-i18n="step_number_3">3</div>
                 <div class="step-text">
-                    <h4>Rewrite & Use</h4>
-                    <p>Click 'Rewrite Article'. Your unique, fresh content will be generated instantly.</p>
+                    <h4 data-i18n="step_title_3">Rewrite & Use</h4>
+                    <p data-i18n="step_description_3">Click 'Rewrite Article'. Your unique, fresh content will be generated instantly.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <section id="more-tools" class="section-container">
-        <h2 class="section-heading">Explore Our Other AI Tools</h2>
+        <h2 class="section-heading" data-i18n="section_heading_explore_other_tools">Explore Our Other AI Tools</h2>
         <div class="tools-grid">
             <a href="{{ url_for('index') }}" class="tool-card">
                 <div class="tool-icon">✍️</div>
-                <h3>AI Summarizer</h3>
-                <p>Transform long texts into concise summaries instantly.</p>
+                <h3 data-i18n="tool_ai_summarizer_title">AI Summarizer</h3>
+                <p data-i18n="tool_ai_summarizer_description">Transform long texts into concise summaries instantly.</p>
             </a>
             <a href="{{ url_for('abstract_generator_page') }}" class="tool-card">
                 <div class="tool-icon">📑</div>
-                <h3>Abstract Generator</h3>
-                <p>Generate concise abstracts for your research papers.</p>
+                <h3 data-i18n="tool_abstract_generator_title">Abstract Generator</h3>
+                <p data-i18n="tool_abstract_generator_description">Generate concise abstracts for your research papers.</p>
             </a>
             <a href="{{ url_for('acronym_generator_page') }}" class="tool-card">
                 <div class="tool-icon">🔠</div>
-                <h3>Acronym Generator</h3>
-                <p>Create acronyms from long phrases instantly.</p>
+                <h3 data-i18n="tool_acronym_generator_title">Acronym Generator</h3>
+                <p data-i18n="tool_acronym_generator_description">Create acronyms from long phrases instantly.</p>
             </a>
             <a href="{{ url_for('adjective_generator_page') }}" class="tool-card">
                 <div class="tool-icon">🎨</div>
-                <h3>Adjective Generator</h3>
-                <p>Find the perfect adjectives to enhance your writing.</p>
+                <h3 data-i18n="tool_adjective_generator_title">Adjective Generator</h3>
+                <p data-i18n="tool_adjective_generator_description">Find the perfect adjectives to enhance your writing.</p>
             </a>
             <a href="{{ url_for('ai_email_generator_page') }}" class="tool-card">
                 <div class="tool-icon">📧</div>
-                <h3>AI Email Generator</h3>
-                <p>Generate professional and engaging emails quickly with AI.</p>
+                <h3 data-i18n="tool_ai_email_generator_title">AI Email Generator</h3>
+                <p data-i18n="tool_ai_email_generator_description">Generate professional and engaging emails quickly with AI.</p>
             </a>
             <a href="{{ url_for('ai_product_description_generator_page') }}" class="tool-card">
                 <div class="tool-icon">🛍️</div>
-                <h3>Product Description Generator</h3>
-                <p>Create compelling product descriptions using AI.</p>
+                <h3 data-i18n="tool_ai_product_description_generator_title">Product Description Generator</h3>
+                <p data-i18n="tool_ai_product_description_generator_description">Create compelling product descriptions using AI.</p>
             </a>
         </div>
         <br>
         <div class="text-center">
-            <a href="{{ url_for('tools_index') }}" class="primary-button view-all-tools-button">View All Tools</a>
+            <a href="{{ url_for('tools_index') }}" class="primary-button view-all-tools-button" data-i18n="button_view_all_tools">View All Tools</a>
         </div>
     </section>
 
     <section id="additional-info-section" class="section-container">
-        <h2 class="section-heading">Additional Information</h2>
+        <h2 class="section-heading" data-i18n="section_heading_additional_info">Additional Information</h2>
         <div class="info-text-box">
-            <p>
+            <p data-i18n="info_text_box_paragraph">
                 Here you can add any additional text or information related to this page or tool. For example, the benefits of this tool, or tips for using it.
             </p>
         </div>
     </section>
 
     <section id="faq" class="section-container">
-        <h2 class="section-heading">Frequently Asked Questions</h2>
+        <h2 class="section-heading" data-i18n="section_heading_faq">Frequently Asked Questions</h2>
         <div class="faq-container">
             <div class="faq-item">
                 <div class="faq-question">
-                    <h3>What is an AI Article Rewriter?</h3>
+                    <h3 data-i18n="faq_question_1">What is an AI Article Rewriter?</h3>
                     <i class="fas fa-plus"></i>
                 </div>
                 <div class="faq-answer">
-                    <p>An AI Article Rewriter is a tool that uses artificial intelligence to rephrase text, sentences, or entire articles while maintaining the original meaning. It helps in creating unique content and avoiding plagiarism.</p>
+                    <p data-i18n="faq_answer_1">An AI Article Rewriter is a tool that uses artificial intelligence to rephrase text, sentences, or entire articles while maintaining the original meaning. It helps in creating unique content and avoiding plagiarism.</p>
                 </div>
             </div>
             <div class="faq-item">
                 <div class="faq-question">
-                    <h3>How does it ensure uniqueness?</h3>
+                    <h3 data-i18n="faq_question_2">How does it ensure uniqueness?</h3>
                     <i class="fas fa-plus"></i>
                 </div>
                 <div class="faq-answer">
-                    <p>The AI analyzes the input text and uses a vast vocabulary and different sentence structures to generate a new version. This process ensures that the rewritten content is distinct from the original while conveying the same message.</p>
+                    <p data-i18n="faq_answer_2">The AI analyzes the input text and uses a vast vocabulary and different sentence structures to generate a new version. This process ensures that the rewritten content is distinct from the original while conveying the same message.</p>
                 </div>
             </div>
             <div class="faq-item">
                 <div class="faq-question">
-                    <h3>Can I adjust the rewriting style?</h3>
+                    <h3 data-i18n="faq_question_3">Can I adjust the rewriting style?</h3>
                     <i class="fas fa-plus"></i>
                 </div>
                 <div class="faq-answer">
-                    <p>Yes, our tool often provides a "creativity level" slider. This allows you to control how much the AI rephrases the text, ranging from subtle changes to more significant rewrites, giving you flexibility over the output style.</p>
+                    <p data-i18n="faq_answer_3">Yes, our tool often provides a "creativity level" slider. This allows you to control how much the AI rephrases the text, ranging from subtle changes to more significant rewrites, giving you flexibility over the output style.</p>
                 </div>
             </div>
         </div>

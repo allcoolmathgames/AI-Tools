@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (abstractOutput && data.abstract) {
                     abstractOutput.value = data.abstract;
                 } else {
-                     throw new Error('Invalid response from server.');
+                    throw new Error('Invalid response from server.');
                 }
 
             } catch (error) {
@@ -74,93 +74,50 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- FAQ Accordion Functionality (for consistency across pages) ---
-    const faqItems = document.querySelectorAll('.faq-item');
+    // --- FAQ Accordion Functionality ---
+    const faqItems = document.querySelectorAll('.faq-item'); //
 
-    faqItems.forEach(item => {
-        const question = item.querySelector('.faq-question');
-        const answer = item.querySelector('.faq-answer');
-        const icon = item.querySelector('.faq-question i');
+    faqItems.forEach(item => { //
+        const question = item.querySelector('.faq-question'); //
+        const answer = item.querySelector('.faq-answer'); //
+        const icon = item.querySelector('.faq-question i'); // Get the icon element
 
-        if (question) {
-            question.addEventListener('click', () => {
-                const currentlyActive = document.querySelector('.faq-item.active');
-                if (currentlyActive && currentlyActive !== item) {
-                    currentlyActive.classList.remove('active');
-                    const otherAnswer = currentlyActive.querySelector('.faq-answer');
-                    const otherIcon = currentlyActive.querySelector('.faq-question i');
-                    if (otherAnswer) otherAnswer.style.maxHeight = "0";
-                    if (otherIcon) {
-                        otherIcon.classList.remove('fa-minus');
-                        otherIcon.classList.add('fa-plus');
+        if (question) { // Ensure question element exists
+            question.addEventListener('click', () => { //
+                // Close other active items
+                const currentlyActive = document.querySelector('.faq-item.active'); //
+                if (currentlyActive && currentlyActive !== item) { //
+                    currentlyActive.classList.remove('active'); //
+                    const otherAnswer = currentlyActive.querySelector('.faq-answer'); //
+                    const otherIcon = currentlyActive.querySelector('.faq-question i'); // Get the other icon
+                    if (otherAnswer) otherAnswer.style.maxHeight = "0"; //
+                    if (otherIcon) { // Ensure otherIcon exists before manipulating
+                        otherIcon.classList.remove('fa-minus'); //
+                        otherIcon.classList.add('fa-plus'); //
                     }
                 }
                 
-                item.classList.toggle('active');
+                // Toggle current item
+                item.classList.toggle('active'); //
 
-                if (item.classList.contains('active')) {
-                    if (answer) {
-                        answer.style.maxHeight = answer.scrollHeight + "px";
+                if (item.classList.contains('active')) { //
+                    if (answer) { //
+                        answer.style.maxHeight = answer.scrollHeight + "px"; //
                     }
-                    if (icon) {
-                        icon.classList.remove('fa-plus');
-                        icon.classList.add('fa-minus');
+                    if (icon) { // Ensure icon exists before manipulating
+                        icon.classList.remove('fa-plus'); //
+                        icon.classList.add('fa-minus'); //
                     }
                 } else {
-                    if (answer) {
-                        answer.style.maxHeight = "0";
+                    if (answer) { //
+                        answer.style.maxHeight = "0"; //
                     }
-                    if (icon) {
-                        icon.classList.remove('fa-minus');
-                        icon.classList.add('fa-plus');
+                    if (icon) { // Ensure icon exists before manipulating
+                        icon.classList.remove('fa-minus'); //
+                        icon.classList.add('fa-plus'); //
                     }
                 }
             });
         }
     });
-});
-
-// --- FAQ Accordion JS ---
-const faqItems = document.querySelectorAll('.faq-item');
-faqItems.forEach(item => {
-    const question = item.querySelector('.faq-question');
-    const answer = item.querySelector('.faq-answer');
-    const icon = item.querySelector('.faq-question i'); // Get the icon element
-
-    if (question) { // Ensure question element exists
-        question.addEventListener('click', () => {
-            // Close other active items
-            const currentlyActive = document.querySelector('.faq-item.active');
-            if (currentlyActive && currentlyActive !== item) {
-                currentlyActive.classList.remove('active');
-                const otherAnswer = currentlyActive.querySelector('.faq-answer');
-                const otherIcon = currentlyActive.querySelector('.faq-question i'); // Get the other icon
-                if (otherAnswer) otherAnswer.style.maxHeight = "0";
-                if (otherIcon) { // Ensure otherIcon exists before manipulating
-                    otherIcon.classList.remove('fa-minus');
-                    otherIcon.classList.add('fa-plus');
-                }
-            }
-            // Toggle current item
-            item.classList.toggle('active');
-
-            if (item.classList.contains('active')) {
-                if (answer) {
-                    answer.style.maxHeight = answer.scrollHeight + "px";
-                }
-                if (icon) { // Ensure icon exists before manipulating
-                    icon.classList.remove('fa-plus');
-                    icon.classList.add('fa-minus');
-                }
-            } else {
-                if (answer) {
-                    answer.style.maxHeight = "0";
-                }
-                if (icon) { // Ensure icon exists before manipulating
-                    icon.classList.remove('fa-minus');
-                    icon.classList.add('fa-plus');
-                }
-            }
-        });
-    }
 });

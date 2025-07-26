@@ -100,7 +100,7 @@ def get_gemini_model():
 # Global model instance to avoid re-initializing on every call
 _essay_generator_model = None
 
-def generate_essay(topic, length="medium", style="formal", keywords=""):
+def generate_essay(topic, length="medium", style="formal", keywords="", target_language="English"): # target_language parameter add kiya
     """Generates essay content using the Gemini model."""
     global _essay_generator_model # Use the global model instance
 
@@ -156,7 +156,7 @@ def generate_essay(topic, length="medium", style="formal", keywords=""):
             return "Error: Gemini model could not be loaded for essay generation."
         
         prompt = (
-            f"Write an essay in English on the topic: '{topic}'.\n" 
+            f"Write an essay in {target_language} on the topic: '{topic}'.\n" # prompt mein target_language use kiya
             f"The essay should be {word_count_target} and written in a {style} style. "
         )
         if keywords:
@@ -181,5 +181,5 @@ def generate_essay(topic, length="medium", style="formal", keywords=""):
             return "Gemini could not generate an essay. Please try a different topic or adjust parameters."
 
     except Exception as e:
-        logging.error(f"Error generating essay with Gemini: {e}", exc_info=True)
+        logging.error(f"Error generating essay with Gemini: {type(e).__name__}: {e}", exc_info=True) # Enhanced error logging
         return f"Error: Essay generation failed with Gemini. Details: {str(e)}"

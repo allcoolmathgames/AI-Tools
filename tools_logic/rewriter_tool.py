@@ -2,8 +2,6 @@ import logging
 import re
 import os
 import nltk
-from nltk.tokenize import sent_tokenize # Assuming this is used elsewhere if NLTK is truly needed
-from nltk.corpus import stopwords # Assuming this is used elsewhere if NLTK is truly needed
 # import json # Not directly used in the provided rewriter_tool logic, but kept if other functions need it
 
 # Configure logging for this module
@@ -54,8 +52,7 @@ def ensure_nltk_data():
         logging.info("NLTK 'punkt' tokenizer is available.")
         
         # Check if 'stopwords' corpus is available
-        nltk.data.find('corpora/stopwords')
-        logging.info("NLTK 'stopwords' corpus is available.")
+        nltk.info("NLTK 'stopwords' corpus is available.")
         
         return True # Indicate success
     except LookupError as e:
@@ -102,7 +99,7 @@ def get_gemini_model():
 # Global model instance for rewrite_article to avoid re-initializing on every call
 _article_rewriter_model = None
 
-def rewrite_article(text, creativity=0.5):
+def rewrite_article(text, creativity=0.5, target_language="English"): # target_language parameter add kiya
     """Rewrites the given text using the Gemini model."""
     global _article_rewriter_model # Use the global model instance
 
@@ -122,7 +119,7 @@ def rewrite_article(text, creativity=0.5):
             return "Error: Gemini model could not be loaded for rewriting."
         
         prompt = (
-            f"Rewrite the following text in English to make it unique and engaging. "
+            f"Rewrite the following text in {target_language} to make it unique and engaging. " # prompt mein target_language use kiya
             f"Adjust the tone and style with a creativity level of {int(creativity*100)}%. "
             f"Maintain the original meaning but rephrase sentences and vocabulary significantly. "
             f"Do not use any markdown formatting, such as **bold**, *italic*, or ##headings. Provide plain text.\n\n"
@@ -148,17 +145,17 @@ def rewrite_article(text, creativity=0.5):
             return "Gemini could not generate rewritten text. Please try different input."
 
     except Exception as e:
-        logging.error(f"Error rewriting text with Gemini: {e}", exc_info=True)
+        logging.error(f"Error rewriting text with Gemini: {type(e).__name__}: {e}", exc_info=True) # Enhanced error logging
         return f"Error: Rewriting failed with Gemini. Details: {str(e)}"
 
 # --- Paraphrasing Tool Logic ---
 # Global model instance for paraphrase_text to avoid re-initializing on every call
 _paraphrasing_tool_model = None # This model variable is not used in the current paraphrase_text, keeping for consistency.
 
-def paraphrase_text(text):
+def paraphrase_text(text, target_language="English"): # target_language parameter add kiya
     """Paraphrases the given text by calling the rewrite_article function."""
     # Paraphrasing for the rewriter tool uses a default creativity level
     # If paraphrase_text needs to use its own model instance for distinct behavior
     # that is not covered by rewrite_article, it should get its own model.
     # For now, it simply calls rewrite_article.
-    return rewrite_article(text, creativity=0.7)
+    return rewrite_article(text, creativity=0.7, target_language=target_language) # Pass target_language

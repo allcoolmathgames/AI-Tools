@@ -100,7 +100,7 @@ def get_gemini_model():
 # Global model instance to avoid re-initializing on every call
 _adjective_generator_model = None
 
-def generate_adjectives(text):
+def generate_adjectives(text, target_language="English"): # target_language parameter add kiya
     """Generates adjectives for a given noun or sentence using the Gemini model."""
     global _adjective_generator_model # Use the global model instance
 
@@ -129,7 +129,7 @@ def generate_adjectives(text):
             }
         }
         prompt = (
-            f"Generate 5-7 relevant and descriptive adjectives in English for the concept or noun in the following text. "
+            f"Generate 5-7 relevant and descriptive adjectives in {target_language} for the concept or noun in the following text. " # prompt mein target_language use kiya
             f"Provide them as a list of single words. Do not use any markdown formatting like **bold**, *italic*, or ##headings. "
             f"Provide the output as a JSON array of objects, where each object has a key 'adjective' and its value is the adjective. Example: [{{'adjective': 'creative'}}, {{'adjective': 'innovative'}}].\n\n"
             f"Text: {text}\n\nAdjectives:"
@@ -153,5 +153,5 @@ def generate_adjectives(text):
         else:
             return ["No adjectives could be generated."]
     except Exception as e:
-        logging.error(f"Error generating adjectives with Gemini: {e}", exc_info=True)
+        logging.error(f"Error generating adjectives with Gemini: {type(e).__name__}: {e}", exc_info=True)
         return [f"Error: Adjective generation failed. Details: {str(e)}"]

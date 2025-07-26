@@ -8,47 +8,51 @@
 <body>
     <footer class="main-footer">
         <div class="section-container footer-container">
+            <!-- Brand Info -->
             <div class="footer-column brand-info">
                 <a href="{{ url_for('index') }}" class="footer-logo">
                     <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Summarizer.AI Logo" class="logo-icon">
-                    SUMMARIZER
+                    <span data-i18n="brand_name">SUMMARIZER</span>
                 </a>
-                <p>
-                    Summarize text online like professional writers with Top Notch AI-Summarizer
-                </p>
+                <p data-i18n="brand_tagline">Summarize text online like professional writers with Top Notch AI-Summarizer</p>
                 <div class="contact-info">
-                    <a href="mailto:support@summarizer.org"><i class="fas fa-envelope"></i> support@summarizer.org</a>
+                    <a href="mailto:support@summarizer.org">
+                        <i class="fas fa-envelope"></i> 
+                        <span data-i18n="contact_email">support@summarizer.org</span>
+                    </a>
                 </div>
             </div>
 
+            <!-- Resources -->
             <div class="footer-column">
-                <h4>RESOURCES</h4>
+                <h4 data-i18n="resources_title">RESOURCES</h4>
                 <ul>
-                    <li><a href="{{ url_for('summarizer_page') }}">Summarizing Tool</a></li>
-                    <li><a href="{{ url_for('blogs_index') }}">Blogs</a></li>
-                    <li><a href="{{ url_for('contact_page') }}">Contact</a></li>
-                    <li><a href="#">API Plan</a></li>
-                    <li><a href="#">API Documentation</a></li>
+                    <li><a href="{{ url_for('summarizer_page') }}" data-i18n="resources_links.summarizing_tool">Summarizing Tool</a></li>
+                    <li><a href="{{ url_for('blogs_index') }}" data-i18n="resources_links.blogs">Blogs</a></li>
+                    <li><a href="{{ url_for('contact_page') }}" data-i18n="resources_links.contact">Contact</a></li>
+                    <li><a href="#" data-i18n="resources_links.api_plan">API Plan</a></li>
+                    <li><a href="#" data-i18n="resources_links.api_documentation">API Documentation</a></li>
                 </ul>
             </div>
 
+            <!-- Quick Links -->
             <div class="footer-column">
-                <h4>QUICK LINKS</h4>
+                <h4 data-i18n="quick_links_title">QUICK LINKS</h4>
                 <ul>
-                    <li><a href="{{ url_for('privacy_policy_page') }}">Privacy Policy</a></li>
-                    <li><a href="{{ url_for('terms_conditions_page') }}">Terms & Conditions</a></li>
-                    {# Refund Policy link removed as per image #}
+                    <li><a href="{{ url_for('privacy_policy_page') }}" data-i18n="quick_links.privacy_policy">Privacy Policy</a></li>
+                    <li><a href="{{ url_for('terms_conditions_page') }}" data-i18n="quick_links.terms_conditions">Terms & Conditions</a></li>
                 </ul>
             </div>
 
+            <!-- Language Selector -->
             <div class="footer-column">
-                <h4>LANGUAGES</h4>
+                <h4 data-i18n="languages_title">LANGUAGES</h4>
                 <div class="language-selector">
                     <select id="langSwitcher" style="background-color: var(--footer-bg-darker);">
                         <option value="en">English</option>
                         <option value="es">Spanish</option>
                         <option value="id">Indonesian</option>
-                        <option value="br">Portuguese (Brazil)</option>
+                        <option value="pt">Portuguese</option>
                         <option value="fr">French</option>
                         <option value="nl">Dutch</option>
                         <option value="it">Italian</option>
@@ -60,9 +64,11 @@
                 </div>
             </div>
         </div>
+
+        <!-- Footer Bottom -->
         <div class="footer-bottom section-container">
             <div class="footer-bottom-content">
-                <p>&copy; <span id="currentYear"></span> Summarizer.AI. All rights reserved.</p>
+                <p>&copy; <span id="currentYear"></span> Summarizer.AI. <span data-i18n="footer_bottom">All rights reserved.</span></p>
                 <div class="social-icons">
                     <a href="https://facebook.com" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
                     <a href="https://twitter.com" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
@@ -75,19 +81,18 @@
 
     <script src="{{ url_for('static', filename='js/language.js') }}"></script>
     <script>
-        // Default script for current year if individual page script is not loaded
-        if (!document.getElementById('currentYearAbstract') && !document.getElementById('currentYearAcronym') &&
-            !document.getElementById('currentYearAdjective') && !document.getElementById('currentYearEmail') &&
-            !document.getElementById('currentYearProductDescription') && !document.getElementById('currentYearSlogan') &&
-            !document.getElementById('currentYearStory') && !document.getElementById('currentYearHumanizer') &&
-            !document.getElementById('currentYearRewriter') && !document.getElementById('currentYearBusinessName') &&
-            !document.getElementById('currentYearConclusion') && !document.getElementById('currentYearContentIdea') &&
-            !document.getElementById('currentYearEmailSubject') && !document.getElementById('currentYearEssay') &&
-            !document.getElementById('currentYearGrammar') && !document.getElementById('currentYearHook') &&
-            !document.getElementById('currentYearParaphrasing') && !document.getElementById('currentYearPlagiarism') &&
-            !document.getElementById('currentYearTitle') && !document.getElementById('currentYearTrendingNews') &&
-            !document.getElementById('currentYearAboutUs') && !document.getElementById('currentYearContact') &&
-            !document.getElementById('currentYearPrivacyPolicy') && !document.getElementById('currentYearTermsConditions')) {
+        // Auto-update footer year if no tool-specific year element exists
+        const yearElements = [
+            'currentYearAbstract','currentYearAcronym','currentYearAdjective','currentYearEmail',
+            'currentYearProductDescription','currentYearSlogan','currentYearStory','currentYearHumanizer',
+            'currentYearRewriter','currentYearBusinessName','currentYearConclusion','currentYearContentIdea',
+            'currentYearEmailSubject','currentYearEssay','currentYearGrammar','currentYearHook',
+            'currentYearParaphrasing','currentYearPlagiarism','currentYearTitle','currentYearTrendingNews',
+            'currentYearAboutUs','currentYearContact','currentYearPrivacyPolicy','currentYearTermsConditions'
+        ];
+
+        const hasSpecificYear = yearElements.some(id => document.getElementById(id));
+        if (!hasSpecificYear) {
             document.getElementById('currentYear').textContent = new Date().getFullYear();
         }
     </script>

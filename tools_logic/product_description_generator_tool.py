@@ -100,7 +100,7 @@ def get_gemini_model():
 # Global model instance to avoid re-initializing on every call
 _product_description_generator_model = None
 
-def generate_product_description(productName, productKeywords, targetAudience, tone="informative"):
+def generate_product_description(productName, productKeywords, targetAudience, tone="informative", target_language="English"): # target_language parameter add kiya
     """Generates a product description using the Gemini model."""
     global _product_description_generator_model # Use the global model instance
 
@@ -120,7 +120,7 @@ def generate_product_description(productName, productKeywords, targetAudience, t
             return "Error: Gemini model could not be loaded for product description generation."
         
         prompt = (
-            f"Generate a compelling product description in English for '{productName}'.\n" 
+            f"Generate a compelling product description in {target_language} for '{productName}'.\n" # prompt mein target_language use kiya
             f"Key features: {productKeywords}\n"
             f"Target audience: {targetAudience}\n"
             f"Desired tone: {tone}.\n\n"
@@ -145,5 +145,5 @@ def generate_product_description(productName, productKeywords, targetAudience, t
             return "Gemini could not generate a product description. Please try different details."
 
     except Exception as e:
-        logging.error(f"Error generating product description with Gemini: {e}", exc_info=True)
+        logging.error(f"Error generating product description with Gemini: {type(e).__name__}: {e}", exc_info=True) # Enhanced error logging
         return f"Error: Product description generation failed with Gemini. Details: {str(e)}"

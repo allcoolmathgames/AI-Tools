@@ -100,7 +100,7 @@ def get_gemini_model():
 # Global model instance to avoid re-initializing on every call
 _hook_generator_model = None
 
-def generate_hooks(topic, tone):
+def generate_hooks(topic, tone, target_language="English"): # target_language parameter add kiya
     """Generates catchy hooks using the Gemini model."""
     global _hook_generator_model # Use the global model instance
 
@@ -129,7 +129,7 @@ def generate_hooks(topic, tone):
             }
         }
         prompt = (
-            f"Generate 3-5 catchy and engaging hooks or opening lines in English for content about '{topic}'. "
+            f"Generate 3-5 catchy and engaging hooks or opening lines in {target_language} for content about '{topic}'. " # prompt mein target_language use kiya
             f"The tone should be '{tone}'. Each hook should grab the reader's attention. "
             f"Do not use any markdown formatting like **bold**, *italic*, or ##headings. "
             f"Provide the output as a JSON array of objects, where each object has a key 'hook' and its value is the hook. Example: [{{'hook': 'Did you know?'}}, {{'hook': 'Imagine a world where...'}}].\n\n"
@@ -153,5 +153,5 @@ def generate_hooks(topic, tone):
         else:
             return ["No hooks could be generated."]
     except Exception as e:
-        logging.error(f"Error generating hooks with Gemini: {e}", exc_info=True)
+        logging.error(f"Error generating hooks with Gemini: {type(e).__name__}: {e}", exc_info=True) # Enhanced error logging
         return [f"Error: Hook generation failed. Details: {str(e)}"]

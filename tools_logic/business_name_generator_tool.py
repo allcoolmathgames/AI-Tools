@@ -100,7 +100,7 @@ def get_gemini_model():
 # Global model instance to avoid re-initializing on every call
 _business_name_generator_model = None
 
-def generate_business_names(keywords, style):
+def generate_business_names(keywords, style, target_language="English"): # target_language parameter add kiya
     """Generates business names using the Gemini model."""
     global _business_name_generator_model # Use the global model instance
 
@@ -129,7 +129,7 @@ def generate_business_names(keywords, style):
             }
         }
         prompt = (
-            f"Generate 5-7 unique, creative, and brandable business names in English related to '{keywords}'. "
+            f"Generate 5-7 unique, creative, and brandable business names in {target_language} related to '{keywords}'. " # prompt mein target_language use kiya
             f"The naming style should be '{style}'. Focus on catchy and memorable ideas. "
             f"Do not use any markdown formatting like **bold**, *italic*, or ##headings. "
             f"Provide the output as a JSON array of objects, where each object has a key 'name' and its value is the business name. Example: [{{'name': 'Innovate Solutions'}}, {{'name': 'Creative Ventures'}}].\n\n"
@@ -153,5 +153,5 @@ def generate_business_names(keywords, style):
         else:
             return ["No business names could be generated."]
     except Exception as e:
-        logging.error(f"Error generating business names with Gemini: {e}", exc_info=True)
+        logging.error(f"Error generating business names with Gemini: {type(e).__name__}: {e}", exc_info=True) # Enhanced error logging
         return [f"Error: Business name generation failed. Details: {str(e)}"]

@@ -100,7 +100,7 @@ def get_gemini_model():
 # Global model instance to avoid re-initializing on every call
 _humanizer_model = None
 
-def humanize_text(text, creativity=0.7):
+def humanize_text(text, creativity=0.7, target_language="English"): # target_language parameter add kiya
     """Humanizes AI-generated text using the Gemini model."""
     global _humanizer_model # Use the global model instance
 
@@ -120,7 +120,7 @@ def humanize_text(text, creativity=0.7):
             return "Error: Gemini model could not be loaded for humanization."
         
         prompt = (
-            f"Please rewrite the following text in a more natural, human-like, and engaging way in English. "
+            f"Please rewrite the following text in a more natural, human-like, and engaging way in {target_language}. " # prompt mein target_language use kiya
             f"Aim for a {int(creativity*100)}% creative flair while maintaining the original meaning. "
             f"Remove any robotic or overly formal phrasing, and inject a natural flow. "
             f"Do not use any markdown formatting, such as **bold**, *italic*, or ##headings. Provide plain text.\n\n"
@@ -146,5 +146,5 @@ def humanize_text(text, creativity=0.7):
             return "Gemini could not generate humanized text. Please try different input."
 
     except Exception as e:
-        logging.error(f"Error humanizing text with Gemini: {e}", exc_info=True)
+        logging.error(f"Error humanizing text with Gemini: {type(e).__name__}: {e}", exc_info=True) # Enhanced error logging
         return f"Error: Humanization failed with Gemini. Details: {str(e)}"

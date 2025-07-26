@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Grammar Checker - Summarizer.ai</title>
-    <meta name="description" content="Correct grammar, spelling, and punctuation errors instantly with our AI Grammar Checker. Improve your writing accuracy and clarity.">
-    <meta name="keywords" content="AI grammar checker, grammar correction, spelling checker, punctuation correction, proofreading tool, writing assistant">
+    <title data-i18n="page_title">AI Grammar Checker - Summarizer.ai</title>
+    <meta data-i18n-content="meta_description" name="description" content="Correct grammar, spelling, and punctuation errors instantly with our AI Grammar Checker. Improve your writing accuracy and clarity.">
+    <meta data-i18n-content="meta_keywords" name="keywords" content="AI grammar checker, grammar correction, spelling checker, punctuation correction, proofreading tool, writing assistant">
     <meta name="robots" content="noindex, nofollow">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -35,153 +35,153 @@
     {% include 'header.html' %}
 
     <section id="grammar-checker-tool" class="section-container">
-        <h1 class="section-heading">AI Grammar Checker</h1>
+        <h1 class="section-heading" data-i18n="section_heading_tool">AI Grammar Checker</h1>
         <div class="tool-container">
             <div class="text-area-group">
-                <label for="inputText">Paste Your Text Here:</label>
-                <textarea id="inputText" placeholder="e.g., 'The quick brown fox jump over the lazy dogs.'"></textarea>
-                <div class="counter"><span id="inputWordCount">0</span> words</div>
+                <label for="inputText" data-i18n="label_input_text">Paste Your Text Here:</label>
+                <textarea id="inputText" data-i18n-placeholder="placeholder_input_text" placeholder="e.g., 'The quick brown fox jump over the lazy dogs.'"></textarea>
+                <div class="counter"><span id="inputWordCount">0</span> <span data-i18n="words_label">words</span></div>
             </div>
             <div class="action-buttons">
-                <button id="checkGrammarBtn" class="primary-button">Check Grammar</button>
+                <button id="checkGrammarBtn" class="primary-button" data-i18n="button_check_grammar">Check Grammar</button>
             </div>
             
             <div class="loader" id="loader"></div>
             <div class="error-message" id="errorMessage"></div>
 
             <div class="output-group">
-                <label for="correctedTextOutput">Corrected Text:</label>
-                <textarea id="correctedTextOutput" readonly placeholder="Your grammatically corrected text will appear here..."></textarea>
-                <div class="counter"><span id="outputWordCount">0</span> words</div>
+                <label for="correctedTextOutput" data-i18n="label_corrected_text_output">Corrected Text:</label>
+                <textarea id="correctedTextOutput" readonly data-i18n-placeholder="placeholder_corrected_text_output" placeholder="Your grammatically corrected text will appear here..."></textarea>
+                <div class="counter"><span id="outputWordCount">0</span> <span data-i18n="words_label">words</span></div>
             </div>
         </div>
     </section>
 
     <section id="grammar-features" class="section-container">
-        <h2 class="section-heading">Why Use Our AI Grammar Checker?</h2>
+        <h2 class="section-heading" data-i18n="section_heading_why_use_tool">Why Use Our AI Grammar Checker?</h2>
         <div class="features-grid">
             <div class="feature-card">
                 <div class="feature-icon">✅</div>
-                <h3>Spotless Grammar</h3>
-                <p>Corrects all types of grammatical errors, from simple typos to complex sentence structures.</p>
+                <h3 data-i18n="feature_title_spotless_grammar">Spotless Grammar</h3>
+                <p data-i18n="feature_description_spotless_grammar">Corrects all types of grammatical errors, from simple typos to complex sentence structures.</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">✨</div>
-                <h3>Enhance Clarity</h3>
-                <p>Improve the readability and professional tone of your writing by eliminating awkward phrasing.</p>
+                <h3 data-i18n="feature_title_enhance_clarity">Enhance Clarity</h3>
+                <p data-i18n="feature_description_enhance_clarity">Improve the readability and professional tone of your writing by eliminating awkward phrasing.</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">⏱️</div>
-                <h3>Instant Proofreading</h3>
-                <p>Get instant corrections and suggestions, saving valuable time on manual proofreading.</p>
+                <h3 data-i18n="feature_title_instant_proofreading">Instant Proofreading</h3>
+                <p data-i18n="feature_description_instant_proofreading">Get instant corrections and suggestions, saving valuable time on manual proofreading.</p>
             </div>
         </div>
     </section>
 
     <section id="how-it-works" class="section-container">
-        <h2 class="section-heading">How To Use the Grammar Checker</h2>
+        <h2 class="section-heading" data-i18n="section_heading_how_to_use">How To Use the Grammar Checker</h2>
         <div class="steps-container">
             <div class="step">
-                <div class="step-number">1</div>
+                <div class="step-number" data-i18n="step_number_1">1</div>
                 <div class="step-text">
-                    <h4>Paste Your Text</h4>
-                    <p>Copy and paste the text you want to check into the input box.</p>
+                    <h4 data-i18n="step_title_1">Paste Your Text</h4>
+                    <p data-i18n="step_description_1">Copy and paste the text you want to check into the input box.</p>
                 </div>
             </div>
             <div class="step">
-                <div class="step-number">2</div>
+                <div class="step-number" data-i18n="step_number_2">2</div>
                 <div class="step-text">
-                    <h4>Check Grammar</h4>
-                    <p>Click the 'Check Grammar' button. Our AI will instantly analyze your text.</p>
+                    <h4 data-i18n="step_title_2">Check Grammar</h4>
+                    <p data-i18n="step_description_2">Click the 'Check Grammar' button. Our AI will instantly analyze your text.</p>
                 </div>
             </div>
             <div class="step">
-                <div class="step-number">3</div>
+                <div class="step-number" data-i18n="step_number_3">3</div>
                 <div class="step-text">
-                    <h4>Review & Correct</h4>
-                    <p>Review the suggested corrections and apply them to make your writing flawless.</p>
+                    <h4 data-i18n="step_title_3">Review & Correct</h4>
+                    <p data-i18n="step_description_3">Review the suggested corrections and apply them to make your writing flawless.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <section id="more-tools" class="section-container">
-        <h2 class="section-heading">Explore Our Other AI Tools</h2>
+        <h2 class="section-heading" data-i18n="section_heading_explore_other_tools">Explore Our Other AI Tools</h2>
         <div class="tools-grid">
             <a href="{{ url_for('ai_story_generator_page') }}" class="tool-card">
                 <div class="tool-icon">📖</div>
-                <h3>AI Story Generator</h3>
-                <p>Generate creative and engaging stories with AI.</p>
+                <h3 data-i18n="tool_ai_story_generator_title">AI Story Generator</h3>
+                <p data-i18n="tool_ai_story_generator_description">Generate creative and engaging stories with AI.</p>
             </a>
             <a href="{{ url_for('ai_product_description_generator_page') }}" class="tool-card">
                 <div class="tool-icon">🛍️</div>
-                <h3>Product Description Generator</h3>
-                <p>Create compelling product descriptions using AI.</p>
+                <h3 data-i18n="tool_product_description_generator_title">Product Description Generator</h3>
+                <p data-i18n="tool_product_description_generator_description">Create compelling product descriptions using AI.</p>
             </a>
             <a href="{{ url_for('essay_generator_page') }}" class="tool-card">
                 <div class="tool-icon">📄</div>
-                <h3>Essay Generator</h3>
-                <p>Generate well-structured essays on any topic with AI.</p>
+                <h3 data-i18n="tool_essay_generator_title">Essay Generator</h3>
+                <p data-i18n="tool_essay_generator_description">Generate well-structured essays on any topic with AI.</p>
             </a>
             <a href="{{ url_for('trending_news_generator_page') }}" class="tool-card">
                 <div class="tool-icon">📰</div>
-                <h3>Trending News Generator</h3>
-                <p>Stay updated with trending news generated by AI.</p>
+                <h3 data-i18n="tool_trending_news_generator_title">Trending News Generator</h3>
+                <p data-i18n="tool_trending_news_generator_description">Stay updated with trending news generated by AI.</p>
             </a>
             <a href="{{ url_for('acronym_generator_page') }}" class="tool-card">
                 <div class="tool-icon">🔠</div>
-                <h3>Acronym Generator</h3>
-                <p>Create acronyms from long phrases instantly.</p>
+                <h3 data-i18n="tool_acronym_generator_title">Acronym Generator</h3>
+                <p data-i18n="tool_acronym_generator_description">Create acronyms from long phrases instantly.</p>
             </a>
             <a href="{{ url_for('abstract_generator_page') }}" class="tool-card">
                 <div class="tool-icon">📑</div>
-                <h3>Abstract Generator</h3>
-                <p>Generate concise abstracts for your research papers.</p>
+                <h3 data-i18n="tool_abstract_generator_title">Abstract Generator</h3>
+                <p data-i18n="tool_abstract_generator_description">Generate concise abstracts for your research papers.</p>
             </a>
         </div>
         <br>
         <div class="text-center">
-            <a href="{{ url_for('tools_index') }}" class="primary-button view-all-tools-button">View All Tools</a>
+            <a href="{{ url_for('tools_index') }}" class="primary-button view-all-tools-button" data-i18n="button_view_all_tools">View All Tools</a>
         </div>
     </section>
 
     <section id="additional-info-section" class="section-container">
-        <h2 class="section-heading">Additional Information</h2>
+        <h2 class="section-heading" data-i18n="section_heading_additional_info">Additional Information</h2>
         <div class="info-text-box">
-            <p>
+            <p data-i18n="info_text_box_paragraph">
                 Here you can add any additional text or information related to this page or tool. For example, the benefits of this tool, or tips for using it.
             </p>
         </div>
     </section>
 
     <section id="faq" class="section-container">
-        <h2 class="section-heading">Frequently Asked Questions</h2>
+        <h2 class="section-heading" data-i18n="section_heading_faq">Frequently Asked Questions</h2>
         <div class="faq-container">
             <div class="faq-item">
                 <div class="faq-question">
-                    <h3>What kind of errors can the Grammar Checker fix?</h3>
+                    <h3 data-i18n="faq_question_1">What kind of errors can the Grammar Checker fix?</h3>
                     <i class="fas fa-plus"></i>
                 </div>
                 <div class="faq-answer">
-                    <p>Our AI Grammar Checker can identify and correct a wide range of errors, including grammatical mistakes, spelling errors, punctuation issues, and even suggest improvements for clarity, conciseness, and overall writing style.</p>
+                    <p data-i18n="faq_answer_1">Our AI Grammar Checker can identify and correct a wide range of errors, including grammatical mistakes, spelling errors, punctuation issues, and even suggest improvements for clarity, conciseness, and overall writing style.</p>
                 </div>
             </div>
             <div class="faq-item">
                 <div class="faq-question">
-                    <h3>Is it suitable for academic writing?</h3>
+                    <h3 data-i18n="faq_question_2">Is it suitable for academic writing?</h3>
                     <i class="fas fa-plus"></i>
                 </div>
                 <div class="faq-answer">
-                    <p>Yes, the tool is highly beneficial for academic writing. It helps students and researchers ensure their papers are grammatically correct and polished, improving their academic standing and the clarity of their arguments.</p>
+                    <p data-i18n="faq_answer_2">Yes, the tool is highly beneficial for academic writing. It helps students and researchers ensure their papers are grammatically correct and polished, improving their academic standing and the clarity of their arguments.</p>
                 </div>
             </div>
             <div class="faq-item">
                 <div class="faq-question">
-                    <h3>Does it work in different languages?</h3>
+                    <h3 data-i18n="faq_question_3">Does it work in different languages?</h3>
                     <i class="fas fa-plus"></i>
                 </div>
                 <div class="faq-answer">
-                    <p>Currently, our primary focus is on English grammar and writing style. We are continuously working to expand language support to provide comprehensive grammar checking capabilities in more languages in the future.</p>
+                    <p data-i18n="faq_answer_3">Currently, our primary focus is on English grammar and writing style. We are continuously working to expand language support to provide comprehensive grammar checking capabilities in more languages in the future.</p>
                 </div>
             </div>
         </div>

@@ -100,7 +100,7 @@ def get_gemini_model():
 # Global model instance to avoid re-initializing on every call
 _story_generator_model = None
 
-def generate_story(topic, genre, characters):
+def generate_story(topic, genre, characters, target_language="English"): # target_language parameter add kiya
     """Generates a short story using the Gemini model."""
     global _story_generator_model # Use the global model instance
 
@@ -123,7 +123,7 @@ def generate_story(topic, genre, characters):
             return "Error: Gemini model could not be loaded for story generation."
         
         prompt = (
-            f"Write {word_count_target} in the '{genre}' genre. Ensure the entire story is written in English.\n" 
+            f"Write {word_count_target} in the '{genre}' genre. Ensure the entire story is written in {target_language}.\n" # prompt mein target_language use kiya
             f"Main characters: {characters}\n"
             f"Plot elements: {topic}\n"
             f"Develop an engaging narrative with a clear beginning, middle, and end. "
@@ -147,5 +147,5 @@ def generate_story(topic, genre, characters):
             return "Gemini could not generate a story. Please try different inputs."
 
     except Exception as e:
-        logging.error(f"Error generating story with Gemini: {e}", exc_info=True)
+        logging.error(f"Error generating story with Gemini: {type(e).__name__}: {e}", exc_info=True) # Enhanced error logging
         return f"Error: Story generation failed with Gemini. Details: {str(e)}"

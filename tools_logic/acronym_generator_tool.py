@@ -1,6 +1,6 @@
-import logging
-import re
 import os
+import re
+import logging
 import nltk
 import json
 
@@ -100,8 +100,8 @@ def get_gemini_model():
 # Global model instance to avoid re-initializing on every call
 _acronym_generator_model = None
 
-def generate_acronym(text):
-    """Generates a concise acronym in English from the given phrase or text using the Gemini model."""
+def generate_acronym(text, target_language="English"): # target_language parameter add kiya
+    """Generates a concise acronym in the specified language from the given phrase or text using the Gemini model."""
     global _acronym_generator_model # Use the global model instance
 
     if not GEMINI_API_AVAILABLE:
@@ -120,7 +120,7 @@ def generate_acronym(text):
             return "Error: Gemini model could not be loaded for acronym generation."
 
         prompt = (
-            f"Generate a concise acronym in English from the following phrase or text. "
+            f"Generate a concise acronym in {target_language} from the following phrase or text. " # prompt mein target_language use kiya
             f"Only use the first letter of each significant word. Exclude common words like 'a', 'an', 'the', 'of', 'for'. "
             f"Provide only the acronym itself, without any additional text or explanations. Do not use any markdown formatting like **bold**, *italic*, or ##headings.\n\n"
             f"Text: {text}\n\nAcronym:"
@@ -142,6 +142,38 @@ def generate_acronym(text):
         else:
             return "N/A" # Default if Gemini does not generate
     except Exception as e:
-        error_message = f"An error occurred while generating acronym with Gemini: {e}"
+        error_message = f"An error occurred while generating acronym with Gemini: {type(e).__name__}: {e}" # Enhanced error logging
         logging.error(error_message, exc_info=True)
         return f"Error: {error_message}"
+
+if __name__ == '__main__':
+    # Example Usage:
+    # Set your GOOGLE_API_KEY environment variable before running this directly
+    # os.environ["GOOGLE_API_KEY"] = "YOUR_GEMINI_API_KEY"
+
+    sample_text_en = "Artificial Intelligence for Natural Language Processing"
+    sample_text_de = "Künstliche Intelligenz für die Verarbeitung natürlicher Sprache"
+    
+    generated_acronym_en = generate_acronym(sample_text_en, target_language="English")
+    print("--- Generated Acronym (English) ---")
+    print(generated_acronym_en)
+    print("--------------------------")
+
+    generated_acronym_de = generate_acronym(sample_text_de, target_language="German")
+    print("\n--- Generated Acronym (German) ---")
+    print(generated_acronym_de)
+    print("---------------------------------")
+
+
+    # Example with missing API key
+    original_api_key = os.getenv("GOOGLE_API_KEY")
+    if original_api_key:
+        del os.environ["GOOGLE_API_KEY"] # Temporarily unset for test
+    
+    generated_acronym_no_key = generate_acronym(sample_text_en, target_language="English")
+    print("\n--- Generated Acronym (No API Key) ---")
+    print(generated_acronym_no_key)
+    print("---------------------------------------")
+
+    if original_api_key:
+        os.environ["GOOGLE_API_KEY"] = original_api_key # Restore API key

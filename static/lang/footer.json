@@ -1,0 +1,222 @@
+{
+  "en": {
+    "brand_name": "SUMMARIZER",
+    "brand_tagline": "Summarize text online like professional writers with Top Notch AI-Summarizer",
+    "contact_email": "support@summarizer.org",
+    "resources_title": "RESOURCES",
+    "resources_links": {
+      "summarizing_tool": "Summarizing Tool",
+      "blogs": "Blogs",
+      "contact": "Contact",
+      "api_plan": "API Plan",
+      "api_documentation": "API Documentation"
+    },
+    "quick_links_title": "QUICK LINKS",
+    "quick_links": {
+      "privacy_policy": "Privacy Policy",
+      "terms_conditions": "Terms & Conditions"
+    },
+    "languages_title": "LANGUAGES",
+    "footer_bottom": "All rights reserved."
+  },
+  "es": {
+    "brand_name": "SUMMARIZER",
+    "brand_tagline": "Resume texto en línea como escritores profesionales con nuestro resumidor de IA de primera categoría",
+    "contact_email": "support@summarizer.org",
+    "resources_title": "RECURSOS",
+    "resources_links": {
+      "summarizing_tool": "Herramienta de Resumen",
+      "blogs": "Blogs",
+      "contact": "Contacto",
+      "api_plan": "Plan de API",
+      "api_documentation": "Documentación de API"
+    },
+    "quick_links_title": "ENLACES RÁPIDOS",
+    "quick_links": {
+      "privacy_policy": "Política de Privacidad",
+      "terms_conditions": "Términos y Condiciones"
+    },
+    "languages_title": "IDIOMAS",
+    "footer_bottom": "Todos los derechos reservados."
+  },
+  "id": {
+    "brand_name": "SUMMARIZER",
+    "brand_tagline": "Ringkas teks online seperti penulis profesional dengan Perangkum AI Top Notch",
+    "contact_email": "support@summarizer.org",
+    "resources_title": "SUMBER DAYA",
+    "resources_links": {
+      "summarizing_tool": "Alat Perangkum",
+      "blogs": "Blog",
+      "contact": "Kontak",
+      "api_plan": "Paket API",
+      "api_documentation": "Dokumentasi API"
+    },
+    "quick_links_title": "TAUTAN CEPAT",
+    "quick_links": {
+      "privacy_policy": "Kebijakan Privasi",
+      "terms_conditions": "Syarat & Ketentuan"
+    },
+    "languages_title": "BAHASA",
+    "footer_bottom": "Semua hak dilindungi undang-undang."
+  },
+  "br": {
+    "brand_name": "SUMMARIZER",
+    "brand_tagline": "Resuma texto online como escritores profissionais com o Summarizer de IA de ponta",
+    "contact_email": "support@summarizer.org",
+    "resources_title": "RECURSOS",
+    "resources_links": {
+      "summarizing_tool": "Ferramenta de Resumo",
+      "blogs": "Blogs",
+      "contact": "Contato",
+      "api_plan": "Plano de API",
+      "api_documentation": "Documentação da API"
+    },
+    "quick_links_title": "LINKS RÁPIDOS",
+    "quick_links": {
+      "privacy_policy": "Política de Privacidade",
+      "terms_conditions": "Termos e Condições"
+    },
+    "languages_title": "IDIOMAS",
+    "footer_bottom": "Todos os direitos reservados."
+  },
+  "fr": {
+    "brand_name": "SUMMARIZER",
+    "brand_tagline": "Résumez du texte en ligne comme des écrivains professionnels avec notre outil de résumé IA de premier ordre",
+    "contact_email": "support@summarizer.org",
+    "resources_title": "RESSOURCES",
+    "resources_links": {
+      "summarizing_tool": "Outil de Résumé",
+      "blogs": "Blogs",
+      "contact": "Contact",
+      "api_plan": "Plan API",
+      "api_documentation": "Documentation API"
+    },
+    "quick_links_title": "LIENS RAPIDES",
+    "quick_links": {
+      "privacy_policy": "Politique de Confidentialité",
+      "terms_conditions": "Termes & Conditions"
+    },
+    "languages_title": "LANGUES",
+    "footer_bottom": "Tous droits réservés."
+  },
+  "nl": {
+    "brand_name": "SUMMARIZER",
+    "brand_tagline": "Vat tekst online samen als professionele schrijvers met de Top Notch AI-Samenvatter",
+    "contact_email": "support@summarizer.org",
+    "resources_title": "BRONNEN",
+    "resources_links": {
+      "summarizing_tool": "Samenvatting Tool",
+      "blogs": "Blogs",
+      "contact": "Contact",
+      "api_plan": "API Plan",
+      "api_documentation": "API Documentatie"
+    },
+    "quick_links_title": "SNELLE LINKS",
+    "quick_links": {
+      "privacy_policy": "Privacybeleid",
+      "terms_conditions": "Algemene Voorwaarden"
+    },
+    "languages_title": "TALEN",
+    "footer_bottom": "Alle rechten voorbehouden."
+  },
+  "it": {
+    "brand_name": "SUMMARIZER",
+    "brand_tagline": "Riassumi testi online come scrittori professionisti con il Riassuntore AI Top Notch",
+    "contact_email": "support@summarizer.org",
+    "resources_title": "RISORSE",
+    "resources_links": {
+      "summarizing_tool": "Strumento di Riassunto",
+      "blogs": "Blog",
+      "contact": "Contatti",
+      "api_plan": "Piano API",
+      "api_documentation": "Documentazione API"
+    },
+    "quick_links_title": "LINK RAPIDI",
+    "quick_links": {
+      "privacy_policy": "Informativa sulla Privacy",
+      "terms_conditions": "Termini e Condizioni"
+    },
+    "languages_title": "LINGUE",
+    "footer_bottom": "Tutti i diritti riservati."
+  },
+  "de": {
+    "brand_name": "SUMMARIZER",
+    "brand_tagline": "Fassen Sie Texte online zusammen wie professionelle Autoren mit dem Top Notch KI-Zusammenfasser",
+    "contact_email": "support@summarizer.org",
+    "resources_title": "RESSOURCEN",
+    "resources_links": {
+      "summarizing_tool": "Zusammenfassungstool",
+      "blogs": "Blogs",
+      "contact": "Kontakt",
+      "api_plan": "API-Plan",
+      "api_documentation": "API-Dokumentation"
+    },
+    "quick_links_title": "SCHNELLE LINKS",
+    "quick_links": {
+      "privacy_policy": "Datenschutzbestimmungen",
+      "terms_conditions": "Allgemeine Geschäftsbedingungen"
+    },
+    "languages_title": "SPRACHEN",
+    "footer_bottom": "Alle Rechte vorbehalten."
+  },
+  "ru": {
+    "brand_name": "SUMMARIZER",
+    "brand_tagline": "Суммируйте текст онлайн как профессиональные писатели с помощью высококлассного ИИ-суммаризатора",
+    "contact_email": "support@summarizer.org",
+    "resources_title": "РЕСУРСЫ",
+    "resources_links": {
+      "summarizing_tool": "Инструмент суммирования",
+      "blogs": "Блоги",
+      "contact": "Контакты",
+      "api_plan": "План API",
+      "api_documentation": "Документация API"
+    },
+    "quick_links_title": "БЫСТРЫЕ ССЫЛКИ",
+    "quick_links": {
+      "privacy_policy": "Политика конфиденциальности",
+      "terms_conditions": "Условия и положения"
+    },
+    "languages_title": "ЯЗЫКИ",
+    "footer_bottom": "Все права защищены."
+  },
+  "ar": {
+    "brand_name": "ملخص",
+    "brand_tagline": "لخص النص عبر الإنترنت مثل الكتاب المحترفين باستخدام ملخص الذكاء الاصطناعي عالي الجودة",
+    "contact_email": "support@summarizer.org",
+    "resources_title": "الموارد",
+    "resources_links": {
+      "summarizing_tool": "أداة التلخيص",
+      "blogs": "المدونات",
+      "contact": "اتصل",
+      "api_plan": "خطة API",
+      "api_documentation": "وثائق API"
+    },
+    "quick_links_title": "روابط سريعة",
+    "quick_links": {
+      "privacy_policy": "سياسة الخصوصية",
+      "terms_conditions": "الشروط والأحكام"
+    },
+    "languages_title": "اللغات",
+    "footer_bottom": "جميع الحقوق محفوظة."
+  },
+  "vi": {
+    "brand_name": "SUMMARIZER",
+    "brand_tagline": "Tóm tắt văn bản trực tuyến như các nhà văn chuyên nghiệp với Trình tóm tắt AI hàng đầu",
+    "contact_email": "support@summarizer.org",
+    "resources_title": "TÀI NGUYÊN",
+    "resources_links": {
+      "summarizing_tool": "Công cụ tóm tắt",
+      "blogs": "Blog",
+      "contact": "Liên hệ",
+      "api_plan": "Gói API",
+      "api_documentation": "Tài liệu API"
+    },
+    "quick_links_title": "LIÊN KẾT NHANH",
+    "quick_links": {
+      "privacy_policy": "Chính sách bảo mật",
+      "terms_conditions": "Điều khoản & Điều kiện"
+    },
+    "languages_title": "NGÔN NGỮ",
+    "footer_bottom": "Mọi quyền được bảo lưu."
+  }
+}

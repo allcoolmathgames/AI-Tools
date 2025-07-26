@@ -100,7 +100,7 @@ def get_gemini_model():
 # Global model instance to avoid re-initializing on every call
 _trending_news_generator_model = None
 
-def generate_trending_news(keywords, category, num_articles):
+def generate_trending_news(keywords, category, num_articles, target_language="English"): # target_language parameter add kiya
     """Generates trending news summaries using the Gemini model."""
     global _trending_news_generator_model # Use the global model instance
 
@@ -120,7 +120,7 @@ def generate_trending_news(keywords, category, num_articles):
             return "Error: Gemini model could not be loaded for trending news generation."
         
         prompt = (
-            f"Provide a concise summary of {num_articles} trending news articles in English. "
+            f"Provide a concise summary of {num_articles} trending news articles in {target_language}. " # prompt mein target_language use kiya
         )
         if keywords:
             prompt += f"Focus on topics related to '{keywords}'. "
@@ -146,5 +146,5 @@ def generate_trending_news(keywords, category, num_articles):
             return "Gemini could not generate trending news summary. Please try different keywords."
 
     except Exception as e:
-        logging.error(f"Error generating trending news summary with Gemini: {e}", exc_info=True)
+        logging.error(f"Error generating trending news summary with Gemini: {type(e).__name__}: {e}", exc_info=True) # Enhanced error logging
         return f"Error: Trending news summary generation failed with Gemini. Details: {str(e)}"

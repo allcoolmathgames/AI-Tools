@@ -1,11 +1,13 @@
 import os
 import logging
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify, render_template, redirect, abort
 from flask_cors import CORS
 from langdetect import detect, LangDetectException
 
 # Import specific functions from the new modular tool files
 # Ensure these files exist in your 'tools_logic' folder.
+# NOTE: The 'NLTK data check failed' error in logs indicates an issue within these imported tool_logic files
+#       where nltk.info is being used. This needs to be fixed inside those individual tool files.
 from tools_logic.summarizer_tool import summarize_text
 from tools_logic.rewriter_tool import rewrite_article, paraphrase_text
 from tools_logic.plagiarism_ai_checker_tool import check_plagiarism_and_ai
@@ -37,175 +39,249 @@ CORS(app)
 
 # ==============================================================================
 # HTML Page Routes: Define routes for serving HTML templates to the user
+# All routes are modified to accept an optional language code prefix
 # ==============================================================================
 
-# ==============================================================================
-# Language-based Routes
-# ==============================================================================
-from flask import redirect
-
-SUPPORTED_LANGUAGES = ["en", "es", "id", "br", "fr", "nl", "it", "de", "ru", "ar", "vi"]
-
-@app.route('/<lang>/')
-def localized_index(lang):
-    """Redirects to localized index if language is supported."""
-    if lang in SUPPORTED_LANGUAGES:
-        return render_template('summarizer/index.html', lang=lang)
-    return redirect('/')
+SUPPORTED_LANGUAGES = ["en", "es", "id", "pt", "fr", "nl", "it", "de", "ru", "ar", "vi"] # 'br' changed to 'pt' for consistency
 
 
-@app.route('/')
-def index():
+# Mapping of tool URLs to their template paths
+TOOL_TEMPLATE_MAP = {
+    'summarizer': 'summarizer/index.html',
+    'article-rewriter': 'article_rewriter/index.html',
+    'plagiarism-checker': 'plagiarism_checker/index.html',
+    'paraphrasing-tool': 'paraphrasing_tool/index.html',
+    'content-idea-generator': 'content_idea_generator/index.html',
+    'slogan-generator': 'slogan_generator/index.html',
+    'ai-text-to-humanize': 'ai_text_to_humanize/index.html',
+    'ai-email-generator': 'ai_email_generator/index.html',
+    'grammar-checker': 'grammar_checker/index.html',
+    'ai-story-generator': 'ai_story_generator/index.html',
+    'ai-product-description-generator': 'ai_product_description_generator/index.html',
+    'essay-generator': 'essay_generator/index.html',
+    'trending-news-generator': 'trending_news_generator/index.html',
+    'acronym-generator': 'acronym_generator/index.html',
+    'abstract-generator': 'abstract_generator/index.html',
+    'adjective-generator': 'adjective_generator/index.html',
+    'hook-generator': 'hook_generator/index.html',
+    'title-generator': 'title_generator/index.html',
+    'conclusion-generator': 'conclusion_generator/index.html',
+    'business-name-generator': 'business_name_generator/index.html',
+    'email-subject-line-generator': 'email_subject_line_generator/index.html',
+    'tools': 'tools/index.html' # Explicitly added for the All Tools page
+}
+
+# Mapping of language codes to full names for display/detection
+LANGUAGE_CODE_TO_NAME = {
+    "en": "English",
+    "es": "Spanish",
+    "id": "Indonesian",
+    "pt": "Portuguese", # 'br' is typically for Portuguese (Brazil), 'pt' for general Portuguese
+    "fr": "French",
+    "nl": "Dutch",
+    "it": "Italian",
+    "de": "German",
+    "ru": "Russian",
+    "ar": "Arabic",
+    "vi": "Vietnamese",
+    "ur": "Urdu", # Example additional language
+    "zh-cn": "Chinese (Simplified)", # Example additional language
+    "ja": "Japanese",
+    "ko": "Korean", # Example additional language
+    # Add more mappings as needed
+}
+
+def get_request_language(text_to_detect):
+    """Detects the language of the given text, returns full language name, defaults to English if detection fails."""
+    if not text_to_detect or len(text_to_detect.strip()) < 20: # Ensure stripping whitespace and sufficient length for detection
+        logging.info("Text too short or empty for reliable language detection, defaulting to English.")
+        return "English"
+    try:
+        detected_code = detect(text_to_detect)
+        # Return full language name if mapped, otherwise return the code or default to English
+        full_language_name = LANGUAGE_CODE_TO_NAME.get(detected_code, detected_code)
+        logging.info(f"Detected language code: {detected_code}, Full language name: {full_language_name}")
+        return full_language_name
+    except LangDetectException as e:
+        logging.warning(f"Could not detect language for text: {e}. Defaulting to English.")
+        return "English"
+    except Exception as e:
+        logging.error(f"An unexpected error occurred during language detection: {e}. Defaulting to English.")
+        return "English"
+
+
+# Consolidated route decorator for all HTML pages
+# This decorator adds two routes for each view function: one with a language prefix and one without.
+def route_with_language(path):
+    def decorator(f):
+        # Register the route with a language code prefix
+        app.add_url_rule(f'/<lang_code>{path}', endpoint=f.__name__, view_func=f)
+        # Register the route without a language code prefix (for default language)
+        app.add_url_rule(path, endpoint=f.__name__, view_func=f)
+        return f # Return the original function
+    return decorator
+
+# Apply the consolidated decorator to all page routes
+@route_with_language('/')
+def index(lang_code=None):
     """Renders the main index page (AI Summarizer tool)."""
     return render_template('summarizer/index.html')
 
-@app.route('/summarizer')
-def summarizer_page():
+@route_with_language('/summarizer')
+def summarizer_page(lang_code=None):
     """Renders the AI Summarizer tool page."""
     return render_template('summarizer/index.html')
 
-@app.route('/article-rewriter')
-def article_rewriter_page():
+@route_with_language('/article-rewriter')
+def article_rewriter_page(lang_code=None):
     """Renders the Article Rewriter tool page."""
     return render_template('article_rewriter/index.html')
 
-@app.route('/plagiarism-checker')
-def plagiarism_checker_page():
+@route_with_language('/plagiarism-checker')
+def plagiarism_checker_page(lang_code=None):
     """Renders the Plagiarism Checker tool page."""
     return render_template('plagiarism_checker/index.html')
 
-@app.route('/paraphrasing-tool')
-def paraphrasing_tool_page():
+@route_with_language('/paraphrasing-tool')
+def paraphrasing_tool_page(lang_code=None):
     """Renders the Paraphrasing Tool page."""
     return render_template('paraphrasing_tool/index.html')
 
-@app.route('/content-idea-generator')
-def content_idea_generator_page():
+@route_with_language('/content-idea-generator')
+def content_idea_generator_page(lang_code=None):
     """Renders the Content Idea Generator tool page."""
     return render_template('content_idea_generator/index.html')
 
-@app.route('/slogan-generator')
-def slogan_generator_page():
+@route_with_language('/slogan-generator')
+def slogan_generator_page(lang_code=None):
     """Renders the Slogan Generator tool page."""
     return render_template('slogan_generator/index.html')
 
-@app.route('/ai-text-to-humanize')
-def ai_humanizer_page():
+@route_with_language('/ai-text-to-humanize')
+def ai_humanizer_page(lang_code=None):
     """Renders the AI Text Humanizer tool page."""
     return render_template('ai_text_to_humanize/index.html')
 
-@app.route('/ai-email-generator')
-def ai_email_generator_page():
+@route_with_language('/ai-email-generator')
+def ai_email_generator_page(lang_code=None):
     """Renders the AI Email Generator tool page."""
     return render_template('ai_email_generator/index.html')
 
-@app.route('/grammar-checker')
-def grammar_checker_page():
+@route_with_language('/grammar-checker')
+def grammar_checker_page(lang_code=None):
     """Renders the Grammar Checker tool page."""
     return render_template('grammar_checker/index.html')
 
-@app.route('/ai-story-generator')
-def ai_story_generator_page():
+@route_with_language('/ai-story-generator')
+def ai_story_generator_page(lang_code=None):
     """Renders the AI Story Generator tool page."""
     return render_template('ai_story_generator/index.html')
 
-@app.route('/ai-product-description-generator')
-def ai_product_description_generator_page():
+@route_with_language('/ai-product-description-generator')
+def ai_product_description_generator_page(lang_code=None):
     """Renders the AI Product Description Generator tool page."""
     return render_template('ai_product_description_generator/index.html')
 
-@app.route('/essay-generator')
-def essay_generator_page():
+@route_with_language('/essay-generator')
+def essay_generator_page(lang_code=None):
     """Renders the Essay Generator tool page."""
     return render_template('essay_generator/index.html')
 
-@app.route('/trending-news-generator')
-def trending_news_generator_page():
+@route_with_language('/trending-news-generator')
+def trending_news_generator_page(lang_code=None):
     """Renders the Trending News Generator tool page."""
     return render_template('trending_news_generator/index.html')
 
-@app.route('/acronym-generator')
-def acronym_generator_page():
+@route_with_language('/acronym-generator')
+def acronym_generator_page(lang_code=None):
     """Renders the Acronym Generator tool page."""
     return render_template('acronym_generator/index.html')
 
-@app.route('/abstract-generator')
-def abstract_generator_page():
+@route_with_language('/abstract-generator')
+def abstract_generator_page(lang_code=None):
     """Renders the Abstract Generator tool page."""
     return render_template('abstract_generator/index.html')
 
-@app.route('/adjective-generator')
-def adjective_generator_page():
+@route_with_language('/adjective-generator')
+def adjective_generator_page(lang_code=None):
     """Renders the Adjective Generator tool page."""
     return render_template('adjective_generator/index.html')
 
-@app.route('/hook-generator')
-def hook_generator_page():
+@route_with_language('/hook-generator')
+def hook_generator_page(lang_code=None):
     """Renders the Hook Generator tool page."""
     return render_template('hook_generator/index.html')
 
-@app.route('/title-generator')
-def title_generator_page():
+@route_with_language('/title-generator')
+def title_generator_page(lang_code=None):
     """Renders the Title Generator tool page."""
     return render_template('title_generator/index.html')
 
-@app.route('/conclusion-generator')
-def conclusion_generator_page():
+@route_with_language('/conclusion-generator')
+def conclusion_generator_page(lang_code=None):
     """Renders the Conclusion Generator tool page."""
     return render_template('conclusion_generator/index.html')
 
-@app.route('/business-name-generator')
-def business_name_generator_page():
+@route_with_language('/business-name-generator')
+def business_name_generator_page(lang_code=None):
     """Renders the Business Name Generator tool page."""
     return render_template('business_name_generator/index.html')
 
+<<<<<<< HEAD
 @app.route('/email_subject_line_generator')
 def email_subject_line_generator_page():
+=======
+@route_with_language('/email-subject-line-generator')
+def email_subject_line_generator_page(lang_code=None):
+>>>>>>> 96c44dd (Localization with final working)
     """Renders the Email Subject Line Generator tool page."""
     return render_template('email_subject_line_generator/index.html')
 
-# --- New Static Pages Routes ---
-@app.route('/about-us')
-def about_us_page():
+# --- Static Pages Routes ---
+@route_with_language('/about-us')
+def about_us_page(lang_code=None):
     """Renders the About Us page."""
     return render_template('pages/about_us.html')
 
-@app.route('/contact')
-def contact_page():
+@route_with_language('/contact')
+def contact_page(lang_code=None):
     """Renders the Contact Us page."""
     return render_template('pages/contact.html')
 
-@app.route('/privacy-policy')
-def privacy_policy_page():
+@route_with_language('/privacy-policy')
+def privacy_policy_page(lang_code=None):
     """Renders the Privacy Policy page."""
     return render_template('pages/privacy_policy.html')
 
-@app.route('/terms-conditions')
-def terms_conditions_page():
+@route_with_language('/terms-conditions')
+def terms_conditions_page(lang_code=None):
     """Renders the Terms & Conditions page."""
     return render_template('pages/terms_conditions.html')
 
-@app.route('/tools/')
-def tools_index():
+@route_with_language('/tools/')
+def tools_index(lang_code=None):
     """Renders the main tools listing page."""
     return render_template('tools/index.html')
-# --- New Static Pages Routes End ---
+# --- End Static Pages Routes ---
 
-# --- Blog Routes (Yeh routes aapki app.py mein pehle se maujood hain aur sahi hain) ---
-@app.route('/blogs/')
-def blogs_index():
+# --- Blog Routes ---
+@route_with_language('/blogs/')
+def blogs_index(lang_code=None):
     """Renders the main blog listing page."""
     return render_template('blogs/index.html')
 
-@app.route('/blogs/<string:slug>.html')
-def blog_post(slug):
+# Individual blog post routes also need to handle optional language code
+@route_with_language('/blogs/<string:slug>.html')
+def blog_post(slug, lang_code=None):
     """Renders individual blog post based on slug."""
     try:
+        # Construct path dynamically, assuming blogs templates are inside a 'blogs' folder
+        # and blog slug matches filename (e.g., 'how_to_write_better_summaries_with_ai.html')
         return render_template(f'blogs/{slug}.html')
     except Exception as e:
-        # Agar blog post file na mile, to 404 error page dikha sakte hain
+        logging.error(f"Error rendering blog post {slug}: {e}")
         return render_template('404.html'), 404 # Assuming you have a 404.html template
-# --- Blog Routes End ---
+# --- End Blog Routes ---
 
 # ==============================================================================
 # Helper for Language Detection (Updated to return full language names)
@@ -270,6 +346,10 @@ def summarize_api():
     detected_language = get_request_language(text) # Language Detection
 
     try:
+<<<<<<< HEAD
+=======
+        # Assuming summarize_text accepts 'language' as a parameter
+>>>>>>> 96c44dd (Localization with final working)
         summary = summarize_text(text, length_ratio, detected_language)
         if str(summary).startswith("Error:"):
             logging.error(f"Summarization API call failed: {summary}")
@@ -297,7 +377,12 @@ def rewrite_api():
         return jsonify({"rewritten_text": "", "error": "Please provide text to rewrite."}), 400
 
     try:
+<<<<<<< HEAD
         rewritten_text = rewrite_article(text, creativity, detected_language) # Pass language
+=======
+        # Assuming rewrite_article accepts 'language' as a parameter
+        rewritten_text = rewrite_article(text, creativity, detected_language)
+>>>>>>> 96c44dd (Localization with final working)
         if str(rewritten_text).startswith("Error:"):
             logging.error(f"Rewriting API call failed: {rewritten_text}")
             return jsonify({"rewritten_text": "", "error": rewritten_text}), 500
@@ -324,7 +409,12 @@ def humanize_api():
         return jsonify({"humanized_text": "", "error": "Please provide text to humanize."}), 400
 
     try:
+<<<<<<< HEAD
         humanized_text = humanize_text(text, creativity, detected_language) # Pass language
+=======
+        # Assuming humanize_text accepts 'language' as a parameter
+        humanized_text = humanize_text(text, creativity, detected_language)
+>>>>>>> 96c44dd (Localization with final working)
         if str(humanized_text).startswith("Error:"):
             logging.error(f"Humanization API call failed: {humanized_text}")
             return jsonify({"humanized_text": "", "error": humanized_text}), 500
@@ -354,7 +444,12 @@ def generate_email_api():
         return jsonify({"generated_email": "", "error": "Please provide either a subject or purpose for the email."}), 400
 
     try:
+<<<<<<< HEAD
         email_content = generate_email(subject, purpose, recipient, detected_language) # Pass language
+=======
+        # Assuming generate_email accepts 'language' as a parameter
+        email_content = generate_email(subject, purpose, recipient, detected_language)
+>>>>>>> 96c44dd (Localization with final working)
         if str(email_content).startswith("Error:"):
             logging.error(f"Email generation API call failed: {email_content}")
             return jsonify({"generated_email": "", "error": email_content}), 500
@@ -380,7 +475,12 @@ def generate_content_ideas_api():
         return jsonify({"content_ideas": [], "error": "Please provide keywords for content ideas."}), 400
 
     try:
+<<<<<<< HEAD
         content_ideas = generate_content_ideas(keywords, detected_language) # Pass language
+=======
+        # Assuming generate_content_ideas accepts 'language' as a parameter
+        content_ideas = generate_content_ideas(keywords, detected_language)
+>>>>>>> 96c44dd (Localization with final working)
         if isinstance(content_ideas, str) and content_ideas.startswith("Error:"):
             logging.error(f"Content idea generation API call failed: {content_ideas}")
             return jsonify({"content_ideas": [], "error": content_ideas}), 500
@@ -408,7 +508,12 @@ def paraphrase_api():
         return jsonify({"paraphrased_text": "", "error": "Please provide text to paraphrase."}), 400
 
     try:
+<<<<<<< HEAD
         paraphrased_text = paraphrase_text(text, detected_language) # Pass language
+=======
+        # Assuming paraphrase_text accepts 'language' as a parameter
+        paraphrased_text = paraphrase_text(text, detected_language)
+>>>>>>> 96c44dd (Localization with final working)
         if str(paraphrased_text).startswith("Error:"):
             logging.error(f"Paraphrasing API call failed: {paraphrased_text}")
             return jsonify({"paraphrased_text": "", "error": paraphrased_text}), 500
@@ -433,7 +538,12 @@ def check_grammar_api():
         return jsonify({"corrected_text": "", "error": "Please provide text to check grammar."}), 400
 
     try:
+<<<<<<< HEAD
         corrected_text = check_grammar(text, detected_language) # Pass language
+=======
+        # Assuming check_grammar accepts 'language' as a parameter
+        corrected_text = check_grammar(text, detected_language)
+>>>>>>> 96c44dd (Localization with final working)
         if str(corrected_text).startswith("Error:"):
             logging.error(f"Grammar check API call failed: {corrected_text}")
             return jsonify({"corrected_text": "", "error": corrected_text}), 500
@@ -466,7 +576,12 @@ def generate_slogan_api():
         num_slogans = 5
 
     try:
+<<<<<<< HEAD
         slogans = generate_slogans(keywords, num_slogans, detected_language) # Pass language
+=======
+        # Assuming generate_slogans accepts 'language' as a parameter
+        slogans = generate_slogans(keywords, num_slogans, detected_language)
+>>>>>>> 96c44dd (Localization with final working)
         if isinstance(slogans, list) and slogans and str(slogans[0]).startswith("Error: Gemini API"):
             logging.error(f"Gemini slogan generation failed: {slogans[0]}")
             return jsonify({"slogans": [], "error": slogans[0]}), 500
@@ -492,7 +607,12 @@ def check_plagiarism_ai_api():
         return jsonify({"error": "Please provide text to check."}), 400
 
     try:
+<<<<<<< HEAD
         results = check_plagiarism_and_ai(text, detected_language) # Pass language
+=======
+        # Assuming check_plagiarism_and_ai accepts 'language' as a parameter
+        results = check_plagiarism_and_ai(text, detected_language)
+>>>>>>> 96c44dd (Localization with final working)
         logging.info("Plagiarism and AI check processed.")
         return jsonify(results)
     except Exception as e:
@@ -518,7 +638,12 @@ def generate_story_api():
         return jsonify({"story": "", "error": "Please provide a story topic or keywords."}), 400
 
     try:
+<<<<<<< HEAD
         story = generate_story(topic, genre, characters, detected_language) # Pass language
+=======
+        # Assuming generate_story accepts 'language' as a parameter
+        story = generate_story(topic, genre, characters, detected_language)
+>>>>>>> 96c44dd (Localization with final working)
         if str(story).startswith("Error:"):
             logging.error(f"Story generation API call failed: {story}")
             return jsonify({"story": "", "error": story}), 500
@@ -549,7 +674,12 @@ def generate_product_description_api():
         return jsonify({"description": "", "error": "Please enter a product name or keywords to generate a description."}), 400
 
     try:
+<<<<<<< HEAD
         description = generate_product_description(product_name, product_keywords, target_audience, tone, detected_language) # Pass language
+=======
+        # Assuming generate_product_description accepts 'language' as a parameter
+        description = generate_product_description(product_name, product_keywords, target_audience, tone, detected_language)
+>>>>>>> 96c44dd (Localization with final working)
         if str(description).startswith("Error:"):
             logging.error(f"Product description generation API call failed: {description}")
             return jsonify({"description": "", "error": description}), 500
@@ -579,7 +709,12 @@ def generate_essay_api():
         return jsonify({"essay": "", "error": "Please provide a topic for the essay."}), 400
 
     try:
+<<<<<<< HEAD
         essay = generate_essay(topic, length, style, keywords, detected_language) # Pass language
+=======
+        # Assuming generate_essay accepts 'language' as a parameter
+        essay = generate_essay(topic, length, style, keywords, detected_language)
+>>>>>>> 96c44dd (Localization with final working)
         if str(essay).startswith("Error:"):
             logging.error(f"Essay generation API call failed: {essay}")
             return jsonify({"essay": "", "error": essay}), 500
@@ -609,7 +744,12 @@ def generate_trending_news_api():
     try:
         num_articles = int(num_articles) if isinstance(num_articles, str) and num_articles.isdigit() else 1
 
+<<<<<<< HEAD
         news_summary = generate_trending_news(keywords, category, num_articles, detected_language) # Pass language
+=======
+        # Assuming generate_trending_news accepts 'language' as a parameter
+        news_summary = generate_trending_news(keywords, category, num_articles, detected_language)
+>>>>>>> 96c44dd (Localization with final working)
         if isinstance(news_summary, str) and str(news_summary).startswith("Error:"):
             logging.error(f"Trending news generation API call failed: {news_summary}")
             return jsonify({"news_summary": "", "error": news_summary}), 500
@@ -634,7 +774,12 @@ def generate_acronym_api():
         return jsonify({"acronym": "", "error": "Please enter a phrase or text to generate an acronym."}), 400
 
     try:
+<<<<<<< HEAD
         acronym = generate_acronym(text, detected_language) # Pass language
+=======
+        # Assuming generate_acronym accepts 'language' as a parameter
+        acronym = generate_acronym(text, detected_language)
+>>>>>>> 96c44dd (Localization with final working)
         if str(acronym).startswith("Error:"):
             logging.error(f"Acronym generation API call failed: {acronym}")
             return jsonify({"acronym": "", "error": acronym}), 500
@@ -659,7 +804,12 @@ def generate_abstract_api():
         return jsonify({"abstract": "", "error": "Please paste your main text to generate an abstract."}), 400
 
     try:
+<<<<<<< HEAD
         abstract = generate_abstract(text, detected_language) # Pass language
+=======
+        # Assuming generate_abstract accepts 'language' as a parameter
+        abstract = generate_abstract(text, detected_language)
+>>>>>>> 96c44dd (Localization with final working)
         if str(abstract).startswith("Error:"):
             logging.error(f"Abstract generation API call failed: {abstract}")
             return jsonify({"abstract": "", "error": abstract}), 500
@@ -683,7 +833,12 @@ def generate_adjectives_api():
         return jsonify({"adjectives": [], "error": "Please enter a noun or sentence to get adjectives."}), 400
 
     try:
+<<<<<<< HEAD
         adjectives = generate_adjectives(text, detected_language) # Pass language
+=======
+        # Assuming generate_adjectives accepts 'language' as a parameter
+        adjectives = generate_adjectives(text, detected_language)
+>>>>>>> 96c44dd (Localization with final working)
         if isinstance(adjectives, list) and adjectives and str(adjectives[0]).startswith("Error:"):
             logging.error(f"Adjective generation API call failed: {adjectives[0]}")
             return jsonify({"adjectives": [], "error": adjectives[0]}), 500
@@ -709,7 +864,12 @@ def generate_hooks_api():
         return jsonify({"hooks": [], "error": "Please describe your content topic to generate hooks."}), 400
 
     try:
+<<<<<<< HEAD
         hooks = generate_hooks(topic, tone, detected_language) # Pass language
+=======
+        # Assuming generate_hooks accepts 'language' as a parameter
+        hooks = generate_hooks(topic, tone, detected_language)
+>>>>>>> 96c44dd (Localization with final working)
         if isinstance(hooks, list) and hooks and str(hooks[0]).startswith("Error:"):
             logging.error(f"Hook generation API call failed: {hooks[0]}")
             return jsonify({"hooks": [], "error": hooks[0]}), 500
@@ -734,7 +894,12 @@ def generate_titles_api():
         return jsonify({"titles": [], "error": "Please describe your content to generate titles."}), 400
 
     try:
+<<<<<<< HEAD
         titles = generate_titles(topic, detected_language) # Pass language
+=======
+        # Assuming generate_titles accepts 'language' as a parameter
+        titles = generate_titles(topic, detected_language)
+>>>>>>> 96c44dd (Localization with final working)
         if isinstance(titles, list) and titles and str(titles[0]).startswith("Error:"):
             logging.error(f"Title generation API call failed: {titles[0]}")
             return jsonify({"titles": [], "error": titles[0]}), 500
@@ -759,7 +924,12 @@ def generate_conclusion_api():
         return jsonify({"conclusion": "", "error": "Please paste your main text to generate a conclusion."}), 400
 
     try:
+<<<<<<< HEAD
         conclusion = generate_conclusion(text, detected_language) # Pass language
+=======
+        # Assuming generate_conclusion accepts 'language' as a parameter
+        conclusion = generate_conclusion(text, detected_language)
+>>>>>>> 96c44dd (Localization with final working)
         if str(conclusion).startswith("Error:"):
             logging.error(f"Conclusion generation API call failed: {conclusion}")
             return jsonify({"conclusion": "", "error": conclusion}), 500
@@ -785,7 +955,12 @@ def generate_business_names_api():
         return jsonify({"names": [], "error": "Please enter keywords about your business to generate names."}), 400
 
     try:
+<<<<<<< HEAD
         names = generate_business_names(keywords, style, detected_language) # Pass language
+=======
+        # Assuming generate_business_names accepts 'language' as a parameter
+        names = generate_business_names(keywords, style, detected_language)
+>>>>>>> 96c44dd (Localization with final working)
         if isinstance(names, list) and names and str(names[0]).startswith("Error:"):
             logging.error(f"Business name generation API call failed: {names[0]}")
             return jsonify({"names": [], "error": names[0]}), 500
@@ -811,7 +986,12 @@ def generate_email_subjects_api():
         return jsonify({"subjects": [], "error": "Please describe what your email is about."}), 400
 
     try:
+<<<<<<< HEAD
         subjects = generate_email_subjects(content, tone, detected_language) # Pass language
+=======
+        # Assuming generate_email_subjects accepts 'language' as a parameter
+        subjects = generate_email_subjects(content, tone, detected_language)
+>>>>>>> 96c44dd (Localization with final working)
         if isinstance(subjects, list) and subjects and str(subjects[0]).startswith("Error:"):
             logging.error(f"Email subject generation API call failed: {subjects[0]}")
             return jsonify({"subjects": [], "error": subjects[0]}), 500

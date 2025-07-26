@@ -100,7 +100,7 @@ def get_gemini_model():
 # Global model instance to avoid re-initializing on every call
 _grammar_checker_model = None
 
-def check_grammar(text):
+def check_grammar(text, target_language="English"): # target_language parameter add kiya
     """Checks grammar and suggests style improvements using the Gemini model."""
     global _grammar_checker_model # Use the global model instance
 
@@ -120,7 +120,7 @@ def check_grammar(text):
             return "Error: Gemini model could not be loaded for grammar check."
         
         prompt = (
-            f"Review the following text in English for grammar, spelling, punctuation, and style. "
+            f"Review the following text in {target_language} for grammar, spelling, punctuation, and style. " # prompt mein target_language use kiya
             f"Provide a list of specific corrections and suggestions for improvement. "
             f"Format the output as a clear list of identified issues and their proposed corrections/improvements. "
             f"Do not use any markdown formatting like **bold**, *italic*, or ##headings. Present the text as plain paragraphs or bullet points if necessary.\n\n"
@@ -146,5 +146,5 @@ def check_grammar(text):
             return "Gemini could not generate grammar corrections or suggestions. The text might be perfect, or try different input."
 
     except Exception as e:
-        logging.error(f"Error checking grammar with Gemini: {e}", exc_info=True)
+        logging.error(f"Error checking grammar with Gemini: {type(e).__name__}: {e}", exc_info=True) # Enhanced error logging
         return f"Error: Grammar check failed with Gemini. Details: {str(e)}"

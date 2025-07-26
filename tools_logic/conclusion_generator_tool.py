@@ -100,7 +100,7 @@ def get_gemini_model():
 # Global model instance to avoid re-initializing on every call
 _conclusion_generator_model = None
 
-def generate_conclusion(text):
+def generate_conclusion(text, target_language="English"): # target_language parameter add kiya
     """Generates a conclusion using the Gemini model."""
     global _conclusion_generator_model # Use the global model instance
 
@@ -120,7 +120,7 @@ def generate_conclusion(text):
             return "Error: Gemini model could not be loaded for conclusion generation."
 
         prompt = (
-            f"Generate a strong and concise concluding paragraph in English for the following text. "
+            f"Generate a strong and concise concluding paragraph in {target_language} for the following text. " # prompt mein target_language use kiya
             f"The conclusion should summarize the main points and provide a final impactful thought. "
             f"Do not use any markdown formatting like **bold**, *italic*, or ##headings. Provide plain text.\n\n"
             f"Original text:\n---\n{text}\n---\n\nConclusion:"
@@ -142,6 +142,6 @@ def generate_conclusion(text):
         else:
             return "Gemini could not generate a conclusion. Please try different details."
     except Exception as e:
-        error_message = f"An error occurred while generating conclusion with Gemini: {e}"
+        error_message = f"An error occurred while generating conclusion with Gemini: {type(e).__name__}: {e}" # Enhanced error logging
         logging.error(error_message, exc_info=True)
         return f"Error: {error_message}"
