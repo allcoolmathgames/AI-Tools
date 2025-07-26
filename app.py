@@ -2,7 +2,7 @@ import os
 import logging
 from flask import Flask, request, jsonify, render_template, redirect, abort
 from flask_cors import CORS
-from langdetect import detect, LangDetectException
+from langdetect import detect, LangDetectException # Ensure langdetect is installed (pip install langdetect)
 
 # Import specific functions from the new modular tool files
 # Ensure these files exist in your 'tools_logic' folder.
@@ -227,13 +227,8 @@ def business_name_generator_page(lang_code=None):
     """Renders the Business Name Generator tool page."""
     return render_template('business_name_generator/index.html')
 
-<<<<<<< HEAD
-@app.route('/email_subject_line_generator')
-def email_subject_line_generator_page():
-=======
 @route_with_language('/email-subject-line-generator')
 def email_subject_line_generator_page(lang_code=None):
->>>>>>> 96c44dd (Localization with final working)
     """Renders the Email Subject Line Generator tool page."""
     return render_template('email_subject_line_generator/index.html')
 
@@ -284,46 +279,6 @@ def blog_post(slug, lang_code=None):
 # --- End Blog Routes ---
 
 # ==============================================================================
-# Helper for Language Detection (Updated to return full language names)
-# ==============================================================================
-LANGUAGE_CODE_TO_NAME = {
-    "en": "English",
-    "es": "Spanish",
-    "id": "Indonesian",
-    "pt": "Portuguese", # 'br' is typically for Portuguese (Brazil), 'pt' for general Portuguese
-    "fr": "French",
-    "nl": "Dutch",
-    "it": "Italian",
-    "de": "German",
-    "ru": "Russian",
-    "ar": "Arabic",
-    "vi": "Vietnamese",
-    "ur": "Urdu", # Added Urdu
-    "zh-cn": "Chinese (Simplified)", # Example for Chinese
-    "ja": "Japanese",
-    "ko": "Korean",
-    # Add more mappings as needed
-}
-
-def get_request_language(text_to_detect):
-    """Detects the language of the given text, returns full language name, defaults to English if detection fails."""
-    if not text_to_detect or len(text_to_detect.strip()) < 20: # Ensure stripping whitespace
-        logging.info("Text too short or empty for reliable language detection, defaulting to English.")
-        return "English"
-    try:
-        detected_code = detect(text_to_detect)
-        # Return full language name if mapped, otherwise return the code or default to English
-        full_language_name = LANGUAGE_CODE_TO_NAME.get(detected_code, detected_code)
-        logging.info(f"Detected language code: {detected_code}, Full language name: {full_language_name}")
-        return full_language_name
-    except LangDetectException as e:
-        logging.warning(f"Could not detect language for text: {e}. Defaulting to English.")
-        return "English"
-    except Exception as e:
-        logging.error(f"An unexpected error occurred during language detection: {e}. Defaulting to English.")
-        return "English"
-
-# ==============================================================================
 # API Endpoints: Define routes for handling API requests from the frontend
 # ==============================================================================
 
@@ -346,10 +301,7 @@ def summarize_api():
     detected_language = get_request_language(text) # Language Detection
 
     try:
-<<<<<<< HEAD
-=======
         # Assuming summarize_text accepts 'language' as a parameter
->>>>>>> 96c44dd (Localization with final working)
         summary = summarize_text(text, length_ratio, detected_language)
         if str(summary).startswith("Error:"):
             logging.error(f"Summarization API call failed: {summary}")
@@ -377,12 +329,8 @@ def rewrite_api():
         return jsonify({"rewritten_text": "", "error": "Please provide text to rewrite."}), 400
 
     try:
-<<<<<<< HEAD
-        rewritten_text = rewrite_article(text, creativity, detected_language) # Pass language
-=======
         # Assuming rewrite_article accepts 'language' as a parameter
         rewritten_text = rewrite_article(text, creativity, detected_language)
->>>>>>> 96c44dd (Localization with final working)
         if str(rewritten_text).startswith("Error:"):
             logging.error(f"Rewriting API call failed: {rewritten_text}")
             return jsonify({"rewritten_text": "", "error": rewritten_text}), 500
@@ -409,12 +357,8 @@ def humanize_api():
         return jsonify({"humanized_text": "", "error": "Please provide text to humanize."}), 400
 
     try:
-<<<<<<< HEAD
-        humanized_text = humanize_text(text, creativity, detected_language) # Pass language
-=======
         # Assuming humanize_text accepts 'language' as a parameter
         humanized_text = humanize_text(text, creativity, detected_language)
->>>>>>> 96c44dd (Localization with final working)
         if str(humanized_text).startswith("Error:"):
             logging.error(f"Humanization API call failed: {humanized_text}")
             return jsonify({"humanized_text": "", "error": humanized_text}), 500
@@ -444,12 +388,8 @@ def generate_email_api():
         return jsonify({"generated_email": "", "error": "Please provide either a subject or purpose for the email."}), 400
 
     try:
-<<<<<<< HEAD
-        email_content = generate_email(subject, purpose, recipient, detected_language) # Pass language
-=======
         # Assuming generate_email accepts 'language' as a parameter
         email_content = generate_email(subject, purpose, recipient, detected_language)
->>>>>>> 96c44dd (Localization with final working)
         if str(email_content).startswith("Error:"):
             logging.error(f"Email generation API call failed: {email_content}")
             return jsonify({"generated_email": "", "error": email_content}), 500
@@ -475,12 +415,8 @@ def generate_content_ideas_api():
         return jsonify({"content_ideas": [], "error": "Please provide keywords for content ideas."}), 400
 
     try:
-<<<<<<< HEAD
-        content_ideas = generate_content_ideas(keywords, detected_language) # Pass language
-=======
         # Assuming generate_content_ideas accepts 'language' as a parameter
         content_ideas = generate_content_ideas(keywords, detected_language)
->>>>>>> 96c44dd (Localization with final working)
         if isinstance(content_ideas, str) and content_ideas.startswith("Error:"):
             logging.error(f"Content idea generation API call failed: {content_ideas}")
             return jsonify({"content_ideas": [], "error": content_ideas}), 500
@@ -508,12 +444,8 @@ def paraphrase_api():
         return jsonify({"paraphrased_text": "", "error": "Please provide text to paraphrase."}), 400
 
     try:
-<<<<<<< HEAD
-        paraphrased_text = paraphrase_text(text, detected_language) # Pass language
-=======
         # Assuming paraphrase_text accepts 'language' as a parameter
         paraphrased_text = paraphrase_text(text, detected_language)
->>>>>>> 96c44dd (Localization with final working)
         if str(paraphrased_text).startswith("Error:"):
             logging.error(f"Paraphrasing API call failed: {paraphrased_text}")
             return jsonify({"paraphrased_text": "", "error": paraphrased_text}), 500
@@ -538,12 +470,8 @@ def check_grammar_api():
         return jsonify({"corrected_text": "", "error": "Please provide text to check grammar."}), 400
 
     try:
-<<<<<<< HEAD
-        corrected_text = check_grammar(text, detected_language) # Pass language
-=======
         # Assuming check_grammar accepts 'language' as a parameter
         corrected_text = check_grammar(text, detected_language)
->>>>>>> 96c44dd (Localization with final working)
         if str(corrected_text).startswith("Error:"):
             logging.error(f"Grammar check API call failed: {corrected_text}")
             return jsonify({"corrected_text": "", "error": corrected_text}), 500
@@ -576,12 +504,8 @@ def generate_slogan_api():
         num_slogans = 5
 
     try:
-<<<<<<< HEAD
-        slogans = generate_slogans(keywords, num_slogans, detected_language) # Pass language
-=======
         # Assuming generate_slogans accepts 'language' as a parameter
         slogans = generate_slogans(keywords, num_slogans, detected_language)
->>>>>>> 96c44dd (Localization with final working)
         if isinstance(slogans, list) and slogans and str(slogans[0]).startswith("Error: Gemini API"):
             logging.error(f"Gemini slogan generation failed: {slogans[0]}")
             return jsonify({"slogans": [], "error": slogans[0]}), 500
@@ -607,12 +531,8 @@ def check_plagiarism_ai_api():
         return jsonify({"error": "Please provide text to check."}), 400
 
     try:
-<<<<<<< HEAD
-        results = check_plagiarism_and_ai(text, detected_language) # Pass language
-=======
         # Assuming check_plagiarism_and_ai accepts 'language' as a parameter
         results = check_plagiarism_and_ai(text, detected_language)
->>>>>>> 96c44dd (Localization with final working)
         logging.info("Plagiarism and AI check processed.")
         return jsonify(results)
     except Exception as e:
@@ -638,12 +558,8 @@ def generate_story_api():
         return jsonify({"story": "", "error": "Please provide a story topic or keywords."}), 400
 
     try:
-<<<<<<< HEAD
-        story = generate_story(topic, genre, characters, detected_language) # Pass language
-=======
         # Assuming generate_story accepts 'language' as a parameter
         story = generate_story(topic, genre, characters, detected_language)
->>>>>>> 96c44dd (Localization with final working)
         if str(story).startswith("Error:"):
             logging.error(f"Story generation API call failed: {story}")
             return jsonify({"story": "", "error": story}), 500
@@ -674,12 +590,8 @@ def generate_product_description_api():
         return jsonify({"description": "", "error": "Please enter a product name or keywords to generate a description."}), 400
 
     try:
-<<<<<<< HEAD
-        description = generate_product_description(product_name, product_keywords, target_audience, tone, detected_language) # Pass language
-=======
         # Assuming generate_product_description accepts 'language' as a parameter
         description = generate_product_description(product_name, product_keywords, target_audience, tone, detected_language)
->>>>>>> 96c44dd (Localization with final working)
         if str(description).startswith("Error:"):
             logging.error(f"Product description generation API call failed: {description}")
             return jsonify({"description": "", "error": description}), 500
@@ -709,12 +621,8 @@ def generate_essay_api():
         return jsonify({"essay": "", "error": "Please provide a topic for the essay."}), 400
 
     try:
-<<<<<<< HEAD
-        essay = generate_essay(topic, length, style, keywords, detected_language) # Pass language
-=======
         # Assuming generate_essay accepts 'language' as a parameter
         essay = generate_essay(topic, length, style, keywords, detected_language)
->>>>>>> 96c44dd (Localization with final working)
         if str(essay).startswith("Error:"):
             logging.error(f"Essay generation API call failed: {essay}")
             return jsonify({"essay": "", "error": essay}), 500
@@ -744,12 +652,8 @@ def generate_trending_news_api():
     try:
         num_articles = int(num_articles) if isinstance(num_articles, str) and num_articles.isdigit() else 1
 
-<<<<<<< HEAD
-        news_summary = generate_trending_news(keywords, category, num_articles, detected_language) # Pass language
-=======
         # Assuming generate_trending_news accepts 'language' as a parameter
         news_summary = generate_trending_news(keywords, category, num_articles, detected_language)
->>>>>>> 96c44dd (Localization with final working)
         if isinstance(news_summary, str) and str(news_summary).startswith("Error:"):
             logging.error(f"Trending news generation API call failed: {news_summary}")
             return jsonify({"news_summary": "", "error": news_summary}), 500
@@ -774,12 +678,8 @@ def generate_acronym_api():
         return jsonify({"acronym": "", "error": "Please enter a phrase or text to generate an acronym."}), 400
 
     try:
-<<<<<<< HEAD
-        acronym = generate_acronym(text, detected_language) # Pass language
-=======
         # Assuming generate_acronym accepts 'language' as a parameter
         acronym = generate_acronym(text, detected_language)
->>>>>>> 96c44dd (Localization with final working)
         if str(acronym).startswith("Error:"):
             logging.error(f"Acronym generation API call failed: {acronym}")
             return jsonify({"acronym": "", "error": acronym}), 500
@@ -804,12 +704,8 @@ def generate_abstract_api():
         return jsonify({"abstract": "", "error": "Please paste your main text to generate an abstract."}), 400
 
     try:
-<<<<<<< HEAD
-        abstract = generate_abstract(text, detected_language) # Pass language
-=======
         # Assuming generate_abstract accepts 'language' as a parameter
         abstract = generate_abstract(text, detected_language)
->>>>>>> 96c44dd (Localization with final working)
         if str(abstract).startswith("Error:"):
             logging.error(f"Abstract generation API call failed: {abstract}")
             return jsonify({"abstract": "", "error": abstract}), 500
@@ -833,12 +729,8 @@ def generate_adjectives_api():
         return jsonify({"adjectives": [], "error": "Please enter a noun or sentence to get adjectives."}), 400
 
     try:
-<<<<<<< HEAD
-        adjectives = generate_adjectives(text, detected_language) # Pass language
-=======
         # Assuming generate_adjectives accepts 'language' as a parameter
         adjectives = generate_adjectives(text, detected_language)
->>>>>>> 96c44dd (Localization with final working)
         if isinstance(adjectives, list) and adjectives and str(adjectives[0]).startswith("Error:"):
             logging.error(f"Adjective generation API call failed: {adjectives[0]}")
             return jsonify({"adjectives": [], "error": adjectives[0]}), 500
@@ -864,12 +756,8 @@ def generate_hooks_api():
         return jsonify({"hooks": [], "error": "Please describe your content topic to generate hooks."}), 400
 
     try:
-<<<<<<< HEAD
-        hooks = generate_hooks(topic, tone, detected_language) # Pass language
-=======
         # Assuming generate_hooks accepts 'language' as a parameter
         hooks = generate_hooks(topic, tone, detected_language)
->>>>>>> 96c44dd (Localization with final working)
         if isinstance(hooks, list) and hooks and str(hooks[0]).startswith("Error:"):
             logging.error(f"Hook generation API call failed: {hooks[0]}")
             return jsonify({"hooks": [], "error": hooks[0]}), 500
@@ -894,12 +782,8 @@ def generate_titles_api():
         return jsonify({"titles": [], "error": "Please describe your content to generate titles."}), 400
 
     try:
-<<<<<<< HEAD
-        titles = generate_titles(topic, detected_language) # Pass language
-=======
         # Assuming generate_titles accepts 'language' as a parameter
         titles = generate_titles(topic, detected_language)
->>>>>>> 96c44dd (Localization with final working)
         if isinstance(titles, list) and titles and str(titles[0]).startswith("Error:"):
             logging.error(f"Title generation API call failed: {titles[0]}")
             return jsonify({"titles": [], "error": titles[0]}), 500
@@ -924,12 +808,8 @@ def generate_conclusion_api():
         return jsonify({"conclusion": "", "error": "Please paste your main text to generate a conclusion."}), 400
 
     try:
-<<<<<<< HEAD
-        conclusion = generate_conclusion(text, detected_language) # Pass language
-=======
         # Assuming generate_conclusion accepts 'language' as a parameter
         conclusion = generate_conclusion(text, detected_language)
->>>>>>> 96c44dd (Localization with final working)
         if str(conclusion).startswith("Error:"):
             logging.error(f"Conclusion generation API call failed: {conclusion}")
             return jsonify({"conclusion": "", "error": conclusion}), 500
@@ -955,12 +835,8 @@ def generate_business_names_api():
         return jsonify({"names": [], "error": "Please enter keywords about your business to generate names."}), 400
 
     try:
-<<<<<<< HEAD
-        names = generate_business_names(keywords, style, detected_language) # Pass language
-=======
         # Assuming generate_business_names accepts 'language' as a parameter
         names = generate_business_names(keywords, style, detected_language)
->>>>>>> 96c44dd (Localization with final working)
         if isinstance(names, list) and names and str(names[0]).startswith("Error:"):
             logging.error(f"Business name generation API call failed: {names[0]}")
             return jsonify({"names": [], "error": names[0]}), 500
@@ -986,12 +862,8 @@ def generate_email_subjects_api():
         return jsonify({"subjects": [], "error": "Please describe what your email is about."}), 400
 
     try:
-<<<<<<< HEAD
-        subjects = generate_email_subjects(content, tone, detected_language) # Pass language
-=======
         # Assuming generate_email_subjects accepts 'language' as a parameter
         subjects = generate_email_subjects(content, tone, detected_language)
->>>>>>> 96c44dd (Localization with final working)
         if isinstance(subjects, list) and subjects and str(subjects[0]).startswith("Error:"):
             logging.error(f"Email subject generation API call failed: {subjects[0]}")
             return jsonify({"subjects": [], "error": subjects[0]}), 500
