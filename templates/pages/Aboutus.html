@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-translate="aboutUsTitle">About Us – GradeWise</title>
+    <meta name="description" data-translate="aboutUsDescription" content="Learn about GradeWise, our mission to simplify GPA calculations and academic planning for students.">
+    <meta name="keywords" data-translate="aboutUsKeywords" content="about GradeWise, GradeWise mission, GPA tools, academic planning, student resources">
+    <meta name="robots" content="noindex, nofollow">
+    
+    <link rel="canonical" href="https://yourwebsite.com/pages/about-us/">
+
+    <link rel="alternate" hreflang="x-default" href="https://yourwebsite.com/pages/about-us/"/>
+    <link rel="alternate" hreflang="en" href="https://yourwebsite.com/pages/about-us/"/>
+    <link rel="alternate" hreflang="ur" href="https://yourwebsite.com/ur/pages/about-us/"/>
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="{{ url_for('static', filename='js/language.js') }}" defer></script>
+</head>
+<body>
+    {% include 'header.html' %}
+
+    <main>
+        <section class="page-content">
+            <h1 data-translate="aboutUsHeading">About Us</h1>
+            <p data-translate="aboutUsIntro">
+                Welcome to GradeWise – your dedicated online platform designed to simplify academic calculations and empower students in their educational journey.
+            </p>
+
+            <h2 data-translate="ourMissionHeading">Our Mission</h2>
+            <p data-translate="ourMissionText1">
+                Our mission at GradeWise is to provide accessible, accurate, and user-friendly tools for GPA calculation and academic planning. We understand the challenges students face in managing their grades and planning for future academic success. That's why we built GradeWise – to offer a reliable solution that helps you track your progress and set achievable goals.
+            </p>
+
+            <h2 data-translate="whatWeOfferHeading">What We Offer</h2>
+            <ul>
+                <li data-translate="offerBullet1">
+                    **Current Semester GPA Calculator:** Easily calculate your GPA for the ongoing semester by adding your courses, credits, and grades.
+                </li>
+                <li data-translate="offerBullet2">
+                    **Prior Semester Final GPA Calculator:** Combine your past academic performance with your current grades to get an updated cumulative GPA.
+                </li>
+                <li data-translate="offerBullet3">
+                    **GPA Planning Calculator:** Determine the GPA you need in upcoming semesters to reach your desired cumulative GPA, helping you set realistic academic targets.
+                </li>
+            </ul>
+
+            <h2 data-translate="ourCommitmentHeading">Our Commitment</h2>
+            <p data-translate="ourCommitmentText1">
+                We are committed to maintaining a free, secure, and privacy-focused platform. GradeWise does not collect or store any personal information or academic data you enter into our calculators. All calculations are performed directly in your browser, ensuring your data remains private and in your control.
+            </p>
+            <p data-translate="ourCommitmentText2">
+                We continuously strive to improve our tools and add new features that benefit students. Your feedback is invaluable to us!
+            </p>
+
+            <h2 data-translate="contactUsHeading">Contact Us</h2>
+            <p data-translate="contactUsText1">
+                If you have any questions, suggestions, or feedback, please don't hesitate to reach out to us at <a href="mailto:support@gradewise.com">support@gradewise.com</a>. We'd love to hear from you!
+            </p>
+        </section>
+    </main>
+
+    {% include 'footer.html' %}
+</body>
+</html>

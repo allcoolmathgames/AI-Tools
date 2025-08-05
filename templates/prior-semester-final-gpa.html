@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en" data-translate-root>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-translate="calcGpaTitle">Cumulative GPA Calculator – Track & Predict Your GPA</title>
+    <meta name="description" data-translate="calcGpaDescription" content="Use our Cumulative GPA Calculator by GPA calculator uf to calculate and forecast your final GPA—free, accurate, and built on the standard 4.0 scale.">
+    <meta name="keywords" data-translate="keywords" content="cumulative GPA calculator, cumulative gpa calculator college, cumulative gpa calculator high school, college cumulative gpa calculator, high school cumulative gpa calculator, cumulative gpa calculator college 4.0 scale, college gpa calculator, gpa calculator, cumulative gpa, final gpa calculator, GPA calculator uf">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="canonical" href="https://yourwebsite.com/prior-semester-gpa/">
+    <link rel="alternate" hreflang="x-default" href="https://yourwebsite.com/prior-semester-gpa/"/>
+    <link rel="alternate" hreflang="en" href="https://yourwebsite.com/prior-semester-gpa/"/>
+    <link rel="alternate" hreflang="ar" href="https://yourwebsite.com/ar/prior-semester-gpa/"/>
+    <link rel="alternate" hreflang="pt" href="https://yourwebsite.com/pt/prior-semester-gpa/"/>
+    <link rel="alternate" hreflang="ru" href="https://yourwebsite.com/ru/prior-semester-gpa/"/>
+    <link rel="alternate" hreflang="es" href="https://yourwebsite.com/es/prior-semester-gpa/"/>
+    <link rel="alternate" hreflang="de" href="https://yourwebsite.com/de/prior-semester-gpa/"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+              integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2QWDFWwBCxN5V6qG/t3bLtmG6NvwK20R8T3M2t/FfD3M5C5P5M5P5M5A=="
+              crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body data-lang="en"> {# Default language set to English, can be changed by JS #}
+{% include 'header.html' %}
+<section class="page-content" style="position: relative; top: -75px;">
+    <h1 data-translate="calcGpaMainHeading">Calculate GPA</h1>
+    <p data-translate="calcGpaDescription">Calculate GPA with Previous Semesters</p>
+
+    <div class="input-section centered-section">
+        <h2 data-translate="gpaPreviousSemesterHeading">Calculate GPA with Previous Semesters</h2>
+        <div class="form-group">
+            <label for="oldTotalCredits" data-translate="oldTotalCreditsLabel">Old Total Credits</label>
+            <input type="number" id="oldTotalCredits" placeholder="Enter old total credits" min="0" data-translate="oldTotalCreditsPlaceholder">
+        </div>
+        <div class="form-group">
+            <label for="oldGpa" data-translate="oldGpaLabel">Old GPA</label>
+            <input type="number" step="0.01" id="oldGpa" placeholder="Enter old GPA" min="0" max="4" data-translate="oldGpaPlaceholder">
+        </div>
+        <div class="form-group">
+            <label for="newSemesterCredits" data-translate="newSemesterCreditsLabel">New Semester Credits</label>
+            <input type="number" id="newSemesterCredits" placeholder="Enter new semester credits" min="0" data-translate="newSemesterCreditsPlaceholder">
+        </div>
+        <div class="form-group">
+            <label for="newSemesterGpa" data-translate="newSemesterGpaLabel">New Semester GPA</label>
+            <input type="number" step="0.01" id="newSemesterGpa" placeholder="Enter new semester GPA" min="0" max="4" data-translate="newSemesterGpaPlaceholder">
+        </div>
+        <div class="button-group">
+            <button id="calculateCombinedGpaBtn" class="primary-btn" data-translate="calculateCombinedGpaButton">Calculate Combined GPA</button>
+            <button id="clearCombinedBtn" class="secondary-btn" data-translate="clearButton">Clear</button>
+        </div>
+
+        <div class="result-display" id="combinedGpaResult" style="display: none;">
+        </div>
+    </div>
+
+<section class="how-to-use-section centered-section">
+    <h2 data-translate="howToUseHeading">How to Use the Cumulative GPA Calculator</h2>
+    <div class="how-to-use-container">
+
+        <div class="step">
+            <div class="step-icon">
+                <i class="fa-solid fa-1" data-translate="step1Icon"></i>
+            </div>
+            <h3 style="text-decoration: none;"><span data-translate="step1Title">Step 1: Enter Your Previous Academic Info</span></h3>
+            <p data-translate="step1Description" style="text-align: left;">
+                You should start by entering your Old Total Credits and Old GPA. This gives the calculator access to your academic records required to calculate your updated GPA.
+            </p>
+        </div>
+
+        <div class="step">
+            <div class="step-icon">
+                <i class="fa-solid fa-2" data-translate="step2Icon"></i>
+            </div>
+            <h3 style="text-decoration: none;"><span data-translate="step2Title">Step 2: Add Current Semester Details</span></h3>
+            <p data-translate="step2Description" style="text-align: left;">
+                Input the number of new Semester Credits you're taking this term and your new Semester GPA. This displays how your current academic performance will influence your cumulative GPA.
+            </p>
+        </div>
+
+        <div class="step">
+            <div class="step-icon">
+                <i class="fa-solid fa-3" data-translate="step3Icon"></i>
+            </div>
+            <h3 style="text-decoration: none;"><span data-translate="step3Title">Step 3: Click Calculate Combined GPA</span></h3>
+            <p data-translate="step3Description" style="text-align: left;">
+                After completing all the required fields properly, you need to click the Calculate Combined GPA button. The tool will rapidly produce your updated cumulative GPA depending on your inputs.
+            </p>
+        </div>
+
+        <div class="step">
+            <div class="step-icon">
+                <i class="fa-solid fa-4" data-translate="step4Icon"></i>
+            </div>
+            <h3 style="text-decoration: none;"><span data-translate="step4Title">Step 4: Review or Reset</span></h3>
+            <p data-translate="step4Description" style="text-align: left;">
+                Review your new cumulative GPA. If you want to modify your enteries or recompute, use the Clear button to reset the form and then you can try again.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="why-choose-us-section centered-section">
+    <h2 data-translate="whyChooseUsHeading">Why Use the Cumulative GPA Calculator?</h2>
+
+    <div class="feature-row left-text-right-image">
+        <div class="feature-text">
+            <h3><span data-translate="feature1Title">Consistency Matters</span></h3>
+            <p data-translate="feature1Description">
+                Cumulative GPA shows your academic achievement throughout all semesters, providing a more comprehensive insight than only term-by-term GPA calculations.
+            </p>
+        </div>
+        <div class="feature-image">
+            <img src="https://via.placeholder.com/500x400.png?text=Academic+Progress+Consistency" alt="Consistency in Academic Progress" data-translate="feature1ImageAlt">
+        </div>
+    </div>
+
+    <div class="feature-row right-text-left-image">
+        <div class="feature-image">
+            <img src="https://via.placeholder.com/500x400.png?text=Fast+and+Reliable" alt="Fast and Reliable" data-translate="feature2ImageAlt">
+        </div>
+        <div class="feature-text">
+            <h3><span data-translate="feature2Title">Instant & Reliable</span></h3>
+            <p data-translate="feature2Description">
+                The calculation follows the standard academic formula: sum of (grade points × credit hours) ÷ total credits. It’s precise, rapid, and easy with zero confusion.
+            </p>
+        </div>
+    </div>
+
+    <div class="feature-row left-text-right-image">
+        <div class="feature-text">
+            <h3><span data-translate="feature3Title">4.0 Scale Compatibility</span></h3>
+            <p data-translate="feature3Description">
+                It is designed based on the conventional U.S. 4.0 scale, including honors/AP weighting, and it is perfect for high school and college GPA tracking.
+            </p>
+        </div>
+        <div class="feature-image">
+            <img src="https://via.placeholder.com/500x400.png?text=4.0+Scale+Support" alt="4.0 Scale Support" data-translate="feature3ImageAlt">
+        </div>
+    </div>
+</section>
+
+<div class="content-section centered-section">
+    <h2 data-translate="contentHeading1">When Should You Use This Tool?</h2>
+    <br>
+    <p data-translate="contentParagraph1" style="color: var(--dark-text); text-align: left;">
+        <strong data-translate="finalGpaEstimate">Final GPA Estimate:</strong>
+        If you're near graduation or planning a transfer, this tool allows you to predict your final GPA by taking into account both completed and upcoming courses, thus enabling you to prepare for transcript submissions with full assurance.
+    </p>
+
+    <p data-translate="contentParagraph2">
+        <strong data-translate="collegePrep">College Application Preparation:</strong>
+        Many colleges demand for your cumulative GPA at the time of admissions. This calculator provides you a comprehensive overview of how your academic progress measures up before persuing to competitive schools or programs.
+    </p>
+
+    <p data-translate="contentParagraph3">
+        <strong data-translate="performanceMonitoring">High School or College Performance Monitoring:</strong>
+        Students often fail to monitor GPA changes over time. This tool makes it easier for them to evaluate progress semester by semester and begin early planning if your GPA starts to fall beneath key thresholds.
+    </p>
+
+    <p data-translate="contentParagraph4">
+        <strong data-translate="scholarshipPlanning">Scholarship & Honors Planning:</strong>
+        Numerous merit-based scholarships and academic honours mandate a minimum cumulative GPA. You can utilize this tool to track your eligibility and plan your academic schedule to sustain or reach the necessary academic standards.
+    </p>
+
+    <p data-translate="contentParagraph5">
+        <strong data-translate="gpaToolSuggestion">Need to plan future semesters with accurate academic predictions?</strong>
+        Try our <a href="/templates/gpa-planning-calculator.html" style="text-decoration: none;" data-translate="gpaPlanningLinkText">GPA Planning Calculator</a> next, or recompute your ongoing status using our <a href="/templates/index.html" style="text-decoration: none;" data-translate="gpaCalculatorLinkText">GPA Calculator</a> by GPA calculator uf.
+    </p>
+</div>
+
+<div class="content-section centered-section">
+    <h2 data-translate="contentHeading2">Cumulative GPA Calculator</h2>
+
+    <p data-translate="contentParagraph6" style="text-align: left; color: var(--dark-text);">
+        Do you want to learn about your overall GPA over multiple semesters for college admission or graduation? Our Cumulative GPA Calculator by GPA calculator uf precisely calculates your cumulative GPA, whether you're in high school or college. It is designed based on the commonly used 4.0 scale, and helps you in interpreting your academic standing and forecasting your final GPA.
+    </p>
+
+    <p data-translate="contentParagraph7">
+        This tool emphasizes how cumulative GPA reflects reliability and long-term academic performance, and this aspect is often prioritized by colleges and employers. The strategy is widely recognised for being user-friendly and task oriented for both high school and college use.
+    </p>
+
+    <p data-translate="contentParagraph8">
+        For comprehensive academic planning advice, you may visit helpful articles from the <a href="https://www.usnews.com/education/articles/2019-10-21/what-you-need-to-know-about-gpa" style="text-decoration: none;" data-translate="usNewsLinkText">U.S. News Education</a> or the <a href="https://bigfuture.collegeboard.org/plan-for-college/college-basics/what-is-a-good-gpa" style="text-decoration: none;" data-translate="collegeBoardLinkText">College Board</a>.
+    </p>
+</div>
+
+<div class="content-section centered-section">
+    <h2 data-translate="contentHeading2">Understanding Cumulative GPA</h2>
+    <p data-translate="contentParagraph1">Your cumulative GPA is a weighted average of all grades received in all courses taken throughout your academic career. It provides a comprehensive overview of your overall academic performance by combining your previous academic achievements with your latest semester's results.</p>
+</div>
+
+<div class="content-section centered-section">
+    <h2 data-translate="contentHeading2">Tips for Improving Your GPA</h2>
+    <p data-translate="contentParagraph2">To improve your cumulative GPA, focus on performing exceptionally well in your current and upcoming courses, especially those with higher credit hours. Consider seeking academic support, forming study groups, and regularly attending office hours with your instructors. Prioritize your most challenging subjects and ensure you have a clear understanding of the material.</p>
+</div>
+
+<div class="faq-section centered-section">
+    <h2 data-translate="faqHeading">FAQ</h2>
+
+    <div class="faq-item">
+        <h3 data-translate="faqQuestion1">What is a cumulative GPA calculator?</h3>
+        <p data-translate="faqAnswer1">
+            A cumulative GPA calculator evaluates your overall GPA by weighing each course’s grade relative to its credit hours. It’s integral for analyzing your entire academic record, particularly when preparing for college, grad school, or competitive scholarships.
+        </p>
+    </div>
+
+    <div class="faq-item">
+        <h3 data-translate="faqQuestion2">Can high school and college students both use this tool?</h3>
+        <p data-translate="faqAnswer2">
+            Yes, this calculator is designed for both high school and college students. It is compatible with traditional 4.0 scales and weighted systems, providing a flexible and precise method to track academic progress across several semesters or school years.
+        </p>
+    </div>
+
+    <div class="faq-item">
+        <h3 data-translate="faqQuestion3">How accurate is the calculator’s result?</h3>
+        <p data-translate="faqAnswer3">
+            The results are calculated using official GPA formulas utilized by most schools. By accurately inputting course grades and credit hours, the calculator can provide a precise estimate of your cumulative GPA, assisting you plan for scholarships, transfers, or graduation.
+        </p>
+    </div>
+
+    <div class="faq-item">
+        <h3 data-translate="faqQuestion4">Can I forecast my final GPA with current work in progress?</h3>
+        <p data-translate="faqAnswer4">
+            Absolutely. You can add future courses with expected grades and credit hours. This enables you to predict your GPA prior to the semester’s completion. It is ideal for establishing academic goals or verifying if you're on track for honors or probation recovery.
+        </p>
+    </div>
+
+    <div class="faq-item">
+        <h3 data-translate="faqQuestion1">How is the required GPA calculated?</h3>
+        <p data-translate="faqAnswer1">It's calculated based on your current GPA, total credits, and the credits you plan to take in the next semester to reach your goal.</p>
+    </div>
+    <div class="faq-item">
+        <h3 data-translate="faqQuestion2">What if my goal GPA is unrealistic?</h3>
+        <p data-translate="faqAnswer2">The calculator will show a very high or impossible required GPA. You may need to adjust your goal or study harder.</p>
+    </div>
+    <div class="faq-item">
+        <h3 data-translate="faqQuestion3">Can I adjust my goal GPA later?</h3>
+        <p data-translate="faqAnswer3">Yes, you can always re-enter new values to calculate a different required GPA.</p>
+    </div>
+</div>
+</section>
+{% include 'footer.html' %}
+
+<script src="{{ url_for('static', filename='js/language.js') }}" defer></script>
+<script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const calculateBtn = document.getElementById('calculateCombinedGpaBtn');
+        const clearBtn = document.getElementById('clearCombinedBtn');
+        const resultDiv = document.getElementById('combinedGpaResult');
+
+        calculateBtn.addEventListener('click', async function() {
+            const oldTotalCredits = document.getElementById('oldTotalCredits').value;
+            const oldGpa = document.getElementById('oldGpa').value;
+            const newSemesterCredits = document.getElementById('newSemesterCredits').value;
+            const newSemesterGpa = document.getElementById('newSemesterGpa').value;
+
+            if (!oldTotalCredits || !oldGpa || !newSemesterCredits || !newSemesterGpa) {
+                resultDiv.innerHTML = '<p class="error">Please fill in all the fields.</p>';
+                resultDiv.style.display = 'block';
+                return;
+            }
+
+            try {
+                const response = await fetch('/calculate_combined_gpa', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        oldTotalCredits: oldTotalCredits,
+                        oldGpa: oldGpa,
+                        newSemesterCredits: newSemesterCredits,
+                        newSemesterGpa: newSemesterGpa
+                    })
+                });
+
+                const result = await response.json();
+
+                if (result.status === 'success') {
+                    resultDiv.innerHTML = `<p class="result-message">Your new combined cumulative GPA is:</p>
+                                           <p class="result-gpa">${result.combinedGpa}</p>`;
+                    resultDiv.style.display = 'block';
+                } else {
+                    resultDiv.innerHTML = `<p class="error">${result.message}</p>`;
+                    resultDiv.style.display = 'block';
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                resultDiv.innerHTML = '<p class="error">An error occurred while calculating GPA. Please try again.</p>';
+                resultDiv.style.display = 'block';
+            }
+        });
+
+        clearBtn.addEventListener('click', function() {
+            document.getElementById('oldTotalCredits').value = '';
+            document.getElementById('oldGpa').value = '';
+            document.getElementById('newSemesterCredits').value = '';
+            document.getElementById('newSemesterGpa').value = '';
+            resultDiv.style.display = 'none';
+            resultDiv.innerHTML = '';
+        });
+    });
+</script>
+</body>
+</html>

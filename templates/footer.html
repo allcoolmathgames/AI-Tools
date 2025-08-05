@@ -1,0 +1,40 @@
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-column">
+            <h3><span data-translate="footerAboutOurSite">GradeWise</span></h3>
+            <p data-translate="footerAboutOurSiteDesc">Your reliable tool for precise GPA calculations and academic planning.</p>
+            <p class="email-address">support@gradewise.com</p>
+        </div>
+
+        <div class="footer-column">
+            <h3><span data-translate="footerResources">Resources</span></h3>
+            <ul>
+                <li><a href="{{ url_for('index') }}" data-translate="gpaCalculatorTitle">Current Semester GPA</a></li>
+                <li><a href="{{ url_for('prior_semester_gpa') }}" data-translate="priorSemesterCardTitle">Prior Semester GPA</a></li>
+                <li><a href="{{ url_for('gpa_planning') }}" data-translate="gpaPlanningCardTitle">GPA Planning</a></li>
+                <li><a href="{{ url_for('blog_index') }}" data-translate="footerBlogs">Blogs</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-column">
+            <h3><span data-translate="footerQuickLinks">Quick Links</span></h3>
+            <ul>
+                <li><a href="{{ url_for('privacy_policy') }}" data-translate="footerPrivacyPolicy">Privacy Policy</a></li>
+                <li><a href="{{ url_for('terms_conditions') }}" data-translate="footerTermsConditions">Terms & Conditions</a></li>
+                <li><a href="{{ url_for('about_us') }}" data-translate="footerAboutUs">About Us</a></li>
+                <li><a href="{{ url_for('contact') }}" data-translate="footerContact">Contact Us</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-column">
+            <h3><span data-translate="footerAddress">Address</span></h3>
+            <p data-translate="footerAddressDetails">Regent mall, Chenone Road, Faisalabad, Pakistan</p>
+            <h3><span data-translate="footerDevelopedBy">Developed by</span></h3>
+            <p>Muhammad Aizazullah</p>
+        </div>
+    </div>
+</footer>
+<div class="footer-bottom">
+    <span class="copyright" data-translate="copyright" id="currentYear" style="position: relative; top: -10px;">© 2025 GradeWise. All Rights Reserved.</span>
+</div>
+<script src="{{ url_for('static', filename='js/script.js') }}" defer></script>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title data-translate="blogsTitle">Our Blogs</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="{{ url_for('static', filename='js/language.js') }}" defer></script>
+</head>
+<body>
+    {% include 'header.html' %}
+
+    <main>
+        <section class="page-content">
+            <h1 data-translate="blogsHeading">Our Latest Blogs</h1>
+            <p data-translate="blogsDescription">Explore articles and guides on GPA, academic success, and study tips.</p>
+<br>
+            <div class="cards-container blog-list">
+                <div class="card blog-card">
+                    <h3><span data-translate="blogTitle1">How to Improve Your GPA Effectively</span></h3>Explore articles and guides on GPA, academic success, and study tips.
+                    <p><span data-translate="blogSnippet1">Discover proven strategies to boost your grade point average and achieve academic success.</span></p>
+                    <a href="{{ url_for('blog_post', slug='how-to-improve-your-gpa-effectively') }}" class="card-button" data-translate="readMoreButton">Read More</a>
+                </div>
+                <div class="card blog-card">
+                    <h3><span data-translate="blogTitle2">Understanding Different Grading Scales</span></h3>
+                    <p><span data-translate="blogSnippet2">A comprehensive guide to various grading systems used across universities worldwide.</span></p>
+                    <a href="{{ url_for('blog_post', slug='understanding-different-grading-scales') }}" class="card-button" data-translate="readMoreButton">Read More</a>
+                </div>
+                <div class="card blog-card">
+                    <h3><span data-translate="blogTitle3">Time Management Tips for Students</span></h3>
+                    <p><span data-translate="blogSnippet3">Learn effective time management techniques to balance studies and personal life.</span></p>
+                    <a href="{{ url_for('blog_post', slug='time-management-tips-for-students') }}" class="card-button" data-translate="readMoreButton">Read More</a>
+                </div>
+            </div>
+            
+            <br>
+            <div class="content-section">
+                <h2 data-translate="contentHeading1">More Articles Coming Soon!</h2>
+                <p data-translate="contentParagraph1">We are constantly working on new content to help you achieve your academic goals.</p>
+            </div>
+        </section>
+    </main>
+
+    {% include 'footer.html' %}
+
+    <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+</body>
+</html>

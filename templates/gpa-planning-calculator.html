@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-translate="goalGpaCalcTitle">GPA Planning Calculator – Forecast & Reach Your Target GPA</title>
+    <meta name="description" data-translate="goalGpaCalcDescription" content="Plan your future with the GPA Planning Calculator by GPA calculator uf. Set your target GPA and find the grades you need. It’s free, fast, and easy to use.">
+    <meta name="keywords" content="GPA Planning Calculator, GPA calculator, academic planning tool, target GPA, improve GPA, GPA for honors, GPA for scholarships, GPA recovery, cumulative GPA, calculate GPA, GPA goal setting, GPA tool for students, college GPA planning, high school GPA tool, GPA calculator uf">
+    <meta name="robots" content="noindex, nofollow">
+
+    <link rel="canonical" href="https://yourwebsite.com/gpa-planning/">
+
+    <link rel="alternate" hreflang="x-default" href="https://yourwebsite.com/gpa-planning/"/>
+    <link rel="alternate" hreflang="en" href="https://yourwebsite.com/gpa-planning/"/>
+    <link rel="alternate" hreflang="ar" href="https://yourwebsite.com/ar/gpa-planning/"/>
+    <link rel="alternate" hreflang="pt" href="https://yourwebsite.com/pt/gpa-planning/"/>
+    <link rel="alternate" hreflang="ru" href="https://yourwebsite.com/ru/gpa-planning/"/>
+    <link rel="alternate" hreflang="es" href="https://yourwebsite.com/es/gpa-planning/"/>
+    <link rel="alternate" hreflang="de" href="https://yourwebsite.com/de/gpa-planning/"/>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Calculator",
+      "name": "Goal GPA Calculator",
+      "description": "An online tool to calculate the GPA required in upcoming semesters to achieve a specific cumulative GPA.",
+      "url": "https://yourwebsite.com/gpa-planning/",
+      "potentialAction": {
+        "@type": "PerformAction",
+        "name": "Calculate Required GPA",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://yourwebsite.com/gpa-planning/?goalGpa={goalGpa}&currentGpa={currentGpa}&currentTotalCredits={currentTotalCredits}&nextSemesterCredits={nextSemesterCredits}",
+          "actionPlatform": [
+            "http://schema.org/DesktopWebPlatform",
+            "http://schema.org/IOSPlatform",
+            "http://schema.org/AndroidPlatform"
+          ]
+        },
+        "queryInput": [
+            "required name=goalGpa",
+            "required name=currentGpa",
+            "required name=currentTotalCredits",
+            "required name=nextSemesterCredits"
+        ]
+      }
+    }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2QWDFWwBCxN5V6qG/t3bLtmG6NvwK20R8T3M2t/FfD3M5C5S5P5M5P5M5A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body data-lang="en"> {# Default language set to English, can be changed by JS #}
+{% include 'header.html' %}
+<section class="page-content" style="position: relative; top: -75px;">
+    <h1 data-translate="gpaPlanningCalcTitle">GPA Planning Calculator</h1>
+    <p data-translate="goalGpaCalcDescription">Calculate the GPA you need to achieve your desired cumulative GPA.</p>
+
+    <div class="input-section centered-section">
+        <h2 data-translate="goalGpaCalcHeading">Goal GPA Calculator</h2>
+        <div class="form-group">
+            <label for="goalGpa" data-translate="goalGpaLabel">Goal GPA</label>
+            <input type="number" step="0.01" id="goalGpa" placeholder="3.5" data-translate="goalGpaPlaceholder">
+        </div>
+        <div class="form-group">
+            <label for="currentGpa" data-translate="currentGpaLabel">Current GPA</label>
+            <input type="number" step="0.01" id="currentGpa" placeholder="3.2" data-translate="currentGpaPlaceholder">
+        </div>
+        <div class="form-group">
+            <label for="currentTotalCredits" data-translate="currentTotalCreditsLabel">Current Total Credits</label>
+            <input type="number" id="currentTotalCredits" placeholder="60" data-translate="currentTotalCreditsPlaceholder">
+        </div>
+        <div class="form-group">
+            <label for="nextSemesterCredits" data-translate="nextSemesterCreditsLabel">Next Semester's Credits</label>
+            <input type="number" id="nextSemesterCredits" placeholder="15" data-translate="nextSemesterCreditsPlaceholder">
+        </div>
+        <div class="button-group">
+            <button id="calculateRequiredGpaBtn" class="primary-btn" data-translate="calculateButton">Calculate</button>
+            <button id="clearPlanningBtn" class="secondary-btn" data-translate="clearButton">Clear</button>
+        </div>
+        <div class="result-display" id="requiredGpaResult" style="display: none;">
+        </div>
+    </div>
+
+<section class="how-to-use-section centered-section">
+    <h2 data-translate="howToUseHeading">How to Use the GPA Planning Calculator</h2>
+    <div class="how-to-use-container">
+        <div class="step">
+            <div class="step-icon">
+                <i class="fa-solid fa-1"></i>
+            </div>
+            <h3 style="text-decoration: none;"><span data-translate="step1Title">Step 1: Enter Your Current GPA and Completed Credit Hours</span></h3>
+            <p style="text-align: left;"><span data-translate="step1Description">Enter your current cumulative GPA and total credit hours completed. This forms the basis for GPA planning.</span></p>
+        </div>
+        <div class="step">
+            <div class="step-icon">
+                <i class="fa-solid fa-2"></i>
+            </div>
+            <h3 style="text-decoration: none;"><span data-translate="step2Title">Step 2: Set Your Target GPA</span></h3>
+            <p style="text-align: left;"><span data-translate="step2Description">Add the GPA you aim to accomplish and it is perfect for fulfilling eligibility criteria for honors, scholarships, or academic enrollment.</span></p>
+        </div>
+        <div class="step">
+            <div class="step-icon">
+                <i class="fa-solid fa-3"></i>
+            </div>
+            <h3 style="text-decoration: none;"><span data-translate="step3Title">Step 3: Add Planned Credit Hours</span></h3>
+            <p style="text-align: left;"><span data-translate="step3Description">Input the number of future credit hours you plan to finish prior to graduation or your objective.</span></p>
+        </div>
+        <div class="step">
+            <div class="step-icon">
+                <i class="fa-solid fa-4"></i>
+            </div>
+            <h3 style="text-decoration: none;"><span data-translate="step4Title">Step 4: Calculate and View Required GPA</span></h3>
+            <p style="text-align: left;"><span data-translate="step4Description">Click “Calculate” to view the GPA you are required to uphold in future courses to achieve your objective. You can use this to develop your study approach.</span></p>
+        </div>
+    </div>
+</section>
+
+<section class="why-choose-us-section centered-section">
+    <h2 data-translate="whyChooseUsHeading">Why Use the GPA Planning Calculator?</h2>
+    <div class="feature-row left-text-right-image">
+        <div class="feature-text">
+            <h3><span data-translate="feature1Title">Set Academic Goals with Precision</span></h3>
+            <p><span data-translate="feature1Description">It gives you an accurate idea of the GPA you need to aim for rather than making assumptions. Whether it’s a 3.5 GPA or being removed from probation, this tool provides transparency.</span></p>
+        </div>
+        <div class="feature-image">
+            <img src="https://via.placeholder.com/500x400.png?text=Accuracy+and+Simplicity" alt="Accuracy and Simplicity" data-translate="feature1ImageAlt">
+        </div>
+    </div>
+
+    <div class="feature-row right-text-left-image">
+        <div class="feature-image">
+            <img src="https://via.placeholder.com/500x400.png?text=Fast+and+Reliable" alt="Fast and Reliable" data-translate="feature2ImageAlt">
+        </div>
+        <div class="feature-text">
+            <h3><span data-translate="feature2Title">Create an Actionable GPA Plan</span></h3>
+            <p><span data-translate="feature2Description">It also stops you from making unclear academic commitments. This calculator offers real and student-specific GPA objectives around which you can organize your semester plans and goals.</span></p>
+        </div>
+    </div>
+
+    <div class="feature-row left-text-right-image">
+        <div class="feature-text">
+            <h3><span data-translate="feature3Title">Get Instant, Accurate Results</span></h3>
+            <p><span data-translate="feature3Description">Just insert your numbers and get your desired GPA results in seconds with no spreadsheets or calculations required.</span></p>
+        </div>
+        <div class="feature-image">
+            <img src="https://via.placeholder.com/500x400.png?text=User-Friendly+Interface" alt="User-Friendly Interface" data-translate="feature3ImageAlt">
+        </div>
+    </div>
+</section>
+<br>
+    <div class="content-section centered-section">
+  <h2 data-translate="contentHeading1">When Should You Use the GPA Planning Tool?</h2>
+
+  <div class="content-subsection">
+    <h3 data-translate="contentSubheading1">Planning for Graduation Honors</h3>
+    <p data-translate="contentParagraph1" style="text-align: left;">
+      If you’re planning to achieve Cum Laude, Magna Cum Laude, or Summa Cum Laude honors, this tool assists in making sure that you meet the GPA criteria before graduation.
+    </p>
+  </div>
+
+  <div class="content-subsection">
+    <h3 data-translate="contentSubheading2">Maintaining or Qualifying for Scholarships</h3>
+    <p data-translate="contentParagraph2" style="text-align: left;">
+      Many scholarships set a minimum GPA to qualify for or maintain many scholarship awards. Use the tool to verify what GPA you would require each semester to keep your eligibility.
+    </p>
+  </div>
+
+  <div class="content-subsection">
+    <h3 data-translate="contentSubheading3">Recovering from Academic Probation</h3>
+    <p data-translate="contentParagraph3" style="text-align: left;">
+      Students facing academic probation often have limited opportunity to enhance their GPA. This calculator can guide and support your strategy and help you to set attainable GPA standards for improvement.
+    </p>
+  </div>
+
+  <div class="content-subsection">
+    <h3 data-translate="contentSubheading4">Setting Goals for Grad School or Internships</h3>
+    <p data-translate="contentParagraph4" style="text-align: left;">
+      Graduate programs and competitive internships often demand a certain GPA threshold. You can use this planning tool by GPA calculator uf to remain competitive and map out your academic journey early.
+    </p>
+  </div>
+
+  <div class="content-subsection">
+  <p data-translate="contentParagraph5" style="text-align: left;">
+    <span data-translate="gpaInfoIntro">For more information on GPA thresholds and honors programs, refer to</span>
+    <a href="https://www.registrar.ucla.edu/Student-Records/Degree-Audit-GPA" style="text-decoration: none;" data-translate="uclaLink">UCLA’s</a>
+    <a href="https://www.registrar.ucla.edu/Student-Records/Degree-Audit-GPA" style="text-decoration: none;" data-translate="gpaReqLink">GPA requirements</a>
+    <span data-translate="or">or</span>
+    <a href="https://college.harvard.edu/academics/academic-policies" style="text-decoration: none;" data-translate="harvardLink">Harvard’s academic policies</a>.
+    <span data-translate="accurateGpaSuggest">To understand your current standing accurately, try our</span>
+    <a href="/templates/prior-semester-final-gpa.html" style="text-decoration: none;" data-translate="cumulativeLink">Cumulative GPA Calculator</a>
+    <span data-translate="byGpaCalcUF">by GPA calculator uf before making your next academic move.</span>
+  </p>
+</div>
+
+</div>
+
+    <div class="content-section centered-section">
+  <h2 data-translate="contentHeading2">GPA Planning Calculator</h2>
+<br>
+  <p data-translate="contentParagraph2" style="text-align: left;">
+    Do you need to achieve a target GPA for honors, scholarships, or graduation? Our GPA Planning Calculator by GPA calculator uf assists you in planning out your academic journey by displaying the GPA you need to attain in future semesters. Whether you’re striving to improve or go beyond expectations, this tool helps you stay on the track.
+    <br><br>
+    It utilizes your existing GPA, completed credit hours, and target GPA to calculate the average GPA required in your leftover courses. It’s an effective technique to establish focused academic objectives and enhance performance. To gain a clearer understanding of your current GPA and to see your current progress towards your goals, use our <a href="/templates/index.html" style="text-decoration: none;" data-translate="gpaCalculatorLink">GPA Calculator</a> beside this planning tool.
+  </p>
+</div>
+
+    <div class="content-section centered-section">
+        <h2 data-translate="contentHeading1">Setting Realistic Goals</h2>
+        <p data-translate="contentParagraph1">It's important to set achievable GPA goals. Consider your academic strengths and weaknesses.</p>
+    </div>
+
+    <div class="content-section centered-section">
+        <h2 data-translate="contentHeading2">Strategies for Success</h2>
+        <p data-translate="contentParagraph2">Consistent study habits, seeking extra help, and time management are key to achieving your target GPA.</p>
+    </div>
+
+    <div class="faq-section centered-section">
+        <h2 data-translate="faqHeading">FAQ</h2>
+        <div class="faq-item">
+            <h3 data-translate="faqQuestion1">What is a GPA Planning Calculator, and how is it different from a regular GPA calculator?</h3>
+            <p data-translate="faqAnswer1">
+              A GPA Planning Calculator assists you find out what grades you would require in upcoming semesters to gain a target GPA. Unlike traditional GPA tracking tools, it’s built for future-oriented planning, forecasting, and strategic academic planning or goal-setting instead of just showing your past performance.
+            </p>
+        </div>
+
+        <div class="faq-item">
+            <h3 data-translate="faqQuestion2">Can this calculator help me if I’m currently on academic probation?</h3>
+            <p data-translate="faqAnswer2">
+              Yes. This calculator is exceptionally beneficial for students on academic probation, who require a GPA improvement strategy. It shows you what GPA you must achieve and retain over upcoming credit hours to restore excellent academic standing and avoid academic suspension or expulsion.
+            </p>
+        </div>
+
+        <div class="faq-item">
+            <h3 data-translate="faqQuestion3">Is this calculator suitable for both high school and college students?</h3>
+            <p data-translate="faqAnswer3">
+              Absolutely. Whether you're in high school or college, provided that your institution utilizes a credit-hour-based GPA system, this calculator can assist you plan your academic targets, particularly when getting ready for graduation, transfers, or merit-based scholarship applications.
+            </p>
+        </div>
+
+        <div class="faq-item">
+            <h3 data-translate="faqQuestion4">Can I plan multiple semesters in advance with this tool?</h3>
+            <p data-translate="faqAnswer4">
+              Yes. You can compute GPA over several future semesters by inputting the total number of remaining credit hours. It guides students plan from the future perspective and calculate the maintained GPA required to attain a desired cumulative score.
+            </p>
+        </div>
+
+        <div class="faq-item">
+            <h3 data-translate="faqQuestion1">How is the required GPA calculated?</h3>
+            <p data-translate="faqAnswer1">It's calculated based on your current GPA, total credits, and the credits you plan to take in the next semester to reach your goal.</p>
+        </div>
+        <div class="faq-item">
+            <h3 data-translate="faqQuestion2">What if my goal GPA is unrealistic?</h3>
+            <p data-translate="faqAnswer2">The calculator will show a very high or impossible required GPA. You may need to adjust your goal or study harder.</p>
+        </div>
+        <div class="faq-item">
+            <h3 data-translate="faqQuestion3">Can I adjust my goal GPA later?</h3>
+            <p data-translate="faqAnswer3">Yes, you can always re-enter new values to calculate a different required GPA.</p>
+        </div>
+    </div>
+</section>
+{% include 'footer.html' %}
+<script src="{{ url_for('static', filename='js/language.js') }}" defer></script>
+<script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const calculateBtn = document.getElementById('calculateRequiredGpaBtn');
+        const clearBtn = document.getElementById('clearPlanningBtn');
+        const resultDiv = document.getElementById('requiredGpaResult');
+
+        calculateBtn.addEventListener('click', async function() {
+            const goalGpa = document.getElementById('goalGpa').value;
+            const currentGpa = document.getElementById('currentGpa').value;
+            const currentTotalCredits = document.getElementById('currentTotalCredits').value;
+            const nextSemesterCredits = document.getElementById('nextSemesterCredits').value;
+
+            if (!goalGpa || !currentGpa || !currentTotalCredits || !nextSemesterCredits) {
+                resultDiv.innerHTML = '<p class="error">Please fill in all the fields.</p>';
+                resultDiv.style.display = 'block';
+                return;
+            }
+
+            try {
+                const response = await fetch('/calculate_required_gpa', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        goalGpa: goalGpa,
+                        currentGpa: currentGpa,
+                        currentTotalCredits: currentTotalCredits,
+                        nextSemesterCredits: nextSemesterCredits
+                    })
+                });
+
+                const result = await response.json();
+
+                if (result.status === 'success') {
+                    if (result.requiredGpa > 4.0 || result.requiredGpa < 0) {
+                        resultDiv.innerHTML = `<p class="result-message error">${result.message}</p>
+                                               <p class="result-gpa">${result.requiredGpa}</p>`;
+                    } else {
+                        resultDiv.innerHTML = `<p class="result-message">To achieve your goal GPA, you need to get a GPA of:</p>
+                                               <p class="result-gpa">${result.requiredGpa}</p>`;
+                    }
+                    resultDiv.style.display = 'block';
+                } else {
+                    resultDiv.innerHTML = `<p class="error">${result.message}</p>`;
+                    resultDiv.style.display = 'block';
+                }
+
+            } catch (error) {
+                console.error('Error:', error);
+                resultDiv.innerHTML = '<p class="error">An error occurred while calculating GPA. Please try again.</p>';
+                resultDiv.style.display = 'block';
+            }
+        });
+
+        clearBtn.addEventListener('click', function() {
+            document.getElementById('goalGpa').value = '';
+            document.getElementById('currentGpa').value = '';
+            document.getElementById('currentTotalCredits').value = '';
+            document.getElementById('nextSemesterCredits').value = '';
+            resultDiv.style.display = 'none';
+            resultDiv.innerHTML = '';
+        });
+    });
+</script>
+</body>
+</html>
