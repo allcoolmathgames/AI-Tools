@@ -2,8 +2,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
-    <title data-translate="pageTitle">GPA Calculator – Calculate Your Grade Point Average</title>
-    <meta name="description" content="Use this GPA Calculator to quickly find your grade point average. Fast, accurate, and perfect for high school and college students." data-translate="metaDescription">
+    <title data-translate="pageTitle">College GPA Calculator - Know Your College GPA</title>
+    <meta name="description" content="Easily calculate your college GPA with our free College GPA calculator. Enter grades and credit hours to get instant results, no sign-up needed." data-translate="metaDescription">
     
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" data-translate="linkStylesheet">
 
@@ -32,10 +32,12 @@
 
     <main style="position: relative; top: -75px;">
         <section class="page-content" data-translate="pageContentSection">
-            <h1 data-translate="gpaCalculatorTitle">GPA Calculator</h1>
+            <h1 data-translate="gpaCalculatorTitle">College GPA Calculator</h1>
 
+                <p>Use this College GPA Calculator to easily calculate your college grade point average by just making a single click.</p>
+                <br>
             <div class="input-section centered-section" data-translate="inputSection">
-                <h2 data-translate="myCoursesHeading" style="position: relative; top: -35px;">Enter Your Grades</h2>
+                <h2 data-translate="myCoursesHeading" style="position: relative; top: -35px;">Calculate College GPA</h2>
                 <table class="course-input-table" data-translate="courseTable" style="position: relative; top: -35px;">
                     <thead>
                         <tr>
@@ -46,17 +48,17 @@
                     </thead>
                     <tbody id="courseTableBody" data-translate="courseTableBody">
                         <tr>
-                            <td><input type="text" name="courseName" placeholder="e.g., Math 101"></td>
+                            <td><input type="text" name="courseName" placeholder="Add Course"></td>
                             <td><input type="number" name="credits" step="0.1" min="0.5" placeholder="e.g., 3"></td>
                             <td><select name="grade"></select></td>
                         </tr>
                         <tr>
-                            <td><input type="text" name="courseName" placeholder="e.g., Biology 202"></td>
+                            <td><input type="text" name="courseName" placeholder="Add course"></td>
                             <td><input type="number" name="credits" step="0.1" min="0.5" placeholder="e.g., 4"></td>
                             <td><select name="grade"></select></td>
                         </tr>
                         <tr>
-                            <td><input type="text" name="courseName" placeholder="e.g., History 101"></td>
+                            <td><input type="text" name="courseName" placeholder="Add Course"></td>
                             <td><input type="number" name="credits" step="0.1" min="0.5" placeholder="e.g., 2"></td>
                             <td><select name="grade"></select></td>
                         </tr>
@@ -86,72 +88,67 @@
                         <div class="step-icon" data-translate="step1Icon">
                             <i class="fa-solid fa-1" data-translate="step1IconFa"></i>
                         </div>
-                        <h3 style="text-decoration: none;"><span data-translate="step1Title">Step 1: Enter Your Grades</span></h3>
-                        <p style="text-align: left;"><span data-translate="step1Description">First enter the letter grade (A, B+, C, etc.) for each course. This step identifies the grade point value which is being used in the formula.</span></p>
+                        <h3 style="text-decoration: none;"><span data-translate="step1Title">Step 1: Enter Your Courses</span></h3>
+                        <p style="text-align: left;"><span data-translate="step1Description">List each course you’ve taken for the semester.</span></p>
                     </div>
                     <div class="step" data-translate="step2">
                         <div class="step-icon" data-translate="step2Icon">
                             <i class="fa-solid fa-2" data-translate="step2IconFa"></i>
                         </div>
                         <h3 style="text-decoration: none;"><span data-translate="step2Title">Step 2: Add Credit Hours</span></h3>
-                        <p style="text-align: left;"><span data-translate="step2Description">In this step you need to enter each course’s credit value (e.g., 3 for a lecture, 1 for a lab). The GPA result will evaluate each class properly.</span></p>
+                        <p style="text-align: left;"><span data-translate="step2Description">Type in the credit hours for each course (usually 1 to 4 hours).</span></p>
                     </div>
                     <div class="step" data-translate="step3">
                         <div class="step-icon" data-translate="step3Icon">
                             <i class="fa-solid fa-3" data-translate="step3IconFa"></i>
                         </div>
-                        <h3 style="text-decoration: none;"><span data-translate="step3Title">Step 3: Watch Your GPA Appear Instantly</span></h3>
-                        <p style="text-align: left;"><span data-translate="step3Description">The calculator shows your semester GPA instantly. No need to click, simply type and watch the number update automatically.</span></p>
+                        <h3 style="text-decoration: none;"><span data-translate="step3Title">Step 3: Select Your Grades</span></h3>
+                        <p style="text-align: left;"><span data-translate="step3Description">Choose the grade you received for each course (A, B, C, etc.).</span></p>
                     </div>
                     <div class="step" data-translate="step4">
-                        <div class="step-icon" data-translate="step4Icon">
+                        <div class="step-icon" data-translate="step3Icon">
                             <i class="fa-solid fa-4" data-translate="step4IconFa"></i>
                         </div>
-                        <h3 style="text-decoration: none;"><span data-translate="step4Title">Step 4: Reset If Needed</span></h3>
-                        <p style="text-align: left;"><span data-translate="step4Description">You can use the reset button to erase all inputs. This is helpful for testing “what if” cases or whether you are checking out future semester plans.</span></p>
+                        <h3 style="text-decoration: none;"><span data-translate="step3Title">Step 4: Click <b>Calculate GPA</b></span></h3>
+                        <p style="text-align: left;"><span data-translate="step3Description">Hit the calculate button to instantly see your GPA result.</span></p>
                     </div>
                 </div>
             </section>
 
             <section class="why-choose-us-section centered-section" data-translate="whyChooseUsSection">
-                <h2 data-translate="whyChooseUsHeading">Why Use This GPA Calculator?</h2>
+                <h2 data-translate="whyChooseUsHeading">Why Use Our College GPA Calculator?</h2>
                 <div class="feature-row left-text-right-image" data-translate="featureRow1">
                     <div class="feature-text" data-translate="feature1Text">
-                        <h3 data-translate="feature1Title">Precision in Results</h3>
-                        <p data-translate="feature1Description">This tool allows you to insert credit hours, guaranteeing weighted GPA results. It reflects official GPA standards. Courses with higher credits have a greater influence on your GPA.</p>
-                    </div>
-                    <div class="feature-image" data-translate="feature1Image">
-                        <img src="" alt="Accuracy and Simplicity" data-translate="feature1ImageAlt">
+                        <h3 data-translate="feature1Title">Accuracy</h3>
+                        <p data-translate="feature1Description" style="text-align: left;">Our tool gives accurate results by using your grades and credit hours, so you can see how you're doing in your studies.</p>
                     </div>
                 </div>
 
                 <div class="feature-row right-text-left-image" data-translate="featureRow2">
-                    <div class="feature-image" data-translate="feature2Image">
-                        <img src="" alt="Fast and Reliable" data-translate="feature2ImageAlt">
-                    </div>
                     <div class="feature-text" data-translate="feature2Text">
-                        <h3 data-translate="feature2Title">Instant Results</h3>
-                        <p data-translate="feature2Description">Your GPA updates instantly as you input grades and credits. It’s perfect for testing how improving a single grade can impact your GPA.</p>
+                        <h3 data-translate="feature2Title">User-Friendly Interface</h3>
+                        <p data-translate="feature2Description" style="text-align: left;">We designed the interface of this tool to be user-friendly so that everyone can use it easily. No technical skills are required to utilize this tool. </p>
                     </div>
                 </div>
 
                 <div class="feature-row left-text-right-image" data-translate="featureRow3">
                     <div class="feature-text" data-translate="feature3Text">
-                        <h3 data-translate="feature3Title">User-Friendly Interface</h3>
-                        <p data-translate="feature3Description">Easy to use design and it works smoothly on any device. You don't need to switch the tab as all features are visible on the single screen.</p>
-                    </div>
-                    <div class="feature-image" data-translate="feature3Image">
-                        <img src="" alt="User-Friendly Interface" data-translate="feature3ImageAlt">
+                        <h3 data-translate="feature3Title">Track Academic Goals</h3>
+                        <p data-translate="feature3Description" style="text-align: left;">This tool helps you stay focused on your academic goals. By checking your GPA regularly, you can see how well you're doing, spot areas that need improvement, and make smart decisions to boost your grades.</p>
                     </div>
                 </div>
 
                 <div class="feature-row right-text-left-image" data-translate="featureRow4">
-                    <div class="feature-image" data-translate="feature4Image">
-                        <img src="" alt="Accurate and Based on Standards" data-translate="feature4ImageAlt">
-                    </div>
                     <div class="feature-text" data-translate="feature4Text">
-                        <h3 data-translate="feature4Title">Accurate and Based on Standards</h3>
-                        <p data-translate="feature4Description">It uses official GPA standards based on the quality points and credits. Every calculator step of your GPA is shown clearly and no hidden math is required.</p>
+                        <h3 data-translate="feature4Title">Instant and Fast Results</h3>
+                        <p data-translate="feature4Description" style="text-align: left;">Get your calculated GPA instantly! Just enter your grades and credit hours - no waiting, no loading, just quick and reliable results right away.</p>
+                    </div>
+                </div>
+                
+                <div class="feature-row left-text-right-image" data-translate="featureRow1">
+                    <div class="feature-text" data-translate="feature1Text">
+                        <h3 data-translate="feature1Title">Free to Use</h3>
+                        <p data-translate="feature1Description" style="text-align: left;">Gpacalculatorcollege.com is 100% free - no sign-ups, no hidden fees, and no limits. Just enter your grades and credit hours to get your grade point average instantly.</p>
                     </div>
                 </div>
             </section>
@@ -174,19 +171,13 @@
 
             <br data-translate="br1">
             <div class="content-section centered-section" data-translate="contentSection1">
-                <h2 data-translate="contentHeading1">About This GPA Calculator</h2>
-                <p data-translate="contentParagraph1">
-                    Our GPA Calculator by GPA Calculator uf is a free to use, online academic tool that assists you in precisely calculating your semester GPA with the help of the standard 4.0 scale. It was designed to provide both accuracy and ease for students, parents, counselors, and education advisors equally. Whether you're monitoring academic performance, confirming scholarship eligibility, or predicting GPA outcomes for future semesters, this calculator provides you a trusted approach for instant grade evaluation. It needs no registration or login; you just simply need to enter your letter grades and credit hours to get rapid results.
-                </p>
-                <p data-translate="contentParagraph2">
-                    This tool is using standardized calculation methods, backed by reliable academic institutions such as Harvard University, guaranteeing that the formula used shows credit-weighted academic grading standards used across U.S. high schools and colleges. It is built for clarity and usability, and it also includes a reset function for instant updated calculations, functioning smoothly across all devices. Whether you're planning for graduation, getting back on track after a difficult semester, or focused on improving to a target GPA, this tool helps you make smarter academic choices powered by real-time inputs.
-                </p>
 
-                <h2 data-translate="contentHeading2.1">Understanding Letter Grades and Numerical Equivalents</h2>
-                <p data-translate="contentParagraph3">
-                    It is important to learn how letter grades convert to numerical values on a 4.0 scale before using our GPA Calculator. These conversions form the core of GPA calculations and play a crucial role in determining your academic standing. Most U.S. institutions observe this grading standard to ensure consistency in results, for analyzing performance across various disciplines and credit-weighted courses. Whether you're using this for high school GPA planning, college semester tracking, or evaluating transfer credits, this chart provides clarity on how your individual grades impact your final academic standing.
+                <h2 data-translate="contentHeading1">What Is College GPA?</h2>
+                <p data-translate="contentParagraph1" style="text-align: left;">
+                    College Grade Point Average is a number that shows your overall academic performance in college. It’s calculated by converting your letter grades (like A, B, or C) into numbers and averaging them based on the credit hours of each course.
+                    <br>
+                    GPA is usually measured on a <b>4.0 scale</b>, where:
                 </p>
-
                 <table class="grade-table" data-translate="gradeTable">
                     <thead>
                         <tr>
@@ -209,97 +200,48 @@
                     </tbody>
                 </table>
 
-                <h2 data-translate="contentHeading3">GPA Calculation Formula</h2>
-                <p data-translate="contentParagraph4">
-                    <strong data-translate="formulaLabel">Formula:</strong>
-                    <br data-translate="brFormula">
-                    GPA = (Total Quality Points) &divide; (Total Credit Hours)
-                    <br data-translate="brFormula2">
-                    Each course&rsquo;s quality points are calculated as:<br>
-                    Grade Point &times; Credit Hours
+                <h2 data-translate="contentHeading1">How can I calculate my College GPA?</h2>
+                <p data-translate="contentParagraph1">
+                    If you know the formula, then calculating GPA is very easy. Your Grade Point Average is based on the grades you receive in each course and the number of credit hours each course is worth.
                 </p>
 
-                <h3 data-translate="contentHeading4">Example:</h3>
-                <table class="gpa-example-table" data-translate="gpaExampleTable">
-                    <thead>
-                        <tr>
-                            <th data-translate="tableHeaderCourse">Course</th>
-                            <th data-translate="tableHeaderGrade">Grade</th>
-                            <th data-translate="tableHeaderCredits">Credits</th>
-                            <th data-translate="tableHeaderGradePoint">Grade Point</th>
-                            <th data-translate="tableHeaderQualityPoints">Quality Points</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td data-translate="exampleMathCourse">Math 101</td>
-                            <td data-translate="exampleMathGrade">A</td>
-                            <td data-translate="exampleMathCredits">3</td>
-                            <td data-translate="exampleMathGradePoint">4.0</td>
-                            <td data-translate="exampleMathQualityPoints">12.0</td>
-                        </tr>
-                        <tr>
-                            <td data-translate="exampleBioCourse">Biology 202</td>
-                            <td data-translate="exampleBioGrade">B+</td>
-                            <td data-translate="exampleBioCredits">4</td>
-                            <td data-translate="exampleBioGradePoint">3.3</td>
-                            <td data-translate="exampleBioQualityPoints">13.2</td>
-                        </tr>
-                        <tr>
-                            <td data-translate="exampleHistoryCourse">History 101</td>
-                            <td data-translate="exampleHistoryGrade">B</td>
-                            <td data-translate="exampleHistoryCredits">2</td>
-                            <td data-translate="exampleHistoryGradePoint">3.0</td>
-                            <td data-translate="exampleHistoryQualityPoints">6.0</td>
-                        </tr>
-                        <tr>
-                            <td data-translate="exampleTotalLabel"><strong>Total</strong></td>
-                            <td data-translate="exampleTotalGrade">–</td>
-                            <td data-translate="exampleTotalCredits"><strong>9</strong></td>
-                            <td data-translate="exampleTotalGradePoint">–</td>
-                            <td data-translate="exampleTotalQualityPoints"><strong>31.2</strong></td>
-                        </tr>
-                        <tr>
-                            <td data-translate="exampleGpaLabel"><strong>GPA</strong></td>
-                            <td data-translate="exampleGpaGrade">–</td>
-                            <td data-translate="exampleGpaCredits">–</td>
-                            <td data-translate="exampleGpaGradePoint">–</td>
-                            <td data-translate="exampleGpaValue"><strong>3.47</strong></td>
-                        </tr>
-                    </tbody>
-                </table>
+                <h2 data-translate="contentHeading2.1">Formula</h2>
+                <p data-translate="contentParagraph3">
+                    <b style="text-align: center;">GPA = (Total Grade Points) ÷ (Total Credit Hours)</b> <br>
+                    Skip the manual calculations and simply use GPA Calculator College to get your result in seconds - fast, accurate, and hassle-free!
+                </p>
             </div>
 
             <div class="content-section centered-section" data-translate="contentSection2">
-                <h2 data-translate="contentHeading2.2"></h2>
-                <p data-translate="contentParagraph2_2"></p>
-
-                <h3 data-translate="gpaTip1"></h3>
-                <p data-translate="gpaTipText1"></p>
-
-                <h3 data-translate="gpaTip2"></h3>
-                <p data-translate="gpaTipText2"></p>
-
-                <h3 data-translate="gpaTip3"></h3>
-                <p data-translate="gpaTipText3">
-                    <span data-translate="gpaTipText3_part1"></span>
-                    <a href="https://www.khanacademy.org/" style="text-decoration: none;" data-translate="khanAcademyLink"></a>
-                    <span data-translate="gpaTipText3_part2"></span>
+                <h2 data-translate="contentHeading1">Use Cases Of This Calculator</h2>
+                <h3>College Students</h3>
+                <p data-translate="contentParagraph1" style="text-align: left;">
+                    We make this website for college students who want to stay on top of their academic progress. Whether you're aiming for scholarships, honors, or just trying to meet graduation requirements, it helps you keep track of your performance.
                 </p>
-
-                <h3 data-translate="gpaTip4"></h3>
-                <p data-translate="gpaTipText4"></p>
-
-                <p data-translate="gpaExtraNote">
-                    <span data-translate="gpaExtraNote_part1"></span>
-                    <a href="https://lsc.cornell.edu/" style="text-decoration: none;" data-translate="cornellLink"></a>
-                    <br data-translate="br2">
-                    <br data-translate="br3">
-                    <span data-translate="gpaExtraNote_part2"></span>
-                    <a href="{{ url_for('gpa_planning') }}" data-translate="gpaPlanningLink"></a>
+                <h3>College Professors</h3>
+                <p data-translate="contentParagraph1">
+                    Professors can use the tool to quickly check or verify a student's grade point average based on their grades and credit hours. It’s a simple and efficient way to calculate academic performance without manual math.
                 </p>
+                <h3>Advisors & Tutors</h3>
+                <p data-translate="contentParagraph1">
+                   Advisors and tutors can use the College GPA Calculator to quickly calculate a student’s academic performance. It helps them get a clear picture of a student's progress without needing to do manual calculations.
+                </p>
+                <h3>Parents</h3>
+                <p data-translate="contentParagraph1">
+                   Parents can use this calculator to stay informed about their child’s academic progress.
+                </p>
+                <h3>Colleges</h3>
+                <p data-translate="contentParagraph1">It's often used by colleges for:</p>
+                <ul style="padding-left: 30px;">
+                    <li>Academic standing</li>
+                    <li>Graduation eligibility</li>
+                    <li>Scholarships or financial aid</li>
+                    <li>Honors and dean’s list qualification</li>
+                    <li>ob or internship applications</li>
+                </ul>
             </div>
 
+<!--
             <div class="blog-section centered-section" data-translate="blogSection">
                 <h2 data-translate="latestBlogsHeading" style="text-align: center;">Latest Blogs</h2>
                 <br data-translate="br4">
@@ -321,54 +263,43 @@
                     <a href="{{ url_for('blog_index') }}" class="primary-btn" data-translate="viewAllBlogsButton">View All Blogs</a>
                 </div>
             </div>
+-->
+
             <br data-translate="br5">
 
             <div class="faq-section centered-section" data-translate="faqSection">
                 <h2 data-translate="faqHeading">Frequently Asked Questions</h2>
 
                 <div class="faq-item" data-translate="faqItem1">
-                    <h3 data-translate="faqQuestion1">What is a GPA calculator?</h3>
-                    <p data-translate="faqAnswer1">A GPA calculator is an academic tool that is used to find out your current or future grade point average by entering letter grades and course credit hours. It eases the process of academic planning, saves time, and assists students in understanding their academic performance throughout a term or school year.</p>
+                    <h3 data-translate="faqQuestion1">How accurate is this College GPA calculator?</h3>
+                    <p data-translate="faqAnswer1">This calculator provides accurate results as long as you enter the correct grades and credit hours for each course.</p>
                 </div>
 
                 <div class="faq-item" data-translate="faqItem2">
-                    <h3 data-translate="faqQuestion2">How do I calculate GPA manually?</h3>
-                    <p data-translate="faqAnswer2">To calculate your GPA manually, you just need to multiply each course's grade point value by its credit hours to obtain the quality points. Then, add all quality points and divide the total by the number of credit hours taken. This method guarantees an accurate academic performance average.</p>
+                    <h3 data-translate="faqQuestion2">Can I use this calculator for multiple semesters?</h3>
+                    <p data-translate="faqAnswer2">Yes, you can calculate GPA for a single semester or combine multiple semesters to find your cumulative GPA.</p>
                 </div>
 
                 <div class="faq-item" data-translate="faqItem3">
-                    <h3 data-translate="faqQuestion3">Can I calculate GPA using percentages?</h3>
-                    <p data-translate="faqAnswer3">No, this calculator only performs with letter grades, not the percentages. You need to convert your percentage scores to standard letter grades as per your institution’s grading scale. Then, enter the letter grade and credit hours to compute an accurate GPA on a 4.0 scale.</p>
+                    <h3 data-translate="faqQuestion3">Do I need to download anything?</h3>
+                    <p data-translate="faqAnswer3">No, the tool works online just open the calculator, enter your info, and get your Grade point average instantly.</p>
                 </div>
 
                 <div class="faq-item" data-translate="faqItem4">
-                    <h3 data-translate="faqQuestion4">What GPA scale does this tool use?</h3>
-                    <p data-translate="faqAnswer4">Our tool utilizes the standard 4.0 unweighted GPA scale, which is commonly used in U.S. colleges and high schools. Grades like A, B+, and C are changed into numerical values between 0.0 and 4.0 to identify your final average depending on the credit hours.</p>
+                    <h3 data-translate="faqQuestion4">Will my information be saved?</h3>
+                    <p data-translate="faqAnswer4">No, the calculator does not store any data. All information you enter stays private and is cleared once you leave the page.</p>
                 </div>
 
                 <div class="faq-item" data-translate="faqItem5">
-                    <h3 data-translate="faqQuestion5">Can I calculate a weighted GPA?</h3>
-                    <p data-translate="faqAnswer5">Right now, the calculator does not support weighted GPA calculations. You can manually increase your grade points if you're in AP or honors classes. In future updates, we plan to integrate an optional weighted GPA mode for high school curriculum tracking.</p>
-                </div>
-
-                <div class="faq-item" data-translate="faqItem6">
-                    <h3 data-translate="faqQuestion6">What’s a good GPA for scholarships?</h3>
-                    <p data-translate="faqAnswer6">A GPA of 3.5 or higher is often considered competitive for merit-based scholarships and education funding. Some programs consider students with lower grades but with strong extracurriculars. Tracking your GPA regularly helps you stay eligible and focused for academic improvement by working harder in key subjects.</p>
-                </div>
-
-                <div class="faq-item" data-translate="faqItem7">
-                    <h3 data-translate="faqQuestion7">How often should I use a GPA calculator?</h3>
-                    <p data-translate="faqAnswer7">You should use the GPA calculator after every of your major exams and assessments, midterms, and at the end of each semester. Frequent monitoring assists students in planning and setting academic goals, identifying the areas, and changing their approach before final grades are delivered. It aids in better planning and performance.</p>
-                </div>
-
-                <div class="faq-item" data-translate="faqItem8">
-                    <h3 data-translate="faqQuestion8">Does this work for both high school and college students?</h3>
-                    <p data-translate="faqAnswer8">Yes. This tool supports high school and college grading systems that follow the 4.0 unweighted GPA scale. Whether you're preparing for college admission or trying to stay on track with your studies, this calculator gives accurate insights based on your specific grade and credits you enter.</p>
+                    <h3 data-translate="faqQuestion5">What if I make a mistake while entering my grades?</h3>
+                    <p data-translate="faqAnswer5">No worries, you can edit or reset the form at any time to correct your entries.</p>
                 </div>
             </div>
         </section>
     </main>
 
+<!--Author section-->
+<!--    
     <section class="author-section similar-to-amazon" data-translate="authorSection">
         <div class="author-content" data-translate="authorContent">
             <h2 class="author-headline" data-translate="authorHeadline">AUTHOR SECTION</h2>
@@ -378,6 +309,8 @@
             <img src="https://images.unsplash.com/photo-1526779259212-939e64788e3c?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZnJlZSUyMGltYWdlc3xlbnwwfHwwfHx8MA%3D%3D" alt="Smiling person using a tablet" data-translate="authorImageAlt">
         </div>
     </section>
+--->
+
 
     {% include 'footer.html' %}
 
@@ -425,7 +358,7 @@
             function addCourseRow() {
                 const newRow = document.createElement('tr');
                 newRow.innerHTML = `
-                    <td><input type="text" name="courseName" placeholder="e.g., Math 101"></td>
+                    <td><input type="text" name="courseName" placeholder="Add Course"></td>
                     <td><input type="number" name="credits" step="0.1" min="0.5" placeholder="e.g., 3"></td>
                     <td><select name="grade"></select></td>
                     <td><button class="delete-btn"><i class="fa-solid fa-xmark"></i></button></td>

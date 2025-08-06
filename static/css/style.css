@@ -415,6 +415,7 @@ body {
   color: var(--dark-text);
   min-width: 300px;
   max-width: 500px;
+  height: 90px;
 }
 
 .gpa-box span:last-child {
@@ -725,7 +726,7 @@ body {
   }
 
   .gpa-box span:last-child {
-    font-size: 36px;
+    font-size: 30px;
   }
 
   .cards-container {
@@ -1253,7 +1254,7 @@ body {
   display: flex;
   align-items: center;
   gap: 50px;
-  margin-bottom: 50px;
+  margin-bottom: 20px;
   text-align: left;
 }
 
