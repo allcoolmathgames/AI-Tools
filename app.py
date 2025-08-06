@@ -245,7 +245,3 @@ def calculate_required_gpa():
         return jsonify({'status': 'error', 'message': 'Invalid input: Please provide valid numbers.'}), 400
     except Exception as e:
         return jsonify({'status': 'error', 'message': f'An unexpected error occurred: {str(e)}'}), 500
-
-
-if __name__ == '__main__':
-    app.run(debug=True)
