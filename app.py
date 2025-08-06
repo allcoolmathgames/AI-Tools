@@ -41,9 +41,9 @@ def prior_semester_gpa():
 def highschool_gpa():
     return render_template('highschool.html')
 
-@app.route('/college-gpa')
-def college_gpa():
-    return render_template('College-GPA.html')
+@app.route('/gpa-calculator')
+def gpa_calculator():
+    return render_template('gpa-calculator.html')
 
 @app.route('/gpa-planning')
 def gpa_planning():
