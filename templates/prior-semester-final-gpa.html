@@ -27,7 +27,6 @@
 {% include 'header.html' %}
 <section class="page-content" style="position: relative; top: -75px;">
     <h1 data-translate="calcGpaMainHeading">Calculate GPA</h1>
-    <p data-translate="calcGpaDescription">Calculate GPA with Previous Semesters</p>
 
     <div class="input-section centered-section">
         <h2 data-translate="gpaPreviousSemesterHeading">Calculate GPA with Previous Semesters</h2>
@@ -303,6 +302,25 @@
             resultDiv.style.display = 'none';
             resultDiv.innerHTML = '';
         });
+
+        // Toggle functionality for FAQ items
+            const faqItems = document.querySelectorAll('.faq-item');
+
+            faqItems.forEach(item => {
+                const header = item.querySelector('h3');
+                const paragraph = item.querySelector('p');
+
+                // Set initial state to open
+                paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+
+                header.addEventListener('click', () => {
+                    if (paragraph.style.maxHeight === '0px') {
+                        paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    } else {
+                        paragraph.style.maxHeight = '0';
+                    }
+                });
+            });
     });
 </script>
 </body>

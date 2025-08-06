@@ -342,27 +342,6 @@
                     <a href="{{ url_for('gpa_planning') }}"></a>
                 </p>
             </div>
-            <div class="blog-section centered-section">
-                <h2 style="text-align: center;">Latest Blogs</h2>
-                <br>
-                <div class="cards-container">
-                    <div class="card blog-card">
-                        <img src="https://gratisography.com/wp-content/uploads/2024/11/gratisography-augmented-reality-800x525.jpg" alt="Blog Image" class="blog-card-image">
-                        <h3>How to Improve Your GPA Effectively</h3>
-                        <p>Discover proven strategies to boost your grade point average and achieve academic success.</p>
-                        <a href="{{ url_for('blog_post', slug='how-to-improve-your-gpa-effectively') }}" class="card-button">Read More</a>
-                    </div>
-                    <div class="card blog-card">
-                        <img src="https://gratisography.com/wp-content/uploads/2024/11/gratisography-augmented-reality-800x525.jpg" alt="Blog Image" class="blog-card-image">
-                        <h3>Understanding Different Grading Scales</h3>
-                        <p>A comprehensive guide to various grading systems used across universities worldwide.</p>
-                        <a href="{{ url_for('blog_post', slug='understanding-different-grading-scales') }}" class="card-button">Read More</a>
-                    </div>
-                </div>
-                <div class="button-group view-all-blogs-btn-group">
-                    <a href="{{ url_for('blog_index') }}" class="primary-btn">View All Blogs</a>
-                </div>
-            </div>
             <div class="faq-section centered-section">
                 <h2>Frequently Asked Questions</h2>
                 <div class="faq-item">
@@ -400,15 +379,6 @@
             </div>
         </section>
     </main>
-    <section class="author-section similar-to-amazon">
-        <div class="author-content">
-            <h2 class="author-headline">AUTHOR SECTION</h2>
-            <p class="author-subheadline">We'll make it easy for you to keep your profile up to date and stay informed about what's happening with all of your work.</p>
-        </div>
-        <div class="author-image-container">
-            <img src="https://images.unsplash.com/photo-1526779259212-939e64788e3c?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZnJlZSUyMGltYWdlc3xlbnwwfHwwfHx8MA%3D%3D" alt="Smiling person using a tablet">
-        </div>
-    </section>
     {% include 'footer.html' %}
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -541,6 +511,25 @@
             // Initial call to set column visibility and add first row
             addCourseRow();
             toggleWeightColumn();
+
+            // Toggle functionality for FAQ items
+            const faqItems = document.querySelectorAll('.faq-item');
+
+            faqItems.forEach(item => {
+                const header = item.querySelector('h3');
+                const paragraph = item.querySelector('p');
+
+                // Set initial state to open
+                paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+
+                header.addEventListener('click', () => {
+                    if (paragraph.style.maxHeight === '0px') {
+                        paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    } else {
+                        paragraph.style.maxHeight = '0';
+                    }
+                });
+            });
         });
     </script>
     <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>

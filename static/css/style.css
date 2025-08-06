@@ -446,61 +446,76 @@ body {
 
 /* FAQ Section */
 .faq-item {
-  margin-bottom: 15px;
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  padding: 0;
-  overflow: hidden;
-  transition: all 0.3s ease;
+    margin-bottom: 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
 }
 
 .faq-item:last-child {
-  margin-bottom: 0;
+    margin-bottom: 0;
 }
 
 .faq-item h3 {
-  font-size: 18px;
-  color: var(--heading-color);
-  margin: 0;
-  padding: 18px 25px;
-  cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: var(--light-bg);
-  transition: background-color 0.3s ease;
-  font-weight: 600;
+    font-size: 18px;
+    color: var(--heading-color);
+    margin: 0;
+    padding: 18px 25px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--light-bg);
+    transition: background-color 0.3s ease;
+    font-weight: 600;
 }
 
 .faq-item h3:hover {
-  background-color: #e6e6e6;
+    background-color: #e6e6e6;
+}
+
+/* Jab item active ho to h3 ka background change ho */
+.faq-item.active h3 {
+    background-color: var(--faq-active-bg, #f0f0f0);
 }
 
 .faq-item h3 .toggle-icon {
-  font-size: 26px;
-  font-weight: normal;
-  margin-left: 15px;
-  transition: transform 0.3s ease;
-  line-height: 1;
-  color: var(--accent-color);
+    font-size: 26px;
+    font-weight: normal;
+    margin-left: 15px;
+    transition: transform 0.3s ease;
+    line-height: 1;
+    color: var(--accent-color);
+}
+
+/* Icon ki initial state */
+.faq-item h3 .toggle-icon::before {
+    content: '+';
+}
+
+/* Jab item active ho to icon rotate ho */
+.faq-item.active h3 .toggle-icon::before {
+    content: '-';
 }
 
 .faq-item p {
-  font-size: 15px;
-  color: #555;
-  line-height: 1.6;
-  margin: 0;
-  padding: 0 25px;
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.4s ease-out, padding 0.4s ease-out;
-  text-align: left;
+    font-size: 15px;
+    color: #555;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0 25px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-in-out, padding 0.4s ease-in-out;
+    text-align: left;
 }
 
-.faq-item p.active {
-  max-height: 200px;
-  padding-top: 15px;
-  padding-bottom: 20px;
+.faq-item.active p {
+    max-height: 500px; /* Is value ko tum apne content ke hisab se badha sakte ho */
+    padding-top: 15px;
+    padding-bottom: 20px;
 }
 
 /* Navigation Cards Section (Typically for home/index page) */
