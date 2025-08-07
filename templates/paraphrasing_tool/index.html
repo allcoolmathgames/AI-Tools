@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="page_title">AI Paraphrasing Tool - Summarizer.ai</title>
+    <meta data-i18n-content="meta_description" name="description" content="Rephrase sentences and paragraphs without changing their meaning using our AI Paraphrasing Tool. Avoid plagiarism and enhance your writing.">
+    <meta data-i18n-content="meta_keywords" name="keywords" content="AI paraphrasing tool, rephrase text, plagiarism checker, content rewriter, unique content, writing assistant">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2QWDFWwBCxN5V6qG/t3bLtmG6NvwK20R8T3M2t/FfD3M5C5S5P5M5P5M5A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="alternate" hreflang="x-default" href=""/>
+    <link rel="alternate" hreflang="cs" href=""/>
+    <link rel="alternate" hreflang="ar" href=""/>
+    <link rel="alternate" hreflang="de" href=""/>
+    <link rel="alternate" hreflang="es" href=""/>
+    <link rel="alternate" hreflang="fi" href=""/>
+    <link rel="alternate" hreflang="fr" href=""/>
+    <link rel="alternate" hreflang="id" href=""/>
+    <link rel="alternate" hreflang="it" href=""/>
+    <link rel="alternate" hreflang="ja" href=""/>
+    <link rel="alternate" hreflang="ko" href=""/>
+    <link rel="alternate" hreflang="pl" href=""/>
+    <link rel="alternate" hreflang="pt" href=""/>
+    <link rel="alternate" hreflang="ru" href=""/>
+    <link rel="alternate" hreflang="da" href=""/>
+    <link rel="alternate" hreflang="no" href=""/>
+    <link rel="alternate" hreflang="tr" href=""/>
+</head>
+<body>
+
+    {% include 'header.html' %}
+
+    <section id="paraphrasing-tool" class="section-container">
+        <h1 class="section-heading" data-i18n="section_heading_tool">AI Paraphrasing Tool</h1>
+        <div class="tool-container">
+            <div class="summarizer-grid">
+                <div class="input-group">
+                    <label for="inputText" data-i18n="label_input_text">Original Text:</label>
+                    <textarea id="inputText" data-i18n-placeholder="placeholder_input_text" placeholder="Paste the text you want to paraphrase here..."></textarea>
+                </div>
+                <div class="output-group">
+                    <label for="paraphrasedText" data-i18n="label_paraphrased_text">Paraphrased Text:</label>
+                    <textarea id="paraphrasedText" readonly data-i18n-placeholder="placeholder_paraphrased_text" placeholder="Your paraphrased content will appear here..."></textarea>
+                </div>
+            </div>
+            <div class="action-buttons">
+                <button id="paraphraseBtn" class="primary-button" data-i18n="button_paraphrase_text">Paraphrase Text</button>
+            </div>
+            
+            <div class="loader" id="loader"></div>
+            <div class="error-message" id="errorMessage"></div>
+        </div>
+    </section>
+
+    <section id="paraphrasing-features" class="section-container">
+        <h2 class="section-heading" data-i18n="section_heading_why_use_tool">Why Use Our Paraphrasing Tool?</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">✨</div>
+                <h3 data-i18n="feature_title_avoid_plagiarism">Avoid Plagiarism</h3>
+                <p data-i18n="feature_description_avoid_plagiarism">Easily rephrase content to ensure originality and maintain academic integrity.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🚀</div>
+                <h3 data-i18n="feature_title_enhance_readability">Enhance Readability</h3>
+                <p data-i18n="feature_description_enhance_readability">Improve your text's flow, vocabulary, and sentence structure for better communication.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⏱️</div>
+                <h3 data-i18n="feature_title_save_time">Save Time</h3>
+                <p data-i18n="feature_description_save_time">Quickly transform complex sentences into simpler ones, or vice versa, in seconds.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="how-it-works" class="section-container">
+        <h2 class="section-heading" data-i18n="section_heading_how_to_use">How To Use the Paraphrasing Tool</h2>
+        <div class="steps-container">
+            <div class="step">
+                <div class="step-number" data-i18n="step_number_1">1</div>
+                <div class="step-text">
+                    <h4 data-i18n="step_title_1">Paste Original Text</h4>
+                    <p data-i18n="step_description_1">Copy the text you wish to rephrase and paste it into the 'Original Text' box.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number" data-i18n="step_number_2">2</div>
+                <div class="step-text">
+                    <h4 data-i18n="step_title_2">Paraphrase</h4>
+                    <p data-i18n="step_description_2">Click the 'Paraphrase Text' button. Our AI will instantly generate a new version.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number" data-i18n="step_number_3">3</div>
+                <div class="step-text">
+                    <h4 data-i18n="step_title_3">Review & Use</h4>
+                    <p data-i18n="step_description_3">Review the paraphrased content. Make any necessary adjustments and use it in your work.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="more-tools" class="section-container">
+        <h2 class="section-heading" data-i18n="section_heading_explore_other_tools">Explore Our Other AI Tools</h2>
+        <div class="tools-grid">
+            <a href="{{ url_for('content_idea_generator_page') }}" class="tool-card">
+                <div class="tool-icon">💡</div>
+                <h3 data-i18n="tool_content_idea_generator_title">Content Idea Generator</h3>
+                <p data-i18n="tool_content_idea_generator_description">Generate creative and engaging ideas for your next content piece.</p>
+            </a>
+            <a href="{{ url_for('slogan_generator_page') }}" class="tool-card">
+                <div class="tool-icon">🏷️</div>
+                <h3 data-i18n="tool_ai_slogan_generator_title">AI Slogan Generator</h3>
+                <p data-i18n="tool_ai_slogan_generator_description">Create catchy and memorable slogans for your brand or campaign.</p>
+            </a>
+            <a href="{{ url_for('ai_humanizer_page') }}" class="tool-card">
+                <div class="tool-icon">🧑‍💻</div>
+                <h3 data-i18n="tool_ai_humanizer_title">AI Text Humanizer</h3>
+                <p data-i18n="tool_ai_humanizer_description">Transform AI-generated text into natural, human-like content.</p>
+            </a>
+            <a href="{{ url_for('ai_email_generator_page') }}" class="tool-card">
+                <div class="tool-icon">📧</div>
+                <h3 data-i18n="tool_ai_email_generator_title">AI Email Generator</h3>
+                <p data-i18n="tool_ai_email_generator_description">Generate professional and engaging emails quickly with AI.</p>
+            </a>
+            <a href="{{ url_for('grammar_checker_page') }}" class="tool-card">
+                <div class="tool-icon">✅</div>
+                <h3 data-i18n="tool_grammar_checker_title">Grammar Checker</h3>
+                <p data-i18n="tool_grammar_checker_description">Correct grammar, spelling, and punctuation errors instantly.</p>
+            </a>
+            <a href="{{ url_for('ai_story_generator_page') }}" class="tool-card">
+                <div class="tool-icon">📖</div>
+                <h3 data-i18n="tool_ai_story_generator_title">AI Story Generator</h3>
+                <p data-i18n="tool_ai_story_generator_description">Generate creative and engaging stories with AI.</p>
+            </a>
+        </div>
+        <br>
+        <div class="text-center">
+            <a href="{{ url_for('tools_index') }}" class="primary-button view-all-tools-button" data-i18n="button_view_all_tools">View All Tools</a>
+        </div>
+    </section>
+
+    <section id="additional-info-section" class="section-container">
+        <h2 class="section-heading" data-i18n="section_heading_additional_info">Additional Information</h2>
+        <div class="info-text-box">
+            <p data-i18n="info_text_box_paragraph">
+                Here you can add any additional text or information related to this page or tool. For example, the benefits of this tool, or tips for using it.
+            </p>
+        </div>
+    </section>
+
+    <section id="faq" class="section-container">
+        <h2 class="section-heading" data-i18n="section_heading_faq">Frequently Asked Questions</h2>
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3 data-i18n="faq_question_1">What is an AI Paraphrasing Tool?</h3>
+                    <i class="fas fa-plus"></i>
+                </div>
+                <div class="faq-answer">
+                    <p data-i18n="faq_answer_1">An AI Paraphrasing Tool uses artificial intelligence to rephrase sentences, paragraphs, or entire articles. It helps you express ideas in new ways, improve clarity, expand vocabulary, and avoid accidental plagiarism while preserving the original meaning.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3 data-i18n="faq_question_2">How does it help avoid plagiarism?</h3>
+                    <i class="fas fa-plus"></i>
+                </div>
+                <div class="faq-answer">
+                    <p data-i18n="faq_answer_2">By generating unique versions of existing text, the tool helps ensure that your content is original. It rephrases the input using different wording and sentence structures, making it distinct from the source while conveying the same information.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3 data-i18n="faq_question_3">Can I use this for academic writing?</h3>
+                    <i class="fas fa-plus"></i>
+                </div>
+                <div class="faq-answer">
+                    <p data-i18n="faq_answer_3">Yes, it's a useful tool for academic writing to help you understand and articulate information from sources in your own words. However, always ensure proper citation of original sources even after paraphrasing to maintain academic integrity.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% include 'footer.html' %}
+
+    <script src="{{ url_for('static', filename='js/paraphrasing_tool_script.js') }}"></script>
+    <script>
+        document.getElementById('currentYearParaphrasing').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

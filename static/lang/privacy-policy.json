@@ -1,0 +1,57 @@
+{
+  "en": {
+    "title": "Privacy Policy",
+    "subtitle": "Your privacy is our priority",
+    "description": "We are committed to protecting your personal information and ensuring transparency in how we use your data."
+  },
+  "es": {
+    "title": "Política de Privacidad",
+    "subtitle": "Tu privacidad es nuestra prioridad",
+    "description": "Nos comprometemos a proteger tu información personal y garantizar la transparencia en el uso de tus datos."
+  },
+  "id": {
+    "title": "Kebijakan Privasi",
+    "subtitle": "Privasi Anda adalah prioritas kami",
+    "description": "Kami berkomitmen untuk melindungi informasi pribadi Anda dan memastikan transparansi dalam penggunaan data Anda."
+  },
+  "br": {
+    "title": "Política de Privacidade",
+    "subtitle": "Sua privacidade é nossa prioridade",
+    "description": "Estamos comprometidos em proteger suas informações pessoais e garantir transparência no uso de seus dados."
+  },
+  "fr": {
+    "title": "Politique de Confidentialité",
+    "subtitle": "Votre vie privée est notre priorité",
+    "description": "Nous nous engageons à protéger vos informations personnelles et à assurer la transparence dans l'utilisation de vos données."
+  },
+  "nl": {
+    "title": "Privacybeleid",
+    "subtitle": "Jouw privacy is onze prioriteit",
+    "description": "Wij zetten ons in om je persoonlijke gegevens te beschermen en transparantie te bieden over het gebruik van je gegevens."
+  },
+  "it": {
+    "title": "Informativa sulla Privacy",
+    "subtitle": "La tua privacy è la nostra priorità",
+    "description": "Ci impegniamo a proteggere le tue informazioni personali e a garantire la trasparenza nell'uso dei tuoi dati."
+  },
+  "de": {
+    "title": "Datenschutzrichtlinie",
+    "subtitle": "Ihre Privatsphäre hat für uns Priorität",
+    "description": "Wir verpflichten uns, Ihre persönlichen Daten zu schützen und Transparenz bei deren Verwendung zu gewährleisten."
+  },
+  "ru": {
+    "title": "Политика Конфиденциальности",
+    "subtitle": "Ваша конфиденциальность — наш приоритет",
+    "description": "Мы обязуемся защищать вашу личную информацию и обеспечивать прозрачность использования ваших данных."
+  },
+  "ar": {
+    "title": "سياسة الخصوصية",
+    "subtitle": "خصوصيتك هي أولويتنا",
+    "description": "نحن ملتزمون بحماية معلوماتك الشخصية وضمان الشفافية في كيفية استخدام بياناتك."
+  },
+  "vi": {
+    "title": "Chính Sách Bảo Mật",
+    "subtitle": "Quyền riêng tư của bạn là ưu tiên của chúng tôi",
+    "description": "Chúng tôi cam kết bảo vệ thông tin cá nhân của bạn và đảm bảo tính minh bạch trong cách chúng tôi sử dụng dữ liệu của bạn."
+  }
+}

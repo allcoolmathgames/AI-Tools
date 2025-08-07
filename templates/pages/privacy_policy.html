@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - Summarizer.ai</title>
+    <meta name="description" content="Read the Privacy Policy of Summarizer.ai. Learn how we collect, use, and protect your information.">
+    <meta name="keywords" content="Summarizer.ai privacy policy, data privacy, user data, information collection, data security">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2QWDFWwBCxN5V6qG/t3bLtmG6NvwK20R8T3M2t/FfD3M5C5S5P5M5P5M5A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="alternate" hreflang="x-default" href=""/>
+    <link rel="alternate" hreflang="cs" href=""/>
+    <link rel="alternate" hreflang="ar" href=""/>
+    <link rel="alternate" hreflang="de" href=""/>
+    <link rel="alternate" hreflang="es" href=""/>
+    <link rel="alternate" hreflang="fi" href=""/>
+    <link rel="alternate" hreflang="fr" href=""/>
+    <link rel="alternate" hreflang="id" href=""/>
+    <link rel="alternate" hreflang="it" href=""/>
+    <link rel="alternate" hreflang="ja" href=""/>
+    <link rel="alternate" hreflang="ko" href=""/>
+    <link rel="alternate" hreflang="pl" href=""/>
+    <link rel="alternate" hreflang="pt" href=""/>
+    <link rel="alternate" hreflang="ru" href=""/>
+    <link rel="alternate" hreflang="da" href=""/>
+    <link rel="alternate" hreflang="no" href=""/>
+    <link rel="alternate" hreflang="tr" href=""/>
+</head>
+<body>
+
+    {% include 'header.html' %}
+
+    <div class="main-content-wrapper">
+        <section class="section-container" id="privacy-policy-section">
+            <h1 class="section-heading">Privacy Policy</h1>
+            <p style="text-align: center; color: var(--text-medium); margin-bottom: 40px; font-size: 0.95rem;">
+                Last Updated: July 19, 2025
+            </p>
+
+            <div class="policy-content">
+                <h2>1. Introduction</h2>
+                <p>
+                    Summarizer.AI par, hum aapki privacy ka ehtram karte hain. Yeh Privacy Policy batati hai ke hum aapki information kaise collect, use, aur protect karte hain jab aap hamari website aur services (jo ke `summarizer.org` par dastyab hain) ka istemal karte hain.
+                </p>
+
+                <h2>2. Information We Collect</h2>
+                <p>Hum sirf woh information collect karte hain jo hamari services ko behtar banane aur unhein operate karne ke liye zaroori hai:</p>
+                <ul>
+                    <li>**Usage Data:** Hum non-personally identifiable usage data collect kar sakte hain, jaise ke aap kaunse tools istemal karte hain, kitni baar, aur technical information jaise browser type, device type. Yeh data hamari services ko improve karne ke liye anonymous tareeqe se analyze kiya jata hai.</li>
+                    <li>**Content Data:** Jab aap hamare tools mein text input karte hain (maslan summarization ke liye), to woh text sirf processing ke liye istemal hota hai aur foran delete kar diya jata hai. Hum aapka input kiya gaya content save ya store nahin karte.</li>
+                </ul>
+
+                <h2>3. How We Use Your Information</h2>
+                <p>Hum aapki collect ki gayi information ka istemal is maqsad ke liye karte hain:</p>
+                <ul>
+                    <li>Apni services ko provide, maintain, aur improve karna.</li>
+                    <li>Usage patterns ko analyze karna taake hamare tools ko behtar banaya ja sake.</li>
+                    <li>Technical maslon ko identify aur resolve karna.</li>
+                </ul>
+
+                <h2>4. Data Security</h2>
+                <p>Hum aapki information ko unauthorized access, disclosure, alteration, aur destruction se bachane ke liye munasib security measures (jaise encryption) ka istemal karte hain. Choonke hum koi sensitive personal data store nahi karte, aapki privacy mazeed secure rehti hai.</p>
+
+                <h2>5. Third-Party Links</h2>
+                <p>Hamari website par doosri websites ke links ho sakte hain. Hum un websites ki privacy practices ke zimmedar nahi hain. Hum aapko hidayat karte hain ke aap kisi bhi third-party site par visit karne se pehle unki Privacy Policies ko parhen.</p>
+
+                <h2>6. Changes to This Privacy Policy</h2>
+                <p>Hum waqt-fawaqt apni Privacy Policy ko update kar sakte hain. Jab hum koi changes karenge to hum is page par "Last Updated" date ko tabdeel kar denge. Hum aapko encourage karte hain ke aap periodically is Policy ko review karte rahen.</p>
+
+                <h2>7. Contact Us</h2>
+                <p>Agar aapko hamari Privacy Policy ke bare mein koi sawal hain, to please humse rabta karein:</p>
+                <p>Email: <a href="mailto:support@summarizer.org">support@summarizer.org</a></p>
+                <p>Address: HR Tower, College Rd, Faisalabad, Pakistan</p>
+            </div>
+        </section>
+    </div>
+
+    {% include 'footer.html' %}
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script>
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+        // Agar aap har page par specific currentYear ID istemal kar rahe hain to:
+        // document.getElementById('currentYearPrivacyPolicy').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

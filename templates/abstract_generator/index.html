@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="page_title">AI Abstract Generator - Summarizer.ai</title>
+    <meta data-i18n-content="meta_description" name="description" content="Generate concise and professional abstracts for your research papers, articles, and reports with our AI Abstract Generator.">
+    <meta data-i18n-content="meta_keywords" name="keywords" content="AI abstract generator, research paper abstract, article abstract, thesis abstract, summary generator">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2QWDFWwBCxN5V6qG/t3bLtmG6NvwK20R8T3M2t/FfD3M5C5S5P5M5P5M5A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+    {% include 'header.html' %}
+
+    <section id="abstract-generator-tool" class="section-container">
+        <h1 class="section-heading" data-i18n="section_heading_tool">AI Abstract Generator</h1>
+        <div class="tool-container">
+            <div class="abstract-tool-grid">
+                <div class="input-group">
+                    <label for="inputText" data-i18n="label_input_text">Paste Your Full Text or Paper Here:</label>
+                    <textarea id="inputText" data-i18n-placeholder="placeholder_input_text" placeholder="e.g., Paste your complete research paper, article, or report..."></textarea>
+                </div>
+                <div class="output-group">
+                    <label for="abstractOutput" data-i18n="label_output_text">Generated Abstract:</label>
+                    <textarea id="abstractOutput" readonly data-i18n-placeholder="placeholder_output_text" placeholder="Your professionally summarized abstract will appear here..."></textarea>
+                </div>
+            </div>
+            
+            <div class="action-buttons">
+                <button id="generateBtn" class="primary-button" data-i18n="button_generate_abstract">Generate Abstract</button>
+            </div>
+            
+            <div class="loader" id="loader"></div>
+            <div class="error-message" id="errorMessage"></div>
+        </div>
+    </section>
+
+    <section id="abstract-features" class="section-container">
+        <h2 class="section-heading" data-i18n="section_heading_why_choose_us">Why Choose Us</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">📑</div>
+                <h3 data-i18n="feature_title_concise_summaries">Concise Summaries</h3>
+                <p data-i18n="feature_description_concise_summaries">Generates well-structured and concise abstracts that cover the key points of your document.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⏱️</div>
+                <h3 data-i18n="feature_title_save_hours">Save Hours of Work</h3>
+                <p data-i18n="feature_description_save_hours">Instantly get a professional abstract from your lengthy paper without manual summarization.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <h3 data-i18n="feature_title_key_point_extraction">Key Point Extraction</h3>
+                <p data-i18n="feature_description_key_point_extraction">Our AI identifies the crucial elements of your text, like methodology, results, and conclusion.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="how-it-works" class="section-container">
+        <h2 class="section-heading" data-i18n="section_heading_how_to_use">How To Use</h2>
+        <div class="steps-container">
+            <div class="step">
+                <div class="step-number" data-i18n="step_number_1">1</div>
+                <div class="step-text">
+                    <h4 data-i18n="step_title_1">Paste Your Document</h4>
+                    <p data-i18n="step_description_1">Copy your entire research paper, article, or report and paste it into the input box.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number" data-i18n="step_number_2">2</div>
+                <div class="step-text">
+                    <h4 data-i18n="step_title_2">Generate Abstract</h4>
+                    <p data-i18n="step_description_2">Click the 'Generate Abstract' button and let our AI create a high-quality summary.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number" data-i18n="step_number_3">3</div>
+                <div class="step-text">
+                    <h4 data-i18n="step_title_3">Review and Use</h4>
+                    <p data-i18n="step_description_3">Your professional abstract is ready to be used in your publications or submissions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="more-tools" class="section-container">
+        <h2 class="section-heading" data-i18n="section_heading_explore_other_tools">Explore Our Other AI Tools</h2>
+        <div class="tools-grid">
+            <a href="{{ url_for('acronym_generator_page') }}" class="tool-card">
+                <div class="tool-icon">🔠</div>
+                <h3 data-i18n="tool_acronym_generator_title">Acronym Generator</h3>
+                <p data-i18n="tool_acronym_generator_description">Create acronyms from long phrases instantly.</p>
+            </a>
+            <a href="{{ url_for('adjective_generator_page') }}" class="tool-card">
+                <div class="tool-icon">🎨</div>
+                <h3 data-i18n="tool_adjective_generator_title">Adjective Generator</h3>
+                <p data-i18n="tool_adjective_generator_description">Find the perfect adjectives to enhance your writing.</p>
+            </a>
+            <a href="{{ url_for('ai_email_generator_page') }}" class="tool-card">
+                <div class="tool-icon">📧</div>
+                <h3 data-i18n="tool_ai_email_generator_title">AI Email Generator</h3>
+                <p data-i18n="tool_ai_email_generator_description">Generate professional and engaging emails quickly with AI.</p>
+            </a>
+            <a href="{{ url_for('ai_product_description_generator_page') }}" class="tool-card">
+                <div class="tool-icon">🛍️</div>
+                <h3 data-i18n="tool_product_description_generator_title">Product Description Generator</h3>
+                <p data-i18n="tool_product_description_generator_description">Create compelling product descriptions using AI.</p>
+            </a>
+            <a href="{{ url_for('slogan_generator_page') }}" class="tool-card">
+                <div class="tool-icon">🏷️</div>
+                <h3 data-i18n="tool_ai_slogan_generator_title">AI Slogan Generator</h3>
+                <p data-i18n="tool_ai_slogan_generator_description">Create catchy and memorable slogans for your brand or campaign.</p>
+            </a>
+            <a href="{{ url_for('ai_story_generator_page') }}" class="tool-card">
+                <div class="tool-icon">📖</div>
+                <h3 data-i18n="tool_ai_story_generator_title">AI Story Generator</h3>
+                <p data-i18n="tool_ai_story_generator_description">Generate creative and engaging stories with AI.</p>
+            </a>
+        </div>
+        <br>
+        <div class="text-center">
+            <a href="{{ url_for('tools_index') }}" class="primary-button view-all-tools-button" data-i18n="button_view_all_tools">View All Tools</a>
+        </div>
+    </section>
+
+    <section id="additional-info-section" class="section-container">
+        <h2 class="section-heading" data-i18n="section_heading_additional_info">Additional Information</h2>
+        <div class="info-text-box">
+            <p data-i18n="info_text_box_paragraph">
+                Here you can add any additional text or information related to this page or tool. For example, the benefits of this tool, or tips for using it.
+            </p>
+        </div>
+    </section>
+
+    <section id="faq" class="section-container">
+        <h2 class="section-heading" data-i18n="section_heading_faq">Frequently Asked Questions</h2>
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3 data-i18n="faq_question_1">What is an Abstract Generator?</h3>
+                    <i class="fas fa-plus"></i>
+                </div>
+                <div class="faq-answer">
+                    <p data-i18n="faq_answer_1">An abstract generator is an AI tool that automatically creates a short, comprehensive summary of a longer piece of work, such as a research paper, thesis, or in-depth article. It highlights the main objectives, methods, results, and conclusions of your document.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3 data-i18n="faq_question_2">What kind of documents work best?</h3>
+                    <i class="fas fa-plus"></i>
+                </div>
+                <div class="faq-answer">
+                    <p data-i18n="faq_answer_2">The tool works best with structured documents like academic papers, technical reports, and case studies that have clear sections. However, it can also summarize lengthy articles and essays effectively.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3 data-i18n="faq_question_3">Is the generated abstract ready to publish?</h3>
+                    <i class="fas fa-plus"></i>
+                </div>
+                <div class="faq-answer">
+                    <p data-i18n="faq_answer_3">Our AI provides a very high-quality draft. We always recommend that you review the generated abstract to ensure it perfectly aligns with your paper's tone and meets specific formatting guidelines of the publication or institution.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% include 'footer.html' %}
+
+    <script src="{{ url_for('static', filename='js/abstract_generator_script.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/language.js') }}"></script>
+</body>
+</html>

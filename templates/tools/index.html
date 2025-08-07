@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="page_title">All AI Tools - Summarizer.ai</title>
+    <meta name="description" data-i18n-content="meta_description" content="Discover all AI tools.">
+    <meta name="keywords" data-i18n-content="meta_keywords" content="ai tools, ai writing tools, summarizer, generator">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Hreflang tags -->
+    <link rel="alternate" hreflang="x-default" href=""/>
+    <link rel="alternate" hreflang="cs" href=""/>
+    <link rel="alternate" hreflang="ar" href=""/>
+    <link rel="alternate" hreflang="de" href=""/>
+    <link rel="alternate" hreflang="es" href=""/>
+    <link rel="alternate" hreflang="fi" href=""/>
+    <link rel="alternate" hreflang="fr" href=""/>
+    <link rel="alternate" hreflang="id" href=""/>
+    <link rel="alternate" hreflang="it" href=""/>
+    <link rel="alternate" hreflang="ja" href=""/>
+    <link rel="alternate" hreflang="ko" href=""/>
+    <link rel="alternate" hreflang="pl" href=""/>
+    <link rel="alternate" hreflang="pt" href=""/>
+    <link rel="alternate" hreflang="ru" href=""/>
+    <link rel="alternate" hreflang="da" href=""/>
+    <link rel="alternate" hreflang="no" href=""/>
+    <link rel="alternate" hreflang="tr" href=""/>
+</head>
+<body>
+
+    {% include 'header.html' %}
+
+    <section id="all-tools-listing" class="section-container">
+        <h1 class="section-heading" data-i18n="all_tools_heading">All Our AI Tools</h1>
+        <div class="tools-grid">
+            <a href="{{ url_for('index') }}" class="tool-card">
+                <div class="tool-icon">✍️</div>
+                <h3 data-i18n="summarizer_tool">AI Summarizer</h3>
+                <p data-i18n="summarizer_tool_desc">Transform long texts into concise summaries instantly.</p>
+            </a>
+            <a href="{{ url_for('abstract_generator_page') }}" class="tool-card">
+                <div class="tool-icon">📑</div>
+                <h3 data-i18n="abstract_tool">Abstract Generator</h3>
+                <p data-i18n="abstract_tool_desc">Generate concise abstracts for your research papers.</p>
+            </a>
+            <a href="{{ url_for('acronym_generator_page') }}" class="tool-card">
+                <div class="tool-icon">🔠</div>
+                <h3 data-i18n="acronym_tool">Acronym Generator</h3>
+                <p data-i18n="acronym_tool_desc">Create acronyms from long phrases instantly.</p>
+            </a>
+            <a href="{{ url_for('adjective_generator_page') }}" class="tool-card">
+                <div class="tool-icon">🎨</div>
+                <h3 data-i18n="adjective_tool">Adjective Generator</h3>
+                <p data-i18n="adjective_tool_desc">Find the perfect adjectives to enhance your writing.</p>
+            </a>
+            <a href="{{ url_for('ai_email_generator_page') }}" class="tool-card">
+                <div class="tool-icon">📧</div>
+                <h3 data-i18n="email_tool">AI Email Generator</h3>
+                <p data-i18n="email_tool_desc">Generate professional and engaging emails quickly with AI.</p>
+            </a>
+            <a href="{{ url_for('ai_product_description_generator_page') }}" class="tool-card">
+                <div class="tool-icon">🛍️</div>
+                <h3 data-i18n="product_desc_tool">Product Description Generator</h3>
+                <p data-i18n="product_desc_tool_desc">Create compelling product descriptions using AI.</p>
+            </a>
+            <a href="{{ url_for('slogan_generator_page') }}" class="tool-card">
+                <div class="tool-icon">🏷️</div>
+                <h3 data-i18n="slogan_tool">AI Slogan Generator</h3>
+                <p data-i18n="slogan_tool_desc">Create catchy and memorable slogans for your brand or campaign.</p>
+            </a>
+            <a href="{{ url_for('ai_story_generator_page') }}" class="tool-card">
+                <div class="tool-icon">📖</div>
+                <h3 data-i18n="story_tool">AI Story Generator</h3>
+                <p data-i18n="story_tool_desc">Generate creative and engaging stories with AI.</p>
+            </a>
+            <a href="{{ url_for('ai_humanizer_page') }}" class="tool-card">
+                <div class="tool-icon">🧑‍💻</div>
+                <h3 data-i18n="humanizer_tool">AI Text Humanizer</h3>
+                <p data-i18n="humanizer_tool_desc">Transform AI-generated text into natural, human-like content.</p>
+            </a>
+            <a href="{{ url_for('article_rewriter_page') }}" class="tool-card">
+                <div class="tool-icon">🔄</div>
+                <h3 data-i18n="rewriter_tool">Article Rewriter</h3>
+                <p data-i18n="rewriter_tool_desc">Rewrite articles to generate fresh, unique content.</p>
+            </a>
+            <a href="{{ url_for('business_name_generator_page') }}" class="tool-card">
+                <div class="tool-icon">🏢</div>
+                <h3 data-i18n="business_name_tool">Business Name Generator</h3>
+                <p data-i18n="business_name_tool_desc">Find unique and creative names for your business.</p>
+            </a>
+            <a href="{{ url_for('conclusion_generator_page') }}" class="tool-card">
+                <div class="tool-icon">🏁</div>
+                <h3 data-i18n="conclusion_tool">Conclusion Generator</h3>
+                <p data-i18n="conclusion_tool_desc">Write powerful conclusions for your essays and reports.</p>
+            </a>
+            <a href="{{ url_for('content_idea_generator_page') }}" class="tool-card">
+                <div class="tool-icon">💡</div>
+                <h3 data-i18n="content_idea_tool">Content Idea Generator</h3>
+                <p data-i18n="content_idea_tool_desc">Generate creative and engaging ideas for your next content piece.</p>
+            </a>
+            <a href="{{ url_for('email_subject_line_generator_page') }}" class="tool-card">
+                <div class="tool-icon">📬</div>
+                <h3 data-i18n="email_subject_tool">Email Subject Line Generator</h3>
+                <p data-i18n="email_subject_tool_desc">Create effective subject lines to boost open rates.</p>
+            </a>
+            <a href="{{ url_for('essay_generator_page') }}" class="tool-card">
+                <div class="tool-icon">📄</div>
+                <h3 data-i18n="essay_tool">Essay Generator</h3>
+                <p data-i18n="essay_tool_desc">Generate well-structured essays on any topic with AI.</p>
+            </a>
+            <a href="{{ url_for('grammar_checker_page') }}" class="tool-card">
+                <div class="tool-icon">✅</div>
+                <h3 data-i18n="grammar_tool">Grammar Checker</h3>
+                <p data-i18n="grammar_tool_desc">Correct grammar, spelling, and punctuation errors instantly.</p>
+            </a>
+            <a href="{{ url_for('hook_generator_page') }}" class="tool-card">
+                <div class="tool-icon">🎣</div>
+                <h3 data-i18n="hook_tool">Hook Generator</h3>
+                <p data-i18n="hook_tool_desc">Create catchy hooks to grab your readers' attention.</p>
+            </a>
+            <a href="{{ url_for('paraphrasing_tool_page') }}" class="tool-card">
+                <div class="tool-icon">📝</div>
+                <h3 data-i18n="paraphrasing_tool">Paraphrasing Tool</h3>
+                <p data-i18n="paraphrasing_tool_desc">Rephrase sentences and paragraphs without changing their meaning.</p>
+            </a>
+            <a href="{{ url_for('plagiarism_checker_page') }}" class="tool-card">
+                <div class="tool-icon">📚</div>
+                <h3 data-i18n="plagiarism_tool">Plagiarism Checker</h3>
+                <p data-i18n="plagiarism_tool_desc">Ensure your content is original and free from plagiarism.</p>
+            </a>
+            <a href="{{ url_for('title_generator_page') }}" class="tool-card">
+                <div class="tool-icon">✒️</div>
+                <h3 data-i18n="title_tool">Title Generator</h3>
+                <p data-i18n="title_tool_desc">Generate compelling titles for your articles and blogs.</p>
+            </a>
+            <a href="{{ url_for('trending_news_generator_page') }}" class="tool-card">
+                <div class="tool-icon">📰</div>
+                <h3 data-i18n="news_tool">Trending News Generator</h3>
+                <p data-i18n="news_tool_desc">Stay updated with trending news generated by AI.</p>
+            </a>
+        </div>
+    </section>
+
+    <section id="additional-info-section" class="section-container">
+        <h2 class="section-heading" data-i18n="additional_info_title">Additional Information About Our Tools</h2>
+        <div class="info-text-box">
+            <p data-i18n="additional_info_desc">
+                Our comprehensive suite of AI tools is designed to enhance every aspect of your writing and content creation. From generating ideas to refining your final draft, our tools leverage advanced artificial intelligence to deliver precision, speed, and creativity. Explore each tool to discover how it can streamline your workflow and elevate your content quality.
+            </p>
+        </div>
+    </section>
+
+    {% include 'footer.html' %}
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/language.js') }}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const yearEl = document.getElementById('currentYear');
+            if (yearEl) yearEl.textContent = new Date().getFullYear();
+        });
+    </script>
+</body>
+</html>

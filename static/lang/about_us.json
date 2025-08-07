@@ -1,0 +1,57 @@
+{
+  "en": {
+    "title": "About Us",
+    "subtitle": "Learn more about our mission and team",
+    "description": "We are dedicated to providing powerful AI tools to make content creation and optimization easier for everyone."
+  },
+  "es": {
+    "title": "Sobre Nosotros",
+    "subtitle": "Conoce más sobre nuestra misión y equipo",
+    "description": "Estamos dedicados a ofrecer potentes herramientas de IA para facilitar la creación y optimización de contenido."
+  },
+  "id": {
+    "title": "Tentang Kami",
+    "subtitle": "Pelajari lebih lanjut tentang misi dan tim kami",
+    "description": "Kami berdedikasi menyediakan alat AI canggih untuk mempermudah pembuatan dan optimisasi konten bagi semua orang."
+  },
+  "br": {
+    "title": "Sobre Nós",
+    "subtitle": "Saiba mais sobre nossa missão e equipe",
+    "description": "Somos dedicados a fornecer ferramentas de IA poderosas para facilitar a criação e otimização de conteúdo."
+  },
+  "fr": {
+    "title": "À Propos de Nous",
+    "subtitle": "En savoir plus sur notre mission et notre équipe",
+    "description": "Nous nous engageons à fournir des outils IA puissants pour faciliter la création et l'optimisation de contenu."
+  },
+  "nl": {
+    "title": "Over Ons",
+    "subtitle": "Lees meer over onze missie en ons team",
+    "description": "Wij zijn toegewijd aan het bieden van krachtige AI-tools om het maken en optimaliseren van inhoud gemakkelijker te maken."
+  },
+  "it": {
+    "title": "Chi Siamo",
+    "subtitle": "Scopri di più sulla nostra missione e sul nostro team",
+    "description": "Siamo dedicati a fornire potenti strumenti AI per semplificare la creazione e l'ottimizzazione dei contenuti."
+  },
+  "de": {
+    "title": "Über Uns",
+    "subtitle": "Erfahren Sie mehr über unsere Mission und unser Team",
+    "description": "Wir sind bestrebt, leistungsstarke KI-Tools bereitzustellen, um die Erstellung und Optimierung von Inhalten zu erleichtern."
+  },
+  "ru": {
+    "title": "О Нас",
+    "subtitle": "Узнайте больше о нашей миссии и команде",
+    "description": "Мы стремимся предоставить мощные инструменты на основе ИИ, чтобы упростить создание и оптимизацию контента."
+  },
+  "ar": {
+    "title": "معلومات عنا",
+    "subtitle": "تعرف على المزيد عن مهمتنا وفريقنا",
+    "description": "نحن ملتزمون بتوفير أدوات ذكاء اصطناعي قوية لتسهيل إنشاء المحتوى وتحسينه للجميع."
+  },
+  "vi": {
+    "title": "Về Chúng Tôi",
+    "subtitle": "Tìm hiểu thêm về sứ mệnh và đội ngũ của chúng tôi",
+    "description": "Chúng tôi tận tâm cung cấp các công cụ AI mạnh mẽ để giúp việc tạo và tối ưu hóa nội dung trở nên dễ dàng hơn cho mọi người."
+  }
+}

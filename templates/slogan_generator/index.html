@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="page_title">AI Slogan Generator - Summarizer.ai</title>
+    <meta data-i18n-content="meta_description" name="description" content="Create catchy and memorable slogans for your brand or campaign with our AI Slogan Generator. Boost your marketing efforts instantly.">
+    <meta data-i18n-content="meta_keywords" name="keywords" content="AI slogan generator, catchy slogans, marketing slogans, brand taglines, creative slogans, slogan maker">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2QWDFWwBCxN5V6qG/t3bLtmG6NvwK20R8T3M2t/FfD3M5C5S5P5M5P5M5A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="alternate" hreflang="x-default" href=""/>
+    <link rel="alternate" hreflang="cs" href=""/>
+    <link rel="alternate" hreflang="ar" href=""/>
+    <link rel="alternate" hreflang="de" href=""/>
+    <link rel="alternate" hreflang="es" href=""/>
+    <link rel="alternate" hreflang="fi" href=""/>
+    <link rel="alternate" hreflang="fr" href=""/>
+    <link rel="alternate" hreflang="id" href=""/>
+    <link rel="alternate" hreflang="it" href=""/>
+    <link rel="alternate" hreflang="ja" href=""/>
+    <link rel="alternate" hreflang="ko" href=""/>
+    <link rel="alternate" hreflang="pl" href=""/>
+    <link rel="alternate" hreflang="pt" href=""/>
+    <link rel="alternate" hreflang="ru" href=""/>
+    <link rel="alternate" hreflang="da" href=""/>
+    <link rel="alternate" hreflang="no" href=""/>
+    <link rel="alternate" hreflang="tr" href=""/>
+</head>
+<body>
+
+    {% include 'header.html' %}
+
+    <section id="slogan-generator-tool" class="section-container">
+        <h1 class="section-heading" data-i18n="section_heading_tool">AI Slogan Generator</h1>
+        <div class="tool-container">
+            <div class="input-group">
+                <label for="keywordsInput" data-i18n="label_keywords_input">Enter Keywords / Describe your brand:</label>
+                <textarea id="keywordsInput" data-i18n-placeholder="placeholder_keywords_input" placeholder="e.g., 'fast food', 'eco-friendly clothing', 'innovative tech solutions'"></textarea>
+            </div>
+            <div class="slider-group">
+                <label for="numSlogans" data-i18n="label_num_slogans">Number of Slogans:</label>
+                <input type="range" id="numSlogans" min="1" max="10" value="5">
+                <span id="numSlogansValue">5</span>
+            </div>
+            <div class="action-buttons">
+                <button id="generateBtn" class="primary-button" data-i18n="button_generate_slogans">Generate Slogans</button>
+            </div>
+            
+            <div class="loader" id="loader"></div>
+            <div class="error-message" id="errorMessage"></div>
+
+            <div class="output-group">
+                <label for="sloganOutput" data-i18n="label_slogan_output">Generated Slogans:</label>
+                <ul id="sloganOutput" class="slogan-list">
+                    </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="slogan-features" class="section-container">
+        <h2 class="section-heading" data-i18n="section_heading_why_use_tool">Why Use Our AI Slogan Generator?</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">✨</div>
+                <h3 data-i18n="feature_title_catchy_memorable">Catchy & Memorable</h3>
+                <p data-i18n="feature_description_catchy_memorable">Create slogans that stick in minds and powerfully convey your brand's message.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🚀</div>
+                <h3 data-i18n="feature_title_instant_inspiration">Instant Inspiration</h3>
+                <p data-i18n="feature_description_instant_inspiration">Generate a wide array of unique slogan ideas in seconds, ideal for branding and marketing.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <h3 data-i18n="feature_title_tailored_to_brand">Tailored to Your Brand</h3>
+                <p data-i18n="feature_description_tailored_to_brand">Get suggestions customized to your keywords and business concept for maximum relevance.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="how-it-works" class="section-container">
+        <h2 class="section-heading" data-i18n="section_heading_how_to_use">How To Use the Slogan Generator</h2>
+        <div class="steps-container">
+            <div class="step">
+                <div class="step-number" data-i18n="step_number_1">1</div>
+                <div class="step-text">
+                    <h4 data-i18n="step_title_1">Describe Your Brand</h4>
+                    <p data-i18n="step_description_1">Enter keywords or a brief description of your brand, product, or campaign.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number" data-i18n="step_number_2">2</div>
+                <div class="step-text">
+                    <h4 data-i18n="step_title_2">Choose Quantity</h4>
+                    <p data-i18n="step_description_2">Select how many slogan ideas you want the AI to generate.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number" data-i18n="step_number_3">3</div>
+                <div class="step-text">
+                    <h4 data-i18n="step_title_3">Generate & Pick</h4>
+                    <p data-i18n="step_description_3">Click 'Generate Slogans' and choose the perfect tagline to represent your brand.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="more-tools" class="section-container">
+        <h2 class="section-heading" data-i18n="section_heading_explore_other_tools">Explore Our Other AI Tools</h2>
+        <div class="tools-grid">
+            <a href="{{ url_for('ai_humanizer_page') }}" class="tool-card">
+                <div class="tool-icon">🧑‍💻</div>
+                <h3 data-i18n="tool_ai_humanizer_title">AI Text Humanizer</h3>
+                <p data-i18n="tool_ai_humanizer_description">Transform AI-generated text into natural, human-like content.</p>
+            </a>
+            <a href="{{ url_for('ai_email_generator_page') }}" class="tool-card">
+                <div class="tool-icon">📧</div>
+                <h3 data-i18n="tool_ai_email_generator_title">AI Email Generator</h3>
+                <p data-i18n="tool_ai_email_generator_description">Generate professional and engaging emails quickly with AI.</p>
+            </a>
+            <a href="{{ url_for('grammar_checker_page') }}" class="tool-card">
+                <div class="tool-icon">✅</div>
+                <h3 data-i18n="tool_grammar_checker_title">Grammar Checker</h3>
+                <p data-i18n="tool_grammar_checker_description">Correct grammar, spelling, and punctuation errors instantly.</p>
+            </a>
+            <a href="{{ url_for('ai_story_generator_page') }}" class="tool-card">
+                <div class="tool-icon">📖</div>
+                <h3 data-i18n="tool_ai_story_generator_title">AI Story Generator</h3>
+                <p data-i18n="tool_ai_story_generator_description">Generate creative and engaging stories with AI.</p>
+            </a>
+            <a href="{{ url_for('ai_product_description_generator_page') }}" class="tool-card">
+                <div class="tool-icon">🛍️</div>
+                <h3 data-i18n="tool_product_description_generator_title">Product Description Generator</h3>
+                <p data-i18n="tool_product_description_generator_description">Create compelling product descriptions using AI.</p>
+            </a>
+            <a href="{{ url_for('essay_generator_page') }}" class="tool-card">
+                <div class="tool-icon">📄</div>
+                <h3 data-i18n="tool_essay_generator_title">Essay Generator</h3>
+                <p data-i18n="tool_essay_generator_description">Generate well-structured essays on any topic with AI.</p>
+            </a>
+        </div>
+        <br>
+        <div class="text-center">
+            <a href="{{ url_for('tools_index') }}" class="primary-button view-all-tools-button" data-i18n="button_view_all_tools">View All Tools</a>
+        </div>
+    </section>
+
+    <section id="additional-info-section" class="section-container">
+        <h2 class="section-heading" data-i18n="section_heading_additional_info">Additional Information</h2>
+        <div class="info-text-box">
+            <p data-i18n="info_text_box_paragraph">
+                Here you can add any additional text or information related to this page or tool. For example, the benefits of this tool, or tips for using it.
+            </p>
+        </div>
+    </section>
+
+    <section id="faq" class="section-container">
+        <h2 class="section-heading" data-i18n="section_heading_faq">Frequently Asked Questions</h2>
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3 data-i18n="faq_question_1">What makes a good slogan?</h3>
+                    <i class="fas fa-plus"></i>
+                </div>
+                <div class="faq-answer">
+                    <p data-i18n="faq_answer_1">A good slogan is concise, memorable, and effectively communicates the essence or unique selling proposition of a brand, product, or campaign. It should be easy to understand and recall, leaving a lasting impression on the audience.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3 data-i18n="faq_question_2">How does the AI generate slogans?</h3>
+                    <i class="fas fa-plus"></i>
+                </div>
+                <div class="faq-answer">
+                    <p data-i18n="faq_answer_2">Our AI analyzes your keywords and brand description to understand your core message. It then uses advanced algorithms to combine words, phrases, and linguistic patterns to generate a variety of creative and relevant slogans.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3 data-i18n="faq_question_3">Can I use these slogans for commercial purposes?</h3>
+                    <i class="fas fa-plus"></i>
+                </div>
+                <div class="faq-answer">
+                    <p data-i18n="faq_answer_3">Yes, the slogans generated by our AI are meant to be used for commercial and marketing purposes. However, we recommend checking for trademark availability before finalizing any slogan for your brand to ensure its uniqueness and legal viability.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% include 'footer.html' %}
+
+    <script src="{{ url_for('static', filename='js/slogan_generator.js') }}"></script>
+    <script>
+        document.getElementById('currentYearSlogan').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

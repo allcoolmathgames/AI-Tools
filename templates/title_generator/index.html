@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="page_title">AI Title Generator - Summarizer.ai</title>
+    <meta data-i18n-content="meta_description" name="description" content="Generate compelling and SEO-friendly titles for your articles, blogs, and content with our AI Title Generator.">
+    <meta data-i18n-content="meta_keywords" name="keywords" content="AI title generator, catchy titles, blog titles, article headlines, SEO titles, content optimization">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2QWDFWwBCxN5V6qG/t3bLtmG6NvwK20R8T3M2t/FfD3M5C5S5P5M5P5M5A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="alternate" hreflang="x-default" href=""/>
+    <link rel="alternate" hreflang="cs" href=""/>
+    <link rel="alternate" hreflang="ar" href=""/>
+    <link rel="alternate" hreflang="de" href=""/>
+    <link rel="alternate" hreflang="es" href=""/>
+    <link rel="alternate" hreflang="fi" href=""/>
+    <link rel="alternate" hreflang="fr" href=""/>
+    <link rel="alternate" hreflang="id" href=""/>
+    <link rel="alternate" hreflang="it" href=""/>
+    <link rel="alternate" hreflang="ja" href=""/>
+    <link rel="alternate" hreflang="ko" href=""/>
+    <link rel="alternate" hreflang="pl" href=""/>
+    <link rel="alternate" hreflang="pt" href=""/>
+    <link rel="alternate" hreflang="ru" href=""/>
+    <link rel="alternate" hreflang="da" href=""/>
+    <link rel="alternate" hreflang="no" href=""/>
+    <link rel="alternate" hreflang="tr" href=""/>
+</head>
+<body>
+
+    {% include 'header.html' %}
+
+    <section id="title-generator-tool" class="section-container">
+        <h1 class="section-heading" data-i18n="section_heading_tool">AI Title Generator</h1>
+        <div class="tool-container">
+            <div class="input-group">
+                <label for="topicInput" data-i18n="label_topic_input">Your Content Topic / Keywords:</label>
+                <textarea id="topicInput" data-i18n-placeholder="placeholder_topic_input" placeholder="e.g., 'Benefits of meditation', 'Latest iPhone features', 'Healthy recipes for busy professionals'"></textarea>
+            </div>
+            <div class="action-buttons">
+                <button id="generateBtn" class="primary-button" data-i18n="button_generate_titles">Generate Titles</button>
+            </div>
+            <div class="loader" id="loader"></div>
+            <div class="error-message" id="errorMessage"></div>
+            <div class="output-group">
+                <label for="titlesOutput" data-i18n="label_titles_output">Generated Titles:</label>
+                <textarea id="titlesOutput" readonly data-i18n-placeholder="placeholder_titles_output" placeholder="Your AI-generated titles will appear here..."></textarea>
+            </div>
+        </div>
+    </section>
+
+    <section id="title-features" class="section-container">
+        <h2 class="section-heading" data-i18n="section_heading_why_use_tool">Why Use Our AI Title Generator?</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">✨</div>
+                <h3 data-i18n="feature_title_catchy_engaging">Catchy & Engaging</h3>
+                <p data-i18n="feature_description_catchy_engaging">Create compelling titles that grab attention and entice readers to click and explore your content.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📈</div>
+                <h3 data-i18n="feature_title_seo_friendly_titles">SEO-Friendly Titles</h3>
+                <p data-i18n="feature_description_seo_friendly_titles">Generate titles optimized with relevant keywords to improve your content's visibility in search engines.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⏱️</div>
+                <h3 data-i18n="feature_title_instant_ideas">Instant Ideas</h3>
+                <p data-i18n="feature_description_instant_ideas">Overcome writer's block and get a wide range of creative title ideas in seconds for any topic.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="how-it-works" class="section-container">
+        <h2 class="section-heading" data-i18n="section_heading_how_to_use">How To Use the Title Generator</h2>
+        <div class="steps-container">
+            <div class="step">
+                <div class="step-number" data-i18n="step_number_1">1</div>
+                <div class="step-text">
+                    <h4 data-i18n="step_title_1">Enter Topic/Keywords</h4>
+                    <p data-i18n="step_description_1">Describe the main topic or key points of your content in the input box.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number" data-i18n="step_number_2">2</div>
+                <div class="step-text">
+                    <h4 data-i18n="step_title_2">Generate Titles</h4>
+                    <p data-i18n="step_description_2">Click 'Generate Titles'. Our AI will instantly create various compelling title options.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number" data-i18n="step_number_3">3</div>
+                <div class="step-text">
+                    <h4 data-i18n="step_title_3">Select & Optimize</h4>
+                    <p data-i18n="step_description_3">Choose the best title and refine it as needed to perfectly suit your content and audience.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="more-tools" class="section-container">
+        <h2 class="section-heading" data-i18n="section_heading_explore_other_tools">Explore Our Other AI Tools</h2>
+        <div class="tools-grid">
+            <a href="{{ url_for('conclusion_generator_page') }}" class="tool-card">
+                <div class="tool-icon">🏁</div>
+                <h3 data-i18n="tool_conclusion_generator_title">Conclusion Generator</h3>
+                <p data-i18n="tool_conclusion_generator_description">Write powerful conclusions for your essays and reports.</p>
+            </a>
+            <a href="{{ url_for('business_name_generator_page') }}" class="tool-card">
+                <div class="tool-icon">🏢</div>
+                <h3 data-i18n="tool_business_name_generator_title">Business Name Generator</h3>
+                <p data-i18n="tool_business_name_generator_description">Find unique and creative names for your business.</p>
+            </a>
+            <a href="{{ url_for('email_subject_line_generator_page') }}" class="tool-card">
+                <div class="tool-icon">📬</div>
+                <h3 data-i18n="tool_email_subject_line_generator_title">Email Subject Line Generator</h3>
+                <p data-i18n="tool_email_subject_line_generator_description">Create effective subject lines to boost open rates.</p>
+            </a>
+            <a href="{{ url_for('index') }}" class="tool-card">
+                <div class="tool-icon">✍️</div>
+                <h3 data-i18n="tool_ai_summarizer_title">AI Summarizer</h3>
+                <p data-i18n="tool_ai_summarizer_description">Transform long texts into concise summaries instantly.</p>
+            </a>
+            <a href="{{ url_for('article_rewriter_page') }}" class="tool-card">
+                <div class="tool-icon">🔄</div>
+                <h3 data-i18n="tool_article_rewriter_title">Article Rewriter</h3>
+                <p data-i18n="tool_article_rewriter_description">Rewrite articles to generate fresh, unique content.</p>
+            </a>
+            <a href="{{ url_for('plagiarism_checker_page') }}" class="tool-card">
+                <div class="tool-icon">📚</div>
+                <h3 data-i18n="tool_plagiarism_checker_title">Plagiarism Checker</h3>
+                <p data-i18n="tool_plagiarism_checker_description">Ensure your content is original and free from plagiarism.</p>
+            </a>
+        </div>
+        <br>
+        <div class="text-center">
+            <a href="{{ url_for('tools_index') }}" class="primary-button view-all-tools-button" data-i18n="button_view_all_tools">View All Tools</a>
+        </div>
+    </section>
+
+    <section id="additional-info-section" class="section-container">
+        <h2 class="section-heading" data-i18n="section_heading_additional_info">Additional Information</h2>
+        <div class="info-text-box">
+            <p data-i18n="info_text_box_paragraph">
+                Here you can add any additional text or information related to this page or tool. For example, the benefits of this tool, or tips for using it.
+            </p>
+        </div>
+    </section>
+
+    <section id="faq" class="section-container">
+        <h2 class="section-heading" data-i18n="section_heading_faq">Frequently Asked Questions</h2>
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3 data-i18n="faq_question_1">What is an AI Title Generator?</h3>
+                    <i class="fas fa-plus"></i>
+                </div>
+                <div class="faq-answer">
+                    <p data-i18n="faq_answer_1">An AI Title Generator is a tool that uses artificial intelligence to create compelling and effective titles or headlines for your articles, blog posts, essays, and any other content. It helps you grab reader attention and improve SEO.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3 data-i18n="faq_question_2">How does it help with SEO?</h3>
+                    <i class="fas fa-plus"></i>
+                </div>
+                <div class="faq-answer">
+                    <p data-i18n="faq_answer_2">The AI can generate titles that incorporate relevant keywords, making your content more discoverable by search engines. This helps improve your search rankings and drives more organic traffic to your articles or blogs.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3 data-i18n="faq_question_3">Can I use this for creative writing?</h3>
+                    <i class="fas fa-plus"></i>
+                </div>
+                <div class="faq-answer">
+                    <p data-i18n="faq_answer_3">Yes, besides SEO and informational titles, the tool can also generate creative and intriguing titles for stories, poems, or other imaginative works, helping you brainstorm compelling names for your literary projects.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% include 'footer.html' %}
+
+    <script src="{{ url_for('static', filename='js/title_generator_script.js') }}"></script>
+    <script>
+        document.getElementById('currentYearTitle').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

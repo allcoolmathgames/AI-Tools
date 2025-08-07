@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="{{ url_for('index') }}" class="nav-logo" data-i18n="nav_logo">Summarizer.AI</a>
+            <div class="nav-links">
+                <a href="{{ url_for('index') }}" class="{% if request.endpoint == 'index' %}active{% endif %}" data-i18n="home">Home</a>
+                <div class="dropdown">
+                    <a href="#" class="dropbtn {% if request.endpoint in ['summarizer_page', 'article_rewriter_page', 'plagiarism_checker_page', 'paraphrasing_tool_page', 'content_idea_generator_page', 'slogan_generator_page', 'ai_humanizer_page', 'ai_email_generator_page', 'grammar_checker_page', 'ai_story_generator_page', 'ai_product_description_generator_page', 'essay_generator_page', 'trending_news_generator_page', 'acronym_generator_page', 'abstract_generator_page', 'adjective_generator_page', 'hook_generator_page', 'title_generator_page', 'conclusion_generator_page', 'business_name_generator_page', 'email_subject_line_generator_page'] %}active{% endif %}" data-i18n="tools">
+                        Tools <i class="fas fa-caret-down"></i>
+                    </a>
+                    <div class="dropdown-content">
+                    </div>
+                </div>
+                <a href="{{ url_for('blogs_index') }}" class="{% if request.endpoint == 'blogs_index' or 'blog_post' in request.endpoint %}active{% endif %}" data-i18n="blog">Blog</a>
+                <a href="{{ url_for('about_us_page') }}" class="{% if request.endpoint == 'about_us_page' %}active{% endif %}" data-i18n="about_us">About Us</a>
+                <a href="{{ url_for('contact_page') }}" class="{% if request.endpoint == 'contact_page' %}active{% endif %}" data-i18n="contact">Contact</a>
+            </div>
+            <div class="nav-toggle" onclick="toggleNav()">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+</body>
+</html>

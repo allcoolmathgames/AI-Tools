@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="page_title">AI Content Idea Generator - Summarizer.ai</title>
+    <meta data-i18n-content="meta_description" name="description" content="Generate creative and engaging content ideas for your next blog post, article, or marketing campaign with our AI Content Idea Generator.">
+    <meta data-i18n-content="meta_keywords" name="keywords" content="AI content idea generator, content ideas, blog topics, article ideas, marketing content, brainstorming tool">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2QWDFWwBCxN5V6qG/t3bLtmG6NvwK20R8T3M2t/FfD3M5C5S5P5M5P5M5A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="alternate" hreflang="x-default" href=""/>
+    <link rel="alternate" hreflang="cs" href=""/>
+    <link rel="alternate" hreflang="ar" href=""/>
+    <link rel="alternate" hreflang="de" href=""/>
+    <link rel="alternate" hreflang="es" href=""/>
+    <link rel="alternate" hreflang="fi" href=""/>
+    <link rel="alternate" hreflang="fr" href=""/>
+    <link rel="alternate" hreflang="id" href=""/>
+    <link rel="alternate" hreflang="it" href=""/>
+    <link rel="alternate" hreflang="ja" href=""/>
+    <link rel="alternate" hreflang="ko" href=""/>
+    <link rel="alternate" hreflang="pl" href=""/>
+    <link rel="alternate" hreflang="pt" href=""/>
+    <link rel="alternate" hreflang="ru" href=""/>
+    <link rel="alternate" hreflang="da" href=""/>
+    <link rel="alternate" hreflang="no" href=""/>
+    <link rel="alternate" hreflang="tr" href=""/>
+</head>
+<body>
+
+    {% include 'header.html' %}
+
+    <section id="content-idea-generator-tool" class="section-container">
+        <h1 class="section-heading" data-i18n="section_heading_tool">AI Content Idea Generator</h1>
+        <div class="tool-container">
+            <div class="input-group">
+                <label for="keywordsInput" data-i18n="label_keywords_input">Enter Keywords / Topic:</label>
+                <textarea id="keywordsInput" data-i18n-placeholder="placeholder_keywords_input" placeholder="e.g., 'digital marketing trends', 'healthy breakfast ideas', 'remote work productivity'" rows="4"></textarea>
+            </div>
+            <div class="action-buttons">
+                <button id="generateBtn" class="primary-button" data-i18n="button_generate_ideas">Generate Ideas</button>
+            </div>
+            
+            <div class="loader" id="loader"></div>
+            <div class="error-message" id="errorMessage"></div>
+
+            <div class="output-group">
+                <label for="ideasOutput" data-i18n="label_generated_ideas">Generated Content Ideas:</label>
+                <textarea id="ideasOutput" readonly data-i18n-placeholder="placeholder_generated_ideas" placeholder="Your AI-generated content ideas will appear here..."></textarea>
+            </div>
+        </div>
+    </section>
+
+    <section id="content-idea-features" class="section-container">
+        <h2 class="section-heading" data-i18n="section_heading_why_use_tool">Why Use Our Content Idea Generator?</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">💡</div>
+                <h3 data-i18n="feature_title_endless_inspiration">Endless Inspiration</h3>
+                <p data-i18n="feature_description_endless_inspiration">Never run out of ideas! Get fresh, creative content suggestions for any topic or niche.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⏱️</div>
+                <h3 data-i18n="feature_title_save_brainstorming_time">Save Brainstorming Time</h3>
+                <p data-i18n="feature_description_save_brainstorming_time">Generate dozens of ideas in seconds, freeing up your time for content creation.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📈</div>
+                <h3 data-i18n="feature_title_engaging_topics">Engaging Topics</h3>
+                <p data-i18n="feature_description_engaging_topics">Our AI suggests ideas that are likely to resonate with your audience and drive engagement.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="how-it-works" class="section-container">
+        <h2 class="section-heading" data-i18n="section_heading_how_to_use">How To Use the Content Idea Generator</h2>
+        <div class="steps-container">
+            <div class="step">
+                <div class="step-number" data-i18n="step_number_1">1</div>
+                <div class="step-text">
+                    <h4 data-i18n="step_title_1">Enter Keywords</h4>
+                    <p data-i18n="step_description_1">Type in keywords or a brief description of the topic you want content ideas for.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number" data-i18n="step_number_2">2</div>
+                <div class="step-text">
+                    <h4 data-i18n="step_title_2">Generate Ideas</h4>
+                    <p data-i18n="step_description_2">Click the 'Generate Ideas' button. Our AI will instantly provide a list of relevant content topics.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number" data-i18n="step_number_3">3</div>
+                <div class="step-text">
+                    <h4 data-i18n="step_title_3">Select & Create</h4>
+                    <p data-i18n="step_description_3">Choose the best ideas that fit your content strategy and start creating!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="more-tools" class="section-container">
+        <h2 class="section-heading" data-i18n="section_heading_explore_other_tools">Explore Our Other AI Tools</h2>
+        <div class="tools-grid">
+            <a href="{{ url_for('slogan_generator_page') }}" class="tool-card">
+                <div class="tool-icon">🏷️</div>
+                <h3 data-i18n="tool_ai_slogan_generator_title">AI Slogan Generator</h3>
+                <p data-i18n="tool_ai_slogan_generator_description">Create catchy and memorable slogans for your brand or campaign.</p>
+            </a>
+            <a href="{{ url_for('ai_humanizer_page') }}" class="tool-card">
+                <div class="tool-icon">🧑‍💻</div>
+                <h3 data-i18n="tool_ai_humanizer_title">AI Text Humanizer</h3>
+                <p data-i18n="tool_ai_humanizer_description">Transform AI-generated text into natural, human-like content.</p>
+            </a>
+            <a href="{{ url_for('ai_email_generator_page') }}" class="tool-card">
+                <div class="tool-icon">📧</div>
+                <h3 data-i18n="tool_ai_email_generator_title">AI Email Generator</h3>
+                <p data-i18n="tool_ai_email_generator_description">Generate professional and engaging emails quickly with AI.</p>
+            </a>
+            <a href="{{ url_for('grammar_checker_page') }}" class="tool-card">
+                <div class="tool-icon">✅</div>
+                <h3 data-i18n="tool_grammar_checker_title">Grammar Checker</h3>
+                <p data-i18n="tool_grammar_checker_description">Correct grammar, spelling, and punctuation errors instantly.</p>
+            </a>
+            <a href="{{ url_for('ai_story_generator_page') }}" class="tool-card">
+                <div class="tool-icon">📖</div>
+                <h3 data-i18n="tool_ai_story_generator_title">AI Story Generator</h3>
+                <p data-i18n="tool_ai_story_generator_description">Generate creative and engaging stories with AI.</p>
+            </a>
+            <a href="{{ url_for('ai_product_description_generator_page') }}" class="tool-card">
+                <div class="tool-icon">🛍️</div>
+                <h3 data-i18n="tool_product_description_generator_title">Product Description Generator</h3>
+                <p data-i18n="tool_product_description_generator_description">Create compelling product descriptions using AI.</p>
+            </a>
+        </div>
+        <br>
+        <div class="text-center">
+            <a href="{{ url_for('tools_index') }}" class="primary-button view-all-tools-button" data-i18n="button_view_all_tools">View All Tools</a>
+        </div>
+    </section>
+
+    <section id="additional-info-section" class="section-container">
+        <h2 class="section-heading" data-i18n="section_heading_additional_info">Additional Information</h2>
+        <div class="info-text-box">
+            <p data-i18n="info_text_box_paragraph">
+                Here you can add any additional text or information related to this page or tool. For example, the benefits of this tool, or tips for using it.
+            </p>
+        </div>
+    </section>
+
+    <section id="faq" class="section-container">
+        <h2 class="section-heading" data-i18n="section_heading_faq">Frequently Asked Questions</h2>
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3 data-i18n="faq_question_1">What is an AI Content Idea Generator?</h3>
+                    <i class="fas fa-plus"></i>
+                </div>
+                <div class="faq-answer">
+                    <p data-i18n="faq_answer_1">It's a tool that uses artificial intelligence to brainstorm and generate a variety of content ideas based on keywords, topics, or a brief description you provide. It helps overcome writer's block and ensures a steady stream of fresh ideas.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3 data-i18n="faq_question_2">How can it help my content strategy?</h3>
+                    <i class="fas fa-plus"></i>
+                </div>
+                <div class="faq-answer">
+                    <p data-i18n="faq_answer_2">By providing a diverse range of engaging topics, the tool helps you plan your content calendar more efficiently, target trending subjects, and create content that resonates with your audience, ultimately boosting your overall content strategy.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3 data-i18n="faq_question_3">Is it suitable for all content types?</h3>
+                    <i class="fas fa-plus"></i>
+                </div>
+                <div class="faq-answer">
+                    <p data-i18n="faq_answer_3">Yes, the Content Idea Generator is versatile. Whether you're planning blog posts, social media updates, video scripts, articles, or even academic papers, it can provide relevant and creative ideas tailored to your needs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% include 'footer.html' %}
+
+    <script src="{{ url_for('static', filename='js/content_idea_generator_script.js') }}"></script>
+    <script>
+        document.getElementById('currentYearContentIdea').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

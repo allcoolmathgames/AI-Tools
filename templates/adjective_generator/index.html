@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="page_title">AI Adjective Generator - Summarizer.ai</title>
+    <meta data-i18n-content="meta_description" name="description" content="Find the perfect adjectives to enhance your writing and make your descriptions more vivid and precise with our AI Adjective Generator.">
+    <meta data-i18n-content="meta_keywords" name="keywords" content="adjective generator, AI adjectives, descriptive writing, vocabulary builder, content enhancement, word finder">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2QWDFWwBCxN5V6qG/t3bLtmG6NvwK20R8T3M2t/FfD3M5C5S5P5M5P5M5A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="alternate" hreflang="x-default" href=""/>
+    <link rel="alternate" hreflang="cs" href=""/>
+    <link rel="alternate" hreflang="ar" href=""/>
+    <link rel="alternate" hreflang="de" href=""/>
+    <link rel="alternate" hreflang="es" href=""/>
+    <link rel="alternate" hreflang="fi" href=""/>
+    <link rel="alternate" hreflang="fr" href=""/>
+    <link rel="alternate" hreflang="id" href=""/>
+    <link rel="alternate" hreflang="it" href=""/>
+    <link rel="alternate" hreflang="ja" href=""/>
+    <link rel="alternate" hreflang="ko" href=""/>
+    <link rel="alternate" hreflang="pl" href=""/>
+    <link rel="alternate" hreflang="pt" href=""/>
+    <link rel="alternate" hreflang="ru" href=""/>
+    <link rel="alternate" hreflang="da" href=""/>
+    <link rel="alternate" hreflang="no" href=""/>
+    <link rel="alternate" hreflang="tr" href=""/>
+</head>
+<body>
+
+    {% include 'header.html' %}
+
+    <section id="adjective-generator-tool" class="section-container">
+        <h1 class="section-heading" data-i18n="section_heading_tool">AI Adjective Generator</h1>
+        <div class="tool-container">
+            <div class="input-group">
+                <label for="inputText" data-i18n="label_input_text">Enter a Noun or Sentence:</label>
+                <input type="text" id="inputText" data-i18n-placeholder="placeholder_input_text" placeholder="e.g., beautiful mountains, a new car, happy moment">
+            </div>
+            <div class="action-buttons">
+                <button id="generateBtn" class="primary-button" data-i18n="button_generate_adjectives">Generate Adjectives</button>
+            </div>
+            <div class="loader" id="loader"></div>
+            <div class="error-message" id="errorMessage"></div>
+            <div class="output-group">
+                <label for="adjectiveOutput" data-i18n="label_output_text">Suggested Adjectives:</label>
+                <div id="adjectiveOutput" class="adjective-list" data-i18n-placeholder="placeholder_output_text">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="adjective-features" class="section-container">
+        <h2 class="section-heading" data-i18n="section_heading_why_use_tool">Why Use Our Adjective Generator?</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">✨</div>
+                <h3 data-i18n="feature_title_enhance_descriptions">Enhance Descriptions</h3>
+                <p data-i18n="feature_description_enhance_descriptions">Find the perfect words to make your writing more vivid and captivating.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📚</div>
+                <h3 data-i18n="feature_title_expand_vocabulary">Expand Vocabulary</h3>
+                <p data-i18n="feature_description_expand_vocabulary">Discover new and powerful adjectives to enrich your linguistic arsenal.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🚀</div>
+                <h3 data-i18n="feature_title_instant_inspiration">Instant Inspiration</h3>
+                <p data-i18n="feature_description_instant_inspiration">Overcome writer's block with a flood of relevant and creative adjective suggestions.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="how-it-works" class="section-container">
+        <h2 class="section-heading" data-i18n="section_heading_how_to_use">How To Use the Adjective Generator</h2>
+        <div class="steps-container">
+            <div class="step">
+                <div class="step-number" data-i18n="step_number_1">1</div>
+                <div class="step-text">
+                    <h4 data-i18n="step_title_1">Enter Text</h4>
+                    <p data-i18n="step_description_1">Type a noun, a phrase, or a full sentence into the input field.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number" data-i18n="step_number_2">2</div>
+                <div class="step-text">
+                    <h4 data-i18n="step_title_2">Generate</h4>
+                    <p data-i18n="step_description_2">Click 'Generate Adjectives'. Our AI will analyze your input and provide relevant adjectives.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number" data-i18n="step_number_3">3</div>
+                <div class="step-text">
+                    <h4 data-i18n="step_title_3">Select & Use</h4>
+                    <p data-i18n="step_description_3">Choose from the suggested adjectives to make your writing more descriptive and engaging.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="more-tools" class="section-container">
+        <h2 class="section-heading" data-i18n="section_heading_explore_other_tools">Explore Our Other AI Tools</h2>
+        <div class="tools-grid">
+            <a href="{{ url_for('essay_generator_page') }}" class="tool-card">
+                <div class="tool-icon">📄</div>
+                <h3 data-i18n="tool_essay_generator_title">Essay Generator</h3>
+                <p data-i18n="tool_essay_generator_description">Generate well-structured essays on any topic with AI.</p>
+            </a>
+            <a href="{{ url_for('grammar_checker_page') }}" class="tool-card">
+                <div class="tool-icon">✅</div>
+                <h3 data-i18n="tool_grammar_checker_title">Grammar Checker</h3>
+                <p data-i18n="tool_grammar_checker_description">Correct grammar, spelling, and punctuation errors instantly.</p>
+            </a>
+            <a href="{{ url_for('hook_generator_page') }}" class="tool-card">
+                <div class="tool-icon">🎣</div>
+                <h3 data-i18n="tool_hook_generator_title">Hook Generator</h3>
+                <p data-i18n="tool_hook_generator_description">Create catchy hooks to grab your readers' attention.</p>
+            </a>
+            <a href="{{ url_for('paraphrasing_tool_page') }}" class="tool-card">
+                <div class="tool-icon">📝</div>
+                <h3 data-i18n="tool_paraphrasing_tool_title">Paraphrasing Tool</h3>
+                <p data-i18n="tool_paraphrasing_tool_description">Rephrase sentences and paragraphs without changing their meaning.</p>
+            </a>
+            <a href="{{ url_for('plagiarism_checker_page') }}" class="tool-card">
+                <div class="tool-icon">📚</div>
+                <h3 data-i18n="tool_plagiarism_checker_title">Plagiarism Checker</h3>
+                <p data-i18n="tool_plagiarism_checker_description">Ensure your content is original and free from plagiarism.</p>
+            </a>
+            <a href="{{ url_for('title_generator_page') }}" class="tool-card">
+                <div class="tool-icon">✒️</div>
+                <h3 data-i18n="tool_title_generator_title">Title Generator</h3>
+                <p data-i18n="tool_title_generator_description">Generate compelling titles for your articles and blogs.</p>
+            </a>
+        </div>
+        <br>
+        <div class="text-center">
+            <a href="{{ url_for('tools_index') }}" class="primary-button view-all-tools-button" data-i18n="button_view_all_tools">View All Tools</a>
+        </div>
+    </section>
+
+    <section id="additional-info-section" class="section-container">
+        <h2 class="section-heading" data-i18n="section_heading_additional_info">Additional Information</h2>
+        <div class="info-text-box">
+            <p data-i18n="info_text_box_paragraph">
+                Here you can add any additional text or information related to this page or tool. For example, the benefits of this tool, or tips for using it.
+            </p>
+        </div>
+    </section>
+
+    <section id="faq" class="section-container">
+        <h2 class="section-heading" data-i18n="section_heading_faq">Frequently Asked Questions</h2>
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3 data-i18n="faq_question_1">What is an Adjective Generator?</h3>
+                    <i class="fas fa-plus"></i>
+                </div>
+                <div class="faq-answer">
+                    <p data-i18n="faq_answer_1">An Adjective Generator is an AI tool that suggests a variety of adjectives based on a noun, phrase, or sentence you provide. It helps writers find the most suitable words to add detail, color, and depth to their descriptions.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3 data-i18n="faq_question_2">How can this tool improve my writing?</h3>
+                    <i class="fas fa-plus"></i>
+                </div>
+                <div class="faq-answer">
+                    <p data-i18n="faq_answer_2">By offering diverse and precise adjectives, the tool helps you enhance the descriptive power of your text, making it more engaging and impactful. It can also expand your vocabulary and help you avoid repetitive language.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3 data-i18n="faq_question_3">Is it suitable for all types of writing?</h3>
+                    <i class="fas fa-plus"></i>
+                </div>
+                <div class="faq-answer">
+                    <p data-i18n="faq_answer_3">Yes, the Adjective Generator is versatile and can be used for various writing styles, including creative writing, academic papers, marketing copy, and everyday communication. It provides suggestions that can be adapted to different tones and contexts.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% include 'footer.html' %}
+
+    <script src="{{ url_for('static', filename='js/adjective_generator_script.js') }}"></script>
+    <script>
+        document.getElementById('currentYearAdjective').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

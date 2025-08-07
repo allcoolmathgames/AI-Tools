@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="page_title">AI Essay Generator - Summarizer.ai</title>
+    <meta data-i18n-content="meta_description" name="description" content="Generate well-structured and insightful essays on any topic with our AI Essay Generator. Perfect for students and writers.">
+    <meta data-i18n-content="meta_keywords" name="keywords" content="AI essay generator, essay writer, academic essay, essay helper, essay drafting, AI tools for students">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2QWDFWwBCxN5V6qG/t3bLtmG6NvwK20R8T3M2t/FfD3M5C5S5P5M5P5M5A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="alternate" hreflang="x-default" href=""/>
+    <link rel="alternate" hreflang="cs" href=""/>
+    <link rel="alternate" hreflang="ar" href=""/>
+    <link rel="alternate" hreflang="de" href=""/>
+    <link rel="alternate" hreflang="es" href=""/>
+    <link rel="alternate" hreflang="fi" href=""/>
+    <link rel="alternate" hreflang="fr" href=""/>
+    <link rel="alternate" hreflang="id" href=""/>
+    <link rel="alternate" hreflang="it" href=""/>
+    <link rel="alternate" hreflang="ja" href=""/>
+    <link rel="alternate" hreflang="ko" href=""/>
+    <link rel="alternate" hreflang="pl" href=""/>
+    <link rel="alternate" hreflang="pt" href=""/>
+    <link rel="alternate" hreflang="ru" href=""/>
+    <link rel="alternate" hreflang="da" href=""/>
+    <link rel="alternate" hreflang="no" href=""/>
+    <link rel="alternate" hreflang="tr" href=""/>
+</head>
+<body>
+
+    {% include 'header.html' %}
+
+    <section id="essay-generator-tool" class="section-container">
+        <h1 class="section-heading" data-i18n="section_heading_tool">AI Essay Generator</h1>
+        <div class="tool-container">
+            <div class="text-area-group">
+                <label for="topicInput" data-i18n="label_topic_input">Essay Topic:</label>
+                <textarea id="topicInput" data-i18n-placeholder="placeholder_topic_input" placeholder="e.g., 'The impact of social media on youth', 'Analysis of Shakespeare's Hamlet'"></textarea>
+            </div>
+            <div class="input-group">
+                <label for="lengthSelect" data-i18n="label_length_select">Desired Length:</label>
+                <select id="lengthSelect">
+                    <option value="short" data-i18n="option_length_short">Short (300-500 words)</option>
+                    <option value="medium" data-i18n="option_length_medium">Medium (500-1000 words)</option>
+                    <option value="long" data-i18n="option_length_long">Long (1000+ words)</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="styleSelect" data-i18n="label_style_select">Writing Style:</label>
+                <select id="styleSelect">
+                    <option value="formal" data-i18n="option_style_formal">Formal</option>
+                    <option value="academic" data-i18n="option_style_academic">Academic</option>
+                    <option value="persuasive" data-i18n="option_style_persuasive">Persuasive</option>
+                    <option value="narrative" data-i18n="option_style_narrative">Narrative</option>
+                    <option value="analytical" data-i18n="option_style_analytical">Analytical</option>
+                </select>
+            </div>
+            <div class="text-area-group">
+                <label for="keywordsInput" data-i18n="label_keywords_input">Key Points/Keywords (Optional):</label>
+                <input type="text" id="keywordsInput" data-i18n-placeholder="placeholder_keywords_input" placeholder="e.g., 'mental health, cyberbullying, positive connections'">
+            </div>
+            <div class="action-buttons">
+                <button id="generateBtn" class="primary-button" data-i18n="button_generate_essay">Generate Essay</button>
+            </div>
+            
+            <div class="loader" id="loader"></div>
+            <div class="error-message" id="errorMessage"></div>
+
+            <div class="output-group">
+                <label for="essayOutput" data-i18n="label_generated_essay">Generated Essay:</label>
+                <textarea id="essayOutput" readonly data-i18n-placeholder="placeholder_generated_essay" placeholder="Your AI-generated essay will appear here..."></textarea>
+            </div>
+        </div>
+    </section>
+
+    <section id="essay-features" class="section-container">
+        <h2 class="section-heading" data-i18n="section_heading_why_use_tool">Why Use Our AI Essay Generator?</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">📝</div>
+                <h3 data-i18n="feature_title_well_structured_essays">Well-Structured Essays</h3>
+                <p data-i18n="feature_description_well_structured_essays">Generates essays with clear introductions, developed body paragraphs, and strong conclusions.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⏱️</div>
+                <h3 data-i18n="feature_title_save_time_effort">Save Time & Effort</h3>
+                <p data-i18n="feature_description_save_time_effort">Overcome writer's block and quickly get a draft for any topic, saving hours of research and writing.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📚</div>
+                <h3 data-i18n="feature_title_academic_support">Academic Support</h3>
+                <p data-i18n="feature_description_academic_support">A valuable tool for students to brainstorm ideas, structure arguments, and create initial essay drafts.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="how-it-works" class="section-container">
+        <h2 class="section-heading" data-i18n="section_heading_how_to_use">How To Use the AI Essay Generator</h2>
+        <div class="steps-container">
+            <div class="step">
+                <div class="step-number" data-i18n="step_number_1">1</div>
+                <div class="step-text">
+                    <h4 data-i18n="step_title_1">Enter Topic & Details</h4>
+                    <p data-i18n="step_description_1">Provide your essay topic, desired length, writing style, and any optional keywords.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number" data-i18n="step_number_2">2</div>
+                <div class="step-text">
+                    <h4 data-i18n="step_title_2">Generate Essay</h4>
+                    <p data-i18n="step_description_2">Click 'Generate Essay'. Our AI will craft a comprehensive essay based on your specifications.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number" data-i18n="step_number_3">3</div>
+                <div class="step-text">
+                    <h4 data-i18n="step_title_3">Review & Refine</h4>
+                    <p data-i18n="step_description_3">Read the generated essay, make any necessary edits, and personalize it before final submission.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="more-tools" class="section-container">
+        <h2 class="section-heading" data-i18n="section_heading_explore_other_tools">Explore Our Other AI Tools</h2>
+        <div class="tools-grid">
+            <a href="{{ url_for('trending_news_generator_page') }}" class="tool-card">
+                <div class="tool-icon">📰</div>
+                <h3 data-i18n="tool_trending_news_generator_title">Trending News Generator</h3>
+                <p data-i18n="tool_trending_news_generator_description">Stay updated with trending news generated by AI.</p>
+            </a>
+            <a href="{{ url_for('acronym_generator_page') }}" class="tool-card">
+                <div class="tool-icon">🔠</div>
+                <h3 data-i18n="tool_acronym_generator_title">Acronym Generator</h3>
+                <p data-i18n="tool_acronym_generator_description">Create acronyms from long phrases instantly.</p>
+            </a>
+            <a href="{{ url_for('abstract_generator_page') }}" class="tool-card">
+                <div class="tool-icon">📑</div>
+                <h3 data-i18n="tool_abstract_generator_title">Abstract Generator</h3>
+                <p data-i18n="tool_abstract_generator_description">Generate concise abstracts for your research papers.</p>
+            </a>
+            <a href="{{ url_for('adjective_generator_page') }}" class="tool-card">
+                <div class="tool-icon">🎨</div>
+                <h3 data-i18n="tool_adjective_generator_title">Adjective Generator</h3>
+                <p data-i18n="tool_adjective_generator_description">Find the perfect adjectives to enhance your writing.</p>
+            </a>
+            <a href="{{ url_for('hook_generator_page') }}" class="tool-card">
+                <div class="tool-icon">🎣</div>
+                <h3 data-i18n="tool_hook_generator_title">Hook Generator</h3>
+                <p data-i18n="tool_hook_generator_description">Create catchy hooks to grab your readers' attention.</p>
+            </a>
+            <a href="{{ url_for('title_generator_page') }}" class="tool-card">
+                <div class="tool-icon">✒️</div>
+                <h3 data-i18n="tool_title_generator_title">Title Generator</h3>
+                <p data-i18n="tool_title_generator_description">Generate compelling titles for your articles and blogs.</p>
+            </a>
+        </div>
+        <br>
+        <div class="text-center">
+            <a href="{{ url_for('tools_index') }}" class="primary-button view-all-tools-button" data-i18n="button_view_all_tools">View All Tools</a>
+        </div>
+    </section>
+
+    <section id="additional-info-section" class="section-container">
+        <h2 class="section-heading" data-i18n="section_heading_additional_info">Additional Information</h2>
+        <div class="info-text-box">
+            <p data-i18n="info_text_box_paragraph">
+                Here you can add any additional text or information related to this page or tool. For example, the benefits of this tool, or tips for using it.
+            </p>
+        </div>
+    </section>
+
+    <section id="faq" class="section-container">
+        <h2 class="section-heading" data-i18n="section_heading_faq">Frequently Asked Questions</h2>
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3 data-i18n="faq_question_1">What kind of essays can I generate?</h3>
+                    <i class="fas fa-plus"></i>
+                </div>
+                <div class="faq-answer">
+                    <p data-i18n="faq_answer_1">Our AI Essay Generator can help you draft essays on a wide range of topics and in various styles, including formal, academic, persuasive, narrative, and analytical. You can specify the topic, length, and style to get tailored results.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3 data-i18n="faq_question_2">Is the generated content original?</h3>
+                    <i class="fas fa-plus"></i>
+                </div>
+                <div class="faq-answer">
+                    <p data-i18n="faq_answer_2">The AI generates original content based on its extensive training data and your specific prompts. While it creates unique drafts, we always recommend reviewing and refining the essay to add your personal touch and ensure academic integrity, especially for submissions.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3 data-i18n="faq_question_3">Can this tool help me with writer's block?</h3>
+                    <i class="fas fa-plus"></i>
+                </div>
+                <div class="faq-answer">
+                    <p data-i18n="faq_answer_3">Absolutely! The AI Essay Generator is an excellent tool to overcome writer's block. It provides a solid starting point, helps you structure your arguments, and can even suggest ideas and expand on your key points, giving you the momentum to complete your essay.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% include 'footer.html' %}
+
+    <script src="{{ url_for('static', filename='js/essay_generator_script.js') }}"></script>
+    <script>
+        document.getElementById('currentYearEssay').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

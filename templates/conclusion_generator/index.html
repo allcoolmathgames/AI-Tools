@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="page_title">AI Conclusion Generator - Summarizer.ai</title>
+    <meta data-i18n-content="meta_description" name="description" content="Generate powerful and effective conclusions for your essays, articles, and reports with our AI Conclusion Generator.">
+    <meta data-i18n-content="meta_keywords" name="keywords" content="AI conclusion generator, generate conclusion, essay conclusion, report conclusion, summary writer, academic tool">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2QWDFWwBCxN5V6qG/t3bLtmG6NvwK20R8T3M2t/FfD3M5C5S5P5M5P5M5A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="alternate" hreflang="x-default" href=""/>
+    <link rel="alternate" hreflang="cs" href=""/>
+    <link rel="alternate" hreflang="ar" href=""/>
+    <link rel="alternate" hreflang="de" href=""/>
+    <link rel="alternate" hreflang="es" href=""/>
+    <link rel="alternate" hreflang="fi" href=""/>
+    <link rel="alternate" hreflang="fr" href=""/>
+    <link rel="alternate" hreflang="id" href=""/>
+    <link rel="alternate" hreflang="it" href=""/>
+    <link rel="alternate" hreflang="ja" href=""/>
+    <link rel="alternate" hreflang="ko" href=""/>
+    <link rel="alternate" hreflang="pl" href=""/>
+    <link rel="alternate" hreflang="pt" href=""/>
+    <link rel="alternate" hreflang="ru" href=""/>
+    <link rel="alternate" hreflang="da" href=""/>
+    <link rel="alternate" hreflang="no" href=""/>
+    <link rel="alternate" hreflang="tr" href=""/>
+</head>
+<body>
+
+    {% include 'header.html' %}
+
+    <section id="conclusion-generator-tool" class="section-container">
+        <h1 class="section-heading" data-i18n="section_heading_tool">AI Conclusion Generator</h1>
+        <div class="tool-container">
+            <div class="input-group">
+                <label for="inputText" data-i18n="label_input_text">Paste Your Main Text / Body Paragraphs Here:</label>
+                <textarea id="inputText" data-i18n-placeholder="placeholder_input_text" placeholder="e.g., Paste the main body of your essay, article, or report..."></textarea>
+            </div>
+            <div class="action-buttons">
+                <button id="generateBtn" class="primary-button" data-i18n="button_generate_conclusion">Generate Conclusion</button>
+            </div>
+            
+            <div class="loader" id="loader"></div>
+            <div class="error-message" id="errorMessage"></div>
+
+            <div class="output-group">
+                <label for="conclusionOutput" data-i18n="label_output_text">Generated Conclusion:</label>
+                <textarea id="conclusionOutput" readonly data-i18n-placeholder="placeholder_output_text" placeholder="Your AI-generated conclusion will appear here..."></textarea>
+            </div>
+        </div>
+    </section>
+
+    <section id="conclusion-features" class="section-container">
+        <h2 class="section-heading" data-i18n="section_heading_why_use_tool">Why Use Our AI Conclusion Generator?</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">✨</div>
+                <h3 data-i18n="feature_title_powerful_endings">Powerful Endings</h3>
+                <p data-i18n="feature_description_powerful_endings">Create impactful and memorable conclusions that effectively summarize your main arguments.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⏱️</div>
+                <h3 data-i18n="feature_title_save_time_effort">Save Time & Effort</h3>
+                <p data-i18n="feature_description_save_time_effort">Quickly generate high-quality conclusions for any document, eliminating writer's block.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <h3 data-i18n="feature_title_cohesive_summaries">Cohesive Summaries</h3>
+                <p data-i18n="feature_description_cohesive_summaries">Ensures your conclusion logically ties back to your introduction and main points, providing cohesion.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="how-it-works" class="section-container">
+        <h2 class="section-heading" data-i18n="section_heading_how_to_use">How To Use the Conclusion Generator</h2>
+        <div class="steps-container">
+            <div class="step">
+                <div class="step-number" data-i18n="step_number_1">1</div>
+                <div class="step-text">
+                    <h4 data-i18n="step_title_1">Paste Main Content</h4>
+                    <p data-i18n="step_description_1">Copy the body paragraphs of your essay, article, or report and paste them into the input box.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number" data-i18n="step_number_2">2</div>
+                <div class="step-text">
+                    <h4 data-i18n="step_title_2">Generate Conclusion</h4>
+                    <p data-i18n="step_description_2">Click the 'Generate Conclusion' button. Our AI will craft a compelling summary of your content.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number" data-i18n="step_number_3">3</div>
+                <div class="step-text">
+                    <h4 data-i18n="step_title_3">Review and Finalize</h4>
+                    <p data-i18n="step_description_3">Your powerful conclusion is ready. Review it and make any necessary edits to perfectly match your document.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="more-tools" class="section-container">
+        <h2 class="section-heading" data-i18n="section_heading_explore_other_tools">Explore Our Other AI Tools</h2>
+        <div class="tools-grid">
+            <a href="{{ url_for('index') }}" class="tool-card">
+                <div class="tool-icon">✍️</div>
+                <h3 data-i18n="tool_ai_summarizer_title">AI Summarizer</h3>
+                <p data-i18n="tool_ai_summarizer_description">Transform long texts into concise summaries instantly.</p>
+            </a>
+            <a href="{{ url_for('article_rewriter_page') }}" class="tool-card">
+                <div class="tool-icon">🔄</div>
+                <h3 data-i18n="tool_article_rewriter_title">Article Rewriter</h3>
+                <p data-i18n="tool_article_rewriter_description">Rewrite articles to generate fresh, unique content.</p>
+            </a>
+            <a href="{{ url_for('plagiarism_checker_page') }}" class="tool-card">
+                <div class="tool-icon">📚</div>
+                <h3 data-i18n="tool_plagiarism_checker_title">Plagiarism Checker</h3>
+                <p data-i18n="tool_plagiarism_checker_description">Ensure your content is original and free from plagiarism.</p>
+            </a>
+            <a href="{{ url_for('paraphrasing_tool_page') }}" class="tool-card">
+                <div class="tool-icon">📝</div>
+                <h3 data-i18n="tool_paraphrasing_tool_title">Paraphrasing Tool</h3>
+                <p data-i18n="tool_paraphrasing_tool_description">Rephrase sentences and paragraphs without changing their meaning.</p>
+            </a>
+            <a href="{{ url_for('content_idea_generator_page') }}" class="tool-card">
+                <div class="tool-icon">💡</div>
+                <h3 data-i18n="tool_content_idea_generator_title">Content Idea Generator</h3>
+                <p data-i18n="tool_content_idea_generator_description">Generate creative and engaging ideas for your next content piece.</p>
+            </a>
+            <a href="{{ url_for('slogan_generator_page') }}" class="tool-card">
+                <div class="tool-icon">🏷️</div>
+                <h3 data-i18n="tool_ai_slogan_generator_title">AI Slogan Generator</h3>
+                <p data-i18n="tool_ai_slogan_generator_description">Create catchy and memorable slogans for your brand or campaign.</p>
+            </a>
+        </div>
+        <br>
+        <div class="text-center">
+            <a href="{{ url_for('tools_index') }}" class="primary-button view-all-tools-button" data-i18n="button_view_all_tools">View All Tools</a>
+        </div>
+    </section>
+
+    <section id="additional-info-section" class="section-container">
+        <h2 class="section-heading" data-i18n="section_heading_additional_info">Additional Information</h2>
+        <div class="info-text-box">
+            <p data-i18n="info_text_box_paragraph">
+                Here you can add any additional text or information related to this page or tool. For example, the benefits of this tool, or tips for using it.
+            </p>
+        </div>
+    </section>
+
+    <section id="faq" class="section-container">
+        <h2 class="section-heading" data-i18n="section_heading_faq">Frequently Asked Questions</h2>
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3 data-i18n="faq_question_1">What is an AI Conclusion Generator?</h3>
+                    <i class="fas fa-plus"></i>
+                </div>
+                <div class="faq-answer">
+                    <p data-i18n="faq_answer_1">An AI Conclusion Generator is a tool that uses artificial intelligence to create effective summaries and concluding remarks for your written work, such as essays, reports, or research papers. It helps tie together your main points cohesively.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3 data-i18n="faq_question_2">How accurate is the generated conclusion?</h3>
+                    <i class="fas fa-plus"></i>
+                </div>
+                <div class="faq-answer">
+                    <p data-i18n="faq_answer_2">The AI analyzes your main text to ensure the conclusion accurately reflects its core arguments. While it provides a high-quality draft, we always recommend reviewing and refining it to perfectly match your specific needs and context.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3 data-i18n="faq_question_3">Can I use this for academic papers?</h3>
+                    <i class="fas fa-plus"></i>
+                </div>
+                <div class="faq-answer">
+                    <p data-i18n="faq_answer_3">Yes, this tool can be a valuable aid for academic writing. It helps students and researchers craft strong, concise conclusions that reinforce their thesis and summarize findings effectively, saving time in the writing process.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% include 'footer.html' %}
+
+    <script src="{{ url_for('static', filename='js/conclusion_generator_script.js') }}"></script>
+    <script>
+        document.getElementById('currentYearConclusion').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

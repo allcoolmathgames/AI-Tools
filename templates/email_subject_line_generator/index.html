@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="page_title">AI Email Subject Line Generator - Summarizer.ai</title>
+    <meta data-i18n-content="meta_description" name="description" content="Create effective and catchy email subject lines that boost open rates with our AI Email Subject Line Generator.">
+    <meta data-i18n-content="meta_keywords" name="keywords" content="AI email subject line generator, catchy subject lines, email marketing, open rate booster, email copywriting">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2QWDFWwBCxN5V6qG/t3bLtmG6NvwK20R8T3M2t/FfD3M5C5S5P5M5P5M5A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="alternate" hreflang="x-default" href=""/>
+    <link rel="alternate" hreflang="cs" href=""/>
+    <link rel="alternate" hreflang="ar" href=""/>
+    <link rel="alternate" hreflang="de" href=""/>
+    <link rel="alternate" hreflang="es" href=""/>
+    <link rel="alternate" hreflang="fi" href=""/>
+    <link rel="alternate" hreflang="fr" href=""/>
+    <link rel="alternate" hreflang="id" href=""/>
+    <link rel="alternate" hreflang="it" href=""/>
+    <link rel="alternate" hreflang="ja" href=""/>
+    <link rel="alternate" hreflang="ko" href=""/>
+    <link rel="alternate" hreflang="pl" href=""/>
+    <link rel="alternate" hreflang="pt" href=""/>
+    <link rel="alternate" hreflang="ru" href=""/>
+    <link rel="alternate" hreflang="da" href=""/>
+    <link rel="alternate" hreflang="no" href=""/>
+    <link rel="alternate" hreflang="tr" href=""/>
+</head>
+<body>
+
+    {% include 'header.html' %}
+
+    <section id="email-subject-generator-tool" class="section-container">
+        <h1 class="section-heading" data-i18n="section_heading_tool">AI Email Subject Line Generator</h1>
+        <p class="section-description" data-i18n="section_description">
+            Create effective subject lines that boost open rates and grab attention.
+        </p>
+        <div class="tool-container">
+            <div class="input-group">
+                <label for="emailContent" data-i18n="label_email_content">Describe your email content:</label>
+                <textarea id="emailContent" data-i18n-placeholder="placeholder_email_content" placeholder="e.g., 'A new product launch with a 20% discount for early birds', 'Meeting reminder for Tuesday at 10 AM', 'Monthly newsletter with latest updates'"></textarea>
+            </div>
+            <div class="input-group">
+                <label for="toneSelect" data-i18n="label_tone_select">Tone:</label>
+                <select id="toneSelect">
+                    <option value="Professional" data-i18n="option_professional">Professional</option>
+                    <option value="Casual" data-i18n="option_casual">Casual</option>
+                    <option value="Urgent" data-i18n="option_urgent">Urgent</option>
+                    <option value="Friendly" data-i18n="option_friendly">Friendly</option>
+                    <option value="Intriguing" data-i18n="option_intriguing">Intriguing</option>
+                </select>
+            </div>
+            <div class="action-buttons">
+                <button id="generateBtn" class="primary-button" data-i18n="button_generate_subjects">Generate Subject Lines</button>
+            </div>
+            <div class="loader" id="loader"></div>
+            <div class="error-message" id="errorMessage"></div>
+            <div class="output-group">
+                <label for="subjectOutput" data-i18n="label_subject_output">Generated Subject Lines:</label>
+                <textarea id="subjectOutput" readonly data-i18n-placeholder="placeholder_subject_output" placeholder="Your AI-generated subject lines will appear here..."></textarea>
+            </div>
+        </div>
+    </section>
+
+    <section id="subject-features" class="section-container">
+        <h2 class="section-heading" data-i18n="section_heading_why_use_tool">Why Use Our AI Email Subject Line Generator?</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">✨</div>
+                <h3 data-i18n="feature_title_boost_open_rates">Boost Open Rates</h3>
+                <p data-i18n="feature_description_boost_open_rates">Craft compelling subject lines that encourage recipients to open your emails.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⏱️</div>
+                <h3 data-i18n="feature_title_save_time">Save Time</h3>
+                <p data-i18n="feature_description_save_time">Generate multiple, effective subject line options in seconds, eliminating brainstorming.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <h3 data-i18n="feature_title_tailored_relevant">Tailored & Relevant</h3>
+                <p data-i18n="feature_description_tailored_relevant">Get suggestions customized to your email's content and desired tone for maximum impact.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="how-it-works" class="section-container">
+        <h2 class="section-heading" data-i18n="section_heading_how_to_use">How To Use the Email Subject Line Generator</h2>
+        <div class="steps-container">
+            <div class="step">
+                <div class="step-number" data-i18n="step_number_1">1</div>
+                <div class="step-text">
+                    <h4 data-i18n="step_title_1">Describe Email Content</h4>
+                    <p data-i18n="step_description_1">Briefly explain what your email is about in the input field.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number" data-i18n="step_number_2">2</div>
+                <div class="step-text">
+                    <h4 data-i18n="step_title_2">Select Tone</h4>
+                    <p data-i18n="step_description_2">Choose the desired tone for your subject lines (e.g., Professional, Casual, Urgent).</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number" data-i18n="step_number_3">3</div>
+                <div class="step-text">
+                    <h4 data-i18n="step_title_3">Generate & Select</h4>
+                    <p data-i18n="step_description_3">Click 'Generate Subject Lines' and pick the most effective one for your email campaign.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="more-tools" class="section-container">
+        <h2 class="section-heading" data-i18n="section_heading_explore_other_tools">Explore Our Other AI Tools</h2>
+        <div class="tools-grid">
+            <a href="{{ url_for('essay_generator_page') }}" class="tool-card">
+                <div class="tool-icon">📄</div>
+                <h3 data-i18n="tool_essay_generator_title">Essay Generator</h3>
+                <p data-i18n="tool_essay_generator_description">Generate well-structured essays on any topic with AI.</p>
+            </a>
+            <a href="{{ url_for('grammar_checker_page') }}" class="tool-card">
+                <div class="tool-icon">✅</div>
+                <h3 data-i18n="tool_grammar_checker_title">Grammar Checker</h3>
+                <p data-i18n="tool_grammar_checker_description">Correct grammar, spelling, and punctuation errors instantly.</p>
+            </a>
+            <a href="{{ url_for('hook_generator_page') }}" class="tool-card">
+                <div class="tool-icon">🎣</div>
+                <h3 data-i18n="tool_hook_generator_title">Hook Generator</h3>
+                <p data-i18n="tool_hook_generator_description">Create catchy hooks to grab your readers' attention.</p>
+            </a>
+            <a href="{{ url_for('title_generator_page') }}" class="tool-card">
+                <div class="tool-icon">✒️</div>
+                <h3 data-i18n="tool_title_generator_title">Title Generator</h3>
+                <p data-i18n="tool_title_generator_description">Generate compelling titles for your articles and blogs.</p>
+            </a>
+            <a href="{{ url_for('conclusion_generator_page') }}" class="tool-card">
+                <div class="tool-icon">🏁</div>
+                <h3 data-i18n="tool_conclusion_generator_title">Conclusion Generator</h3>
+                <p data-i18n="tool_conclusion_generator_description">Write powerful conclusions for your essays and reports.</p>
+            </a>
+            <a href="{{ url_for('business_name_generator_page') }}" class="tool-card">
+                <div class="tool-icon">🏢</div>
+                <h3 data-i18n="tool_business_name_generator_title">Business Name Generator</h3>
+                <p data-i18n="tool_business_name_generator_description">Find unique and creative names for your business.</p>
+            </a>
+        </div>
+        <br>
+        <div class="text-center">
+            <a href="{{ url_for('tools_index') }}" class="primary-button view-all-tools-button" data-i18n="button_view_all_tools">View All Tools</a>
+        </div>
+    </section>
+
+    <section id="additional-info-section" class="section-container">
+        <h2 class="section-heading" data-i18n="section_heading_additional_info">Additional Information</h2>
+        <div class="info-text-box">
+            <p data-i18n="info_text_box_paragraph">
+                Here you can add any additional text or information related to this page or tool. For example, the benefits of this tool, or tips for using it.
+            </p>
+        </div>
+    </section>
+
+    <section id="faq" class="section-container">
+        <h2 class="section-heading" data-i18n="section_heading_faq">Frequently Asked Questions</h2>
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3 data-i18n="faq_question_1">What is an AI Email Subject Line Generator?</h3>
+                    <i class="fas fa-plus"></i>
+                </div>
+                <div class="faq-answer">
+                    <p data-i18n="faq_answer_1">It's an AI-powered tool that creates engaging and effective subject lines for your emails. You provide the main content or purpose of your email, and the AI generates several options designed to increase open rates.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3 data-i18n="faq_question_2">How can a good subject line help my emails?</h3>
+                    <i class="fas fa-plus"></i>
+                </div>
+                <div class="faq-answer">
+                    <p data-i18n="faq_answer_2">A compelling subject line is crucial for email marketing and communication as it directly influences whether your email gets opened. It grabs the recipient's attention, conveys urgency or value, and encourages them to read further.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3 data-i18n="faq_question_3">Can I get subject lines for different tones?</h3>
+                    <i class="fas fa-plus"></i>
+                </div>
+                <div class="faq-answer">
+                    <p data-i18n="faq_answer_3">Yes, our tool allows you to select a desired tone (e.g., Professional, Casual, Urgent, Intriguing). This helps the AI generate subject lines that align with your brand's voice and the specific context of your email.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% include 'footer.html' %}
+
+    <script src="{{ url_for('static', filename='js/email_subject_line_generator_script.js') }}"></script>
+    <script>
+        document.getElementById('currentYearEmailSubject').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
