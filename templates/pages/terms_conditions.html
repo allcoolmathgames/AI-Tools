@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< HEAD
     <title>Terms & Conditions - Summarizer.ai</title>
     <meta name="description" content="Read the Terms & Conditions for using Summarizer.ai services and tools.">
     <meta name="keywords" content="Summarizer.ai terms, service agreement, user policy, legal terms, conditions of use">
@@ -111,5 +112,75 @@
         // Agar aap har page par specific currentYear ID istemal kar rahe hain to:
         // document.getElementById('currentYearTermsConditions').textContent = new Date().getFullYear();
     </script>
+=======
+    <title data-translate="termsConditionsTitle">Terms & Conditions – GradeWise</title>
+    <meta name="description" data-translate="termsConditionsDescription" content="Read the Terms & Conditions for using GradeWise. Understand your rights and responsibilities when using our services.">
+    <meta name="keywords" data-translate="termsConditionsKeywords" content="terms and conditions, GradeWise terms, service agreement, user agreement, website terms">
+    <meta name="robots" content="noindex, nofollow">
+    
+    <link rel="canonical" href="https://yourwebsite.com/pages/terms-conditions/">
+
+    <link rel="alternate" hreflang="x-default" href="https://yourwebsite.com/pages/terms-conditions/"/>
+    <link rel="alternate" hreflang="en" href="https://yourwebsite.com/pages/terms-conditions/"/>
+    <link rel="alternate" hreflang="ur" href="https://yourwebsite.com/ur/pages/terms-conditions/"/>
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="{{ url_for('static', filename='js/language.js') }}" defer></script>
+</head>
+<body>
+    {% include 'header.html' %}
+
+    <main>
+        <section class="page-content">
+            <h1 data-translate="termsConditionsHeading">Terms & Conditions</h1>
+            <p data-translate="termsConditionsIntro">
+                Welcome to GradeWise. By accessing or using our website, you agree to be bound by these Terms & Conditions. Please read them carefully.
+            </p>
+
+            <h2 data-translate="useOfServiceHeading">Use of Service</h2>
+            <p data-translate="useOfServiceText1">
+                GradeWise provides free GPA calculation tools for educational purposes. All calculations are performed on the client-side (in your browser), and we do not store any personal data or academic information you input.
+            </p>
+            <p data-translate="useOfServiceText2">
+                You agree to use the service for lawful purposes only and in a way that does not infringe the rights of, restrict or inhibit anyone else's use and enjoyment of the website.
+            </p>
+
+            <h2 data-translate="intellectualPropertyHeading">Intellectual Property</h2>
+            <p data-translate="intellectualPropertyText1">
+                All content, trademarks, logos, and intellectual property displayed on GradeWise are the property of GradeWise or its licensors. You may not use, reproduce, or distribute any content from this site without our express written permission.
+            </p>
+
+            <h2 data-translate="disclaimerOfWarrantiesHeading">Disclaimer of Warranties</h2>
+            <p data-translate="disclaimerOfWarrantiesText1">
+                GradeWise is provided "as is" and without any warranties, express or implied. We do not guarantee the accuracy, completeness, or usefulness of any information on the site, including GPA calculations, which are for estimation purposes only.
+            </p>
+            <p data-translate="disclaimerOfWarrantiesText2">
+                We do not warrant that the website will be uninterrupted or error-free, that defects will be corrected, or that the site or the server that makes it available are free of viruses or other harmful components.
+            </p>
+
+            <h2 data-translate="limitationOfLiabilityHeading">Limitation of Liability</h2>
+            <p data-translate="limitationOfLiabilityText1">
+                In no event shall GradeWise be liable for any direct, indirect, incidental, consequential, special, or exemplary damages, including but not limited to damages for loss of profits, goodwill, data, or other intangible losses, resulting from the use or inability to use the service.
+            </p>
+
+            <h2 data-translate="changesToTermsHeading">Changes to These Terms</h2>
+            <p data-translate="changesToTermsText1">
+                We reserve the right to modify these Terms & Conditions at any time. Any changes will be posted on this page, and your continued use of the website after such modifications will constitute your acknowledgment of the modified Terms & Conditions and agreement to abide and be bound by them.
+            </p>
+
+            <h2 data-translate="governingLawHeading">Governing Law</h2>
+            <p data-translate="governingLawText1">
+                These Terms & Conditions shall be governed by and construed in accordance with the laws of Pakistan, without regard to its conflict of law provisions.
+            </p>
+
+            <h2 data-translate="contactUsHeading">Contact Us</h2>
+            <p data-translate="contactUsText1">
+                If you have any questions about these Terms & Conditions, please contact us at <a href="mailto:support@gradewise.com">support@gradewise.com</a>.
+            </p>
+        </section>
+    </main>
+
+    {% include 'footer.html' %}
+>>>>>>> 8ebd2b9829b0cbe3d131b25a8e06be0b0e8f5db1
 </body>
 </html>
